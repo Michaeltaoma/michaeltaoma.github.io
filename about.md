@@ -3,8 +3,6 @@ layout: page
 title: About
 ---
 
-Hello.
-
-This will be your About page. Anything about you, it should be written here in details. You may describe your bio here like who you are, what you do, your intention, social site hyperlinks and how people can contact you, etc.
+Hello. My name is Tao Ma. And I am a skillful computer science engineer in terms of programming skill, building neural network models, analyzing and organizing data as well as a third year undergraduate student who specialized in Artificial Intelligence in school of computing, Queen's University.
 
 **Less is more..**
