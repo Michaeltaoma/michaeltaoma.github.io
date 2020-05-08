@@ -1,1 +1,109 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1" /> <title>What is bias? · Tao Ma's Personal Blog</title> <meta name="description" content="What is bias?"> <link rel="icon" href="http://localhost:4000/assets/favicon.png"> <link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png"> <link rel="stylesheet" href="http://localhost:4000/assets/core.css"> <link rel="canonical" href="http://localhost:4000/What-is-bias"> <link rel="alternate" type="application/atom+xml" title="Tao Ma's Personal Blog" href="http://localhost:4000/feed.xml" /> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </head> <body> <aside class="logo"> <a href="http://localhost:4000/"> <img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar"> </a> <span class="logo-prompt code">Back to Index</span> </aside> <br /> <section> And hello to u too:) By clicking the above icon, u can come back to index any time, or u can eneter my personal info page. <br /> <em><strong>The picture is randomly generated every time u click the icon, I have nothing to do with any of the content of the pictures(ﾟ∀ﾟ)</strong></em> . </section> <div id="content"> <article> <div class="center"> <h1 class="title">What is bias?</h1> <time class="code">May 7, 2020</time> </div> <div class="divider"></div> <h2 id="what-is-bias">What is bias?</h2> <iframe width="560" height="315" src="https://www.youtube.com/embed/HetFihsXSys" frameborder="0" allowfullscreen=""></iframe> <p>但凡对于神经网络有过一定了解的人，就不会不知道bias。bias为分界线提供了一个灵活的变化。假设现在使用的激活函数是ReLU即整流线型激活函数，当加权和\( \sum_{i = 1}w_{i}*x_{i} + bias \)进入到达神经元时，这个函数的行为如下图所示 <img src="assets/post_pics/2560px-Ramp_function.svg.png" /> 显然，施加了ReLU激活函数的神经元阈值为0，那么如果我们在训练的时候发现，0并不是一个最好的阈值，1才是一个最好的阈值，那该怎么办呢？当这种情况发生，神经网络会自适应调整bias的值，把bias的值变成-1，<strong>这样通过改变bias的大小的同时调整了函数的阈值，使得nn的适应性更加强。</strong> bias偏差值和学习率一样，初始化的时候随机生成，我们训练神经网络，就是通过多次迭代，找出现有训练集下的能够最大化模型预测精准度的参数的值。在计算加权和的时候，为了确保bias能够随着权重在每一次的迭代中被调整到，神经网络都是把bias当作是一个不存在的输入\(x_0(= 1) \)的权重，也就是说，\( \sum_{i=0}w_{i}*x_{i} \)是等价于\(\sum_{i = 1}w_{i}*x_{i} + bias \).</p> </article> <div class="page-navigation code"> <a class="home" href="http://localhost:4000/" title="Back to Index">Index</a> <span> &middot; </span> <a class="prev" href="http://localhost:4000/Hello-World" title="PREV: Hello World">&gt;&gt;</a> </div> </div> <div class="footer"> <span class="block">&copy; 2020 Tao Ma</span> <span class="block"><small>&lt;/&gt; Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/heiswayi/the-plain">The Plain theme</a>.</small></span> </div> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+	<title>What is bias? · Tao Ma</title>
+
+
+<meta name="description" content="What is bias?">
+
+<link rel="icon" href="http://localhost:4000/assets/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
+<link rel="stylesheet" href="http://localhost:4000/assets/core.css">
+<link rel="canonical" href="http://localhost:4000/What-is-bias">
+<link rel="alternate" type="application/atom+xml" title="Tao Ma" href="http://localhost:4000/feed.xml" />
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<aside class="logo">
+
+	
+
+	<a href="http://localhost:4000/">
+		<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">
+	</a>
+	<span class="logo-prompt code">Back to Index</span>
+</aside>
+<br />
+<section>
+		And hello to u too:) By clicking the above icon, u can come back to index any time, or u can eneter my personal info page. 
+		<br />
+		<em><strong>The picture is randomly generated every time u click the icon, I have nothing to do with any of the content of the pictures(ﾟ∀ﾟ)</strong></em>
+.
+</section>
+
+
+		<div id="content">
+			<article>
+
+	<div class="center">
+		<h1 class="title">What is bias?</h1>
+		<time class="code">May 7, 2020</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<h2 id="what-is-bias">What is bias?</h2>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HetFihsXSys" frameborder="0" allowfullscreen=""></iframe>
+
+<p>但凡对于神经网络有过一定了解的人，就不会不知道bias。bias为分界线提供了一个灵活的变化。假设现在使用的激活函数是ReLU即整流线型激活函数，当加权和\( \sum_{i = 1}w_{i}*x_{i} + bias \)进入到达神经元时，这个函数的行为如下图所示
+<img src="assets/post_pics/2560px-Ramp_function.svg.png" />
+显然，施加了ReLU激活函数的神经元阈值为0，那么如果我们在训练的时候发现，0并不是一个最好的阈值，1才是一个最好的阈值，那该怎么办呢？当这种情况发生，神经网络会自适应调整bias的值，把bias的值变成-1，<strong>这样通过改变bias的大小的同时调整了函数的阈值，使得nn的适应性更加强。</strong>
+bias偏差值和学习率一样，初始化的时候随机生成，我们训练神经网络，就是通过多次迭代，找出现有训练集下的能够最大化模型预测精准度的参数的值。在计算加权和的时候，为了确保bias能够随着权重在每一次的迭代中被调整到，神经网络都是把bias当作是一个不存在的输入\(x_0(= 1) \)的权重，也就是说，\( \sum_{i=0}w_{i}*x_{i} \)是等价于\(\sum_{i = 1}w_{i}*x_{i} + bias \).</p>
+
+
+</article>
+
+<div class="page-navigation code">
+	
+		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="http://localhost:4000/Hello-World" title="PREV: Hello World">&gt;&gt;</a>
+  
+</div>
+
+<!-- Link Gitalk 的支持文件  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    // gitalk的主要参数
+        clientID: 'f075f01270dae871aa15',
+        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
+        repo: 'https://michaeltaoma.github.io/',
+        owner: 'michaeltaoma',
+        admin: ['michaeltaoma'],
+        id: md5(location.pathname),
+        
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
+
+		</div>
+
+		<div class="footer">
+  <span class="block">&copy; 2020 Tao Ma</span>
+  <span class="block"><small>&lt;/&gt; Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/heiswayi/the-plain">The Plain theme</a>.</small></span>
+</div>
+
+
+	</body>
+
+</html>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tao Ma's Personal Blog</title>
+    <title>Tao Ma</title>
     <description>And hello to you to:)</description>
     <link>http://localhost:4000</link>
     
