@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+	<title>Java On Call 2 · Tao Ma</title>
+
+
+<meta name="description" content="  Java基础知识  面向对象  常用API  集合I/O  多线程、网络编程、反射、设计模式">
+
+<link rel="icon" href="http://localhost:4000/assets/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
+<link rel="stylesheet" href="http://localhost:4000/assets/core.css">
+<link rel="canonical" href="http://localhost:4000/java-on-call-2">
+<link rel="alternate" type="application/atom+xml" title="Tao Ma" href="http://localhost:4000/feed.xml" />
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<aside class="logo">
+
+	
+
+	<a href="http://localhost:4000/">
+		<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">
+	</a>
+	<span class="logo-prompt code">Back to Index</span>
+</aside>
+<br />
+<section>
+		And hello to u too:) By clicking the above icon, u can come back to index any time, or u can eneter my personal info page. 
+		<br />
+		<em><strong>The picture is randomly generated every time u click the icon, I have nothing to do with any of the content of the pictures(ﾟ∀ﾟ)</strong></em>
+.
+</section>
+
+
+		<div id="content">
+			<article>
+
+	<div class="center">
+		<h1 class="title">Java On Call 2</h1>
+		<time class="code">May 9, 2020</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<ol>
+  <li>Java基础知识</li>
+  <li>面向对象</li>
+  <li>常用API</li>
+  <li>集合I/O</li>
+  <li>多线程、网络编程、反射、设计模式</li>
+</ol>
+
+<p>这是准备java面试的第二天，以上的分类的思维导图，来自-&gt;<a href="https://www.cnblogs.com/java1024/p/8757952.html" target="_blank">这里</a></p>
+<ul>
+  <li>这里是整理好的面试题，至少都过一遍:
+    <ol>
+      <li><a href="https://blog.csdn.net/qq_41701956/article/details/86686492">2019年最新java面试题及答案整理上</a></li>
+      <li><a href="https://blog.csdn.net/qq_41701956/article/details/86699263">2019年最新java面试题及答案整理下</a></li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="面向对象object-oriented">面向对象(Object Oriented)</h3>
+<ul>
+  <li>面向对象是一种程序设计思想之一。面向对象是一种对现实世界理解和抽象的方法，是计算机编程技术发展到一定阶段后的产物。<strong>面向过程是一种以过程为中心的编程思维。这些都是以<em>什么正在发生为主要目标进行编程。</em>与面向底箱明显不同的是封装、继承、类</strong></li>
+  <li>在看完了网上一个很生动的例子，这里写下一些个人的理解。面向对象应该是一个大于面向过程的概念，即面向对象融合了面向过程与对象。为什么这么说呢，在网上现有的对于面向过程的定义一般都如：面向过程指的是一种以事物为中心的编程思想。主要关注的是“怎么做”，即完成任务的具体细节。但是令我非常不解的一点就是：<strong><u>难道面向对象思想中就不包含一丝面向过程的概念吗？这两个非得一定是互斥对立的吗？</u></strong>个人认为，面向对象也关注任务的具体细节，但是面向对象把任务的具体细节抽象化，并且把事物分工给了各个对象，只不过，当我们无法再细分，具体到某一个对象的某一个任务的时候，我们不也是“关注任务的具体细节”吗？当不停的出现新的需求，或者同类任务却有不同的小细节时，面向对象就展现出了其优势。
+    <h4 id="类与对象">类与对象</h4>
+  </li>
+  <li><em>类与对象是不一样的东西，不过他是存在联系的。</em><strong>类对某一类事物进行描述，是抽象的；而对象是类的实例，是具象的。对象拥有他这一类的共有的属性，却也有独立与对象个体的属性。</strong>万物皆是对象，当这个对象从一个类被实例化的时候，他就成了对象。打个比方，狗是一个类，狗规定了狗的一些共有性质（脊索动物门，哺乳纲…），而柯基是狗的一个子类，因为它继承了狗的特点，却也衍生出了自己的特点，而你家的养的小柯基jimmy则是一个对象，因为他不再是抽象的了，他是具象的一条狗叫jimmy</li>
+  <li><strong>成员变量（class variable/member variable）</strong>:
+    <ol>
+      <li>成员变量定义在类中，在整个类都可以被访问</li>
+      <li>成员变量随着对象的建立而建立，随着对象的消失而消失，存在于对象所在的堆内存中。成员变量与对象共存亡。</li>
+      <li>成员变量有默认初始化值。</li>
+    </ol>
+  </li>
+  <li><strong>局部变量</strong>
+    <ol>
+      <li>局部变量只定义在局部范围，如函数内、语句内、只在所属的区域有效</li>
+      <li>局部变量存于栈内存中（因为只有function call的时候会用到这个局部变量），当方法执行完之后，变量空间会自动释放</li>
+      <li>局部变量没有默认初始化值</li>
+    </ol>
+  </li>
+  <li>在使用变量时遵循的原则是就近原则，就是现在“局部”范围里面找，没有的话才是取到成员类的位置上找</li>
+  <li>小问题：父类的成员变量子类可不可以访问</li>
+  <li><strong>静态变量</strong>: 指的是使用<code>static</code>修饰符修饰的变量
+    <ol>
+      <li>静态变量随着类的加载而存在（并不需要实例化），随着类的消失而消失</li>
+      <li>静态变量可以被对象调用，还可以被类名字调用</li>
+      <li>静态变量的数据储存在方法区（共享数据区）的静态区，所以也叫对象的共享数据</li>
+    </ol>
+  </li>
+  <li><strong>匿名对象</strong>: 在实例化的时候没有明确的给出名字的对象。匿名对象只用一次，而且匿名对象只在堆内存中开辟空间，而不存在栈内存的引用。
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span> 
+  <span class="kd">public</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span> 
+  <span class="c1">// 定义构造方法，为属性初始化</span>
+  <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="c1">// 获取信息的方法</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">tell</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"姓名："</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"，年龄："</span> <span class="o">+</span> <span class="n">age</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">"张三"</span><span class="o">,</span> <span class="mi">30</span><span class="o">).</span><span class="na">tell</span><span class="o">();</span> <span class="c1">// 匿名对象，可以看到张三这个对象是没有名字的，直接使用了person类的tell方法</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+    <h4 id="封装encapsulation这里的解释很多都是从chenssy的博客中引用的">封装（Encapsulation，这里的解释很多都是从<a href="https://www.cnblogs.com/chenssy/p/3351835.html" target="_blank">chenssy的博客</a>中引用的）</h4>
+  </li>
+  <li>封装从字面上来理解就是包装的意思，专业点就是信息隐藏，是指利用抽象数据类型将数据和基于数据的操作封装在一起，使其构成一个不可分割的独立实体，数据被保护在抽象数据类型的内部，尽可能地隐藏内部的细节，只保留一些对外接口使之与外部发生联系。系统的其他对象只能通过包裹在数据外面的已经授权的操作来与这个封装的对象进行交流和交互。也就是说用户是无需知道对象内部的细节（当然也无从知道），但可以通过该对象对外的提供的接口来访问该对象。</li>
+  <li>如果用124的定义的化就很简单：Encapsulation is the process of defining a Class that has at least one customizable attribute</li>
+  <li>使用封装的好处：
+    <ol>
+      <li>良好的封装能够减少耦合（耦合指的是模块及模块之间信息或参数依赖程度）</li>
+      <li>类内部的结构可以自由修改</li>
+      <li>可以对成员进行更精确的控制</li>
+      <li>隐藏信息，实现细节</li>
+    </ol>
+  </li>
+  <li>其实这个概念就是相当简单的，封装令一个对象的属性私有化，同时提供一些可以被外界访问的属性的方法，即使是方法，也可以被类封装起来</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+
+<span class="cm">/**
+ * A class to store Halloween information.
+ * &lt;p&gt;
+ * The year, the number of vistors, hourly temperatures in deg C and the weather condition is recorded. This class
+ * has been created as a lecture example, and is not otherwise particularly useful!  
+ * &lt;p&gt;
+ * This version demonstrates the implementation of Comparable (for sorting) and Serializable (for
+ * filing).  Also, the mutators for temperature and weather condition have been combined, so both
+ * attributes have to be set at the same time.  In this way they cannot be set to an illegal value
+ * independently.
+ * 
+ * @author Alan McLeod
+ * @version 3.2
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Halloween5</span> <span class="kd">implements</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="nc">Halloween5</span><span class="o">&gt;,</span> <span class="nc">Serializable</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">4705089863030936649L</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">year</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">numMunchkins</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">temperatures</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">weatherCondition</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * Full parameter constructor.
+	 * 可以看到如果是和类名一样的方法的那他就是个constructor
+     * @param yr The year when the data was collected.
+     * @param numKids The number of Trick or Treaters!
+     * @param temps The air temperatures in degrees Centigrade in an array of int of any size.
+     * @param weather The weather condition: "clear", "snow" or "rain".
+     * @throws IllegalHalloweenException If arguments are not legal.
+     */</span>
+    <span class="c1">// 4 parameter constructor invokes mutators</span>
+    <span class="kd">public</span> <span class="nf">Halloween5</span><span class="o">(</span><span class="kt">int</span> <span class="n">yr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">numKids</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">temps</span><span class="o">,</span> <span class="nc">String</span> <span class="n">weather</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="n">setYear</span><span class="o">(</span><span class="n">yr</span><span class="o">);</span>
+        <span class="n">setNumMunchkins</span><span class="o">(</span><span class="n">numKids</span><span class="o">);</span>
+        <span class="n">setWeather</span><span class="o">(</span><span class="n">temps</span><span class="o">,</span> <span class="n">weather</span><span class="o">);</span>
+    <span class="o">}</span> <span class="c1">// end Halloween4 4 parameter constructor</span>
+
+    <span class="cm">/**
+     * Three parameter constructor.  The weather condition does not have to be supplied.
+	 * 利用了方法过载
+     * @param yr The year when the data was collected.
+     * @param numKids The number of Trick or Treaters.
+     * @param temps The air temperatures in degrees Centigrade in an array of int of any size.
+     * @throws IllegalHalloweenException if arguments are not legal.
+     */</span>
+    <span class="c1">// 3 parameter constructor invokes 3 parameter constructor with an assumption about the</span>
+    <span class="c1">// weatherCondition attribute</span>
+    <span class="kd">public</span> <span class="nf">Halloween5</span><span class="o">(</span><span class="kt">int</span> <span class="n">yr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">numKids</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">temps</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">(</span><span class="n">yr</span><span class="o">,</span> <span class="n">numKids</span><span class="o">,</span> <span class="n">temps</span><span class="o">,</span> <span class="s">"unknown"</span><span class="o">);</span>
+    <span class="o">}</span> <span class="c1">// end Halloween4 3 parameter constructor</span>
+
+    <span class="cm">/**
+     * Sets the year the data was recorded.
+     * @param year The calendar year.
+     * @throws IllegalHalloweenException if the year does not lie between 1959 and 2016
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setYear</span><span class="o">(</span><span class="kt">int</span> <span class="n">year</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">year</span> <span class="o">&lt;</span> <span class="mi">1950</span> <span class="o">||</span> <span class="n">year</span> <span class="o">&gt;</span> <span class="mi">2019</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"Illegal year: "</span> <span class="o">+</span> <span class="n">year</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">year</span> <span class="o">=</span> <span class="n">year</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end year mutator</span>
+
+    <span class="cm">/**
+     * Sets the number of kids.
+     * @param numKids The number of kids arriving at the door.
+     * @throws IllegalHalloweenException if the number of kids is less than zero or greater
+     * than 500.
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNumMunchkins</span><span class="o">(</span><span class="kt">int</span> <span class="n">numKids</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">numKids</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">numKids</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"Illegal number of kids: "</span> <span class="o">+</span> <span class="n">numKids</span><span class="o">);</span>
+        <span class="n">numMunchkins</span> <span class="o">=</span> <span class="n">numKids</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end numMunchkinds mutator</span>
+
+    <span class="cm">/**
+     * Sets the temperatures array and the weather condition String.  The temperatures are 
+     * recorded with one temperature per hour.
+     * @param temps An array of temperatures between -30 and 30 degrees C.
+     * @param weather The weather condition as a String.
+     * @throws IllegalHalloweenException if the condition is not "rain", "snow", "clear" or "unknown",
+     * or if the array is empty or any temperatures are not legal. 
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setWeather</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">temps</span><span class="o">,</span> <span class="nc">String</span> <span class="n">weather</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">avgTemperature</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">temps</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"No temperatures supplied"</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">temperature</span> <span class="o">:</span> <span class="n">temps</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">30</span> <span class="o">||</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">30</span><span class="o">)</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"Illegal temperature in array: "</span> <span class="o">+</span> <span class="n">temperature</span><span class="o">);</span>
+            <span class="n">avgTemperature</span> <span class="o">+=</span> <span class="n">temperature</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">temperatures</span> <span class="o">=</span> <span class="n">temps</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+        <span class="n">avgTemperature</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">avgTemperature</span> <span class="o">/</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">/</span> <span class="mf">10.0</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">((</span><span class="n">weather</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="s">"rain"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">avgTemperature</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">5</span><span class="o">)</span> <span class="o">||</span>
+                <span class="o">(</span><span class="n">weather</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="s">"snow"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">avgTemperature</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">||</span>
+                <span class="n">weather</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="s">"clear"</span><span class="o">)</span> <span class="o">||</span> <span class="n">weather</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="s">"unknown"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">weatherCondition</span> <span class="o">=</span> <span class="n">weather</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"Illegal weather/temperature combination: "</span> <span class="o">+</span>
+                    <span class="n">weather</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">avgTemperature</span> <span class="o">+</span> <span class="s">" deg C."</span><span class="o">);</span>    	
+    <span class="o">}</span> <span class="c1">// end setWeather mutator</span>
+    
+    <span class="cm">/**
+     * Returns the calendar year the data was recorded.
+     * @return The year the data was recorded.
+     */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getYear</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">year</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end getYear</span>
+
+    <span class="cm">/**
+     * Returns the number of visitors.
+     * @return the number of Trick or Treaters.
+     */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNumMunchkins</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">numMunchkins</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end getNumMunchkins Accessor</span>
+
+    <span class="cm">/**
+     * Returns the temperatures array.
+     * @return The temperatures in degrees Centigrade.
+     */</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">getTemperatures</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+    <span class="o">}</span> <span class="c1">// end getTemperature Accessor</span>
+
+    <span class="cm">/**
+     * Returns the weather condition.
+     * @return The weather condition as a String.
+     */</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getWeatherCondition</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">weatherCondition</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end getWeatherCondition Accessor</span>
+
+    <span class="cm">/**
+     * A String representation of the current object.
+     * @return A String representation of the contents of the object containing the values of
+     * all the attributes.
+     */</span>
+    <span class="c1">// Overrides (replaces) the toString method of the Object class.</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"In "</span> <span class="o">+</span> <span class="n">year</span> <span class="o">+</span> <span class="s">" there were "</span> <span class="o">+</span> <span class="n">numMunchkins</span> <span class="o">+</span> <span class="s">" kids. Temperatures each hour were: "</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="s">", "</span><span class="o">;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">"and "</span> <span class="o">+</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">temperatures</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">" deg C., and the weather was "</span><span class="o">;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">weatherCondition</span> <span class="o">+</span> <span class="s">"."</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end toString</span>
+
+    <span class="cm">/**
+     * Tests two Halloween5 objects for equality.
+     * @return &lt;code&gt;true&lt;/code&gt; if all the attributes of both objects are exactly equal, &lt;code&gt;false&lt;/code&gt;
+     * otherwise.
+     * @param otherObject The other Halloween5 object.
+     */</span>
+    <span class="c1">// Overrides the equals method of the Object class.</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">otherObject</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">otherObject</span> <span class="k">instanceof</span> <span class="nc">Halloween5</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">Halloween5</span> <span class="n">otherH</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Halloween5</span><span class="o">)</span><span class="n">otherObject</span><span class="o">;</span>
+            <span class="kt">boolean</span> <span class="n">arrayCheck</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">otherH</span><span class="o">.</span><span class="na">temperatures</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span> <span class="n">arrayCheck</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                <span class="n">arrayCheck</span> <span class="o">=</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">otherH</span><span class="o">.</span><span class="na">temperatures</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">arrayCheck</span><span class="o">)</span>
+                <span class="k">return</span> <span class="n">year</span> <span class="o">==</span> <span class="n">otherH</span><span class="o">.</span><span class="na">year</span> <span class="o">&amp;&amp;</span>
+                    <span class="n">numMunchkins</span> <span class="o">==</span> <span class="n">otherH</span><span class="o">.</span><span class="na">numMunchkins</span> <span class="o">&amp;&amp;</span>
+                    <span class="n">weatherCondition</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">otherH</span><span class="o">.</span><span class="na">weatherCondition</span><span class="o">);</span>
+        <span class="o">}</span> <span class="c1">// end if</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end equals</span>
+
+    <span class="cm">/**
+     * Compares Halloween5 objects on the basis of the number of visitors only.
+     * @param otherH The other Halloween5 object.
+     * @return A negative &lt;code&gt;int&lt;/code&gt; if the supplied object had more vistors, zero if they have the same
+     * number and a positive number if the current object has more visitors.
+     */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="nc">Halloween5</span> <span class="n">otherH</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">numMunchkins</span> <span class="o">-</span> <span class="n">otherH</span><span class="o">.</span><span class="na">numMunchkins</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end compareTo</span>
+    
+    <span class="cm">/**
+     * Returns a copy of the of the current Halloween5 object.
+     * @return A copy of the current object.
+     */</span>
+    <span class="c1">// Overrides the clone method in the Object class.</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Halloween5</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Halloween5</span> <span class="n">hwCopy</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">hwCopy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Halloween5</span><span class="o">(</span><span class="n">year</span><span class="o">,</span> <span class="n">numMunchkins</span><span class="o">,</span> <span class="n">temperatures</span><span class="o">,</span> <span class="n">weatherCondition</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IllegalHalloweenException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Should never get here!</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span> <span class="c1">// end try/catch</span>
+        <span class="k">return</span> <span class="n">hwCopy</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end clone</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>上面就是一个Halloween5的类，他有五个变量其中<code>serialVersionUID</code>是一个静态变量，也就是说别的对象也可以使用</li>
+  <li>构造函数就是constructor，构造函数没有返回值，并且构造函数的名字与类名相同，构造函数也是可以过载的</li>
+  <li><code>this</code>关键字的作用是对当前对象的引用；或者更高级一点的对当前方法所属对象的引用。这个东西在一个类中常见于构造函数内用来区分构造函数的局部变量与类的成员变量</li>
+</ul>
+
+<h4 id="继承inheritance">继承(Inheritance)</h4>
+<ul>
+  <li>继承是java三大特性之二，它允许创建分等级分层次的类。继承就是子类继承父类的特征和行为，使得子类对象（实例）具有父类的实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为。</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{...}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{...}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{...}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{...}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Student</span> <span class="kd">extends</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="c1">// 不要重复name和age字段/方法,</span>
+    <span class="c1">// 只需要定义新增score字段/方法:</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">score</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getScore</span><span class="o">()</span> <span class="o">{</span> <span class="err">…</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setScore</span><span class="o">(</span><span class="kt">int</span> <span class="n">score</span><span class="o">)</span> <span class="o">{</span> <span class="err">…</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>可以看到以上的代码，student类继承了person类，那么此时person就是student的父类，超类，基类；而student是person的子类，扩展类</li>
+  <li>子类可以直接访问父类中非私有的属性与方法，注意是非私有的，也就是说如果一个属性/方法被<code>private</code>修饰符给修饰了，那么即使是子类也无法访问，但如果是一个加上了<code>protected</code>修饰符的变量/方法，是可以被子类访问的</li>
+  <li><strong>任何类都是Object类的子类</strong></li>
+  <li><em>一个类只可以继承自一个类，也就是说，任何类都只有一个父类。但是一个父类却可以有多个子类</em></li>
+  <li>向上转型和向下转型：
+    <ul>
+      <li>向上转型（upcasting）指的是把一个子类类型安全的变为父类类型: <code>Person p = new Student();</code>，注意这个操作是可以的</li>
+      <li>向下转型（downcasting）指的是令一个引用类型为父类的变量指向其子类，这个操作是不允许的</li>
+    </ul>
+  </li>
+  <li><code>super</code>这个关键字可以给子类指向父类，并且在子类的构造函数中，必须符合以下规定：
+    <ol>
+      <li>每一个构造函数都会默认访问父类的构造函数<code></code></li>
+      <li><strong>每一个构造函数第一行默认是super()</strong></li>
+      <li>先执行父类的构造函数，再执行自己的</li>
+      <li>如果父类没有空参数构造函数，子类必须实打实的使用有参数的构造函数，并且子类可以访问本类其他构造函数，再访问父类的构造函数</li>
+    </ol>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="nc">Student</span> <span class="kd">extends</span> <span class="nc">Person</span> <span class="o">{</span>
+  <span class="kd">protected</span> <span class="kt">int</span> <span class="n">score</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="kt">int</span> <span class="n">score</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span> <span class="c1">// 调用父类的构造方法Person(String, int)</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>方法的重写（override）：指的是子类将父类的方法重新实现，要利用<code>@override</code>关键字，子类方法的访问权限要大于等于父类方法的访问权限（不可以父类是public的，然后子类重写了之后来个private），静态方法只可以覆盖静态方法，子类不能覆盖父类私有方法</li>
+</ul>
+
+
+</article>
+
+<div class="page-navigation code">
+	
+		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="http://localhost:4000/java-on-call-1" title="PREV: Java On Call 1">&gt;&gt;</a>
+  
+</div>
+
+<!-- Link Gitalk 的支持文件  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    // gitalk的主要参数
+        clientID: 'f075f01270dae871aa15',
+        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
+        repo: 'michaeltaoma.github.io',
+        owner: 'michaeltaoma',
+        admin: ['michaeltaoma'],
+        id: md5(location.pathname),
+        
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
+
+		</div>
+
+		<div class="footer">
+  <span class="block">&copy; 2020 Tao Ma</span>
+  <span class="block"><small>&lt;/&gt; Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/heiswayi/the-plain">The Plain theme</a>.</small></span>
+</div>
+
+
+	</body>
+
+</html>
