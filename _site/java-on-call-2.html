@@ -616,17 +616,110 @@
 </ul>
 
 <h3 id="常用api">常用API</h3>
-<h4 id="wrapper-classes">Wrapper classes</h4>
-<h4 id="object">Object</h4>
-<h4 id="scanner">Scanner</h4>
-<h4 id="string">String</h4>
-<h4 id="arrays">Arrays</h4>
-<h4 id="stringbuffer">StringBuffer</h4>
-<h4 id="random">Random</h4>
-<h4 id="system">System</h4>
-<h4 id="date">Date</h4>
-<h4 id="dateformat">DateFormat</h4>
-<h4 id="calender">Calender</h4>
+<ul>
+  <li>API，英文全称Application Programming Interface，翻译为“应用程序编程接口”。是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。简单的来说就是一个让编程人员不需要读到源码就能使用某一现存的软件/硬件的接口
+    <h4 id="wrapper-classes包装类">Wrapper classes（包装类）</h4>
+  </li>
+  <li>有的时候为了方便，我们往往希望一个基本数据类型不仅仅是基本数据类型，我们也想他是一个对象，毕竟万物皆是对象。那么Java为每一个基本数据类型都有一个唯一的包装类。基本类型与其包装类都可以通过他对应的包装类的中的静态成员方法进行转换。注意的是，<strong>这些包装类都是final修饰的</strong>，他们都无法被继承或重写.
+    <h5 id="integer包装类">Integer包装类</h5>
+  </li>
+  <li><code>public Integer(int value)</code>: Integer包装类的构造函数，构造一个值为value的Integer对象</li>
+  <li><code>public Integer(String s)</code>: Integer包装类的构造函数，相当于把字符串s中的数字提取出来放入Integer对象当中</li>
+  <li><code>static int MAX_VALUE</code></li>
+  <li><code>static int MIN_VALUE</code></li>
+  <li><code>public static String toBinaryString(int i)</code>: 用String返还一个int的二进制形式</li>
+  <li><code>public static String toHexSrtring(int i)</code></li>
+  <li><code>public static String toOctal(int i)</code></li>
+  <li><code>public static String toString(int i, int radix)</code></li>
+  <li><code>public static Integer valueOf(String s, int radix)</code>: 相当于把一个String中的int提取出来并返还</li>
+  <li><code>public Integer(int value)</code>: 和构造函数一样，不过也有其他的意义，int -&gt; Integer的转换</li>
+  <li><code>public int intValue()</code>: Integer -&gt; int的转换
+    <h4 id="object">Object</h4>
+  </li>
+  <li><code>public String toSrting()</code>: 就是那个每个对象都要改来改去的方法</li>
+  <li><code>public boolean equals(Object obj)</code>: 这个方法的意义是判断两个object是不是指向同一个类</li>
+  <li><code>protected void finalize()</code>: The java.lang.Object.finalize() is called by the garbage collector on an object when garbage collection determines that there are no more references to the object. A subclass overrides the finalize method to dispose of system resources or to perform other cleanup. 似乎是判断已经没有对这个类的引用</li>
+  <li><code>public final Class getClass()</code>: returns the runtime class of an object.</li>
+  <li><code>public int hashCode()</code>: method returns a hash code value for the object.
+    <h4 id="scanner">Scanner</h4>
+  </li>
+  <li><code>public String nextLine()</code>: 以Enter为结束符,也就是说 nextLine()方法返回的是输入回车之前的所有字符且可以获得空白。</li>
+  <li><code>public int nextInt()</code>: 读取整数
+    <h4 id="string">String</h4>
+  </li>
+  <li><code>public String()</code></li>
+  <li><code>boolean equals(Object obj)</code></li>
+  <li><code>boolean equalsIgnoreCase(Srting str)</code></li>
+  <li><code>boolean contains(Srting str)</code></li>
+  <li><code>boolean startsWith(Srting str)</code></li>
+  <li><code>boolean endsWith(String str)</code></li>
+  <li><code>boolean isEmpty</code></li>
+  <li><code>int length()</code></li>
+  <li><code>char charAt(int index)</code></li>
+  <li><code>int indexOf(int ch)</code></li>
+  <li><code>int indexOf(String str)</code></li>
+  <li><code>int indexOf(int ch, int fromIndex0</code></li>
+  <li><code>String subSrting(int start, int end)</code></li>
+  <li><code>byte[] getBytes()</code></li>
+  <li><code>char[] toCharArrays()</code></li>
+  <li><code>static String copyValueOf(char[] chs)</code></li>
+  <li><code>static String valueOf(char[] chs)</code></li>
+  <li><code>static String valueOf(int i)</code></li>
+  <li><code>String toLowerCase()</code></li>
+  <li><code>String concat(String str)</code></li>
+  <li><code>String replace(char old, char new)</code></li>
+  <li><code>String replace(String old, String new)</code></li>
+  <li><code>String[] split(String regex)</code></li>
+  <li><code>String trim()</code>: 去除字符串两端空格
+    <h4 id="arrays">Arrays</h4>
+  </li>
+  <li><code>public static String toSrting(int[] a)</code>: This method returns a string representation of a.</li>
+  <li><code>public static void sort(int[] a)</code>: o(nlogn)</li>
+  <li><code>public static int binarySearch(int[] a, int key)</code>
+    <h4 id="stringbuffer">StringBuffer</h4>
+  </li>
+  <li>众所周知String作为不可修改的对象，即每次更改String都会产生一个新的字符串对象，与之相对应的StringBuffer类的对象能够进行多次修改并且不会产生新的未使用的对象，因此在内存上要优于String对象</li>
+  <li><code>public StringBuffer()</code></li>
+  <li><code>public StringBuffer(int capacity)</code></li>
+  <li><code>public StringBuffer(String str)</code></li>
+  <li><code>public int length()</code></li>
+  <li><code>public int capacity()</code></li>
+  <li><code>public StringBuffer append(int i)</code></li>
+  <li><code>public StringBuffer insert(int offset, int i)</code></li>
+  <li><code>StringBuffer delete(int start, int end)</code></li>
+  <li><code>StringBuffer deleteCharAt(int index)</code></li>
+  <li><code>StringBuffer replace(int start, int end, String str)</code></li>
+  <li><code>String substring(int start, int end)</code></li>
+  <li><code>StringBuffer reverse()</code>
+    <h4 id="random">Random</h4>
+  </li>
+  <li><code>public Random(long seed)</code>: 构造一个random类，If two instances of Random are created with the same seed, and the same sequence of method calls is made for each, they will generate and return identical sequences of numbers.</li>
+  <li><code>public int nextInt(int n)</code>: 随机生成一个0到n之间的整数
+    <h4 id="system">System</h4>
+  </li>
+  <li><code>public static void gc()</code>: The java.lang.System.gc() method runs the garbage collector</li>
+  <li><code>public static void exit(int status)</code>: The java.lang.System.exit() method terminates the currently running Java Virtual Machine.</li>
+  <li><code>public static long currentTimeMills()</code></li>
+  <li><code>public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)</code>: The java.lang.System.arraycopy() method copies an array from the specified source array, beginning at the specified position, to the specified position of the destination array.
+    <h4 id="date">Date</h4>
+  </li>
+  <li><code>public Date()</code></li>
+  <li><code>public Date(long date)</code>: 毫秒到日期的转换</li>
+  <li><code>public long getTime()</code>: 日期到毫秒的转换
+    <h4 id="dateformat">DateFormat</h4>
+  </li>
+  <li>SimpleDateFormat is a concrete class for formatting and parsing dates in a locale-sensitive manner. SimpleDateFormat allows you to start by choosing any user-defined patterns for date-time formatting.</li>
+  <li><code>public SimpleDateFormat(String pattern)</code></li>
+  <li><code>public final String format(Date date)</code></li>
+  <li><code>public Date parse(String source)</code>
+    <h4 id="calender">Calender</h4>
+  </li>
+  <li><code>public static Calender getInstance()</code>: The java.util.Calendar.getInstance() method gets a calendar using the specified time zone and specified locale.</li>
+  <li><code>public int get(int field)</code>: returns the value of the given calendar field.</li>
+  <li><code>public final void set(int year, int month, int date)</code>: sets the values for the calendar fields YEAR, MONTH,DAY_OF_MONTH,HOUR_OF_DAY,MINUTE and SECOND.</li>
+  <li><code>public abstract void add(int field, int amount)</code>: adds or subtracts the specified amount of time (amount) to the given calendar field (field), based on the calendar’s rules.</li>
+</ul>
+
 
 
 </article>

@@ -570,17 +570,110 @@
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;常用api&quot;&gt;常用API&lt;/h3&gt;
-&lt;h4 id=&quot;wrapper-classes&quot;&gt;Wrapper classes&lt;/h4&gt;
-&lt;h4 id=&quot;object&quot;&gt;Object&lt;/h4&gt;
-&lt;h4 id=&quot;scanner&quot;&gt;Scanner&lt;/h4&gt;
-&lt;h4 id=&quot;string&quot;&gt;String&lt;/h4&gt;
-&lt;h4 id=&quot;arrays&quot;&gt;Arrays&lt;/h4&gt;
-&lt;h4 id=&quot;stringbuffer&quot;&gt;StringBuffer&lt;/h4&gt;
-&lt;h4 id=&quot;random&quot;&gt;Random&lt;/h4&gt;
-&lt;h4 id=&quot;system&quot;&gt;System&lt;/h4&gt;
-&lt;h4 id=&quot;date&quot;&gt;Date&lt;/h4&gt;
-&lt;h4 id=&quot;dateformat&quot;&gt;DateFormat&lt;/h4&gt;
-&lt;h4 id=&quot;calender&quot;&gt;Calender&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;API，英文全称Application Programming Interface，翻译为“应用程序编程接口”。是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。简单的来说就是一个让编程人员不需要读到源码就能使用某一现存的软件/硬件的接口
+    &lt;h4 id=&quot;wrapper-classes包装类&quot;&gt;Wrapper classes（包装类）&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;有的时候为了方便，我们往往希望一个基本数据类型不仅仅是基本数据类型，我们也想他是一个对象，毕竟万物皆是对象。那么Java为每一个基本数据类型都有一个唯一的包装类。基本类型与其包装类都可以通过他对应的包装类的中的静态成员方法进行转换。注意的是，&lt;strong&gt;这些包装类都是final修饰的&lt;/strong&gt;，他们都无法被继承或重写.
+    &lt;h5 id=&quot;integer包装类&quot;&gt;Integer包装类&lt;/h5&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public Integer(int value)&lt;/code&gt;: Integer包装类的构造函数，构造一个值为value的Integer对象&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public Integer(String s)&lt;/code&gt;: Integer包装类的构造函数，相当于把字符串s中的数字提取出来放入Integer对象当中&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;static int MAX_VALUE&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;static int MIN_VALUE&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static String toBinaryString(int i)&lt;/code&gt;: 用String返还一个int的二进制形式&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static String toHexSrtring(int i)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static String toOctal(int i)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static String toString(int i, int radix)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static Integer valueOf(String s, int radix)&lt;/code&gt;: 相当于把一个String中的int提取出来并返还&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public Integer(int value)&lt;/code&gt;: 和构造函数一样，不过也有其他的意义，int -&amp;gt; Integer的转换&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public int intValue()&lt;/code&gt;: Integer -&amp;gt; int的转换
+    &lt;h4 id=&quot;object&quot;&gt;Object&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public String toSrting()&lt;/code&gt;: 就是那个每个对象都要改来改去的方法&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public boolean equals(Object obj)&lt;/code&gt;: 这个方法的意义是判断两个object是不是指向同一个类&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;protected void finalize()&lt;/code&gt;: The java.lang.Object.finalize() is called by the garbage collector on an object when garbage collection determines that there are no more references to the object. A subclass overrides the finalize method to dispose of system resources or to perform other cleanup. 似乎是判断已经没有对这个类的引用&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public final Class getClass()&lt;/code&gt;: returns the runtime class of an object.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public int hashCode()&lt;/code&gt;: method returns a hash code value for the object.
+    &lt;h4 id=&quot;scanner&quot;&gt;Scanner&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public String nextLine()&lt;/code&gt;: 以Enter为结束符,也就是说 nextLine()方法返回的是输入回车之前的所有字符且可以获得空白。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public int nextInt()&lt;/code&gt;: 读取整数
+    &lt;h4 id=&quot;string&quot;&gt;String&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public String()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;boolean equals(Object obj)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;boolean equalsIgnoreCase(Srting str)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;boolean contains(Srting str)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;boolean startsWith(Srting str)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;boolean endsWith(String str)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;boolean isEmpty&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;int length()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;char charAt(int index)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;int indexOf(int ch)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;int indexOf(String str)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;int indexOf(int ch, int fromIndex0&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;String subSrting(int start, int end)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;byte[] getBytes()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;char[] toCharArrays()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;static String copyValueOf(char[] chs)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;static String valueOf(char[] chs)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;static String valueOf(int i)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;String toLowerCase()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;String concat(String str)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;String replace(char old, char new)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;String replace(String old, String new)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;String[] split(String regex)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;String trim()&lt;/code&gt;: 去除字符串两端空格
+    &lt;h4 id=&quot;arrays&quot;&gt;Arrays&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static String toSrting(int[] a)&lt;/code&gt;: This method returns a string representation of a.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static void sort(int[] a)&lt;/code&gt;: o(nlogn)&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static int binarySearch(int[] a, int key)&lt;/code&gt;
+    &lt;h4 id=&quot;stringbuffer&quot;&gt;StringBuffer&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;众所周知String作为不可修改的对象，即每次更改String都会产生一个新的字符串对象，与之相对应的StringBuffer类的对象能够进行多次修改并且不会产生新的未使用的对象，因此在内存上要优于String对象&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public StringBuffer()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public StringBuffer(int capacity)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public StringBuffer(String str)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public int length()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public int capacity()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public StringBuffer append(int i)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public StringBuffer insert(int offset, int i)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;StringBuffer delete(int start, int end)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;StringBuffer deleteCharAt(int index)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;StringBuffer replace(int start, int end, String str)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;String substring(int start, int end)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;StringBuffer reverse()&lt;/code&gt;
+    &lt;h4 id=&quot;random&quot;&gt;Random&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public Random(long seed)&lt;/code&gt;: 构造一个random类，If two instances of Random are created with the same seed, and the same sequence of method calls is made for each, they will generate and return identical sequences of numbers.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public int nextInt(int n)&lt;/code&gt;: 随机生成一个0到n之间的整数
+    &lt;h4 id=&quot;system&quot;&gt;System&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static void gc()&lt;/code&gt;: The java.lang.System.gc() method runs the garbage collector&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static void exit(int status)&lt;/code&gt;: The java.lang.System.exit() method terminates the currently running Java Virtual Machine.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static long currentTimeMills()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)&lt;/code&gt;: The java.lang.System.arraycopy() method copies an array from the specified source array, beginning at the specified position, to the specified position of the destination array.
+    &lt;h4 id=&quot;date&quot;&gt;Date&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public Date()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public Date(long date)&lt;/code&gt;: 毫秒到日期的转换&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public long getTime()&lt;/code&gt;: 日期到毫秒的转换
+    &lt;h4 id=&quot;dateformat&quot;&gt;DateFormat&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;SimpleDateFormat is a concrete class for formatting and parsing dates in a locale-sensitive manner. SimpleDateFormat allows you to start by choosing any user-defined patterns for date-time formatting.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public SimpleDateFormat(String pattern)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public final String format(Date date)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public Date parse(String source)&lt;/code&gt;
+    &lt;h4 id=&quot;calender&quot;&gt;Calender&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static Calender getInstance()&lt;/code&gt;: The java.util.Calendar.getInstance() method gets a calendar using the specified time zone and specified locale.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public int get(int field)&lt;/code&gt;: returns the value of the given calendar field.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public final void set(int year, int month, int date)&lt;/code&gt;: sets the values for the calendar fields YEAR, MONTH,DAY_OF_MONTH,HOUR_OF_DAY,MINUTE and SECOND.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public abstract void add(int field, int amount)&lt;/code&gt;: adds or subtracts the specified amount of time (amount) to the given calendar field (field), based on the calendar’s rules.&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
           <pubDate>2020-05-09T00:00:00+08:00</pubDate>
           <link>http://localhost:4000/java-on-call-2</link>

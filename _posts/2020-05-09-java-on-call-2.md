@@ -505,14 +505,93 @@ public class Daughter implements Father{
 - final关键字：可以修饰类，方法和变量，fianl修饰的类不能被子类继承，final修饰的方法，不能被子类重写，final修饰的变量的值不能被改变，其实也就相当于一个常量了
 
 ### 常用API
-#### Wrapper classes
+- API，英文全称Application Programming Interface，翻译为“应用程序编程接口”。是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。简单的来说就是一个让编程人员不需要读到源码就能使用某一现存的软件/硬件的接口
+#### Wrapper classes（包装类）
+- 有的时候为了方便，我们往往希望一个基本数据类型不仅仅是基本数据类型，我们也想他是一个对象，毕竟万物皆是对象。那么Java为每一个基本数据类型都有一个唯一的包装类。基本类型与其包装类都可以通过他对应的包装类的中的静态成员方法进行转换。注意的是，**这些包装类都是final修饰的**，他们都无法被继承或重写.
+##### Integer包装类
+- <code>public Integer(int value)</code>: Integer包装类的构造函数，构造一个值为value的Integer对象
+- <code>public Integer(String s)</code>: Integer包装类的构造函数，相当于把字符串s中的数字提取出来放入Integer对象当中
+- <code>static int MAX_VALUE</code>
+- <code>static int MIN_VALUE</code>
+- <code>public static String toBinaryString(int i)</code>: 用String返还一个int的二进制形式
+- <code>public static String toHexSrtring(int i)</code>
+- <code>public static String toOctal(int i)</code>
+- <code>public static String toString(int i, int radix)</code>
+- <code>public static Integer valueOf(String s, int radix)</code>: 相当于把一个String中的int提取出来并返还
+- <code>public Integer(int value)</code>: 和构造函数一样，不过也有其他的意义，int -> Integer的转换
+- <code>public int intValue()</code>: Integer -> int的转换
 #### Object
+- <code>public String toSrting()</code>: 就是那个每个对象都要改来改去的方法
+- <code>public boolean equals(Object obj)</code>: 这个方法的意义是判断两个object是不是指向同一个类
+- <code>protected void finalize()</code>: The java.lang.Object.finalize() is called by the garbage collector on an object when garbage collection determines that there are no more references to the object. A subclass overrides the finalize method to dispose of system resources or to perform other cleanup. 似乎是判断已经没有对这个类的引用
+- <code>public final Class getClass()</code>: returns the runtime class of an object.
+- <code>public int hashCode()</code>: method returns a hash code value for the object.
 #### Scanner
+- <code>public String nextLine()</code>: 以Enter为结束符,也就是说 nextLine()方法返回的是输入回车之前的所有字符且可以获得空白。
+- <code>public int nextInt()</code>: 读取整数
 #### String
+- <code>public String()</code>
+- <code>boolean equals(Object obj)</code>
+- <code>boolean equalsIgnoreCase(Srting str)</code>
+- <code>boolean contains(Srting str)</code>
+- <code>boolean startsWith(Srting str)</code>
+- <code>boolean endsWith(String str)</code>
+- <code>boolean isEmpty</code>
+- <code>int length()</code>
+- <code>char charAt(int index)</code>
+- <code>int indexOf(int ch)</code>
+- <code>int indexOf(String str)</code>
+- <code>int indexOf(int ch, int fromIndex0</code>
+- <code>String subSrting(int start, int end)</code>
+- <code>byte[] getBytes()</code>
+- <code>char[] toCharArrays()</code>
+- <code>static String copyValueOf(char[] chs)</code>
+- <code>static String valueOf(char[] chs)</code>
+- <code>static String valueOf(int i)</code>
+- <code>String toLowerCase()</code>
+- <code>String concat(String str)</code>
+- <code>String replace(char old, char new)</code>
+- <code>String replace(String old, String new)</code>
+- <code>String[] split(String regex)</code>
+- <code>String trim()</code>: 去除字符串两端空格
 #### Arrays
+- <code>public static String toSrting(int[] a)</code>: This method returns a string representation of a.
+- <code>public static void sort(int[] a)</code>: o(nlogn)
+- <code>public static int binarySearch(int[] a, int key)</code>
 #### StringBuffer
+- 众所周知String作为不可修改的对象，即每次更改String都会产生一个新的字符串对象，与之相对应的StringBuffer类的对象能够进行多次修改并且不会产生新的未使用的对象，因此在内存上要优于String对象
+- <code>public StringBuffer()</code>
+- <code>public StringBuffer(int capacity)</code>
+- <code>public StringBuffer(String str)</code>
+- <code>public int length()</code>
+- <code>public int capacity()</code>
+- <code>public StringBuffer append(int i)</code>
+- <code>public StringBuffer insert(int offset, int i)</code>
+- <code>StringBuffer delete(int start, int end)</code>
+- <code>StringBuffer deleteCharAt(int index)</code>
+- <code>StringBuffer replace(int start, int end, String str)</code>
+- <code>String substring(int start, int end)</code>
+- <code>StringBuffer reverse()</code>
 #### Random
+- <code>public Random(long seed)</code>: 构造一个random类，If two instances of Random are created with the same seed, and the same sequence of method calls is made for each, they will generate and return identical sequences of numbers.
+- <code>public int nextInt(int n)</code>: 随机生成一个0到n之间的整数
 #### System
+- <code>public static void gc()</code>: The java.lang.System.gc() method runs the garbage collector
+- <code>public static void exit(int status)</code>: The java.lang.System.exit() method terminates the currently running Java Virtual Machine.
+- <code>public static long currentTimeMills()</code>
+- <code>public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)</code>: The java.lang.System.arraycopy() method copies an array from the specified source array, beginning at the specified position, to the specified position of the destination array.
 #### Date
+- <code>public Date()</code>
+- <code>public Date(long date)</code>: 毫秒到日期的转换
+- <code>public long getTime()</code>: 日期到毫秒的转换
 #### DateFormat
+- SimpleDateFormat is a concrete class for formatting and parsing dates in a locale-sensitive manner. SimpleDateFormat allows you to start by choosing any user-defined patterns for date-time formatting. 
+- <code>public SimpleDateFormat(String pattern)</code>
+- <code>public final String format(Date date)</code>
+- <code>public Date parse(String source)</code>
 #### Calender
+- <code>public static Calender getInstance()</code>: The java.util.Calendar.getInstance() method gets a calendar using the specified time zone and specified locale.
+- <code>public int get(int field)</code>: returns the value of the given calendar field.
+- <code>public final void set(int year, int month, int date)</code>: sets the values for the calendar fields YEAR, MONTH,DAY_OF_MONTH,HOUR_OF_DAY,MINUTE and SECOND.
+- <code>public abstract void add(int field, int amount)</code>: adds or subtracts the specified amount of time (amount) to the given calendar field (field), based on the calendar's rules.
+
