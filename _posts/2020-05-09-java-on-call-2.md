@@ -364,6 +364,7 @@ class Student extends Person {
 
 #### 内部类(Inner Class)
 - 关于内部类的内容多选自<a href="https://www.cnblogs.com/chenssy/p/3388487.html">java提高篇（八）----详解内部类</a>
+- 还有这个<a href="https://www.cnblogs.com/dolphin0520/p/3811445.html">Java内部详解</a>
 - A class defined within a class。就是在一个类的内部再定义一个类。里面定义的这个类就叫做内部类。
 
 - 成员内部类（成员内部类是最普通的内部类，它的定义为位于另一个类的内部）
@@ -383,7 +384,80 @@ class Student extends Person {
 	}
 
 	```
-	- 内部类可以访问外部类的成员，包括私有的成员，但是如果外部类想要访问内部类的成员，必须要创建内部类对象，才可以访问
+	- 内部类可以访问外部类的成员，包括私有的成员，但是如果外部类想要访问内部类的成员，必须要创建内部类对象，才可以访问，在编译的时候，编译器会默认为成员内部类添加了一个指向外部类对象的引用
+	- 要注意的是！当成员内部类拥有和外部类同名的成员变量或者方法时，默认情况下访问的是成员内部类的成员。如果从外面要访问外部类的同名成员，需要<code>外部类.this.成员</code>
+	- 成员内部类是依附外部类而存在的，也就是说，如果要创建成员内部类的对象，前提是必须首先存在一个外部类对象。
+	```java
+	Outter outter = new Outter();
+	Outter.Inner inner = outter.new Inner();
+	//或者是
+	Outter.Inner inner = outter.getInnerInstance();
+	```
+	- 内部类可以拥有private访问权限、protected访问权限、public访问权限及包访问权限。比如上面的例子，如果成员内部类Inner用private修饰，则只能在外部类的内部访问，如果用public修饰，则任何地方都能访问；如果用protected修饰，则只能在同一个包下或者继承外部类的情况下访问；如果是默认访问权限，则只能在同一个包下访问。这一点和外部类有一点不一样，外部类只能被public和包访问两种权限修饰。我个人是这么理解的，由于成员内部类看起来像是外部类的一个成员，所以可以像类的成员一样拥有多种权限修饰。
+ 
+- 局部内部类（定义在一个方法或者一个作用域里面的类，它和成员内部类的区别在于局部内部类的访问仅限于方法内或者该作用域内）
+- 局部内部类因为就像是个局部变量一样，是不可以有修饰符的
+	```java
+	class People{
+		public People() {
+			 
+		}
+	}
+ 
+	class Man{
+		public Man(){
+			 
+		}
+	 
+		public People getWoman(){
+			class Woman extends People{   //局部内部类
+				int age =0;
+			}
+			return new Woman();
+		}
+	}
+	```
+- 匿名内部类（匿名内部类也就是没有名字的内部类，正因为没有名字，所以匿名内部类只能使用一次，它通常用来简化代码编写）
+
+	```java
+	abstract class Person {
+    	public abstract void eat();
+	}
+	 
+	public class Demo {
+    	public static void main(String[] args) {
+        	Person p = new Person() {
+            	public void eat() {
+                	System.out.println("eat something");
+            	}
+        	};
+        	p.eat();
+    	}
+	}
+	```
+	- 以上这段代码的运行结果也是eat something，这样的写法就比较简洁
+	- 匿名内部类是唯一一个没有构造函数的类
+- 静态内部类（和成员内部类很像，只不过他多了个静态修饰符）
+	```java
+	public class Test {
+    	public static void main(String[] args)  {
+        	Outter.Inner inner = new Outter.Inner();
+    	}
+	}
+	 
+	class Outter {
+    	public Outter() {
+	         
+    	}
+	     
+    	static class Inner {
+        	public Inner() {
+	             
+        	}
+    	}
+	}
+	```
+	- 静态内部类是不可以像成员内部类一样访问外部类非静态的内容，因为静态内部类是独立于外部类的，是可以独立创建的，所以如果允许静态内部类访问外部类的非静态的内容的话就会产生矛盾
 
 - 为什么要使用内部类？**使用内部类最吸引人的原因是：每个内部类都能独立地继承一个接口的实现，所以无论外围类是否已经继承了某个接口的实现，对于内部类没有影响**
 
@@ -407,5 +481,38 @@ public class Daughter implements Father{
     }
 }
 ```
-- 以上的实例
-- 如果要引用inner class的一些东西的话需要：<code>OuterClass.InnerClass.method</code>
+- 思考一个很高深的问题，为什么局部内部类和匿名内部类只可以访问局部final变量？先考虑以下代码
+
+	```java
+	public class Test {
+    	public static void main(String[] args)  {
+       	  
+    	}
+     	
+    	public void test(final int b) {
+        	final int a = 10;
+        	new Thread(){
+            	public void run() {
+                	System.out.println(a);
+                	System.out.println(b);
+            	};
+        	}.start();
+    	}
+	}
+	```
+- 这段代码就很有东西，观察test这个方法，他访问的是a和b这两个final变量，当test方法执行完毕之后，变量a和b的生命周期就结束了（因为是局部的），那么如果Thread在此时还没结束，Thread还要访问a/b的，那么怎么办呢？Java采用了复制的手段来解决这个问题，具体是：也就说如果局部变量的值在编译期间就可以确定，则直接在匿名内部里面创建一个拷贝。如果局部变量的值无法在编译期间确定，则通过构造器传参的方式来对拷贝进行初始化赋值。前者很好理解，如果是后者的话，可以看出，在run方法中访问的变量a和test中实际的局部变量啊不是一个变量，他们只不过有一样的值，那么如果test中的a被确定了，然后run又想改变a的内容的话，会造成数据不一致！所以java编译器限定必须将变量a限制为final变量
+
+- final关键字：可以修饰类，方法和变量，fianl修饰的类不能被子类继承，final修饰的方法，不能被子类重写，final修饰的变量的值不能被改变，其实也就相当于一个常量了
+
+### 常用API
+#### Wrapper classes
+#### Object
+#### Scanner
+#### String
+#### Arrays
+#### StringBuffer
+#### Random
+#### System
+#### Date
+#### DateFormat
+#### Calender
