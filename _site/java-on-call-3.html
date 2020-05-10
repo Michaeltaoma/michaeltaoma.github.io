@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+	<title>Java On Call 3 · Tao Ma</title>
+
+
+<meta name="description" content="  Java基础知识  面向对象  常用API  集合I/O  多线程、网络编程、反射、设计模式">
+
+<link rel="icon" href="http://localhost:4000/assets/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
+<link rel="stylesheet" href="http://localhost:4000/assets/core.css">
+<link rel="canonical" href="http://localhost:4000/java-on-call-3">
+<link rel="alternate" type="application/atom+xml" title="Tao Ma" href="http://localhost:4000/feed.xml" />
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<aside class="logo">
+
+	
+
+	<a href="http://localhost:4000/">
+		<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">
+	</a>
+	<span class="logo-prompt code">Back to Index</span>
+</aside>
+<br />
+<section>
+		And hello to u too:) By clicking the above icon, u can come back to index any time, or u can eneter my personal info page. 
+		<br />
+		<em><strong>The picture is randomly generated every time u click the icon, I have nothing to do with any of the content of the pictures(ﾟ∀ﾟ)</strong></em>
+.
+</section>
+
+
+		<div id="content">
+			<article>
+
+	<div class="center">
+		<h1 class="title">Java On Call 3</h1>
+		<time class="code">May 9, 2020</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<ol>
+  <li>Java基础知识</li>
+  <li>面向对象</li>
+  <li>常用API</li>
+  <li>集合I/O</li>
+  <li>多线程、网络编程、反射、设计模式</li>
+</ol>
+
+<p>这是准备java面试的第二天，以上的分类的思维导图，来自-&gt;<a href="https://www.cnblogs.com/java1024/p/8757952.html" target="_blank">这里</a></p>
+<ul>
+  <li>这里是整理好的面试题，至少都过一遍:
+    <ol>
+      <li><a href="https://blog.csdn.net/qq_41701956/article/details/86686492">2019年最新java面试题及答案整理上</a></li>
+      <li><a href="https://blog.csdn.net/qq_41701956/article/details/86699263">2019年最新java面试题及答案整理下</a></li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="集合io">集合IO</h3>
+
+<h4 id="集合">集合</h4>
+<ul>
+  <li>集合是java中的一个大的框架，这个框架上有非常多的东西，首先集合可以分为：
+    <ul>
+      <li>Collection集合，collection集合中又可以细分为
+        <ul>
+          <li>List集合，list集合又可以细分为
+            <ul>
+              <li>ArrayList</li>
+              <li>Vector</li>
+              <li>LinkedList</li>
+            </ul>
+          </li>
+          <li>Set集合，set集合又可以细分为
+            <ul>
+              <li>HashSet</li>
+              <li>TreeSet</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Map集合, map集合又可以细分为
+        <ul>
+          <li>HashMap</li>
+          <li>TreeMap</li>
+          <li>Hashtable</li>
+        </ul>
+      </li>
+      <li>泛型</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="泛型generic">泛型(Generic)</h5>
+<ul>
+  <li>泛型指的是参数化类型，参数化类型指的就是，我们把数据的类型作为其参数的一种，加了泛型可以让我们避免出现运行时异常，并且强制要求了在集合中只能加入一种类型的数据</li>
+  <li>
+    <p><strong>泛型类</strong></p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="c1">//这就是一个简单的泛型类，当实例化这个类的时候，可以把我们要处理的数据类型，当作是一个参数给传入，具体的例子看下面</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sample</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;{</span>
+	
+      <span class="kd">private</span> <span class="no">T</span> <span class="n">data</span><span class="o">;</span>
+	
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="no">T</span> <span class="n">newData</span><span class="o">){};</span>
+		
+      <span class="kd">public</span> <span class="no">T</span> <span class="nf">getData</span><span class="o">(){};</span>
+  <span class="o">}</span><span class="c1">//end Sample&lt;T&gt;</span>
+
+</code></pre></div>    </div>
+    <p>实例化泛型类<code class="highlighter-rouge">Sample&lt;Integer&gt; num2 = new Sample&lt;&gt;();</code>，在泛型类定义的时候，是可以在&lt;&gt;里面加入多个类型的。或者说有的时候，希望限制那些被允许传递到一个类型参数的类型种类范围，那么就是使用<em>bounding有界的类型参数</em>。<strong>要声明一个有界的类型参数，首先列出类型参数的名称，后跟extends关键字，最后紧跟他的上届</strong></p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">RootClass</span><span class="o">&gt;</span> <span class="c1">//利用extend关键字声明上界，也就是说这个类型只可以是RootClass类及其子类的的</span>
+  <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">RootClass</span> <span class="o">&amp;</span> <span class="nc">Pizza</span><span class="o">&gt;</span> <span class="c1">//利用extend关键字声明上界，也就是说这个类型只可以是RootClass类和Pizza类以及他们的子类的的</span>
+
+  <span class="o">&lt;</span><span class="no">T</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="c1">//利用super关键字声明下界，表示参数化类型是此类型的超类型（父类型），直至Object，在这里就是</span>
+                    <span class="c1">//Integer，Number，Object</span>
+</code></pre></div>    </div>
+
+    <p>在限定类型的时候，不仅仅可以用T，还有别的标识符：
+      - E: Element(在集合中使用，因为集合中存放的是元素)
+      - T: Type，指的是java类
+      - K: Key
+      - V: Value
+      - N: Number
+      - <strong>?: 表示不确定的java类型（无限制通配符类型）</strong></p>
+
+    <p><em>使用泛型的好处</em>（once again）: Object是所有类的根类，任何类的对象都可以设置给该Object引用变量，使用的时候可能需要类型强制转换，但是使用了泛型标识符之后，类型在使用之前就已经确定了，不需要在进行类型强制转换</p>
+    <ul>
+      <li>上界指的是使用了extends的bounding，例如<code class="highlighter-rouge">&lt;? extends T&gt;</code>，表示参数化类型的可能是T或是T的子类</li>
+      <li>下界指的是使用了super的bounding，例如<code class="highlighter-rouge">&lt;? super T&gt;</code>，这个学名叫做超类型限定，表示参数化类型的可能是此类型的超类型，直至Object</li>
+    </ul>
+  </li>
+  <li><strong>泛型方法</strong>
+    <ul>
+      <li>泛型方法既可以存在于泛型类中，也可以存在于普通类中。<strong>如果通过泛型方法就可以解决问题，那么应该尽量使用泛型方法</strong></li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="nc">DataHolder</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;{</span>
+  	<span class="no">T</span> <span class="n">item</span><span class="o">;</span>
+    	
+  	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+  		<span class="k">this</span><span class="o">.</span><span class="na">item</span><span class="o">=</span><span class="n">t</span><span class="o">;</span>
+  	<span class="o">}</span>
+   	 
+  	<span class="kd">public</span> <span class="no">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+  		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
+  	<span class="o">}</span>
+    	
+  	<span class="cm">/**
+   	* 泛型方法
+   	* @param e
+   	*/</span>
+  	<span class="kd">public</span> <span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">PrinterInfo</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+  		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+  	<span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="c1">//作者：dreamGong</span>
+  <span class="c1">//链接：https://juejin.im/post/5b614848e51d45355d51f792</span>
+  <span class="c1">//来源：掘金</span>
+  <span class="c1">//著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+</code></pre></div>    </div>
+    <p>上面这个就是在一个泛型类中定义了一个泛型方法PrinterInfo，注意在泛型方法中声明的类型参数跟他所处的泛型类的类型参数是独立的，也就是说，我实例化的时候，可以为这个泛型类实例化一个String类型的，但是我们在利用这个对象的泛型方法PrinterInfo的时候，是可以把它应用在Double类型的。</p>
+  </li>
+  <li><strong>泛型接口</strong>
+    <ul>
+      <li>泛型接口就也是一个将类型参数化的接口，他的定义和泛型类的定义很相似</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Sample</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;{};</span> <span class="c1">//一个未传入实参的泛型接口</span>
+  <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Sample</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;{};</span> <span class="c1">//一个传入实参（String）的泛型接口</span>
+</code></pre></div>    </div>
+    <p>而对于实现了这个接口的类，对于未传入实参和传入实参的泛型接口的处理也是不一样的</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nc">Class</span> <span class="n">class1</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">Sample</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;{};</span> <span class="c1">//当一个类实现一个未传入实参的泛型接口时，他自己也变成了泛型类</span>
+  <span class="nc">Class</span> <span class="n">class2</span> <span class="kd">implements</span> <span class="nc">Sample</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;{};</span> <span class="c1">//当一个类实现一个传入实参的泛型接口时，他还是个普通的类</span>
+</code></pre></div>    </div>
+    <h5 id="collection集合">Collection集合</h5>
+  </li>
+  <li>Collection集合包含两大体系：List和Set
+    <h6 id="list">List</h6>
+  </li>
+  <li>存取有序，有索引，可以根据索引来取值，元素可以重复</li>
+  <li>ArrayList
+    <ul>
+      <li>底层是使用数组实现的，所以查询速度快，增删速度慢</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span>  <span class="err">//好好学</span><span class="nn">java</span><span class="o">;</span>
+	
+  <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+	
+	
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+  	<span class="c1">// 使用ArrayList进行添加和遍历</span>
+  	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      	<span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+        	
+      	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"接口1"</span><span class="o">);</span>
+      	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"接口2"</span><span class="o">);</span>
+      	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"接口3"</span><span class="o">);</span>
+        	
+      	<span class="c1">// 第一种遍历方式,使用迭代器</span>
+      	<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">it</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+      	<span class="k">while</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
+          	<span class="nc">String</span> <span class="n">next</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+          	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">next</span><span class="o">);</span>
+      	<span class="o">}</span>
+      	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-------------------"</span><span class="o">);</span>
+      	<span class="c1">// 第二种遍历方式，使用foreach</span>
+      	<span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">str</span> <span class="o">:</span> <span class="n">list</span><span class="o">){</span>
+          	<span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+      	<span class="o">}</span>
+  	<span class="o">}</span>
+	
+  <span class="o">}</span>
+	
+  <span class="c1">//作者：欧阳思海</span>
+  <span class="c1">//链接：https://juejin.im/post/5ad82dbef265da503825b240</span>
+  <span class="c1">//来源：掘金</span>
+  <span class="c1">//著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+</code></pre></div>    </div>
+  </li>
+  <li>LinkedList
+    <ul>
+      <li>也就是链表啦，有头有尾一条线，是基于链表结构实现的，查询速度慢，增删速度快，提供了特殊的方法，对头尾的元素操作</li>
+      <li>以下这个例子是使用了linkedlist来实现栈（栈是先进后出（LIFO），而队列是先进先出（FIFO））</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">com.xiaoshitou.classtest</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">java.util.LinkedList</span><span class="o">;</span>
+	
+  <span class="cm">/**
+ 	* 利用LinkedList来模拟栈
+ 	* 栈的特点：先进后出
+ 	* @author Beck
+ 	*
+ 	*/</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyStack</span> <span class="o">{</span>
+  	<span class="kd">private</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">linkList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+   	 
+  	<span class="c1">// 压栈</span>
+  	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">){</span>
+      	<span class="n">linkList</span><span class="o">.</span><span class="na">addFirst</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+  	<span class="o">}</span>
+    	
+  	<span class="c1">// 出栈</span>
+  	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">pop</span><span class="o">(){</span>
+      	<span class="k">return</span> <span class="n">linkList</span><span class="o">.</span><span class="na">removeFirst</span><span class="o">();</span>
+  	<span class="o">}</span>
+    
+  	<span class="c1">// 查看</span>
+  	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">peek</span><span class="o">(){</span>
+      	<span class="k">return</span> <span class="n">linkList</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+  	<span class="o">}</span>
+    
+  	<span class="c1">// 判断是否为空</span>
+  	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">(){</span>
+      	<span class="k">return</span> <span class="n">linkList</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">();</span>
+  	<span class="o">}</span>
+  <span class="o">}</span>
+	
+  <span class="c1">//作者：欧阳思海</span>
+  <span class="c1">//链接：https://juejin.im/post/5ad82dbef265da503825b240</span>
+  <span class="c1">//来源：掘金</span>
+  <span class="c1">//著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Vector
+    <ul>
+      <li>Vector类实现了一个动态数组，和ArrayList很相似，但是两者是不同的
+        <ul>
+          <li>Vector是同步访问的</li>
+          <li>Vector包含了许多传统的方法，这些方法不属于集合框架</li>
+          <li>Vector是线程安全的，ArrayList不是线程安全的</li>
+          <li>ArrayList在底层数组不够用时在原来的基础上扩展0.5倍，Vector是扩展一倍</li>
+        </ul>
+      </li>
+      <li>为什么说Vector是线程安全的呢？因为在Vector的源码里面，凡是比较关键的操作，都使用了<code>synchronized</code>这个关键字，保证了线程的安全性，加了这个关键字的操作，每一次只可以被一个线程执行，而不可以并发执行
+        <h6 id="set">Set</h6>
+      </li>
+    </ul>
+  </li>
+  <li>存取无序，元素不可以重复, 无下标Set集合下面有：HashSet，LinkedHashSet，TreeSet</li>
+  <li>HashSet
+    <ul>
+      <li>哈希集，每个加入哈希集的元素，都会先用hashcode来生成对这个元素的哈希值，然后根据计算得出的哈希值和数组的长度进行计算出存储的下标；如果下标的位置无元素，那么直接存储，如果有元素的话，使用equals来判断这个位置的这个元素和要存入的元素是不是一样的，如果结果为真，就不存了，因为已经有了，如果结果为假，那么就以链表的形式存在这个位置上</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span>  <span class="err">好好学</span><span class="nn">java</span><span class="o">;</span>
+	
+  <span class="kn">import</span> <span class="nn">java.util.HashSet</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.Set</span><span class="o">;</span>
+	
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      	<span class="c1">// 利用HashSet来存取</span>
+      	<span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+        	
+      	<span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"我的天"</span><span class="o">);</span>
+      	<span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"我是重复的"</span><span class="o">);</span>
+      	<span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"我是重复的"</span><span class="o">);</span>
+      	<span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"welcome"</span><span class="o">);</span>
+        	
+      	<span class="c1">// 遍历 第一种方式 迭代器</span>
+      	<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">it</span> <span class="o">=</span> <span class="n">set</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+      	<span class="k">while</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
+          	<span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+          	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+      	<span class="o">}</span>
+        
+      	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------------"</span><span class="o">);</span>
+      	<span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">str</span> <span class="o">:</span> <span class="n">set</span><span class="o">){</span>
+          	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+      	<span class="o">}</span>
+      	<span class="c1">// 打印结果，重复的已经去掉了</span>
+      	<span class="cm">/*我的天
+      	welcome
+      	我是重复的
+      	--------------
+      	我的天
+      	welcome
+      	我是重复的*/</span>
+  	<span class="o">}</span>
+
+  <span class="c1">//作者：欧阳思海</span>
+  <span class="c1">//链接：https://juejin.im/post/5ad82dbef265da503825b240</span>
+  <span class="c1">//来源：掘金</span>
+  <span class="c1">//著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+</code></pre></div>    </div>
+  </li>
+  <li>LinkedHashSet
+    <ul>
+      <li>是一个Set的实现，所以他其中存的不是键值对，而是值，这个东西是HashSet的子类，继承于HashSet，然后是基于LinkedHashMap来实现的</li>
+    </ul>
+  </li>
+</ul>
+
+
+
+</article>
+
+<div class="page-navigation code">
+	
+		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="http://localhost:4000/java-on-call-2" title="PREV: Java On Call 2">&gt;&gt;</a>
+  
+</div>
+
+<!-- Link Gitalk 的支持文件  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    // gitalk的主要参数
+        clientID: 'f075f01270dae871aa15',
+        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
+        repo: 'michaeltaoma.github.io',
+        owner: 'michaeltaoma',
+        admin: ['michaeltaoma'],
+        id: md5(location.pathname),
+        
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
+
+		</div>
+
+		<div class="footer">
+  <span class="block">&copy; 2020 Tao Ma</span>
+  <span class="block"><small>&lt;/&gt; Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/heiswayi/the-plain">The Plain theme</a>.</small></span>
+</div>
+
+
+	</body>
+
+</html>
