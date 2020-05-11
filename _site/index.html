@@ -45,11 +45,57 @@
 
 
 		<div id="content">
-			<section>
+			<style>
+	input[type=text]{
+		width: 50%;
+		height: 40%;
+		border: 2px solid #7BA7AB;
+        border-radius: 5px;
+        background: #f0f8ff;
+        color: #00000;
+	}
+</style>
 
+<section>
+
+	<div id="search-container" >
+		<input type="text" id="search-input" placeholder="search for post...">
+		<ul id="results-container"></ul>
+	</div>
+
+<!-- Script pointing to search-script.js -->
+	<script src="assets/js/search-script.js" type="text/javascript"></script>
+
+<!-- Configuration -->
+	<script>
+	SimpleJekyllSearch({
+  		searchInput: document.getElementById('search-input'),
+  		resultsContainer: document.getElementById('results-container'),
+  		json: '/search.json'
+	})
+	</script>
+	
 	
 		
 			<h3 class="code">2020</h3>
+		
+
+		<ul>
+			<li>
+				<div class="post-date code">
+					<span>May 11</span>
+				</div>
+				<div class="title">
+					<a href="http://localhost:4000/java-on-call-4">Java On Call 4</a>
+				</div>
+			</li>
+		</ul>
+
+	
+		
+			
+			
+			
 		
 
 		<ul>

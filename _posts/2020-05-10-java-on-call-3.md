@@ -1,6 +1,7 @@
 ---
 layout: post
 updated: 2020-05-10 10:22
+description: set, io, list, arraylist, vector, linklist, hashset, linkedhashset, generic, treeset, map, treemap, hashmap, linkedhashmap, compareto, comparable, block, nonblock, asychronous
 ---
 
 1. Java基础知识
