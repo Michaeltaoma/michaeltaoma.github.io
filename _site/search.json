@@ -13,6 +13,28 @@
   
     {
 
+      "title"    : "Economics Note",
+      "url"      : "/economics-note",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2020-05-11 00:00:00 +0800",
+	  "description" : "My Economics note"
+
+    } ,
+  
+    {
+
+      "title"    : "All My Past Notes",
+      "url"      : "/all-my-past-notes",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2020-05-11 00:00:00 +0800",
+	  "description" : "CISC324, CISC452, CISC365, CISC223, CISC124"
+
+    } ,
+  
+    {
+
       "title"    : "Java On Call 3",
       "url"      : "/java-on-call-3",
       "category" : "",

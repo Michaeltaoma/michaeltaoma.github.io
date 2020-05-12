@@ -319,6 +319,91 @@
     
       
         <item>
+          <title>Economics Note</title>
+          <description>&lt;h2 id=&quot;chapter-1&quot;&gt;Chapter 1&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Contrast the two main branches of economics—microeconomics and macroeconomics.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Describe the three main analytical tools of microeconomics—constrained optimization, equilibrium analysis, and comparative statics—and recognize examples of each of these tools.&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Explain the difference between positive and normative analysis.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Economics is the science that deals with the allocation of limited resources to satisfy unlimited human wants&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;That is why economics is often described as the science of constrained choice.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Resource
+    &lt;ul&gt;
+      &lt;li&gt;Labor(劳动力)&lt;/li&gt;
+      &lt;li&gt;Managerial talent（人才管理）&lt;/li&gt;
+      &lt;li&gt;Capital（资本）
+        &lt;ul&gt;
+          &lt;li&gt;在经济学，资本， 是一种生产要素，为用于生产的耐久财，即资金、厂房、设备、材料等物质资源，用来生产其他商品或产生收入的累积物力与财务资源.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Raw Material
+        &lt;ul&gt;
+          &lt;li&gt;A raw material, also known as a feedstock, unprocessed material, or primary commodity, is a basic material that is used to produce goods, finished products, energy, or intermediate materials that are feedstock for future finished products.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;资本和原材料是一样的吗？原材料是资本的一部分吗？
+    &lt;ul&gt;
+      &lt;li&gt;资本和原材料不一样，最大的区别在于&lt;strong&gt;原材料会变成商品的一部分，而资本不会&lt;/strong&gt;，所以对于资本有更加精准的定义：具有以下特性的商品，即为资本：
+        &lt;ul&gt;
+          &lt;li&gt;在制造其他商品时会使用到（因此是生产要素中的一项）&lt;/li&gt;
+          &lt;li&gt;不会变为其他商品中的一部分（和原料或半成品不同），在制造过程中也不会将此商品耗尽（不过资本会有折旧．也是企业支出的一部分）。&lt;/li&gt;
+          &lt;li&gt;需要经过生产制造流程才能得到（和生产要素中的“土地”不同，后者是指自然存在的资产，例如矿产）。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;比如打印机本来属于资本，因为在制造其他商品时会用到，但是如果他同时是商品的一部分，那他就不是资本了&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Microeconomics: studies the economic behavior of individ- ual economic decision makers, such as a consumer, a worker, a firm, or a manager. It also analyzes the behavior of individual households, industries, markets, labor unions, or trade associations. 微观经济学要解决的三个问题
+    &lt;ul&gt;
+      &lt;li&gt;What goods and services will be produced and in what quantities?&lt;/li&gt;
+      &lt;li&gt;Who will produce the goods and services, and how?&lt;/li&gt;
+      &lt;li&gt;Who will receive the goods and services?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Macroeconomics: analyzes how an entire national economy performs.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Three key analytical tools
+    &lt;ul&gt;
+      &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+          <pubDate>2020-05-11T00:00:00+08:00</pubDate>
+          <link>http://localhost:4000/economics-note</link>
+          <guid isPermaLink="true">http://localhost:4000/economics-note</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>All My Past Notes</title>
+          <description>&lt;p&gt;一直很想把自己之前上课做过的所有笔记都放出来，以下的笔记是按照课程来分类的，作为一个分享也作为一个自己笔记的整理，有些笔记是影印版的，所以大的离谱&lt;/p&gt;
+
+&lt;h4 id=&quot;cisc324随堂笔记&quot;&gt;&lt;a href=&quot;assets/pdf/gener_324.pdf&quot;&gt;CISC324随堂笔记&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;cisc324期末笔记&quot;&gt;&lt;a href=&quot;assets/pdf/324Final.pdf&quot;&gt;CISC324期末笔记&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;cisc452笔记&quot;&gt;&lt;a href=&quot;assets/pdf/452_combine.pdf&quot;&gt;CISC452笔记&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;cisc223期末笔记&quot;&gt;&lt;a href=&quot;assets/pdf/223_final.pdf&quot;&gt;CISC223期末笔记&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;cisc365笔记含部分习题&quot;&gt;&lt;a href=&quot;assets/pdf/365Note.pdf&quot;&gt;CISC365笔记含部分习题&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;cisc124笔记含部分习题&quot;&gt;&lt;a href=&quot;assets/pdf/124_REVIEW.pdf&quot;&gt;CISC124笔记含部分习题&lt;/a&gt;&lt;/h4&gt;
+
+</description>
+          <pubDate>2020-05-11T00:00:00+08:00</pubDate>
+          <link>http://localhost:4000/all-my-past-notes</link>
+          <guid isPermaLink="true">http://localhost:4000/all-my-past-notes</guid>
+        </item>
+      
+    
+      
+        <item>
           <title>Java On Call 3</title>
           <description>&lt;ol&gt;
   &lt;li&gt;Java基础知识&lt;/li&gt;
