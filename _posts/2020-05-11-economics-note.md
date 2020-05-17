@@ -3,7 +3,7 @@ layout: post
 updated: 2020-05-13 16:29
 description: My Economics note
 ---
-## Chapter 1
+## Chapter 1: Analyzing Economic Problems
 - Contrast the two main branches of economics—microeconomics and macroeconomics.
 - *Describe the three main analytical tools of microeconomics—constrained optimization, equilibrium analysis, and comparative statics—and recognize examples of each of these tools.*
 - Explain the difference between positive and normative analysis.
@@ -45,9 +45,10 @@ description: My Economics note
 	- *Objective function*：The relationship that the decision maker seeks to "optimize"
 		- 例子就是如果现在的问题是一个消费者想要通过购物去最大化自己的满足感。那么这里的objective function就是消费者在购买某一种商品之后他有多少满足感
 		- 假设现在需要通过L和W去最大化Area（定位为LW）那么他的标识是 \\(\mathop{max}\limits_{(L,W)}(LW)\ subject\ to\ \{Set\ of\ constraint\} \\)
+	- LW就是Objective Function
 	- Set of constrains
 - 所以其实Objective function就一个简单的目标值足矣
-- 然后textbook举了个例子来阐述constrained optimization是怎样把人们从不明显的错误中给纠正过来，个人认为是废话。不过课本根据这个问题提出了经济学上的一个重要观点：***The solution to any constrained optimization problem depends on the marginal impact of the decision variables on the value of the objective function.***这句话的意思就是变量对于价值的边际影响决定了cop的答案，边际影响值得是每提高一个unit的变量，价值的改变是多少。
+- 然后textbook举了个例子来阐述constrained optimization是怎样把人们从不明显的错误中给纠正过来，个人认为是废话。不过课本根据这个问题提出了经济学上的一个重要观点：***The solution to any constrained optimization problem depends on the marginal impact of the decision variables on the value of the objective function.***这句话的意思就是变量对于价值的边际影响决定了cop的答案，边际影响指得是每提高一个unit的变量，价值的改变是多少。
 - 然后根据例子，处理这种多变量的constrain optimization problem的时候，我们往往考虑增加边际影响更大的变量，边际影响指明了方向
 - **The term marginal in microeconomics tells us how a dependent variable changes as a result of adding one unit of an independent variable**
 - **Marginal Cost**: Marginal cost measures the incremental impact of the last unit of the independent variable (output) on the dependent variable (total cost). 这个和刚刚的边际影响是相反的，这个考虑的是当价值提高一个unit，那么成本（变量）会提高多少，一般就是价格
@@ -71,4 +72,30 @@ description: My Economics note
 	- Normative economics focuses on the value of economic fairness, or what the economy "should be" or "ought to be."
 - While positive economics is based on fact and cannot be approved or disapproved, normative economics is based on value judgments.
 - 看到了一个反对最低工资上调的说法：上调最低工资其实是把收入转移给了没有技术的员工。如果想要把收入转移给某类人，还有一种做法是从一般税收收入中支付转移的费用。这样做有两个好处:一是将负担分摊到所有纳税人身上，二是让政客们为自己的行为负责。但是通过提高最低工资的办法，只会让这个担子全压在雇主身上，如果最低工资上调，雇主只可以多付工资，每年的成本上涨，这上涨的成本无异于前种办法的征税，唯一的区别是政策设计者可以告诉你他没有提高税收
-- Positive analysis attempts to explain how an economic system works and to predict how the endogenous variables will change as exogenous vari- ables change. Normative analysis considers prescriptive questions such as “What should be done?” Normative studies introduce value judgments into the analysis.
+- Positive analysis attempts to explain how an economic system works and to predict how the endogenous variables will change as exogenous variables change. Normative analysis considers prescriptive questions such as “What should be done?” Normative studies introduce value judgments into the analysis.
+
+## Chapter 2: Demand and Supply Analysis
+
+- Describe the **three main building blocks of supply and demand analysis**––demand curves, supply curves, and the concept of market equilibrium. 
+- Analyze how changes in exogenous variables shift the demand and supply curves and thus change the equilibrium price and quantity.
+- Explain the concept of **price elasticity.**
+- Calculate the price elasticity of demand for specific demand curves.
+- Explain how price elasticity of demand is related to total revenue.
+- Discuss the factors that determine the price elasticity of demand.
+- **Contrast the market-level price elasticity of demand with the brand-level price elasticity of demand.** 
+- Explain and contrast **other elasticities**: the income elasticity of demand, the cross-price elasticity of demand, and the price elasticity of supply.
+- Indicate why the short-run price elasticities of demand and supply may differ from the long-run price elasticities of demand and supply.  
+- Use **“back-of-the-envelope”** techniques to determine key properties of demand and supply curves with only fragmentary data on prices, quantities, or elasticities.
+
+### 2.1 Demand, Supply, and Market Equilibrium
+- 目标分析市场：
+	- Perfectly Competitive Market
+	- 完全竞争市场comprise large numbers of buyers and sellers。
+	- 存在许多的买家/卖家，所以单个的买家/卖家无法决定价格，他们只能接受市场决定的整体的价格(*price-taking*)
+- 一个市场可以被以下三个维度划分：
+	- Commodity: 在贩卖/购买的是什么货物
+	- Geography: 市场的地点在哪里
+	- Time
+- **Market Demand Curve**: 就是市场需求曲线，A curve that shows us the quantity of goods that con- sumers are willing to buy at different prices. 
+- **Derived Demand**: Demand for a good that is derived from the produc- tion and sale of other goods. Derived demand is demand for a factor of production or intermediate good that occurs as a result of the demand for another intermediate or final good. 也就是说derived demand这个需求是基于别的最终产品的需求上的，比如我想要的是玉米汁，但是玉米是玉米汁的原材料，所以我对玉米的需求是基于我对玉米汁的需求
+- **Direct Demand**: Demand for a good that comes from the desire of buyers to directly consume the good itself. 就是我对于玉米的需求来源于我本身想要消费玉米，而像在上面举的例子里面的direct demand就是我对于玉米汁的需求

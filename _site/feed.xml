@@ -7,6 +7,268 @@
     
       
         <item>
+          <title>Java On Call 6</title>
+          <description>&lt;ol&gt;
+  &lt;li&gt;Java基础知识&lt;/li&gt;
+  &lt;li&gt;面向对象&lt;/li&gt;
+  &lt;li&gt;常用API&lt;/li&gt;
+  &lt;li&gt;集合I/O&lt;/li&gt;
+  &lt;li&gt;多线程、网络编程、反射、设计模式&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这是准备java面试的第二天，以上的分类的思维导图，来自-&amp;gt;&lt;a href=&quot;https://www.cnblogs.com/java1024/p/8757952.html&quot; target=&quot;_blank&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;这里是整理好的面试题，至少都过一遍:
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/qq_41701956/article/details/86686492&quot;&gt;2019年最新java面试题及答案整理上&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/qq_41701956/article/details/86699263&quot;&gt;2019年最新java面试题及答案整理下&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;notes-of-this-video&quot;&gt;Notes of this video&lt;/h3&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/If1Lw4pLLEo&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Dependenct Injection&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Object depends on other objects.(Dependency)&lt;/li&gt;
+      &lt;li&gt;Coupling（耦合性）：我们追求的是对象间的低耦合性，但是只要我们在一个对象中说new的时候，这个耦合性就会变高了，那为什么高耦合性会不好呢？
+        &lt;ul&gt;
+          &lt;li&gt;Coupling的标准定义是：Degree of direct knowledge that one element has of each other.&lt;/li&gt;
+          &lt;li&gt;Tight Coupling:  In general, Tight coupling means the two classes often change together. In other words, if A knows more than it should about the way in which B was implemented, then A and B are tightly coupled.&lt;/li&gt;
+          &lt;li&gt;为什么高耦合性的程序设计不好？In general, Tight Coupling is bad in but most of the time, because it reduces flexibility and re-usability of code, it makes changes much more difficult, it impedes test ability etc.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;所以我们不用自己在对象中实例化他的依赖对象，而是通过一个外部的服务，外部的服务帮助注入这个依赖的对象， 这就是依赖注入。&lt;/li&gt;
+      &lt;li&gt;因为在对象中我们写代码的时候不需要实例化对象，所以要让容器知道你要注入什么对象，就需要配置，配置在java Spring框架中有的是用XML来配置的。或者是用Spring Boot，用关键字来声明配置&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;dependingObj&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dependingObjParent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;//..&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;//..&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Laptop&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;dependingObj&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li&gt;以上使用了component这个关键字后，这个dependingObj就是一个我们需要注入的对象&lt;/li&gt;
+      &lt;li&gt;使用了autowired之后，框架就会帮助注入你的对象&lt;/li&gt;
+      &lt;li&gt;依赖注入的原因：除了希望设计出松耦合的程序，还有个原因就是在做测试的时候，如果没有依赖注入的话，我们在测试一个对象的时候，同时需要测试他依赖的对象；但是更合理的难道不是依赖的对象测试成功之后，就不需要在测试别的对象的时候重复测试了嘛？有个例子是如果一个对象依赖于一个跟数据库相关的对象，那么难道当我们在测试这个对象的时候，要不停的manipulate这个数据库嘛？如果用松耦合的程序的话就可以用mock class去避免重复测试&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Maven and 如何用Spring来做依赖注入&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Maven是一个项目构建和管理工具，为开发人员提供了一个项目构建（build）的生命周期框架。&lt;/li&gt;
+      &lt;li&gt;就是当我们在写一个项目的时候，需要用到很多的库，假设你全都把库手动下载到电脑上，是可以的，但是，如果需要更新的时候就裂了。所以Maven这个工具就是，通过声明在Maven中的project中的&lt;code&gt;pom.xml&lt;/code&gt;中的需要哪个库，Maven会帮你把这些库给拉进来，像这样声明&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;o&quot;&gt;&amp;lt;!--&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;https:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//mvnrepository.com/artifact/org.springframework/spring-web --&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dependency&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  	&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;groupId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;springframework&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;groupId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  	&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;artifactId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;artifactId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  	&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;5.2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;RELEASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dependency&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Maven有一个本地仓，也有一个网络上的仓库，当Maven看到了你需要的dependency之后，Maven会首先搜索本地仓，看看本地仓有没有这个库，如果有的话就直接使用；如果没有的话就会去网络的仓库下载到本地仓中。&lt;/li&gt;
+      &lt;li&gt;Maven里面的Archetype可以被看作是一类项目的基本框架&lt;/li&gt;
+      &lt;li&gt;GroupID是package name，ArtifactID是项目的名字&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;getBean();&lt;/code&gt;是定义在BeanFactory/ApplicationContext接口的方法，这两个接口都是springFramework中，区别是ApplicationContext中有BeanFactory更多的东西，这两个都是IoC容器且BeanFactory是最基础的IoC&lt;/li&gt;
+      &lt;li&gt;注入的流程是首先你得有一个xml文件，这个文件里面定义了你的bean，这个bean声明了要注入的是什么类，像下面这样&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;vehicle&quot;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;=&quot;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;taoma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TestMaven2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;然后在你的对象里面，比如你的对象是依赖于上面这个对象的，那么你就得在声明这个对象的时候使用以下的语句&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nc&quot;&gt;ApplicationContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClassPathXmlApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;spring.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    	 
+  &lt;span class=&quot;nc&quot;&gt;Vehicle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newCar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Vehicle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Vehicle&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;而不再是使用new了&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;依赖注入在java中有三种实现方式，其中一种就是像上面说的用xml去配置，还有种办法是用&lt;strong&gt;Annotation based configurations&lt;/strong&gt;，这种方式就是@Component这样的&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.taoma.TestMaven2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vehicle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;drive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		
+		&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;I am TaoMa&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;那么此时相应的在xml文件中就应该加上这一行并且把刚刚定义的bean给删除来告诉框架现在使用这种方法来声明&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;context:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scan&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;=&quot;&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;com.taoma.TestMaven2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;context:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Spring变量注入&lt;/strong&gt;: 像下面这例子，如果Car是一个你要注入的对象，这个对象的声明中含有变量，但是因为是用容器注入，整体的设计思路是松耦合，那么声明一个变量相当于“这个对象是基于这个变量和存在了”，这又把耦合度给提高了，所以容器不会怎么搞这个变量。需要在xml文件中注入这个变量&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.taoma.TestMaven2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vehicle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;nc&quot;&gt;Private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brand&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;drive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		
+		&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;I am TaoMa&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;注入这个变量，并且可以定义这个值，这就是这个bean的参数（property），使用这个property且定义他的参数就像是用setter一样&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;vehicle&quot;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;=&quot;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;taoma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TestMaven2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;gt;
+		&amp;lt;property name=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brand&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; value=&quot;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Tao&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;当然我们也可以在需要有变量的地方定义一个constructor，然后在xml中就不使用property而是使用以下的语句，这样子的方式叫做Constructor Injection&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;vehicle&quot;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;=&quot;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;taoma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TestMaven2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;gt;
+		&amp;lt;constructor-arg value=&quot;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Tao&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;我们编写spring框架的代码的时候，一直遵循着这样的原则：所有在Spring中注入的bean都建议定义成私有的域变量。并且要配套写上get和set方法。以下的例子就是用这种原则编写的代码，其中Car和Office是我们要注入Boss的对象&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.baobaotao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   
+  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Office&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;office&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   
+  
+    &lt;span class=&quot;c1&quot;&gt;// 省略 get/setter   &lt;/span&gt;
+  
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;car:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/n&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;office:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;office&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;   
+
+&lt;span class=&quot;c1&quot;&gt;//-------------------------------------------------&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xml&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.0&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&amp;gt;&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beans&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xmlns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;  
+    &lt;span class=&quot;nl&quot;&gt;xmlns:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xsi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;  
+    &lt;span class=&quot;nl&quot;&gt;xsi:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;schemaLocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans    
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;boss&quot;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;=&quot;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;baobaotao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Boss&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;gt;   
+        &amp;lt;property name=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; ref=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&amp;gt;   
+        &amp;lt;property name=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;office&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; ref=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;office&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; /&amp;gt;   
+    &amp;lt;/bean&amp;gt;   
+    &amp;lt;bean id=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;office&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; class=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;baobaotao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Office&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;gt;   
+        &amp;lt;property name=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;officeNo&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; value=&quot;&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;002&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&amp;gt;   
+    &amp;lt;/bean&amp;gt;   
+    &amp;lt;bean id=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; class=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;baobaotao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; scope=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;singleton&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;gt;   
+        &amp;lt;property name=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brand&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; value=&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;红旗&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;CA72&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&amp;gt;   
+        &amp;lt;property name=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; value=&quot;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beans&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Autowired Annotation&lt;/strong&gt;：也就是最开始举的例子，使用@Autowired去修饰依赖对象。Autowire注释可以对类成员变量、方法及构造函数进行标注，完成自动装备的工作。Autowire之后，他的代码会变化成以下这样&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.baobaotao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   
+  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   
+	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   
+	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Office&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;office&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   
+  
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;car:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/n&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;office:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;office&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;   
+
+&lt;span class=&quot;c1&quot;&gt;//-------------------------------------------------&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xml&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.0&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&amp;gt;&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beans&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xmlns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;  
+    &lt;span class=&quot;nl&quot;&gt;xmlns:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xsi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;  
+    &lt;span class=&quot;nl&quot;&gt;xsi:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;schemaLocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans    
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;boss&quot;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;=&quot;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;baobaotao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Boss&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;gt;&amp;lt;/bean&amp;gt;   
+    &amp;lt;bean id=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;office&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; class=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;baobaotao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Office&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;gt;   
+        &amp;lt;property name=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;officeNo&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; value=&quot;&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;002&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&amp;gt;   
+    &amp;lt;/bean&amp;gt;   
+    &amp;lt;bean id=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; class=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;baobaotao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; scope=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;singleton&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;gt;   
+        &amp;lt;property name=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brand&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; value=&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;红旗&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;CA72&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&amp;gt;   
+        &amp;lt;property name=&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; value=&quot;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;   
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beans&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;把getter和setter可以去掉，并且加上注释。这样，当 Spring 容器启动时，AutowiredAnnotationBeanPostProcessor 将扫描 Spring 容器中所有 Bean，当发现 Bean 中拥有 @Autowired 注释时就找到和其匹配（默认按类型匹配）的 Bean，并注入到对应的地方中去。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Annotation Configuration&lt;/strong&gt;：就是说之前是从xml文件里面找Bean，不过现在可以定义一个class文件，这个类里面有取的对象的方法，像下面这个一样&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.taoma.TestMaven2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.Bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AppConfig&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Samsung&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getPhone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Samsung&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//-----------------------------&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;ApplicationContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClassPathXmlApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;AppCongig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    	 
+&lt;span class=&quot;nc&quot;&gt;Samsung&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newCar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Samsung&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Samsung&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;所以这样定义就方便很多了，在配置类写bean，用@Configuration来声明配置类，用@Bean来声明bean的方法，像上面那样&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;然后其实只要被Component修饰了的东西，且在配置类中用@ComponentScan注释，那么这个配置类就相当于自动生成了所有被Component修饰的类的bean，就连上面的&lt;code&gt;getPhone()&lt;/code&gt;这种东西都不用写&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+          <pubDate>2020-05-17T00:00:00+08:00</pubDate>
+          <link>http://localhost:4000/java-on-call-6</link>
+          <guid isPermaLink="true">http://localhost:4000/java-on-call-6</guid>
+        </item>
+      
+    
+      
+        <item>
           <title>Java On Call 5</title>
           <description>&lt;ol&gt;
   &lt;li&gt;Java基础知识&lt;/li&gt;
@@ -446,7 +708,7 @@
       
         <item>
           <title>Economics Note</title>
-          <description>&lt;h2 id=&quot;chapter-1&quot;&gt;Chapter 1&lt;/h2&gt;
+          <description>&lt;h2 id=&quot;chapter-1-analyzing-economic-problems&quot;&gt;Chapter 1: Analyzing Economic Problems&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;Contrast the two main branches of economics—microeconomics and macroeconomics.&lt;/li&gt;
   &lt;li&gt;&lt;em&gt;Describe the three main analytical tools of microeconomics—constrained optimization, equilibrium analysis, and comparative statics—and recognize examples of each of these tools.&lt;/em&gt;&lt;/li&gt;
@@ -518,11 +780,12 @@
           &lt;li&gt;假设现在需要通过L和W去最大化Area（定位为LW）那么他的标识是 \(\mathop{max}\limits_{(L,W)}(LW)\ subject\ to\ {Set\ of\ constraint} \)&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
+      &lt;li&gt;LW就是Objective Function&lt;/li&gt;
       &lt;li&gt;Set of constrains&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;所以其实Objective function就一个简单的目标值足矣&lt;/li&gt;
-  &lt;li&gt;然后textbook举了个例子来阐述constrained optimization是怎样把人们从不明显的错误中给纠正过来，个人认为是废话。不过课本根据这个问题提出了经济学上的一个重要观点：&lt;strong&gt;&lt;em&gt;The solution to any constrained optimization problem depends on the marginal impact of the decision variables on the value of the objective function.&lt;/em&gt;&lt;/strong&gt;这句话的意思就是变量对于价值的边际影响决定了cop的答案，边际影响值得是每提高一个unit的变量，价值的改变是多少。&lt;/li&gt;
+  &lt;li&gt;然后textbook举了个例子来阐述constrained optimization是怎样把人们从不明显的错误中给纠正过来，个人认为是废话。不过课本根据这个问题提出了经济学上的一个重要观点：&lt;strong&gt;&lt;em&gt;The solution to any constrained optimization problem depends on the marginal impact of the decision variables on the value of the objective function.&lt;/em&gt;&lt;/strong&gt;这句话的意思就是变量对于价值的边际影响决定了cop的答案，边际影响指得是每提高一个unit的变量，价值的改变是多少。&lt;/li&gt;
   &lt;li&gt;然后根据例子，处理这种多变量的constrain optimization problem的时候，我们往往考虑增加边际影响更大的变量，边际影响指明了方向&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;The term marginal in microeconomics tells us how a dependent variable changes as a result of adding one unit of an independent variable&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Marginal Cost&lt;/strong&gt;: Marginal cost measures the incremental impact of the last unit of the independent variable (output) on the dependent variable (total cost). 这个和刚刚的边际影响是相反的，这个考虑的是当价值提高一个unit，那么成本（变量）会提高多少，一般就是价格&lt;/li&gt;
@@ -557,7 +820,43 @@
   &lt;/li&gt;
   &lt;li&gt;While positive economics is based on fact and cannot be approved or disapproved, normative economics is based on value judgments.&lt;/li&gt;
   &lt;li&gt;看到了一个反对最低工资上调的说法：上调最低工资其实是把收入转移给了没有技术的员工。如果想要把收入转移给某类人，还有一种做法是从一般税收收入中支付转移的费用。这样做有两个好处:一是将负担分摊到所有纳税人身上，二是让政客们为自己的行为负责。但是通过提高最低工资的办法，只会让这个担子全压在雇主身上，如果最低工资上调，雇主只可以多付工资，每年的成本上涨，这上涨的成本无异于前种办法的征税，唯一的区别是政策设计者可以告诉你他没有提高税收&lt;/li&gt;
-  &lt;li&gt;Positive analysis attempts to explain how an economic system works and to predict how the endogenous variables will change as exogenous vari- ables change. Normative analysis considers prescriptive questions such as “What should be done?” Normative studies introduce value judgments into the analysis.&lt;/li&gt;
+  &lt;li&gt;Positive analysis attempts to explain how an economic system works and to predict how the endogenous variables will change as exogenous variables change. Normative analysis considers prescriptive questions such as “What should be done?” Normative studies introduce value judgments into the analysis.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-2-demand-and-supply-analysis&quot;&gt;Chapter 2: Demand and Supply Analysis&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Describe the &lt;strong&gt;three main building blocks of supply and demand analysis&lt;/strong&gt;––demand curves, supply curves, and the concept of market equilibrium.&lt;/li&gt;
+  &lt;li&gt;Analyze how changes in exogenous variables shift the demand and supply curves and thus change the equilibrium price and quantity.&lt;/li&gt;
+  &lt;li&gt;Explain the concept of &lt;strong&gt;price elasticity.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Calculate the price elasticity of demand for specific demand curves.&lt;/li&gt;
+  &lt;li&gt;Explain how price elasticity of demand is related to total revenue.&lt;/li&gt;
+  &lt;li&gt;Discuss the factors that determine the price elasticity of demand.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Contrast the market-level price elasticity of demand with the brand-level price elasticity of demand.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Explain and contrast &lt;strong&gt;other elasticities&lt;/strong&gt;: the income elasticity of demand, the cross-price elasticity of demand, and the price elasticity of supply.&lt;/li&gt;
+  &lt;li&gt;Indicate why the short-run price elasticities of demand and supply may differ from the long-run price elasticities of demand and supply.&lt;/li&gt;
+  &lt;li&gt;Use &lt;strong&gt;“back-of-the-envelope”&lt;/strong&gt; techniques to determine key properties of demand and supply curves with only fragmentary data on prices, quantities, or elasticities.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;21-demand-supply-and-market-equilibrium&quot;&gt;2.1 Demand, Supply, and Market Equilibrium&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;目标分析市场：
+    &lt;ul&gt;
+      &lt;li&gt;Perfectly Competitive Market&lt;/li&gt;
+      &lt;li&gt;完全竞争市场comprise large numbers of buyers and sellers。&lt;/li&gt;
+      &lt;li&gt;存在许多的买家/卖家，所以单个的买家/卖家无法决定价格，他们只能接受市场决定的整体的价格(&lt;em&gt;price-taking&lt;/em&gt;)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;一个市场可以被以下三个维度划分：
+    &lt;ul&gt;
+      &lt;li&gt;Commodity: 在贩卖/购买的是什么货物&lt;/li&gt;
+      &lt;li&gt;Geography: 市场的地点在哪里&lt;/li&gt;
+      &lt;li&gt;Time&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Market Demand Curve&lt;/strong&gt;: 就是市场需求曲线，A curve that shows us the quantity of goods that con- sumers are willing to buy at different prices.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Derived Demand&lt;/strong&gt;: Demand for a good that is derived from the produc- tion and sale of other goods. Derived demand is demand for a factor of production or intermediate good that occurs as a result of the demand for another intermediate or final good. 也就是说derived demand这个需求是基于别的最终产品的需求上的，比如我想要的是玉米汁，但是玉米是玉米汁的原材料，所以我对玉米的需求是基于我对玉米汁的需求&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Direct Demand&lt;/strong&gt;: Demand for a good that comes from the desire of buyers to directly consume the good itself. 就是我对于玉米的需求来源于我本身想要消费玉米，而像在上面举的例子里面的direct demand就是我对于玉米汁的需求&lt;/li&gt;
 &lt;/ul&gt;
 </description>
           <pubDate>2020-05-11T00:00:00+08:00</pubDate>
