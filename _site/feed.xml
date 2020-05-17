@@ -7,6 +7,86 @@
     
       
         <item>
+          <title>西瓜</title>
+          <description>&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/TeFuirnever/article/details/96178919&quot;&gt;成品笔记&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;第一章绪论&quot;&gt;第一章：绪论&lt;/h2&gt;
+&lt;h3 id=&quot;11-引言--12-基本术语&quot;&gt;1.1 引言 &amp;amp; 1.2 基本术语&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;机器学习致力于通过计算的手段，利用经验来改善系统自身的性能。机器学习所研究的主要内容，是关于在数据中产生模型。在面对新的情况时（情况不存在“经验”中），模型可以作出相应的判断。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;模型&lt;/strong&gt;：本书用这个词泛指从数据中学得的结果&lt;/li&gt;
+  &lt;li&gt;数据集指的是存在许多数据的集合，例如有很多个西瓜的数据，每一个西瓜的数据，被称为示例/样本，而每个西瓜数据中的类目，例如色泽，根蒂等，被称为属性或者特征，属性上面具体的取值被称为属性值，属性张成的空间被称为属性空间/样本空间，例如西瓜数据中有三个属性，那么每个属性作为一个坐标轴，就有一个关于西瓜的三维空间，每个西瓜都可以在这个空间中对应一个坐标向量，因此示例也被称为特征向量&lt;/li&gt;
+  &lt;li&gt;\x_{ij}( \)指的是\( x_i\)在第j个属性上面的取值&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;模型对应了关于数据的某种潜在的规律，因此也被称为假设，而这种实际真实存在的潜在规律则被称为真相&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;拥有了标记信息的示例，称为样例&lt;/li&gt;
+  &lt;li&gt;监督学习
+    &lt;ul&gt;
+      &lt;li&gt;分类Classification：预测的是离散值，比如好瓜，坏瓜&lt;/li&gt;
+      &lt;li&gt;回归Regression：若预测的是连续值，比如西瓜成熟度0.95，那么此时的输出空间就是全体实数&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;无监督学习
+    &lt;ul&gt;
+      &lt;li&gt;聚类Clustering：没有标记的情况下，将训练集中的西瓜分成若干个簇。这些簇对应着某些概念划分&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;泛化generalization的能力是模型适应位置样本的能力。所以虽然训练集只是样本空间的一个很小的采样，依然希望它能够反应样本空间的特性。&lt;/li&gt;
+  &lt;li&gt;独立同分布（iid，independently identically distribution） 在概率统计理论中，指随机过程中，任何时刻的取值都为随机变量，如果这些随机变量服从同一分布，并且互相独立，那么这些随机变量是独立同分布。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;13-假设空间&quot;&gt;1.3 假设空间&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;归纳induction：从特殊（具体的数据）到泛化（抽象的规律），从具体的实施归结出一般性规律&lt;/li&gt;
+  &lt;li&gt;演绎deduction：从泛化（抽象的规律）到特殊（具体的数据），从基础原理推演出具体状况&lt;/li&gt;
+  &lt;li&gt;归纳学习（Inductive Learning）：从样例中学习，狭义的归纳学习要求从训练数据中学得概念，因此已成为概念学习。但是&lt;em&gt;要学到泛化性能好且予以明确的概念实在太困难了&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;布尔概念学习：这整个例子就是352的concept learning，具体可以看那个的笔记
+    &lt;ul&gt;
+      &lt;li&gt;只要训练集中有正例，那么\( \Phi \)就不出现，这个表示这组样本空间中不存在正例&lt;/li&gt;
+      &lt;li&gt;假设空间值得是所有“假设”组成的空间，每个假设都可以看作出对属性的一种取值组合，目标是从假设空间中找到一个能够泛化所有样本的假设&lt;/li&gt;
+      &lt;li&gt;版本空间version space是只有训练集中的样本的集合，版本空间是假设空间的子集&lt;/li&gt;
+      &lt;li&gt;这个的目标总归都是从假设空间/版本空间中找到最特殊的却能表示整体样本空间的假设&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;14-归纳偏好-inductive-bias&quot;&gt;1.4 归纳偏好 Inductive Bias&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;通过学习得到的模型对应了假设空间中的一个假设&lt;/li&gt;
+  &lt;li&gt;机器学习算法在学习过程中对某种类型的假设的偏好，成为归纳偏好。“尽可能一般”的情况我们无法在这三者里用训练样本驱除身下的两个，但是我们的算法必须给出一个选择，这时候的对某种类型假设的偏好就叫做归纳偏好。例如在西瓜例子上面，我们更偏好于根蒂，那么在训练好的假设空间中，比如留下了三个假设，那么我们的模型会选择能够最大化根蒂作用的模型&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;任何一个有效的机器学习算法必有其归纳偏好，否则它将被假设空间中看似在训练集上等效的假设所迷惑，而无法产生确定的学习结果。归纳偏好可以看作学习算法自身在一个很庞大的假设空间中对假设进行选择的启发式或“价值观”&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;奥卡姆剃刀也是一种归纳偏好，比较常用比较基本的原则，那就是若有多个假设与观察一致，那么选用最简单的那个，但其实这个东西也不好整，因为对于不同的情形，也有不同的标准来判断简单这个标准&lt;/li&gt;
+  &lt;li&gt;关于“训练集外误差的推导”：
+    &lt;ul&gt;
+      &lt;li&gt;对f的定义为任何能将样本映射到{0, 1}的函数+均匀分布&lt;/li&gt;
+      &lt;li&gt;概率空间整体为1，所以\( \sum_{h}P(h)=1 \)&lt;/li&gt;
+      &lt;li&gt;这个式子推导可以参见&lt;a href=&quot;https://ti.arc.nasa.gov/m/profile/dhw/papers/78.pdf&quot; target=&quot;_blank&quot;&gt;NFL&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;这个定理被称为no free lunch theorem，它证明了：无论学习算法多聪明/多笨拙，评估他们的期望性能的算式都是一样&lt;/li&gt;
+      &lt;li&gt;这个定理是不是说明了：既然学习算法的期望性能都跟随机生成差不多，那么是不是代表没啥好学的&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/post_pics/2019071619262619.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;因为是二元分类问题，所以每个样本能被分为{0, 1}两类，而f同时又是均匀分布的，所以全体的f会把全体样本的全体可能性都走一遍，这就用到了排列组合中的排列。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;接上面的问题，其实不是这样的，因为nfl假设了f的均匀分布，也就是说假设的均匀分布，但很多时候不是这样的，比如姓李的和姓马的都是好人，这个没问题，但是全国范围之内，姓马的和姓李的一样多吗，这是不存在的，他们不是均匀分布的&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;所以这个nfl定理最重要的是他的寓意，也就是说脱离具体的问题，空泛的谈论“什么学习算法更好”毫无意义。&lt;/li&gt;
+  &lt;li&gt;若考虑所有潜在的问题，那么所有学习算法都一样的好。我们必须要结合具体的问题，去谈论算法的相对优劣。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+          <pubDate>2020-05-17T00:00:00+08:00</pubDate>
+          <link>http://localhost:4000/%E8%A5%BF%E7%93%9C</link>
+          <guid isPermaLink="true">http://localhost:4000/%E8%A5%BF%E7%93%9C</guid>
+        </item>
+      
+    
+      
+        <item>
           <title>Java On Call 6</title>
           <description>&lt;ol&gt;
   &lt;li&gt;Java基础知识&lt;/li&gt;
@@ -857,6 +937,15 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
   &lt;li&gt;&lt;strong&gt;Market Demand Curve&lt;/strong&gt;: 就是市场需求曲线，A curve that shows us the quantity of goods that con- sumers are willing to buy at different prices.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Derived Demand&lt;/strong&gt;: Demand for a good that is derived from the produc- tion and sale of other goods. Derived demand is demand for a factor of production or intermediate good that occurs as a result of the demand for another intermediate or final good. 也就是说derived demand这个需求是基于别的最终产品的需求上的，比如我想要的是玉米汁，但是玉米是玉米汁的原材料，所以我对玉米的需求是基于我对玉米汁的需求&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Direct Demand&lt;/strong&gt;: Demand for a good that comes from the desire of buyers to directly consume the good itself. 就是我对于玉米的需求来源于我本身想要消费玉米，而像在上面举的例子里面的direct demand就是我对于玉米汁的需求&lt;/li&gt;
+  &lt;li&gt;When we draw the demand curve, we assume that all other factors that affect the quantity demanded are fixed. Demand curve只探讨价格和需求的关系&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Law of demand&lt;/strong&gt;: The inverse relationship between price and quantity demanded, holding all other factors that influence demand fixed也就是价格越高，需求就越小，但是有些杠精就会跑出来说了，哎呀奢侈品就不一样，价格越高越多人喜欢，需求就更大，不过其实这样想的话，因为我们多考虑了一个变量“优越感”，优越感越高需求越大，而价格越高优越感越干，因为需求曲线只在乎价格上的影响，所以如果我们控制优越感不变，价格越高，需求还是越少的&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Market Supply Curve&lt;/strong&gt;：A curve that shows us the total quantity of goods that their suppliers are willing to sell at different prices. 就是简单的市场供给曲线。Supply里面包括当年生产的也包括之前的库存&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Law of supply&lt;/strong&gt;：The positive relationship between price and quantity supplied, when all other factors that influence supply are held fixed. 意即价格越高，供给者会供给的产品越多&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Factors of production&lt;/strong&gt;：Resources such as labor and raw materials that are used to produce a good.&lt;/li&gt;
+  &lt;li&gt;很多东西，包括上面的生产要素，都可以影响供给的量，比如别的产品的价格也会影响供给的量。和供给曲线一样，supply curve也只探讨价格和供给的关系&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Market Equilibrium&lt;/strong&gt;：The point where the quantity demanded equals the quantity supplied, so the market clears&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Excess Supply&lt;/strong&gt;：当价格偏高，生产者愿意供给比需求者需求更多的商品 A situation in which the quantity supplied at a given price exceeds the quantity demanded. 在这种情况下，价格会变低，趋于平衡&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Excess Demand&lt;/strong&gt;：当价格偏低，消费者需求比生产者愿意供给的更多的商品 A situation in which the quantity demanded at a given price exceeds the quantity supplied 在这种情况下，价格会变高，趋于平衡&lt;/li&gt;
 &lt;/ul&gt;
 </description>
           <pubDate>2020-05-11T00:00:00+08:00</pubDate>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+	<title>西瓜 · Tao Ma</title>
+
+
+<meta name="description" content="成品笔记">
+
+<link rel="icon" href="http://localhost:4000/assets/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
+<link rel="stylesheet" href="http://localhost:4000/assets/core.css">
+<link rel="canonical" href="http://localhost:4000/%E8%A5%BF%E7%93%9C">
+<link rel="alternate" type="application/atom+xml" title="Tao Ma" href="http://localhost:4000/feed.xml" />
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<aside class="logo">
+
+	
+
+	<a href="http://localhost:4000/">
+		<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">
+	</a>
+	<span class="logo-prompt code">Back to Index</span>
+</aside>
+<br />
+<section>
+		And hello to u too:) By clicking the above icon, u can come back to index any time, or u can eneter my personal info page. 
+		<br />
+		<em><strong>The picture is randomly generated every time u click the icon, I have nothing to do with any of the content of the pictures(ﾟ∀ﾟ)</strong></em>
+.
+</section>
+
+
+		<div id="content">
+			<article>
+
+	<div class="center">
+		<h1 class="title">西瓜</h1>
+		<time class="code">May 17, 2020</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<p><a href="https://blog.csdn.net/TeFuirnever/article/details/96178919">成品笔记</a></p>
+
+<h2 id="第一章绪论">第一章：绪论</h2>
+<h3 id="11-引言--12-基本术语">1.1 引言 &amp; 1.2 基本术语</h3>
+<ul>
+  <li>机器学习致力于通过计算的手段，利用经验来改善系统自身的性能。机器学习所研究的主要内容，是关于在数据中产生模型。在面对新的情况时（情况不存在“经验”中），模型可以作出相应的判断。</li>
+  <li><strong>模型</strong>：本书用这个词泛指从数据中学得的结果</li>
+  <li>数据集指的是存在许多数据的集合，例如有很多个西瓜的数据，每一个西瓜的数据，被称为示例/样本，而每个西瓜数据中的类目，例如色泽，根蒂等，被称为属性或者特征，属性上面具体的取值被称为属性值，属性张成的空间被称为属性空间/样本空间，例如西瓜数据中有三个属性，那么每个属性作为一个坐标轴，就有一个关于西瓜的三维空间，每个西瓜都可以在这个空间中对应一个坐标向量，因此示例也被称为特征向量</li>
+  <li>\x_{ij}( \)指的是\( x_i\)在第j个属性上面的取值</li>
+  <li><em>模型对应了关于数据的某种潜在的规律，因此也被称为假设，而这种实际真实存在的潜在规律则被称为真相</em></li>
+  <li>拥有了标记信息的示例，称为样例</li>
+  <li>监督学习
+    <ul>
+      <li>分类Classification：预测的是离散值，比如好瓜，坏瓜</li>
+      <li>回归Regression：若预测的是连续值，比如西瓜成熟度0.95，那么此时的输出空间就是全体实数</li>
+    </ul>
+  </li>
+  <li>无监督学习
+    <ul>
+      <li>聚类Clustering：没有标记的情况下，将训练集中的西瓜分成若干个簇。这些簇对应着某些概念划分</li>
+    </ul>
+  </li>
+  <li>泛化generalization的能力是模型适应位置样本的能力。所以虽然训练集只是样本空间的一个很小的采样，依然希望它能够反应样本空间的特性。</li>
+  <li>独立同分布（iid，independently identically distribution） 在概率统计理论中，指随机过程中，任何时刻的取值都为随机变量，如果这些随机变量服从同一分布，并且互相独立，那么这些随机变量是独立同分布。</li>
+</ul>
+
+<h3 id="13-假设空间">1.3 假设空间</h3>
+<ul>
+  <li>归纳induction：从特殊（具体的数据）到泛化（抽象的规律），从具体的实施归结出一般性规律</li>
+  <li>演绎deduction：从泛化（抽象的规律）到特殊（具体的数据），从基础原理推演出具体状况</li>
+  <li>归纳学习（Inductive Learning）：从样例中学习，狭义的归纳学习要求从训练数据中学得概念，因此已成为概念学习。但是<em>要学到泛化性能好且予以明确的概念实在太困难了</em></li>
+  <li>布尔概念学习：这整个例子就是352的concept learning，具体可以看那个的笔记
+    <ul>
+      <li>只要训练集中有正例，那么\( \Phi \)就不出现，这个表示这组样本空间中不存在正例</li>
+      <li>假设空间值得是所有“假设”组成的空间，每个假设都可以看作出对属性的一种取值组合，目标是从假设空间中找到一个能够泛化所有样本的假设</li>
+      <li>版本空间version space是只有训练集中的样本的集合，版本空间是假设空间的子集</li>
+      <li>这个的目标总归都是从假设空间/版本空间中找到最特殊的却能表示整体样本空间的假设</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="14-归纳偏好-inductive-bias">1.4 归纳偏好 Inductive Bias</h3>
+<ul>
+  <li>通过学习得到的模型对应了假设空间中的一个假设</li>
+  <li>机器学习算法在学习过程中对某种类型的假设的偏好，成为归纳偏好。“尽可能一般”的情况我们无法在这三者里用训练样本驱除身下的两个，但是我们的算法必须给出一个选择，这时候的对某种类型假设的偏好就叫做归纳偏好。例如在西瓜例子上面，我们更偏好于根蒂，那么在训练好的假设空间中，比如留下了三个假设，那么我们的模型会选择能够最大化根蒂作用的模型</li>
+  <li><strong>任何一个有效的机器学习算法必有其归纳偏好，否则它将被假设空间中看似在训练集上等效的假设所迷惑，而无法产生确定的学习结果。归纳偏好可以看作学习算法自身在一个很庞大的假设空间中对假设进行选择的启发式或“价值观”</strong></li>
+  <li>奥卡姆剃刀也是一种归纳偏好，比较常用比较基本的原则，那就是若有多个假设与观察一致，那么选用最简单的那个，但其实这个东西也不好整，因为对于不同的情形，也有不同的标准来判断简单这个标准</li>
+  <li>关于“训练集外误差的推导”：
+    <ul>
+      <li>对f的定义为任何能将样本映射到{0, 1}的函数+均匀分布</li>
+      <li>概率空间整体为1，所以\( \sum_{h}P(h)=1 \)</li>
+      <li>这个式子推导可以参见<a href="https://ti.arc.nasa.gov/m/profile/dhw/papers/78.pdf" target="_blank">NFL</a></li>
+      <li>这个定理被称为no free lunch theorem，它证明了：无论学习算法多聪明/多笨拙，评估他们的期望性能的算式都是一样</li>
+      <li>这个定理是不是说明了：既然学习算法的期望性能都跟随机生成差不多，那么是不是代表没啥好学的</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="assets/post_pics/2019071619262619.png" /></p>
+
+<ul>
+  <li>
+    <p>因为是二元分类问题，所以每个样本能被分为{0, 1}两类，而f同时又是均匀分布的，所以全体的f会把全体样本的全体可能性都走一遍，这就用到了排列组合中的排列。</p>
+  </li>
+  <li>
+    <p>接上面的问题，其实不是这样的，因为nfl假设了f的均匀分布，也就是说假设的均匀分布，但很多时候不是这样的，比如姓李的和姓马的都是好人，这个没问题，但是全国范围之内，姓马的和姓李的一样多吗，这是不存在的，他们不是均匀分布的</p>
+  </li>
+  <li>所以这个nfl定理最重要的是他的寓意，也就是说脱离具体的问题，空泛的谈论“什么学习算法更好”毫无意义。</li>
+  <li>若考虑所有潜在的问题，那么所有学习算法都一样的好。我们必须要结合具体的问题，去谈论算法的相对优劣。</li>
+</ul>
+
+
+</article>
+
+<div class="page-navigation code">
+	
+		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="http://localhost:4000/java-on-call-6" title="PREV: Java On Call 6">&gt;&gt;</a>
+  
+</div>
+
+<!-- Link Gitalk 的支持文件  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    // gitalk的主要参数
+        clientID: 'f075f01270dae871aa15',
+        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
+        repo: 'michaeltaoma.github.io',
+        owner: 'michaeltaoma',
+        admin: ['michaeltaoma'],
+        id: md5(location.pathname),
+        
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
+
+		</div>
+
+		<div class="footer">
+  <span class="block">&copy; 2020 Tao Ma</span>
+  <span class="block"><small>&lt;/&gt; Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/heiswayi/the-plain">The Plain theme</a>.</small></span>
+</div>
+
+
+	</body>
+
+</html>

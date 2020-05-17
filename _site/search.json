@@ -2,6 +2,17 @@
   
     {
 
+      "title"    : "西瓜",
+      "url"      : "/%E8%A5%BF%E7%93%9C",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2020-05-17 00:00:00 +0800",
+	  "description" : "周志华的机器学习随书笔记"
+
+    } ,
+  
+    {
+
       "title"    : "Java On Call 6",
       "url"      : "/java-on-call-6",
       "category" : "",
