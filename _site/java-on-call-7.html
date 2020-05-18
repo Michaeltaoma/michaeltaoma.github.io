@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+	<title>Java On Call 7 · Tao Ma</title>
+
+
+<meta name="description" content="  Java基础知识  面向对象  常用API  集合I/O  多线程、网络编程、反射、设计模式">
+
+<link rel="icon" href="http://localhost:4000/assets/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
+<link rel="stylesheet" href="http://localhost:4000/assets/core.css">
+<link rel="canonical" href="http://localhost:4000/java-on-call-7">
+<link rel="alternate" type="application/atom+xml" title="Tao Ma" href="http://localhost:4000/feed.xml" />
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<aside class="logo">
+
+	
+
+	<a href="http://localhost:4000/">
+		<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">
+	</a>
+	<span class="logo-prompt code">Back to Index</span>
+</aside>
+<br />
+<section>
+		And hello to u too:) By clicking the above icon, u can come back to index any time, or u can eneter my personal info page. 
+		<br />
+		<em><strong>The picture is randomly generated every time u click the icon, I have nothing to do with any of the content of the pictures(ﾟ∀ﾟ)</strong></em>
+.
+</section>
+
+
+		<div id="content">
+			<article>
+
+	<div class="center">
+		<h1 class="title">Java On Call 7</h1>
+		<time class="code">May 18, 2020</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<ol>
+  <li>Java基础知识</li>
+  <li>面向对象</li>
+  <li>常用API</li>
+  <li>集合I/O</li>
+  <li>多线程、网络编程、反射、设计模式</li>
+</ol>
+
+<p>这是准备java面试的第二天，以上的分类的思维导图，来自-&gt;<a href="https://www.cnblogs.com/java1024/p/8757952.html" target="_blank">这里</a></p>
+<ul>
+  <li>这里是整理好的面试题，至少都过一遍:
+    <ol>
+      <li><a href="https://blog.csdn.net/qq_41701956/article/details/86686492">2019年最新java面试题及答案整理上</a></li>
+      <li><a href="https://blog.csdn.net/qq_41701956/article/details/86699263">2019年最新java面试题及答案整理下</a></li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="notes-of-this-video">Notes of this video</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/g2b-NbR48Jo" frameborder="0" allowfullscreen=""></iframe>
+
+<h3 id="spring-mvc">Spring MVC</h3>
+<ul>
+  <li>Spring MVC是个基于MVC架构的用来简化web应用程序开发的应用开发框架
+    <ul>
+      <li>Easy to work with</li>
+      <li>Easy to learn</li>
+      <li>Flexible</li>
+      <li>Seperation of Concern</li>
+    </ul>
+  </li>
+  <li>
+    <p>对于普通的MVC，可能你有很多的controller，然后当一个用户请求被传输过来的时候，有一个web.xml文件来为不同的用户请求分配不同的controller，这样就很繁琐。用Spring MVC的话，所有的用户请求都会先传输到一个FrontController叫做DispatcherServlet，然后这个FrontController负责为不同的客户请求分配不同的controller。当然，DispatcherServlet会有个配置文件，根据配置文件去找到对应的controller。所谓的“找到controller”指的是对应的controller会把对应的model和view的名字返还给FrontController，然后FrontController去call对应的view，再用FrontController把这个view和数据返还给client。<strong>所以一切都是由DispatcherServlet来完成的，内部的细节各个部分都不知道全局</strong></p>
+  </li>
+  <li>普通的MVC是通过web.xml，找到对应的controller，然后对应的controller把数据从数据库拉出来，然后把数据传输到view里面</li>
+</ul>
+
+<p><img src="assets/post_pics/1510582750520510.png" /></p>
+
+<ul>
+  <li>MVC(Model-view-controller)是软件工程中的一种软件架构模式，把软件系统分为三个基本部分（对应其名字）：模型，视图，控制器
+    <ul>
+      <li>模型：程序员编写程序应有的功能（实现算法等）、数据库专家进行数据管理和数据库设计</li>
+      <li>视图：界面设计人员进行图形界面设计</li>
+      <li>控制器：负责转发请求，对请求进行处理</li>
+    </ul>
+  </li>
+  <li><code>.jsp</code>: Java Server Pages (JSP) is a server-side programming technology that enables the creation of dynamic, platform-independent method for building Web-based applications.
+    <ul>
+      <li>当我新建一个Maven web框架的时候，里面的.jsp文件就是以html格式来编写的</li>
+    </ul>
+  </li>
+  <li><strong>Spring MVC</strong>把一个请求找到一个controller</li>
+  <li>如果要用Spring MVC的话，需要在原来的web.xml中定义一个<servlet></servlet>，这里面用了springframework的web.servlet.DispatcherServlet，当然啦需要在Maven的dependency中加入这个包。并且要有另外一个xml文件作为这个DispatcherServlet的配置文件，这里面声明了对应的一个客户请求会怎么map到对应的controller（就是一个class）</li>
+  <li>比如可以在jsp文件中定义一个form，当submit之后他就会找到web.xml中的DispatcherServlet，再由这个servlet去找到对应的class</li>
+  <li>在这个对应的class，你得用@Controller去注释这个类，并且在类中要注明什么样的请求会找到这个controller，那么这些就是告诉你怎么把html文件/请求map到一个class文件中</li>
+  <li>这个class文件可以通过requests接收到用户输入的东西</li>
+  <li>然后通过ModelAndView对象去把在class后端文件中处理的数据传输到page里面</li>
+  <li>在page中可以用request来把这个东西给取得，或者是使用expression language：<code>Result is: ${result}</code></li>
+  <li>
+    <p>然后可以令这个class文件return一个string，这个string里面声明了一个page的地址，那么Dispatcher就会接收到这个，就会把page给调处出来</p>
+  </li>
+  <li>但是其实controller是属于controller layer的，可以看到他负责和Dispatcher和page调动，而真正的一些后端的内容，应该声明另一个类来完成。这个后端类会被controller调用，去完成一些计算，或者是逻辑的工作。</li>
+</ul>
+
+
+</article>
+
+<div class="page-navigation code">
+	
+		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="http://localhost:4000/%E8%A5%BF%E7%93%9C" title="PREV: 西瓜">&gt;&gt;</a>
+  
+</div>
+
+<!-- Link Gitalk 的支持文件  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    // gitalk的主要参数
+        clientID: 'f075f01270dae871aa15',
+        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
+        repo: 'michaeltaoma.github.io',
+        owner: 'michaeltaoma',
+        admin: ['michaeltaoma'],
+        id: md5(location.pathname),
+        
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
+
+		</div>
+
+		<div class="footer">
+  <span class="block">&copy; 2020 Tao Ma</span>
+  <span class="block"><small>&lt;/&gt; Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/heiswayi/the-plain">The Plain theme</a>.</small></span>
+</div>
+
+
+	</body>
+
+</html>
