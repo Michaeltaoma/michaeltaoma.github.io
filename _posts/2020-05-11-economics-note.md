@@ -253,3 +253,8 @@ $$
 	- 长期需求曲线弹性低于短期需求曲线弹性：一般使用在durable good上面。比如如果飞机的价格上升了，那么在长期需求中，这对于航空公司来说是必需品，所以必须得换；但是对于短期来说，航空公司可能决定这个飞机多开几年，所以短期内的需求可能会下降的比长期的需求要多
 	- 长期供给曲线弹性高于短期需求曲线弹性：一般出现在可以再次使用/二手市场出售的商品中，在短期内，这个商品价格上升，would elicit an increased supply from two sources: additional new aluminum and recycled aluminum made from scrap. However, in the long run, the stock of scrap aluminum will diminish, and the increase in quantity supplied induced by the increased price will mainly come from the produc- tion of new aluminum.
 
+- “经济法律和推理仅仅是材料的一部分，在解决实际问题和制定可能成为生活指南的规则时，良心和常识必须加以利用。”
+
+但是，《经济学人》也不得不考虑道德力量。确实有人试图就“经济人”的行为建立一种抽象的科学，经济人不受道德的影响，谨慎而积极地追求金钱利益，但机械地和自私地。但是它们没有成功，甚至没有完全执行;因为他们从来没有真正把经济人看作完全自私的人。最可靠的人莫过于有经济头脑的人，他为了养家糊口而无私地吃苦耐劳、牺牲牺牲;他的正常动机一直被默认为包括家庭感情在内。但是，如果把这些动机也包括在内，为什么不把所有其他的利他动机也包括在内呢?到目前为止，任何阶级、任何时间、任何地点的所有其他利他动机的行为都是一致的，因此可以归结为普遍规律。”
+
+
