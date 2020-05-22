@@ -222,7 +222,7 @@
   &lt;li&gt;过拟合（overfitting）：当训练误差非常小的时候，并不代表这个模型就一定好，因为最终需要得到的模型是一个拥有好的泛化表现的模型。为了达到这个目的，应该从训练样本中尽可能学出适用于所有潜在样本的“普遍规律”。如果训练集能够完整表示整个样本空间那固然好，不过很多时候训练集无法做到这一点。那么这种情况下，如果一个学习器把训练集的数据学的太好了，有可能会把一些只存在于训练集上的样本的一些比较特殊的特征都给学进去了，比如10000个西瓜里面只有100个西瓜是白色的，但是正好这一百个白色的西瓜都在训练集中，如果算法认为“白色”因为在训练集中占有不小的比例，而把白色认为是西瓜的普遍特征，那么这个模型就&lt;strong&gt;过拟合了：把训练样本自身的特点当作了所有潜在样本都会具有的一般性质&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;欠拟合（underfitting）：指对训练样本的一般性质没学好，注意这里指的也是一般性质&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;过拟合与NP&lt;/strong&gt;：过拟合无法避免，因为：机器学习面临的问题通常是NP甚至是NPC，机器学习的算法必然是在多项式时间内P运行万层的，若可彻底避免过拟合，则通过经验误差最小化就能获取最优解，这就意味着\( P=NP \)。&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;过拟合与NP&lt;/strong&gt;：过拟合无法避免，因为：机器学习面临的问题通常是NP甚至是NPC，机器学习的算法必然是在多项式时间内P运行完成的，若可彻底避免过拟合，则通过经验误差最小化就能获取最优解，这就意味着\( P=NP \)。&lt;/p&gt;
 
     &lt;p&gt;&lt;img src=&quot;assets/post_pics/p-np.jpg&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
@@ -260,7 +260,55 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;222-交叉验证法&quot;&gt;2.2.2 交叉验证法&lt;/h4&gt;
+&lt;h4 id=&quot;222-交叉验证法k-fold-cross-validation&quot;&gt;2.2.2 交叉验证法(K-fold cross validation)&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;把数据集D划分为k个大小相似（注意是相似）的互斥子集，即 \( D=D_{1} \cup D_{2} \cup … \cup D_{k}, D_{i} \cap D_{j} = null(i \neq j)\ \)&lt;/li&gt;
+  &lt;li&gt;并且每个子集D_i都采用分层采样，保持数据的一致性&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;如何评估？&lt;/strong&gt;每次都进行k词训练和测试，分别每一次都有k-1个子集的并集作为训练集，剩下的那一个作为测试集，返还的时候返还的是k组饰演的均值&lt;/li&gt;
+  &lt;li&gt;所以他的表现很大程度上取决于k，交叉验证法常常被称为“k折交叉验证”，如果是10折交叉验证，说明这个验证法取的k是十，有十个子集&lt;/li&gt;
+  &lt;li&gt;和留出法一样，为了避免只用单一划分而造成的误差，交叉验证发也会在划分k子集的时候采用多种划分方式，&lt;strong&gt;k折交叉验证通常要使用随机不同的划分重复p次，最终的结果也是这p次k折交叉验证的均值&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;留一法&lt;/strong&gt;（leave one out）：设数据集中有m个样本，留一法是令k=m，每次只留下一个样本作为训练集，这个的弊端当然是整体的效率会非常的低，不管好处是留一法中训练出来的模型与期望评估的用D训练出的模型很相似-&amp;gt;结果比较准确&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;223-自助法-bootstrapping&quot;&gt;2.2.3 自助法 bootstrapping&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;以自助采样法为基础：给定包含m个样本的数据集D，对D进行采样产生数据集D’：每次随机从D中挑选一个样本，将其拷贝放入D’，但是把这个样本放回初始数据集D中，这样的画在下一次挑选/采样的时候也有可能采到这个样本，和这个过程重复m次，就得到了m个样本的数据集D’&lt;/li&gt;
+  &lt;li&gt;样本可能在D‘中重复出现，也有可能在D‘中永远也不出现，永远也不出现的概率是：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$&lt;/p&gt;
+
+&lt;p&gt;\begin{aligned}&lt;/p&gt;
+
+&lt;p&gt;\lim_{m\to\infty} (1-\frac{1}{m})^m = \frac{1}{e} \approx 0.368&lt;/p&gt;
+
+&lt;p&gt;\end{aligned}&lt;/p&gt;
+
+&lt;p&gt;$$&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;可见这个概率还是挺高的。。。也就是说有大概37%的样本未出现在采样数据集D‘中&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;那么就可以把D‘用作训练集，D-D’用作测试集&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;这么做的好处是：现在实际训练集和数据集的样本数量一样，并且还有大概37%的不再训练集中出现的测试集，这样的测试结果被称为&lt;strong&gt;包外估计&lt;/strong&gt;，可以从初始数据集中产生多个不同的训练集，坏处是因为是随机采样，他无法保证数据的一致性&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;224-调参与最终模型&quot;&gt;2.2.4 调参与最终模型&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Parameter Tuning就是调参&lt;/li&gt;
+  &lt;li&gt;因为很多参数的范围都是整体实数，所以调参实际上要花费大量的时间，科学的调参需要在参数的列表中一个个去尝试比对参数的结果&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;整个训练和测试的流程给结果的流程是划分数据集训练集和测试集--训练数据集---评估数据集---调参---重新训练或确定参数---给整个数据集d上面把参数确定好的模型重新训练---提交用户&quot;&gt;整个训练和测试的流程：给结果的流程是划分数据集（训练集和测试集）-&amp;gt; 训练数据集 -&amp;gt; 评估数据集 -&amp;gt; 调参 -&amp;gt; 重新训练或确定参数 -&amp;gt; 给整个数据集D上面把参数确定好的模型重新训练 -&amp;gt; 提交用户&lt;/h5&gt;
+
+&lt;h4 id=&quot;23-性能度量performance-measure&quot;&gt;2.3 性能度量（Performance measure）&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;给定\( D={ (x_1, y_1), (x_2, y_2),…, (x_m, y_m) } \)的数据集，要评估这个学习器的性能，就要把学习期预测结果\( f(x) \)与真是标记\( y\)做比较，一般用的是下面的mean squared error，均方误差&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{aligned}
+
+E(f;D) = \frac{1}{m} \sum_{i=1}^{m}(f(x_i)-y_{i})^2
+
+\end{aligned}&lt;/script&gt;
 </description>
           <pubDate>2020-05-17T00:00:00+08:00</pubDate>
           <link>http://localhost:4000/%E8%A5%BF%E7%93%9C</link>
@@ -1325,7 +1373,76 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
       &lt;li&gt;长期供给曲线弹性高于短期需求曲线弹性：一般出现在可以再次使用/二手市场出售的商品中，在短期内，这个商品价格上升，would elicit an increased supply from two sources: additional new aluminum and recycled aluminum made from scrap. However, in the long run, the stock of scrap aluminum will diminish, and the increase in quantity supplied induced by the increased price will mainly come from the produc- tion of new aluminum.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+  &lt;li&gt;“经济法律和推理仅仅是材料的一部分，在解决实际问题和制定可能成为生活指南的规则时，良心和常识必须加以利用。”&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;但是，《经济学人》也不得不考虑道德力量。确实有人试图就“经济人”的行为建立一种抽象的科学，经济人不受道德的影响，谨慎而积极地追求金钱利益，但机械地和自私地。但是它们没有成功，甚至没有完全执行;因为他们从来没有真正把经济人看作完全自私的人。最可靠的人莫过于有经济头脑的人，他为了养家糊口而无私地吃苦耐劳、牺牲牺牲;他的正常动机一直被默认为包括家庭感情在内。但是，如果把这些动机也包括在内，为什么不把所有其他的利他动机也包括在内呢?到目前为止，任何阶级、任何时间、任何地点的所有其他利他动机的行为都是一致的，因此可以归结为普遍规律。”&lt;/p&gt;
+
+&lt;h2 id=&quot;chapter-3-consumer-preferences-and-the-concept-of-utility&quot;&gt;Chapter 3: Consumer Preferences and the Concept of Utility&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在这个章节里面，主要探讨的是消费者的喜好，忽视掉商品的价格，我们不谈钱，只谈感情，这一章和下一章结合在一起会探讨一个问题：在经济条件允许的情况下，消费者会怎么选择商品&lt;/li&gt;
+  &lt;li&gt;Represent consumer preferences in terms of market baskets of goods and services&lt;/li&gt;
+  &lt;li&gt;Apply three basic &lt;strong&gt;assumption&lt;/strong&gt; about consumer preferences: Preferences are complete, preferences are transitive, and more is bettwe&lt;/li&gt;
+  &lt;li&gt;Distinguish between &lt;strong&gt;ordinal and cardinal ranking of preferences&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Apply utility functions as a tool for representing preferences and analyze the concept of &lt;strong&gt;marginal unitility&lt;/strong&gt; and the principle of diminishing marginal utility&lt;/li&gt;
+  &lt;li&gt;Apply utility functions in the analysis of preferences with a &lt;strong&gt;single good and with multiple goods.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Construct indifference curves as a way of representing util- ity functions in simplified form.&lt;/li&gt;
+  &lt;li&gt;Analyze the concept of the &lt;strong&gt;marginal rate of substitution of one good for another.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Describe and compare some &lt;strong&gt;special utility functions.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;31-representation-of-preferences&quot;&gt;3.1 Representation of preferences&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Market basket(bundle)&lt;/strong&gt;: A collecition of goods and services that an individual might consume.注意这个colletion里面清楚表明了商品/服务的数量的，是个非常具体，一点都不抽象的类目&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-05-21_20-15-57.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Consumer Preferences&lt;/strong&gt;：指的是给定两个basket，假定basktes都不需要任何cost的情况下，消费者会如何rank这两个basket&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Assumptions about consumer preferences&lt;/strong&gt;（首先必然是消费者是理智的）
+    &lt;ul&gt;
+      &lt;li&gt;Preferences are complete：消费者必须“有能力”去找到自己最喜欢的那个，&lt;strong&gt;注意&lt;/strong&gt;：equally喜欢也是允许的&lt;/li&gt;
+      &lt;li&gt;Preferences are transitive: 就是说如消费者偏好A多过B，偏好B多过D，那么他必定偏好A多过D&lt;/li&gt;
+      &lt;li&gt;More is better：两个basket，如果能控制剩余的商品数量一样，那么消费者必然偏好剩下的商品更多的那个basket，根据这个原则在上面那张图里面，消费者在全局必然最偏好A&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;以上的assumption在现实生活中往往不那么显然的存在，这是因为现实生活中变化太多了&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ordinal Ranking&lt;/strong&gt;: give us information about the order in which a consumer ranks baskets。只包含简单的次序，也就是说只能看出来消费者更加喜欢哪个，却很难看出来消费者有多喜欢。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cardinal Ranking&lt;/strong&gt;: give us information about the intensity of a consumer’s preferences。Cardinal ranking还给了喜欢的强度，我们不仅知道消费者在A和B之间更喜欢B，我们甚至还知道消费者喜欢B多过A多多少
+    &lt;h3 id=&quot;32-utility-functions&quot;&gt;3.2 Utility Functions&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Utility Function&lt;/strong&gt;: A utility function measures the level of satisfaction that a consumer receives from any basket of goods. We can represent the utility function with algebra or a graph.
+    &lt;ul&gt;
+      &lt;li&gt;\( U(y)=\sqrt(y) \)就是一个简单的utility function的例子，他衡量的是某人购买了y件产品，他的utility值是多少&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Marginal Utility&lt;/strong&gt;：又到了导数的概念，marginal utility指的是rate of change in U respect to change in y。就是how the level of satisfaction will change in response to a change in the level of consumption&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+&amp; MU = \frac{dU}{dy}
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;因为这个不需要化简单位，所以在图像上，marginal utility就是在utility function函数上某一点的切线斜率
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;然后根据这个导数又得出了一个经济学的理论：The additional satisfaction that ppl receives from consuming more of a good depends on how much of the good she already consumed&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-05-21_20-51-52.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在经济学中所有的边际关系都是像这样用导数来衡量的&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Principle of diminishing marginal utility&lt;/strong&gt;：After some point, as consumption of a good increases, the marginal utility of that good will begin to fall. 这个也很符合人类的行为，因为当我们越多的消费一个东西的时候，每多消费这样的东西带来的效益就没有之前那么高了&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;special-preferences&quot;&gt;Special Preferences&lt;/h3&gt;
 
 </description>
           <pubDate>2020-05-11T00:00:00+08:00</pubDate>

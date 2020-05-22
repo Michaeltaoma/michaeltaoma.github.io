@@ -257,4 +257,54 @@ $$
 
 但是，《经济学人》也不得不考虑道德力量。确实有人试图就“经济人”的行为建立一种抽象的科学，经济人不受道德的影响，谨慎而积极地追求金钱利益，但机械地和自私地。但是它们没有成功，甚至没有完全执行;因为他们从来没有真正把经济人看作完全自私的人。最可靠的人莫过于有经济头脑的人，他为了养家糊口而无私地吃苦耐劳、牺牲牺牲;他的正常动机一直被默认为包括家庭感情在内。但是，如果把这些动机也包括在内，为什么不把所有其他的利他动机也包括在内呢?到目前为止，任何阶级、任何时间、任何地点的所有其他利他动机的行为都是一致的，因此可以归结为普遍规律。”
 
+## Chapter 3: Consumer Preferences and the Concept of Utility
+
+- 在这个章节里面，主要探讨的是消费者的喜好，忽视掉商品的价格，我们不谈钱，只谈感情，这一章和下一章结合在一起会探讨一个问题：在经济条件允许的情况下，消费者会怎么选择商品
+- Represent consumer preferences in terms of market baskets of goods and services
+- Apply three basic **assumption** about consumer preferences: Preferences are complete, preferences are transitive, and more is bettwe
+- Distinguish between **ordinal and cardinal ranking of preferences**
+- Apply utility functions as a tool for representing preferences and analyze the concept of **marginal unitility** and the principle of diminishing marginal utility
+- Apply utility functions in the analysis of preferences with a **single good and with multiple goods.**
+- Construct indifference curves as a way of representing util- ity functions in simplified form. 
+- Analyze the concept of the **marginal rate of substitution of one good for another.**
+- Describe and compare some **special utility functions.**
+
+### 3.1 Representation of preferences
+- **Market basket(bundle)**: A collecition of goods and services that an individual might consume.注意这个colletion里面清楚表明了商品/服务的数量的，是个非常具体，一点都不抽象的类目
+	
+	<img src="assets/post_pics/Snipaste_2020-05-21_20-15-57.png">
+
+- **Consumer Preferences**：指的是给定两个basket，假定basktes都不需要任何cost的情况下，消费者会如何rank这两个basket
+- **Assumptions about consumer preferences**（首先必然是消费者是理智的）
+	- Preferences are complete：消费者必须“有能力”去找到自己最喜欢的那个，**注意**：equally喜欢也是允许的
+	- Preferences are transitive: 就是说如消费者偏好A多过B，偏好B多过D，那么他必定偏好A多过D
+	- More is better：两个basket，如果能控制剩余的商品数量一样，那么消费者必然偏好剩下的商品更多的那个basket，根据这个原则在上面那张图里面，消费者在全局必然最偏好A
+- 以上的assumption在现实生活中往往不那么显然的存在，这是因为现实生活中变化太多了
+- **Ordinal Ranking**: give us information about the order in which a consumer ranks baskets。只包含简单的次序，也就是说只能看出来消费者更加喜欢哪个，却很难看出来消费者有多喜欢。
+- **Cardinal Ranking**: give us information about the intensity of a consumer’s preferences。Cardinal ranking还给了喜欢的强度，我们不仅知道消费者在A和B之间更喜欢B，我们甚至还知道消费者喜欢B多过A多多少
+### 3.2 Utility Functions
+- **Utility Function**: A utility function measures the level of satisfaction that a consumer receives from any basket of goods. We can represent the utility function with algebra or a graph.
+	- \\( U(y)=\sqrt(y) \\)就是一个简单的utility function的例子，他衡量的是某人购买了y件产品，他的utility值是多少
+- **Marginal Utility**：又到了导数的概念，marginal utility指的是rate of change in U respect to change in y。就是how the level of satisfaction will change in response to a change in the level of consumption
+
+$$
+\begin{aligned}
+& MU = \frac{dU}{dy}
+\end{aligned}
+$$
+
+	因为这个不需要化简单位，所以在图像上，marginal utility就是在utility function函数上某一点的切线斜率
+
+- 然后根据这个导数又得出了一个经济学的理论：The additional satisfaction that ppl receives from consuming more of a good depends on how much of the good she already consumed
+
+	<img src = "assets/post_pics/Snipaste_2020-05-21_20-51-52.png">
+
+- 在经济学中所有的边际关系都是像这样用导数来衡量的
+
+- **Principle of diminishing marginal utility**：After some point, as consumption of a good increases, the marginal utility of that good will begin to fall. 这个也很符合人类的行为，因为当我们越多的消费一个东西的时候，每多消费这样的东西带来的效益就没有之前那么高了
+
+
+### Special Preferences
+
+
 
