@@ -2,6 +2,17 @@
   
     {
 
+      "title"    : "Dnn",
+      "url"      : "/dnn",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2020-05-24 00:00:00 +0800",
+	  "description" : ""
+
+    } ,
+  
+    {
+
       "title"    : "Java On Call 7",
       "url"      : "/java-on-call-7",
       "category" : "",

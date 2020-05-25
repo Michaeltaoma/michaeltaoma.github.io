@@ -282,7 +282,9 @@ $$
 - 以上的assumption在现实生活中往往不那么显然的存在，这是因为现实生活中变化太多了
 - **Ordinal Ranking**: give us information about the order in which a consumer ranks baskets。只包含简单的次序，也就是说只能看出来消费者更加喜欢哪个，却很难看出来消费者有多喜欢。
 - **Cardinal Ranking**: give us information about the intensity of a consumer’s preferences。Cardinal ranking还给了喜欢的强度，我们不仅知道消费者在A和B之间更喜欢B，我们甚至还知道消费者喜欢B多过A多多少
+
 ### 3.2 Utility Functions
+
 - **Utility Function**: A utility function measures the level of satisfaction that a consumer receives from any basket of goods. We can represent the utility function with algebra or a graph.
 	- \\( U(y)=\sqrt(y) \\)就是一个简单的utility function的例子，他衡量的是某人购买了y件产品，他的utility值是多少
 - **Marginal Utility**：又到了导数的概念，marginal utility指的是rate of change in U respect to change in y。就是how the level of satisfaction will change in response to a change in the level of consumption
@@ -304,7 +306,161 @@ $$
 - **Principle of diminishing marginal utility**：After some point, as consumption of a good increases, the marginal utility of that good will begin to fall. 这个也很符合人类的行为，因为当我们越多的消费一个东西的时候，每多消费这样的东西带来的效益就没有之前那么高了
 
 
-### Special Preferences
+### Preferences with multiple goods: Marginal Utility, Indifference Curves and the marginal rate of substitution
+- 单个产品的utility function作用并没有很大，我们在生活中往往需要衡量多个商品对自己的utility，假设for any basket(x, y)，utility function是\\( U = \sqrt{(xy)} \\)，那么他的utility function的图如下
+	
+	<img src="assets/post_pics/Snipaste_2020-05-24_21-50-08.png">
 
+- **多个产品的边际效用的计算**：计算多个产品边际效用很简单：控制住n-1个产品的consumption为常量就好了：The marginal utility of any one good is the rate at which total utility changes as the level of consumption of that good rises, holding constant the levels of consumption of all other goods.
+- \\( \sqrt{xy} = \sqrt{x} \times \sqrt{y} \\)
+- 在计算的时候，给定一个basket，只可以分别计算他们各商品的MU
+- 如果\\( U = \sqrt{xy} \\), 那么\\( MU_{x} = \frac{\sqrt{y}}{2\sqrt{x}} \\)，\\( MU_{y} = \frac{\sqrt{x}}{2\sqrt{y}} \\)
+- 注意，这个理论基础比较虚，要根据实际的效用函数来看他的mu的性质
 
+- **Indifference Curve**: A curve connecting a set of consumption baskets that yield the same level of satisfaction to the consumer.
 
+<img src="assets/post_pics/Snipaste_2020-05-24_22-35-16.png">
+
+- 所以对于布兰登来说，他indifferent in A，B和C，因为他们都有同样的效用值
+- 上面那个也被称为indifference map
+- indifference curve的四个性质：
+	- When the consumer likes both goods (i.e., when MUx and MUy are both positive), all the indifference curves will have a negative slope
+		- 这个证明也很简单，Points to the northeast or southwest of A cannot be on the same indifference curve as A because they will be preferred to A or less preferred than A, respectively. Thus, points on the same indifference curve as A must lie either to the northwest or southeast of A.
+	- Indifference curves cannot intersect
+	- Every consumption basket lies on one and only one indifference curve
+	- Indifference curves are not “thick.”
+
+- **Marginal rate of substitution**：The rate at which the consumer will give up one good to get more of another, holding the level of utility constant. 比较关键的概念是他hold the level of utility constant -> 在utility值保持不变的情况下，消费者愿意放弃多少某商品从而获得更多的商品，虽然说我们这一章讲的preference都是不计成本的，但问题是utility值现在变成了一个限制
+	- a consumer’s **marginal rate of substitution** of **hamburgers for lemonade** is the **rate at which the consumer would be willing to give up glasses of lemonade to get more hamburgers, with the same overall satisfaction.**
+	- 表现在indifference map上面就是，一条indifference curve的斜率
+	- 假设现在两个商品分别是x和y，那么\\( \frac{dy}{dx} \\)代表了**The rate of change of y relative to the change of x = Marginal rate of substitution of x for y** -> 为了得到x，需要放弃多少y，可以这么理解：change of y relative to x，说明y的变化随着x而变化，说明我们是自己控制x，“为了得到x”就对应了这个性质
+
+- **Indifference Map for consumer is given exogenously and remains fixed**
+- 非常重要的公式，这个公式的推导是根据在indifference curve上的x和y的任何增量都不会影响u的值：
+	- \\( \Delta U = MU_{x}(\Delta x) + MU_{y}(\Delta y) \\)
+	- \\( 0 = MU_{x}(\Delta x) + MU_{y}(\Delta y) \\)
+	- \\( -MU_{x}(\Delta x) = MU_{y}(\Delta y) \\)
+	- 根据以上推理出来最终的MRS的公式是：
+	
+	$$
+	\begin{aligned}
+	& MRS_{x, y} = \frac{dy}{dx} = -\frac{dy}{dx} = \frac{MU_{x}}{MU_{y}}
+	\end{aligned}
+	$$
+
+- **negative of the slope of the indifference curve on a graph with x on the horizontal axis and y on the vertical axis**
+
+- **Diminishing Marginal rate of substitution**: A feature of consumer pref- erences for which the marginal rate of substitution of one good for another good diminishes as the consumption of the first good increases along an indifference curve.一开始的时候，因为消费者消费x的数量不多，所以消费者很乐意去拿许多的y去换一个x，但是他占有x的数量越来越多，占有y的数量越来越少，消费者会不那么乐意用那么多的y去换一个x了。根据indifference也可以看出这个性质
+
+- **Draw indifference graph**: 给定一个utility function，给定一个utility值，要如何画indifference graph->只需要找出适当的x，y组合令utility值等于要求的utility值，这样就可以找出一个点，然后继续找下一个点，多找几个点就可以把线给描出来了
+	- 如果问你可不可以和纵轴/横轴相交，用原函数式+x或y等于0去反推
+- 做这种题目要时刻记住：只要MUx和MUy都是positive，那么他们的indifference curve就一定是negative slope
+
+### 3.3 Special Preferences
+
+- **Perfect Substitutes**：**Two goods are perfect substitutes when the marginal rate of substitution of one for the other is a constant**。也就是说，不管他已经获得了多少某种产品，消费者都会愿意用一定数量的产品去交换一定数量的另外一种产品。这类商品之间的MRS是个常量
+	- More generally, indifference curves for perfect substitutes are straight lines, and the marginal rate of substitution is constant, though not necessarily equal to 1
+	- 比如一个人愿意用2个P换取1个W，那么他的Utility function就是：U = P + 2W
+
+- **Perfect Complements**：(in consumption) Two goods that the consumer always wants to consume in fixed proportion to each other. 比如一双袜子：左边袜子和右边袜子
+	
+	<img src="assets/post_pics/Snipaste_2020-05-25_11-42-23.png">
+
+	- 以上这个例子就是perfect complement的例子：\\( U(R, L) = 10min(R, L) \\)
+
+- **The Cobb-Douglas utility function**: 形如\\( U=\sqrt(xy) \\)或者是\\( U = xy \\)这样子的utility function都被称为cobb-douglas utility function, 更general的表示是\\( U=Ax^{\alpha}y^{\beta} \\), 其中\\(A, \alpha, \beta \\)都属于positive constant
+	- 这类的utility function都有其三个性质：
+		- The marginal utilities are positive for both goods.
+		- Since the marginal utilities are both positive, the indifference curves will be downward sloping.
+		- The Cobb–Douglas utility function also exhibits a diminishing marginal rate of substitution.(也就是说他的函数会慢慢变平，趋于饱和)
+- **Quasilinear utility function**：A utility function that is linear in at least one of the goods consumed, but may be a nonlinear function of the other good(s).
+
+	<img src="assets/post_pics/Snipaste_2020-05-25_11-55-19.png">
+
+	- The distinguishing characteristic of a quasilinear utility function is that, as **we move due north on the indifference map, the marginal rate of substitution of x for y remains the same. That is, at any value of x, the slopes of all of the indifference curves will be the same, so the indifference curves are parallel to each other.**
+	- At any value of x, the slope of all of the indifference curves(and hence the MRS_{x, y})will be the same 
+
+## 4 Consumer Choice
+- Theory of Consumer Choice, explaining how consumers allocate their limited incomes among available goods and services.
+- Write the equation of the budget constraint and graph the budget line.
+- Illustrate graphically how a change in income or a change in a price affects the budget line.
+- Describe the conditions for optimal consumer choice.
+- Illustrate graphically the tangency condition for optimal consumer choice.
+- Solve for an optimal consumption basket, given information about income, prices, and marginal utilities.
+- Explain why the optimal consumption basket solves both a utility maximization problem and an expendi- ture minimization problem.
+- Explain why the optimal consumption basket could occur at a corner point.
+- Illustrate the budget line and optimal consumer choice graphically when one of the goods a consumer can choose is a composite good.
+- Describe the concept of revealed preference.
+- Employ the concept of revealed preference to determine whether observed choices are consistent with utility maximization.
+
+### 4.1 The Budget constraint
+- **The budget cnsrtaint** defines the set of baskets that a consumer can purchase with a limited amount of income. 
+- 假设I是income，那么：The budget line indicates all of the combinations of food (x) and clothing ( y) that Eric can purchase if he spends all of his available income on the two goods. It can be expressed as
+	
+	$$
+		P_{x} x + P_{y} y = I
+	$$
+
+<img src = "assets/post_pics/Snipaste_2020-05-25_19-54-09.png">
+
+- 显而易见的是，只要在budget line，x轴，和y轴包围的空间里面，他随便选，但在这个空间之外，就是不行的了，而budget constraint的式子是\\( P_{x}x + P_{y} y \leq I \\)
+- **budget line的斜率**: Thus, the slope of the budget line tells us **how many units of the good on the vertical axis a consumer must give up to obtain an additional unit of the good on the horizontal axis.** 和MRS有点像，不过又不尽一样，因为MRS控制的是utility相等，而这个控制的是开销相等
+- 如果收入变多了，那么budget line向上平行移动
+
+	<img src="assets/post_pics/Snipaste_2020-05-25_20-02-54.png">
+
+- 如果一个商品的价格改变了的话，这个budget line会“旋转”，像下面这样：
+
+	<img src+"assets/post_pics/Snipaste_2020-05-25_20-05-36.png">
+
+- Thus, an increase in the price of one good moves the intercept on that good’s axis toward the origin. Conversely, a decrease in the price of one good would move the intercept on that good’s axis away from the origin.
+- **假设工资和商品的价格同时涨到了本来的2倍，那么这对于budget line没有任何影响**
+
+### 4.2 Optimal Choice
+- **Optimal Choice**: Consumer choice of a basket of goods that (1) maximizes satisfaction (utility) while (2) allowing him to live within his budget constraint. 分为两个部分来讨论最佳选择：在不超过自己工资承受范围的情况下的同时最大化效用值
+- optimal choice绝对在budget line上
+- 整理一下，这个optimal choice的问题是：
+
+$$
+\begin{aligned}
+& \mathop{max}_{(x, y)} U(x, y) \\
+& subject\ to:\ P_{x}x + P_{y}y \leq I
+\end{aligned}
+$$
+
+- 大致分了一下endogenous/exogenous
+	- Endogeneous Variable: x, y
+	- Exogeneous Variable: Prices, Income
+
+<img src="assets/post_pics/Snipaste_2020-05-25_20-39-14.png">
+
+- Diminishing MRS的图上表示是：because the indifference curves are bowed in toward the origin (in economic terms, because there is diminishing marginal rate of substitution of x for y)
+
+- 同时，有个算式是：\\( \frac{MU_{x}}{MU_{y}} = \frac{P_{x}}{P_{y}}  \\) **The optimum occurs at a point where the budget line is tangent to the indifference curve.**
+- \\( \frac{MU_x}{P_x} = \frac{MU_y}{P_y} \\) **Put another way, at an interior optimum, the extra utility per dollar spent on good x is equal to the extra utility per dollar spent on good y.**
+- **Interior Optimum**: An optimal basket at which a consumer will be purchasing positive amounts of all commodities.消费者不会不买任何产品
+	- an interior optimal basket, the consumer chooses commodi- ties so that the ratio of the marginal utilities (i.e., the marginal rate of substitution) equals the ratio of the prices of the goods.
+- 如果MUx和MUy都是正数，那么optimal choice会在budget line上面
+- 如果存在diminishing marginal rate of substitution，那么interior optimal consumption会出现在indifferent curve和budget line相切的地方
+- 在看待这个优化问题的时候，当然存在别的角度：What basket should the consumer choose to minimize his expenditure (Px x  Py y) and also achieve a given level of utility U2?
+
+$$
+\begin{aligned}
+& \mathop{min}_{(x, y)} expenditure = P_{x}x + P_{y}y \\
+& subject\ to:\ U(x, y) = U_{2}
+\end{aligned}
+$$
+
+- 这样的问题被称为：**expenditure minimization problem**
+
+<img src="assets/post_pics/Snipaste_2020-05-25_21-22-46.png">
+
+- The consumer can increase utility if he continues to spend $800 monthly, or he can spend less money to stay at the same level of utility he is currently realizing at B.
+
+- **Corner Points**: A solution to the consumer’s optimal choice problem at which some good is not being consumed at all, in which case the optimal basket lies on an axis.
+
+<img src="assets/post_pics/Snipaste_2020-05-25_21-31-52.png">
+
+- 上图就阐明了一种这样子的关系，当没有一条indifferent curve和bl相切。并且这三条indifferent curve的都比BL要更加的斜，经过证明，这代表了：\\( \frac{MU_x}{P_x} \lt \frac{MU_y}{P_y} \\)，也就是说明tells us the marginal utility per dollar spent is higher for food than for clothing, so the consumer would like to purchase more food and less clothing. 所以消费者必定会选择R（把food选到最大）
+
+- 如果要找有拐点的optimal value：先通过计算斜率等大致说出indifference curve和bl的一些性质（凸起还是凹下啊），陈述拐点的可能存在，然后根据MUx/MUy = Px/Py试图找切点，找到悖论证明切点不存在，说明最优解在拐点，直接算拐点的时候的utility值
