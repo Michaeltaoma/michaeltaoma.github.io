@@ -121,7 +121,20 @@
         &lt;/tr&gt;
       &lt;/tbody&gt;
     &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;对数似然函数的代价函数的基本过程：想办法定义概率分布函数，取这个概率分布函数的log然后找最佳参数匹配&lt;/li&gt;
+  &lt;li&gt;使用最大似然法则提取出来的cost function符合这个原理：
     &lt;ul&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;机器学习可以看作是给定数据x，我们要预测y，假设y服从某一种分布，那么机器学习就是想要学得这个分布的具体的参数，假设已知label y服从某一概率分布，通过最大似然函数找出令P(y&lt;/td&gt;
+              &lt;td&gt;参数)最大的参数值来确定概率模型的参数，这样子就是用最大似然函数去求代价函数的基本意义&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
       &lt;li&gt;Principle of maximum likelihood:
         &lt;ul&gt;
           &lt;li&gt;
@@ -250,6 +263,8 @@ J(\theta) = -E_{x, y \sim \hat{P}_{data}} [Log p_{model}(y|x)]
 
 &lt;h5 id=&quot;6222-sigmoid-units-for-bernoulli-output-distribution&quot;&gt;6.2.2.2 Sigmoid Units for Bernoulli Output Distribution&lt;/h5&gt;
 &lt;ul&gt;
+  &lt;li&gt;二元分类问题的的maximum likihood approach就是要定义一个基于伯努利分布的条件概率&lt;/li&gt;
+  &lt;li&gt;sigmoid的意义是：把线性结果转换为一个概率&lt;/li&gt;
   &lt;li&gt;伯努利分布指的是对于随机变量X有, 参数为p(0&amp;lt;p&amp;lt;1)，如果它分别以概率p和1-p取1和0为值。EX= p,DX=p(1-p)。伯努利试验成功的次数服从伯努利分布,参数p是试验成功的概率。伯努利分布是一个离散型机率分布，是N=1时二项分布的特殊情况，为纪念瑞士科学家詹姆斯·伯努利(Jacob Bernoulli 或James Bernoulli)而命名。&lt;/li&gt;
   &lt;li&gt;如果用这一个的话，因为probability需要定义在[0, 1]这个范围内，所以如果是用linear的话，如果approximate出来的东西的梯度会变成0（具体可以看书上的例子），这样子梯度是0的东西就无法对他的参数进行调整&lt;/li&gt;
   &lt;li&gt;综上，我们用sigmoid output unit来代替linear output unit：\( \hat{y} = \sigma (w^{T}h + b) \), 在原有的linear output的基础上多加一个sigmoid函数去把linear output z变成一个概率&lt;/li&gt;
@@ -279,6 +294,157 @@ f(x) = ln(1 + e^{x})
   &lt;li&gt;那如果是一个很错误的预测呢？-&amp;gt; The derivative with respect tozasymptotes tosign(z), so, in the limit of extremelyincorrectz, the softplus function does not shrink the gradient at all. This propertyis useful because it means that gradient-based learning can act to quickly correcta mistaken z.&lt;/li&gt;
   &lt;li&gt;还是那句话，因为有sigmoid的存在，函数有时候太容易饱和了，所以两边取个对数就舒服很多&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h5 id=&quot;softmax-units-for-multinouli-output-distributions&quot;&gt;Softmax Units for Multinouli Output Distributions&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;以下定义的就是一个softmax的函数，这个函数的意义在于：可以帮助我们表示n个离散变量的概率分布&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;s(x_{i}) = \frac{e^{x_{i}}}{sum_{j = 1}^{n} e^{x_{j}}}&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Softmax functions are most often used as the output of a classiﬁer, to representthe probability distribution overndiﬀerent classes&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;和上面sigmoid的推导很像：
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;令\( \hat{y} = P(y = i&lt;/td&gt;
+              &lt;td&gt;x) \)，并且令这个概率是一个严格的概率分布&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+      &lt;li&gt;那么现在模型的目的就是求得这个hat y&lt;/li&gt;
+      &lt;li&gt;令linear output: \( z = W^{T} h + b \)&lt;/li&gt;
+      &lt;li&gt;和之前一样同取对数再normalize，oh~又发现了这特么就是softmax函数的定义：&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;softmax(z)_{i} = \frac{exp(z_i)}{\sum_{j} exp(z_{j})}&lt;/script&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;然后再套一层log在softmax外面(log-likelihood原则的代价函数)，得到logsoftmax，这个的意义也是令这个有很多个exp term的东西不那么快饱和&lt;/p&gt;
+
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{aligned}
+      logsoftmax(z)_{i} = z_i - log \sum_{j} exp(z_j)
+  \end{aligned}&lt;/script&gt;
+  &lt;/li&gt;
+  &lt;li&gt;看这样子的代价函数就非常的好，前面第一个term会令求梯度时不会太快饱和，从而让模型可以一直进行自我调整&lt;/li&gt;
+  &lt;li&gt;第二的term的意义在于，如果现在预测出来的zj是对的，那么他就应该拥有很大的值，那么那个sum会大概等于zj，那么zi和zj因为很接近（zj是正确的），这个loss就会比较小；反之，这个loss就会返回一个比较大的loss的值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-05-26_18-41-31.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;总的来说，非正则化的极大似然将驱动模型学习驱动softmax的参数，以预测在训练集中观察到的每个结果的计数的分数&lt;/li&gt;
+  &lt;li&gt;总算来了！！从神经科学的角度来解释：softmax激起不同的神经元的竞争，因为概率总值为1，某个神经元的输出的提高, 必定意味着另一个神经元的输出变低&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;6224-other-output-types&quot;&gt;6.2.2.4 Other Output Types&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;总结一下，如果我们的条件概率分布是p的话，利用最大似然原则去-logp就可以知道他的代价函数&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;我们可以这么去理解神经网络：&lt;u&gt;神经网络输出的并不直接是预测的y值，而是y来自的概率分布的参数w，所以代价函数如上定义&lt;/u&gt;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;that gradient-based optimization of conditional Gaussianmixtures (on the output of neural networks) can be unreliable, in part because onegets divisions (by the variance) which can be numerically unstable (when somevariance gets to be small for a particular example, yielding very large gradients)对混合条件高斯基于梯度的优化可能是不可靠的，因为涉及到除法的式子（当某个方差对于特定的样本变得非常小的时候，会导致非常大的梯度）-&amp;gt; Clip gradient/scale the gradients heuristically&lt;/li&gt;
+  &lt;li&gt;差不多懂了，高斯混合输出是一个可以用来表示在总体分布下含有k个子分布的概率模型，高斯混合模型下有k个单高斯模型组合而成的模型，比如要预测一个东西是不是狗，这个狗的数据集的样本有体型，颜色，长相等，他们混在了一起但都属于这个狗的数据，所以对于不同的样本（颜色，体型或者长相），高斯混合模型习得一个高斯分布的参数，最后预测概率的时候把这些分别的子分布拢起来&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;63-hidden-units&quot;&gt;6.3 Hidden Units&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;现在我们转向一个前馈神经网络独有的问题：该如何选择隐藏单元的类型，这些隐藏单元用在模型的隐藏层中。&lt;/li&gt;
+  &lt;li&gt;一般使用的隐藏单元是线性整流函数\( f(x) = max(0, x) \)，这个函数的问题是他在x = 0的时候不可微，这不是基本宣告了基于梯度的学习算法无效？不过事实上，&lt;strong&gt;神经网络算法通常无法达到代价函数的局部最小值&lt;/strong&gt;，根本就到不了0，所以也不用x=0&lt;/li&gt;
+  &lt;li&gt;并且：即使导数没产生：神经网络训练的软件实现通常返回左导数或右导数的其中一个，而不是报告导数未定义或产生一个错误。当一个函数被要求计算x=0的情况时，输入的x可能是一个&lt;strong&gt;被舍入为0&lt;/strong&gt;的极小的值&lt;/li&gt;
+  &lt;li&gt;most hidden units can be described as acceptinga vector of inputsx, computing an aﬃne transformation z=Wx+b, andthen applying an element-wise nonlinear functiong(z)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;631-rectified-linear-units-and-their-generalization整流线性单元及其拓展&quot;&gt;6.3.1 Rectified Linear Units and Their Generalization整流线性单元及其拓展&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;就是上面描述的整流线性单元：\( g(z) = max(0, z) \)&lt;/li&gt;
+  &lt;li&gt;好处就是，整流线性单元在其一般的定义域输出为0，这使得只要整流线性单元属于激活状态，他的梯度都能保持较大且一致：在一阶导数上处处为1&lt;/li&gt;
+  &lt;li&gt;作用在一个仿射变化上：\( h = g(W^{T}x + b) \), 所以如果一开始就把b定义成0.1的话，可能从训练的一开始整流线性单元就对大多数的输入都呈现激活状态-&amp;gt;允许导数通过&lt;/li&gt;
+  &lt;li&gt;Generalization of ReLu（对于普通整流函数的拓展，解决梯度方法对于激活为零的样本无用的问题）
+&lt;script type=&quot;math/tex&quot;&gt;( h_{i} = g(z, \alpha)_{i} = max(0, z_i) + \alpha_{i} min(0, z_{i})&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;在z&amp;lt;0时，其中alpha是非负斜率
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;Absolute value rectification：固定 αi = −1 来得到 g(z) =&lt;/td&gt;
+              &lt;td&gt;z&lt;/td&gt;
+              &lt;td&gt;，它的意义：用于图像中的对象识别 (Jarrett et al., 2009a)，其中寻找在输入照明极性反转下不变的特征是有意义的。&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Leaky ReLU：ﬁxes αi to a small value like 0.01&lt;/li&gt;
+      &lt;li&gt;Parametric ReLU/PReLU：treats αi as a learnable parameter&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;maxout unit&lt;/strong&gt;：把z划分为每组具有k个值的组，每个maxout单元输出每组中的最大元素：&lt;/p&gt;
+
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;g(z)_{i} = max_{j\in G^{(i)}} z_{j}&lt;/script&gt;
+  &lt;/li&gt;
+  &lt;li&gt;学习对输入 x 空间中多个方向响应的分段线性函数。&lt;/li&gt;
+  &lt;li&gt;特别地，具有两块的 maxout 层可以学习实现和传统层相同的输入 x 的函数，这些传统层可以使用整流线性激活函数、绝对值整流、渗漏整流线性单元 或参数化整流线性单元，或者可以学习实现与这些都不同的函数&lt;/li&gt;
+  &lt;li&gt;maxout也需要嵌套权重&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;catastrophic forgetting&lt;/strong&gt;：neural networks forget how to perform tasks that they were trained on in the past&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;632-logistic-sigmoid-and-hyperbolic&quot;&gt;6.3.2 Logistic Sigmoid and Hyperbolic&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;在神经网络引入之前一般使用sigmoid函数\( g(z) = \sigma (z) \)或者是双曲正切函数（Hyperbolic Tangent）：\( g(z) = tanh(z) = \frac{cosh(z)}{sinh(z)} = 2\sigma(2z) - 1 \)&lt;/li&gt;
+  &lt;li&gt;使用这个的问题是：sigmoid作为单元太容易饱和，只有当z非常接近于0时，才会输出敏感的梯度&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;633-其他隐藏单元&quot;&gt;6.3.3 其他隐藏单元&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;很多种类的可微函数都表现的很好。神他妈cos()的误差率小于1%&lt;/li&gt;
+  &lt;li&gt;单位函数作为激活函数（纯线性变换）：这是以将线性变换约束为低秩的代价来实现的，但这些低秩关系往往是足够的。线性隐藏单元因此提供了一种减少网络中参数数量的有效方法。&lt;/li&gt;
+  &lt;li&gt;其他的隐藏单元：
+    &lt;ul&gt;
+      &lt;li&gt;Radial Basis Function（RBD）：径向基函数，以x距离模版w的距离作为input，离得越近，越活跃&lt;/li&gt;
+      &lt;li&gt;softmax&lt;/li&gt;
+      &lt;li&gt;softplus：\( g(a) = log(1 + e^{a}) \)&lt;/li&gt;
+      &lt;li&gt;hard tanh硬双曲正切函数：\( g(a) = max(-1, min(1, a)) \)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;64-architecture-design&quot;&gt;6.4 Architecture Design&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Architecture值得是指网络的整体结构：它应该具有多少单元，以及这些单元应该如何连接。&lt;/li&gt;
+  &lt;li&gt;就好像之前记的，神经网络被组织成层的单元组。&lt;strong&gt;每一层都是前一层的函数&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;设计主要指的是要计算各层的宽度和整体的深度，有的时候的神经网络不需要太多层，一层也不需要太宽，便可以达到目标，但是这也让他们更难优化&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;641-universal-approximation-properties-and-depth&quot;&gt;6.4.1 Universal Approximation Properties and Depth&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;使用线性模型，许多损失函数会导出凸优化问题-&amp;gt;那不就稳了！！！但问题是很多模型不是线性模型&lt;/li&gt;
+  &lt;li&gt;Universal Approximation theorem（万能近似定理）：一个前馈神经网络如果具有线性输出层和至少一层具有任何一种 ‘‘挤压’’ 性质的激活函数（例如loistic sigmoid激活函数）的隐藏层，只要给予网络足够数量的隐藏单元，它可以以任意的精度来近似任何从一个有限维空间到另一个有限维空间的 Borel 可测函数。（留个坑好吧，想知道这东西是怎么证明的）&lt;/li&gt;
+  &lt;li&gt;a feedforward network with a linear outputlayer and at least one hidden layer with any “squashing” activation function (suchas the logistic sigmoid activation function) can approximate any Borel measurablefunction from one ﬁnite-dimensional space to another with any desired nonzeroamount of error, provided that the network is given enough hidden units.&lt;/li&gt;
+  &lt;li&gt;注意了，被逼近的函数必然是定义在有限闭区间的实值连续函数&lt;/li&gt;
+  &lt;li&gt;这个定理代表：只要一个大的MLP，一定可以表示这个函数，但却无法保证训练算法能够学到这个函数&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;no free lunch theorem&lt;/strong&gt; shows that there is no universally superior machine learning algorithm. There is no universal procedure for examining a training set ofspeciﬁc examples and choosing a function that will generalize to points not in thetraining set&lt;/li&gt;
+  &lt;li&gt;上面这个定理证明了只要单层神经网络足够的宽，就可以逼近任何闭区间的实值连续函数。但是这个宽度非常大（n的指数级），所以使用更&lt;em&gt;深&lt;/em&gt;但&lt;em&gt;窄&lt;/em&gt;的模型可以减少所需的单元数量，并且可以减少泛化误差&lt;/li&gt;
+  &lt;li&gt;指出一些用深度整流网络表示的函数可能需要浅层网络（一个隐藏层）指数级的隐藏单元才能表示。&lt;/li&gt;
+  &lt;li&gt;Choosing a deep model encodes a very general belief that the function wewant to learn should involve composition of several simpler functions.其实在选择深层模型的时候，我们就假定了我们想要学得的函数是基于一些简单函数的组合&lt;/li&gt;
+  &lt;li&gt;根据经验，更深的模型似乎确实在广泛的任务中泛化得更好。很可惜的是却没有证明出来&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;652-other-architectural-consideration&quot;&gt;6.5.2 Other Architectural Consideration&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;虽然这里介绍的神经网络把层都以简单链式结构来描述，但并不往往是这样的。比如卷积，比如RNN，实际上，层与层之间也不用紧密相连，比如存在skip connection（These skip connections make it easier for the gradient to ﬂow fromoutput layers to layers nearer the input.）&lt;/li&gt;
+  &lt;li&gt;还有一个考量的是层和层之间要连接的话会怎么连接，之前看到过的是矩阵W的线性变化：每个输入单元连接到各个输出单元，但也存在每个输入单元连接到输出单元的子集，&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;65-back-propagation-and-other-differentiation-algorithm&quot;&gt;6.5 Back-Propagation and Other Differentiation Algorithm&lt;/h4&gt;
 </description>
           <pubDate>2020-05-24T00:00:00+08:00</pubDate>
           <link>http://localhost:4000/dnn</link>
