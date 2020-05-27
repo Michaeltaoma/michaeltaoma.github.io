@@ -59,12 +59,19 @@
   <li>Deep feedforward networks, feedforward neural networks, Multilayer perceptrons其实都是一个东西。目的都是学的一个方程 \( f* \)比如可以用来学得一个把数据x映射到类别y的分类器。</li>
   <li><em>A feedforward network defines a mapping \( y = f(x;\theta) \) and learns the value of the parameters \( \theta \) that result in the best function approximation</em></li>
   <li>feedforward并没有feedback connection，有feedback connection的叫做recurrent network.</li>
-  <li>用数学的方式来表示layer：\( f(x) = f^{(3)}(f^{(2)}(f^{(1)}(x))) \)，那么可以看到在这个例子里面，（1）就代表的是第一个layer，（2）代表的就是第二个layer。这个chain的长度就是模型的深度depth。</li>
+  <li>用数学的方式来表示layer：\( f(x) = f^{(3)}(f^{(2)}(f^{(1)}(x))) \)，那么可以看到在这个例子里面，
+    <ul>
+      <li>（1）就代表的是第一个layer</li>
+      <li>（2）代表的就是第二个layer。这个chain的长度就是模型的深度depth。</li>
+    </ul>
+  </li>
   <li>除了output layer，并没有额外的信息来告诉这个模型在每个hidden layer他应该如何表现</li>
   <li>刚刚说到了<em>depth</em>深度，而hidden layer的维度则决定了模型的宽度</li>
-  <li>It is best to think offeedforward networks as function approximation machines that are designed toachieve statistical aeneralization, occasionally drawing some insights from what weknow about the brain, rather than as models of brain function
-    <h4 id="linear-models">Linear Models</h4>
-  </li>
+  <li>It is best to think of feedforward networks as function approximation machines that are designed to achieve statistical generalization, occasionally drawing some insights from what we know about the brain, rather than as models of brain function</li>
+</ul>
+
+<h4 id="linear-models">Linear Models</h4>
+<ul>
   <li>Logistic regression，linear regression</li>
   <li>使用他们的好处是：
     <ul>
@@ -77,7 +84,7 @@
     <ul>
       <li>把x映射到无限维，就像之前在自学452的时候说的那样</li>
       <li>手扒这个映射</li>
-      <li>把这个\( \phi \)定义成一个hidden layer：\( y = f(x;\theta, w) = \phi(x;\theta)^{T} w \)。在这个方法下面，只需要先指明映射的大类，然后就可以让算法自己去学这个具体的映射</li>
+      <li>把这个\( \phi \)定义成一个hidden layer：\( y = f(x;\theta, w) = \phi(x;\theta)^{T} w \)。在这个方法下面，只需要先指明映射的大类，然后就可以让算法自己去学这个具体的映射(这是一个关于隐藏层的一个全新的理解)</li>
     </ul>
   </li>
 </ul>
@@ -240,7 +247,7 @@ J(\theta) = -E_{x, y \sim \hat{P}_{data}} [Log p_{model}(y|x)]
       <li>这个抵消就很关键：\( Log_{e} e^{X} = X \)</li>
     </ul>
   </li>
-  <li>对于实值输出变量，如果模型能够控制输出分布的密度(例如，通过学习高斯输出分布的变异参数)，那么就有可能将极高的密度分配给正确的训练集输出，从而导致交叉熵趋近于负无穷。第7章描述的正则化技术提供了几种修改学习问题的不同方法，这样模型就不能以这种方式获得无限的回报（完全没看懂的一句话）</li>
+  <li>对于实值输出变量，如果模型能够控制输出分布的密度(例如，通过学习高斯输出分布的变异参数)，那么就有可能将极高的密度分配给正确的训练集输出，从而导致交叉熵趋近于负无穷。第7章描述的正则化技术提供了几种修改学习问题的不同方法，这样模型就不能以这种方式获得无限的回报（完全没看懂的一句话）：极高的密度也就是说如果习得的参数是正确的话，那么模型就可以为这个参数匹配极高的概率，从而在接下来的梯度里面对其进行比较小的调整</li>
 </ul>
 
 <h5 id="6212-learning-conditional-statistics">6.2.1.2 Learning Conditional Statistics</h5>
@@ -413,9 +420,15 @@ f(x) = ln(1 + e^{x})
   <li>就是上面描述的整流线性单元：\( g(z) = max(0, z) \)</li>
   <li>好处就是，整流线性单元在其一般的定义域输出为0，这使得只要整流线性单元属于激活状态，他的梯度都能保持较大且一致：在一阶导数上处处为1</li>
   <li>作用在一个仿射变化上：\( h = g(W^{T}x + b) \), 所以如果一开始就把b定义成0.1的话，可能从训练的一开始整流线性单元就对大多数的输入都呈现激活状态-&gt;允许导数通过</li>
-  <li>Generalization of ReLu（对于普通整流函数的拓展，解决梯度方法对于激活为零的样本无用的问题）
-<script type="math/tex">( h_{i} = g(z, \alpha)_{i} = max(0, z_i) + \alpha_{i} min(0, z_{i})</script></li>
-  <li>在z&lt;0时，其中alpha是非负斜率
+  <li>Generalization of ReLu（对于普通整流函数的拓展，解决梯度方法对于激活为零的样本无用的问题）</li>
+</ul>
+
+<script type="math/tex; mode=display">( h_{i} = g(z, \alpha)_{i} = max(0, z_i) + \alpha_{i} min(0, z_{i})</script>
+
+<ul>
+  <li>
+    <p>在z&lt;0时，其中alpha是非负斜率</p>
+
     <ul>
       <li>
         <table>
@@ -428,7 +441,9 @@ f(x) = ln(1 + e^{x})
           </tbody>
         </table>
       </li>
-      <li>Leaky ReLU：ﬁxes αi to a small value like 0.01</li>
+      <li>
+        <p>Leaky ReLU：ﬁxes αi to a small value like 0.01</p>
+      </li>
       <li>Parametric ReLU/PReLU：treats αi as a learnable parameter</li>
     </ul>
   </li>
@@ -455,7 +470,7 @@ f(x) = ln(1 + e^{x})
   <li>单位函数作为激活函数（纯线性变换）：这是以将线性变换约束为低秩的代价来实现的，但这些低秩关系往往是足够的。线性隐藏单元因此提供了一种减少网络中参数数量的有效方法。</li>
   <li>其他的隐藏单元：
     <ul>
-      <li>Radial Basis Function（RBD）：径向基函数，以x距离模版w的距离作为input，离得越近，越活跃</li>
+      <li>Radial Basis Function（RBF）：径向基函数，以x距离模版w的距离作为input，离得越近，越活跃</li>
       <li>softmax</li>
       <li>softplus：\( g(a) = log(1 + e^{a}) \)</li>
       <li>hard tanh硬双曲正切函数：\( g(a) = max(-1, min(1, a)) \)</li>
@@ -491,6 +506,172 @@ f(x) = ln(1 + e^{x})
 </ul>
 
 <h4 id="65-back-propagation-and-other-differentiation-algorithm">6.5 Back-Propagation and Other Differentiation Algorithm</h4>
+<ul>
+  <li>前向传播指的是从输入一层传向另一层，直到输出一个结果y。反向传播指的则是从输出层得到结果产生标量代价函数的结果，再把这个结果传回来，向后流动以便计算各层参数的调整梯度</li>
+  <li><strong>关于反向传播的几个经常被误解的点：</strong>
+    <ul>
+      <li>首先，反向传播仅限于计算梯度，而根据梯度调整则是：随机梯度下降</li>
+      <li>反向传播不仅仅适用于MLP，它适用于计算任何函数的导数</li>
+      <li>梯度的表示：\( \nabla_{x}f(x, y) \)：这个代表的是函数f关于x的梯度，我们最常需要的是代价函数关于参数的梯度: \( \nabla_{\theta}J(\theta) \)</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="651-computational-graphs">6.5.1 Computational Graphs</h5>
+<ul>
+  <li>Inside the graph:
+    <ul>
+      <li><strong>Node</strong>: indicate a variable(maybe a scalar, vector, matrix, tensor, or even a variable of another type)</li>
+      <li><strong>“Operation”</strong>: 就是一个或多个变量的简单函数，一个operation仅返还一个值</li>
+    </ul>
+  </li>
+  <li>
+    <p>更具体的：If a variable y is computed by applying an operation to a variable x, thenwe draw a directed edge from x to y.</p>
+
+    <p><img src="assets/post_pics/Snipaste_2020-05-27_12-19-35.png" /></p>
+  </li>
+</ul>
+
+<h5 id="652-chain-rule-of-calculus">6.5.2 Chain Rule of Calculus</h5>
+<ul>
+  <li>这个我真的很不想记笔记了，但是还是要记。。</li>
+  <li>如果\( y = g(x) \)和\( z = f(g(x)) = f(y) \)，那么：</li>
+</ul>
+
+<script type="math/tex; mode=display">\frac{dz}{dx} = \frac{dz}{dy} \times \frac{dy}{dx}</script>
+
+<p><img src="assets/post_pics/Snipaste_2020-05-27_12-31-59.png" /></p>
+
+<ul>
+  <li>
+    <p>上面讲到的Jacobin矩阵（雅可比矩阵）：</p>
+
+    <p><img src="assets/post_pics/Snipaste_2020-05-27_12-40-39.png" /></p>
+  </li>
+  <li>根据这本书自己的解释：张量值得就是超过二维的数组，一般地，一个数组中的元素分布在若干维坐标的规则网络中，我们称之为张量。张量A中坐标为(i, j, k)的元素记作\( A_{i, j, k} \)，在tensorflow中，张量tensor指的是N维数组</li>
+  <li><a href="http://www.360doc.com/content/20/0113/21/32196507_886034162.shtml">这篇博客解释的很清楚张量，矩阵和向量的区别</a></li>
+  <li>所以比如一个\( 3 \times 1908 \times 1080 \)的矩阵便是一个张量，几何上面可以想像成一个立方体。反向传播算法完全可以应用于任意维度的张量，</li>
+</ul>
+
+<h5 id="653-recursively-applying-the-chain-rule-to-obtain-backprop">6.5.3 Recursively Applying the Chain Rule to Obtain Backprop</h5>
+<ul>
+  <li>设计这个算法的时候可以聪明点，因为要对应许多的i点来求梯度，但这些式子很多都是重复的，为了提高效率，下面用到了dp算法去提高效率</li>
+</ul>
+
+<p><img src="assets/post_pics/Snipaste_2020-05-27_13-46-14.png" /></p>
+
+<p><img src="assets/post_pics/Snipaste_2020-05-27_13-47-48.png" /></p>
+
+<ul>
+  <li>执行反向传播所需的计算量与G中的边的数量成比例</li>
+</ul>
+
+<h5 id="654-back-propagation-computation-in-fully-connected-mlp">6.5.4 Back-Propagation Computation in Fully connected MLP</h5>
+
+<ul>
+  <li>前向传播和代价函数的计算就不写了，这个东西没什么含量，下面包含的是反向传播以及计算图</li>
+</ul>
+
+<p><img src="assets/post_pics/Snipaste_2020-05-27_13-56-44.png" /></p>
+
+<h5 id="symbol-to-symbol-derivatives">Symbol-to-Symbol Derivatives</h5>
+
+<ul>
+  <li>Some approaches to bp take a computational graph and a set of numerical values describing the gradient at those input values. 这就是<strong>Symbol to number differentiation</strong></li>
+  <li>说实话我是真的没有明白这个概念的意义，反正就是可以利用很多种方法来表示梯度的计算</li>
+  <li>还有是符号到符号的计算方法，主要有点是导数只是另外一张计算图</li>
+  <li>有两种不同的编码方式：
+    <ul>
+      <li>符号到数字：使用者只知道大概的网络结构，不知道具体的梯度是怎么计算的</li>
+      <li>符号到符号：具体的梯度计算也被符号表示了出来</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="assets/post_pics/Snipaste_2020-05-27_20-22-04.png" /></p>
+
+<h4 id="656-general-back-propagation">6.5.6 General Back-Propagation</h4>
+<ul>
+  <li>在实际的计算图中为了最大化一般化，我们将节点对应的变量描述成一个张量（张量可以用任意维度，并且包含标量，向量和矩阵）</li>
+  <li>然后他这里定义了几个子程序，虽然我觉得这个定义应该都是因人而异的？
+    <ul>
+      <li><code>get_operation(V)</code>: 返回计算V的操作</li>
+      <li><code>get_consumers(V, G)</code>: 返回一组变量，计算G中V的字节点</li>
+      <li><code>get_inputs</code>(V, G): 返回一组变量，计算G中V的父节点</li>
+    </ul>
+  </li>
+  <li>
+    <p>每个操作与bprop操作相关联，bprob操作可以计算雅各布向量积</p>
+
+    <script type="math/tex; mode=display">op.bprop(inputs, X, G) = \sum_{i} (\nabla_{x} op.f(inputs)_{i})G_{i}</script>
+  </li>
+  <li>
+    <p>上面这个：这里，inputs 是提供给操作的一组输入，op.f 是操作实现的数学函数，X 是输入，我们想要计算关于它的梯度，G 是操作对于输出的梯度。</p>
+  </li>
+  <li>这个操作应该总是假装他的输入彼此不同：。例如，如果 mul 操作传递两个 x 来计算 x^(2)，op.bprop 方法应该仍然返回 x 作为对于两个输入的导数。反向传播算法后面会将这些变量加起来获得 2x，这是 x 上总的正确的导数。</li>
+</ul>
+
+<p><img src="assets/post_pics/Snipaste_2020-05-27_21-08-06.png" /></p>
+
+<ul>
+  <li>在计算复杂度的时候，我们把这个算法里面的每一个operation看作是最小的单位，也就是o(1)，其他的复杂度都是根据这个为基础的，其实这个有点作弊，因为这个不是根据底层硬件的执行的单独操作，但其实这个operation又是高度可变的-&gt;比如两个多维矩阵相乘</li>
+</ul>
+
+<h4 id="657-example-back-propagation-for-mlp-training">6.5.7 Example: Back-Propagation for MLP Training</h4>
+
+<p><img src="assets/post_pics/Snipaste_2020-05-27_21-23-05.png" /></p>
+
+<ul>
+  <li>观察上图，对于反向传播：有两种不同的路径从 J 后退到权重：一条通过交叉熵代价，另一条通过权重衰减代价。
+    <ul>
+      <li>权重衰减代价相对简单，它总是对 W(i) 上的梯度贡献 2λW(i)。</li>
+    </ul>
+
+    <p><img src="assets/post_pics/Snipaste_2020-05-27_21-28-24.png" /></p>
+
+    <p>而上面则介绍了反向传播从Jmle这一边应该如何传播到具体的节点</p>
+  </li>
+  <li>如果只是对于mlp来说，计算的主要成本来源于矩阵乘法。</li>
+</ul>
+
+<h4 id="658-complications">6.5.8 Complications</h4>
+
+<ul>
+  <li>在这里定义的反向传播算法比实际使用的实现要简单</li>
+  <li>比如在现实生活中，往往需要处理返还多个张量的情况</li>
+  <li>也没有考虑反向传播的内存消耗，最普通的办法是分别计算张量中的每一个，然后在第二步对这些张量求和。但他有过高的存储瓶颈，可以通过保持一个缓冲期，并在计算时将每个值加到该缓冲器来避免该瓶颈</li>
+  <li>各种其他技术的特性使现实世界的微分更加复杂。这些技术性并不是不可逾越的，本章已经描述了计算微分所需的关键知识工具，但重要的是要知道还有许多的精妙之处存在。</li>
+</ul>
+
+<h4 id="659-diﬀerentiation-outside-the-deep-learning-communit">6.5.9 Diﬀerentiation outside the Deep Learning Communit</h4>
+<ul>
+  <li>
+    <p>Automatic Differentation(计算机领域的一种：自动微分)：领域关心如何以算法方式计算导数，在这里面描述的bp只不过是一种自动微分的方法（reverse mode accumulation）</p>
+  </li>
+  <li>惊讶！<strong>Finding the optimal sequence of operations to compute the gradient is NP-complete</strong></li>
+  <li>这个问题还是个现存的很困难的问题，因为对于一些明显的表达式，人类数学家可以马上通过经验察觉出他的简单的微分形式，但bp算法无法使用这种方式来简化梯度，而是会通过原始的计算显式的传播梯度</li>
+  <li>The overall computation isthereforeO(# edges). （for bp）</li>
+  <li>诸如 Theano 和 TensorFlow 的实现使用基于匹配已知简化模式的试探法，以便重复地尝试去简化图。（用到了heuristic）</li>
+  <li>当图的输出数目大于输入的数目时，有时更偏向于使用另外一种形式的自动微分，称为 前向模式累加（forward mode accumulation）。前向模式计算已经被提出用于循环神经网络梯度的实时计算</li>
+</ul>
+
+<h4 id="6510-higher-order-derivatives">6.5.10 Higher-Order Derivatives</h4>
+<ul>
+  <li>一些软件框架支持使用高阶导数.</li>
+  <li>In mathematics, the <strong>Hessian matrix</strong> or Hessian is a square matrix of second-order partial derivatives of a scalar-valued function, or scalar field.</li>
+  <li>一般我们对hessian矩阵的性质比较感兴趣，但有时候hessian矩阵的大小很容易达到数十亿</li>
+  <li>虽然计算 Hessian 通常是不可取的，但是可以使用 Hessian 向量积。可以对所有的 i = 1, . . . , n 简单地计算 He(i)，其中 e(i) 是 e(i)i = 1 并其他元素都为 0的one-hot向量。</li>
+</ul>
+
+<h3 id="66-historical-notes">6.6 Historical Notes</h3>
+
+<ul>
+  <li>前馈网络可以被视为一种高效的非线性函数近似器，它以使用梯度下降来最小化函数近似误差为基础。</li>
+  <li>神经网络这个行业已经整整快三十年没有什么显然的进步了</li>
+  <li>之前整流线性函数并没有流行的原因由于有些迷信的观念，认为必须避免具有不可导点的激活函数</li>
+  <li>从生物学考虑整流线性单元的导出。半整流非线性旨在描述生物神经元的这些性质：(1) 对于某些输入，生物神经元是完全不活跃的。(2) 对于某些输入，生物神经元的输出和它的输入成比例。(3) 大多数时间，生物神经元是在它们不活跃的状态下进行操作（即它们应该具有 稀疏激活（sparse activation））。</li>
+</ul>
+
 
 
 </article>

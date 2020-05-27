@@ -239,7 +239,6 @@ $$
 & \epsilon_{Q_i, P_j} = \frac{\Delta Q_{i}}{\Delta P_j}\frac{P_j}{Q_i}
 
 \end{aligned}
-
 $$
 
 - 如果这个弹性是正数，说明当一个产品的价格上升，另一个产品的需求上升，那么说明这两个产品属于互相替代的关系：demand substitutes：Two goods related in such a way that if the price of one increases, demand for the other increases.
@@ -353,6 +352,7 @@ $$
 - **Diminishing Marginal rate of substitution**: A feature of consumer pref- erences for which the marginal rate of substitution of one good for another good diminishes as the consumption of the first good increases along an indifference curve.一开始的时候，因为消费者消费x的数量不多，所以消费者很乐意去拿许多的y去换一个x，但是他占有x的数量越来越多，占有y的数量越来越少，消费者会不那么乐意用那么多的y去换一个x了。根据indifference也可以看出这个性质
 
 - **Draw indifference graph**: 给定一个utility function，给定一个utility值，要如何画indifference graph->只需要找出适当的x，y组合令utility值等于要求的utility值，这样就可以找出一个点，然后继续找下一个点，多找几个点就可以把线给描出来了
+	
 	- 如果问你可不可以和纵轴/横轴相交，用原函数式+x或y等于0去反推
 - 做这种题目要时刻记住：只要MUx和MUy都是positive，那么他们的indifference curve就一定是negative slope
 
