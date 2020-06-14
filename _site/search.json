@@ -2,6 +2,17 @@
   
     {
 
+      "title"    : "Mlp",
+      "url"      : "/mlp",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2020-06-09 00:00:00 +0800",
+	  "description" : ""
+
+    } ,
+  
+    {
+
       "title"    : "Dnn",
       "url"      : "/dnn",
       "category" : "",

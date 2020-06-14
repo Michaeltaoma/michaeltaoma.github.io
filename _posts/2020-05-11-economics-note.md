@@ -436,7 +436,7 @@ $$
 
 - Diminishing MRS的图上表示是：because the indifference curves are bowed in toward the origin (in economic terms, because there is diminishing marginal rate of substitution of x for y)
 
-- 同时，有个算式是：\\( \frac{MU_{x}}{MU_{y}} = \frac{P_{x}}{P_{y}}  \\) **The optimum occurs at a point where the budget line is tangent to the indifference curve.**
+- 同时，有个算式是：\\( \frac{MU_{x}}{MU_{y}} = \frac{P_{x}}{P_{y}}  \\) **The optimum occurs at a point where the budget line is tangent to the indifference curve.**：学到后面就会发现optimal点出现在切点仅仅是对于Cobb而言
 - \\( \frac{MU_x}{P_x} = \frac{MU_y}{P_y} \\) **Put another way, at an interior optimum, the extra utility per dollar spent on good x is equal to the extra utility per dollar spent on good y.**
 - **Interior Optimum**: An optimal basket at which a consumer will be purchasing positive amounts of all commodities.消费者不会不买任何产品
 	- an interior optimal basket, the consumer chooses commodi- ties so that the ratio of the marginal utilities (i.e., the marginal rate of substitution) equals the ratio of the prices of the goods.
@@ -464,3 +464,389 @@ $$
 - 上图就阐明了一种这样子的关系，当没有一条indifferent curve和bl相切。并且这三条indifferent curve的都比BL要更加的斜，经过证明，这代表了：\\( \frac{MU_x}{P_x} \lt \frac{MU_y}{P_y} \\)，也就是说明tells us the marginal utility per dollar spent is higher for food than for clothing, so the consumer would like to purchase more food and less clothing. 所以消费者必定会选择R（把food选到最大）
 
 - 如果要找有拐点的optimal value：先通过计算斜率等大致说出indifference curve和bl的一些性质（凸起还是凹下啊），陈述拐点的可能存在，然后根据MUx/MUy = Px/Py试图找切点，找到悖论证明切点不存在，说明最优解在拐点，直接算拐点的时候的utility值
+
+- Kink：这个知识记在了Module笔记上
+
+### Chapter 4: Appendix 1: The Mathematics of Consumer Choice
+
+- 是拉格朗日乘数是一种寻找多元函数在其变量受到一个或多个条件的约束时的极值的方法
+- 这种方法将一个有n 个变量与k 个约束条件的最优化问题转换为一个有n + k个变量的方程组的极值问题，其变量不受任何约束。这种方法引入了一种新的标量未知数，即拉格朗日乘数：约束方程的梯度（gradient）的线性组合里每个向量的系数。
+- 先看看这个拉格朗日乘数一般是如何定义的：
+
+$$
+\begin{aligned}
+	& \text{Assume current funtcion is z = f(x, y) and } \phi(x, y)=0 \\
+	& \text{goal is to maximize z while preserving } \phi(x, y) = 0 \\
+	& \text{Lagranian Function will be defined as } F(x, y, \lambda) = f(x, y) + \lambda \phi(x, y)\\
+\end{aligned}
+$$
+
+- 定义好了之后，如何根据拉格朗日函数的方法求值呢？必须要通过三元方程解出\\( x, y, \lambda \\)的值（同时满足下列三个等式）
+
+$$
+\begin{aligned}
+	& F'_{x} = f'_{x}(x, y) + \lambda {\phi}'_{x}(x, y) = 0 \\
+	& F'_{y} = f'_{y}(x, y) + \lambda {\phi}'_{y}(x, y) = 0 \\
+	& F'_{\lambda} = {\phi}(x, y) = 0 \\
+	& \text{也就是对这三个值分别求导等于0，必须找到这样一个combination就可以了}
+\end{aligned}
+$$
+
+- 现在回到我们的optimal choice的题目
+
+$$
+\begin{aligned}
+& \mathop{max}_{(x, y)} U(x, y) \\
+& subject\ to:\ P_{x}x + P_{y}y \leq I
+\end{aligned}
+$$
+
+- 显然拉格朗日函数就被定义为\\( F(x, y, \lambda) = U(x, y) + \lambda (I - P_{x}x - P_{y}y) \\), 且和刚刚一样，都要满足刚刚那几个条件就好了，
+
+<img src="assets/post_pics/Snipaste_2020-05-29_22-51-38.png">
+
+- The partial derivative dU(x, y)/dx is the mathematical expression for the marginal utility of x (MUx). It measures how much utility increases as x increases, holding y constant. Similarly, the partial derivative dU(x, y) /y is the mathematical expression for the marginal utility of y (MUy). It measures how much utility increases as y increases, holding x constant. 这里解释了上面那张图片的几个项是什么意思
+
+- 然后。。。你妈的推回来了以下的等式证明了在cobb效用函数中确实应该使用切线定理：
+
+$$
+\begin{aligned}
+& \frac{MU_x}{MU_y} = \frac{P_x}{P_y} \\
+& P_{x}x + P_{y}y = I \\
+\end{aligned}
+$$
+
+-  So the mathematical solution to the consumer choice problem tells us that an optimal interior basket will satisfy the tangency condition and be on the budget line. This verifies the conditions for an op- timum we developed in the text, using a graphical approach.神你妈的verify
+
+## Chapter 5: The theory of Demand
+
+- 理解demand的具体信息非常重要：其中包括一条是：如果政府对需求价格弹性不高的（对价格不敏感）的产品征税的话，政府可以得到更高的税收，同时，研究表明，香烟对于消费者工资的变化也相当的不敏感，在recession期间，对香烟征税，且因为香烟对工资的降低不敏感，政府可以得到非常客观的税收
+- 这一章的主旨是：Studying the impact of chages in prices and income levels on an individual's consumption decision, we can: **gain insight into why some goods, such as cigarettes, have demands that are relatively insensitive to changes in prices and income, while other goods, such as automobiles, might have demands that are relatively more sensitive to changes in prices, or income, or both.**
+
+- Explain how a consumer's demand for a good depends on the prices of all goods and on income
+- Examine how a change in the price of a good affects a consumer through a substitution effect and an income effect
+- Explain how a change in the price of a good affects three measures of con- sumers’ well-being: consumer surplus, compensating variation, and equivalent variation.
+- Derive market demand curves from individual demand curves.
+- Discuss the effects of network externalities on demand curves.
+- Explain how consumers choose to allocate their time between labor and leisure and how this relates to the supply of labor in the market.
+- Explain the biases in the Consumer Price Index.
+
+### 5.1 Optimal Choice and demand
+
+<img src="assets/post_pics/Snipaste_2020-05-30_22-31-42.png">
+
+- 如上图，这里主要讲了如何通过indifferent curve + budget line的组合作出以下的demand curve。观察就会得到，确实当食物的价格下降的时候，对事物的需求确实变大了
+- **Price consumption curve**: The set of utility-maximizing baskets as the price of one good varies (holding constant income and the prices of other goods).(这个curve就是把在indifferent curve那边的当某一商品价格不停变化而带来的optimal choice的变化给连在一起的)
+- 需求曲线有时候也可以理解成“消费者愿意消费曲线”：具体怎么看呢？可以看上图，在价格为4的时候，MRSx,y是1，也就是说消费者愿意付出多一个unit的clothing来换得一个unit的food，而一个unit的clothing正好是$4，这就带来了当我们已经有2unit食物的时候，消费者愿意花费4块钱去买多一个，其实就是把图上面的东西解释来解释去
+- **The Effect of a change in income**: 
+
+<img src="assets/post_pics/Snipaste_2020-05-30_22-48-25.png">
+- **Income consumption curve**: The set of curve utility-maximizing baskets as income varies (and prices are held constant).
+- **Engel Curve**: a graph relating the amount of the good consumed to the level of income.
+	- 一个正斜率的engel curve代表了normal good：赚得越多，买得越多
+	- **shows that a good with a positive income elasticity of demand will have a positively sloped Engel curve.**
+	- 一个负斜率的engel curve说明是个inferior good：赚得越多，买的越少
+
+<img src="assets/post_pics/Snipaste_2020-05-30_23-06-20.png">
+
+- 阐述了一句废话： If a good is normal, its income elasticity of demand is positive.
+- **如何通过Utility function和budget line去找到demand curve（没有corner points的）**
+	- 注意此时的utility function是\\( U(x, y) = xy \\)然后此时的budget line是\\( P_{x}x + P_{y}y = I \\)
+	- 并且求出此时的\\( MU_{x} = y, MU_{y} = x \\)
+	- 因为根据之前的经验，消费者对这两个商品都想要，mu都大于0。所以他们的optimal choice都是interior，也就是x，y都是正数数量，所以**optimal choice**必然在budget line和indifferent curve的切点上
+	- 也就是符合\\( \frac{MU_x}{MU_y} = \frac{P_x}{P_y} \\)
+
+	$$
+	\begin{aligned}
+		& \text{代入MU_x和MU_y轻松得到} \\
+		& \frac{y}{x} = \frac{P_x}{P_y} \\
+		& y = (\frac{P_x}{P_y})x \\
+		& \text{代入原有的budget line得到} \\
+		& P_{x}x + P_{y}(\frac{P_x}{P_y} x) = I
+		& x = \frac{I}{2P_{x}}
+	\end{aligned}
+	$$
+
+	- 上面求出来最后的x=什么什么就是demand curve for x了
+	- 然后题目有时候会问你当I等于多少的时候demand curve是多少，就直接把I带进去就好了
+
+- **如何通过Utility function和budget line去找到demand curve（有corner points的）**
+	- 注意此时的utility function是\\( U(x, y) = xy+10x \\)，观察易得y可以是0
+	- \\( MU_{x} = y + 10, MU_{y} = x \\)
+	- price of x is 1, price of y is Py
+	- 然后注意这里是有corner point的存在的，这种情况下的话要分情况讨论
+		- 最佳点不在拐点：
+			- 如果是这种情况的话，那么计算的方式和普通的无拐点的情况下是一样的，根据切点相等的条件用y来表示x，然后代入到budget line里面得到demand curve
+			- 具体的就不计算了不过结果是：\\( y = \frac{100 - 10P}{ 2P_{y}} \\)
+		- 最佳点在拐点：
+			- 这种情况的话就要观察一下，可以看到上面最佳点不在拐点的情况得出来的式子说明当P_y大于10的时候，y就变成负的了，说明这个关键点就是y价格为10的时候
+			- 直接讨论说明当y的价格高于10的时候对y的demand为0就好了
+
+### 5.1 Change in the price of good: <u>Substitution Effect and Income Effect</u>
+
+- **Substitution Effect**: The change in the amount of a good that would be consumed as the price of that good changes, holding constant all other prices and the level of utility.保持效用值和别的一切商品价格不变的情况下，当某件商品的价格改变时，消费者购买的数量会如何改变 
+	- For example, if the price of food falls, the con- sumer can achieve the same level of utility by substituting food for other goods (i.e., by buying more food and less of other goods)
+- **Income Effect**：The change in the amount of a good that a consumer would buy as purchasing power changes, holding all prices constant.当一件商品的价格改变时，等同于说明消费者的购买力也改变了。The income effect accounts for the part of the total difference in the quantity of the good purchased that isn’t accounted for by the substitution effect.
+- 下面这个解释挺不错的：
+	- 一种商品的名义价格（nominal price）发生变化后，将同时对商品的需求量发生两种影响
+		- 替代效应：因该种商品名义价格变化，而导致的消费者所购买的商品组合中，该商品与其他商品之间的替代
+		- 收入效应：另一种是在名义收入不变的条件下，因一种商品名义价格变化，导致消费者实际收入变化，而导致的消费者所购商品总量的变化，称为收入效应（income effect）。
+- 先留个坑：现在已经知道了替代效应的效用维持不变，那收入效应呢？
+
+#### THE SUBSTITUTION EFFECT
+
+- 替代效应在乎的是： The **change in the amount of a good** that would be consumed as the price of that good changes, holding constant all other prices and the level of utility，根据这一个定义可以看到虽然现在价格下降之后，BL向外推，实际可以达到的效用值是U2，但是我们不在乎这个，目前在乎的是，为了维持现有的效用值，需要多购买x多少个。
+- 作平行的原因是因为在价格下跌了之后，y和x之间的比例要保持一致，斜率得一致
+- Thus, the substitution effect accounts for the consumer’s movement from basket A to basket B—that is, the portion of the overall effect on the quantity of food purchased that can be attributed to the substitution effect is xB - xA.
+
+<img src="assets/post_pics/Snipaste_2020-06-01_11-22-09.png">
+
+#### THE INCOME EFFECT
+- 同样的还是可以根据上面的图来解释
+- the change in the amount of a good consumed as the consumer’s utility changes.
+- 可以看到在替代效用之后，消费者会在A和B中摇摆不定，因为A和B都在同一条indifferent curve上面，所以对消费者来说似乎没有区别，但同时又看到，如果消费者此时因为替代效用在B点的这个BLd那里，在这一点上消费者的income其实是降低了的，也就是说当他买完B这个basket之后，还有钱没有花掉，所以消费者此时会选择购买更多的东西: **restoring the lost income**从而达到一个更高的效用值U2
+- 那么，拢共说明了：当价格从P_x1降到了P_x2的时候，消费者对于x消费的总变化为x_c - x_a，这其中可以分为
+	- 因为替代效应而产生的x_c - x_a
+	- 因为收入效应而产生的x_c - x_b
+
+- **也就是说收入效应和替代效应都工作于同一个方向**
+
+#### When goods are not normal
+
+- **当商品既不normal也不inferior**：income effect影响为0
+
+	<img src="assets/post_pics/Snipaste_2020-06-01_11-49-37.png">
+
+- **当商品是inferior的时候**：income effect有负影响
+	
+	<img src="assets/post_pics/Snipaste_2020-06-01_11-52-19.png">
+
+- **当商品是giffen good的时候**：
+	- A good so strongly inferior that the income effect outweighs the substitution effect, resulting in an upward-sloping demand curve over some region of prices.
+	- 商品实在太垃圾了，导致income effect对数量的负影响甚至超过了替代效应对商品的正影响
+
+	<img src="assets/post_pics/Snipaste_2020-06-01_11-55-59.png">
+
+	- A Giffen good has a demand curve with a positive slope over part of the curve.
+	
+	- For an inferior good to have an income effect large enough to offset the substitution effect, the income elasticity of demand would have to be negative and the expenditures on the good would need to represent a large part of the consumer’s budget. 
+
+- 对于如何计算income effect和substitution effect具体的数值书上170-171有详细的解释，也是根据上面那个step来的
+
+- 下面就是讨论了当价格上升的时候（normal good）会如何变化，其实都是大同小异的
+
+	<img src="assets/post_pics/Snipaste_2020-06-01_12-39-55.png">
+
+- 在计算的时候，先根据相切的条件算出此时的x和y的数量是多少，然后按照utility function算出价格变化之前的效用值
+- 然后把新的价格放入相切条件算出x和y的替换
+- 然后代入进之前的效用值中
+- 就可以得到为了维持在原有的效用值上，x和y的数量然后计算出他们的income，然后算cv就好了
+- **Income and Substitution Effects with a Quasilinear Utility Function**
+	- 给定一个quslinear的utility公式，其算demand curve的步骤和cobb的步骤基本是一样的，都是先根据切点的等式来求得
+	- 然后有了demand curve之后就很舒服了，他给你什么价格就可以算出什么数量
+	- 然后求decomposition的时候要充分记住，utility和原来保持不变，然后斜率和final的保持不变
+
+### 5.3 Change in the price of a good: The concept of consumer surplus消费者盈余
+
+- **Consumer Surplus**: the **difference** between the maximum amount a consumer is willing to pay for a good and the amount he must actually pay to purchase the good in the marketplace.
+- The consumer surplus is the area below the demand curve and above the price that the consumer must pay for the good
+- 虽然不知道为什么，但是**the area under a demand curve exactly measures net benefits for a consumer only if the consumer experiences no income effect over the range of price change**
+- 如果是很简单的线性的demand function的话，算consumer surplus直接计算面积就好了
+
+#### Understanding consumer surplus from the optimal choice diagram: compensating variation and equivalent variation
+- 效用没有单位，伟大的经济学家使用金钱的单位来衡量
+- **Compensating variation**: A measure of how much money a consumer would be willing to give up after a reduction in the price of a good to be just as well off as before the price decrease. 重点是要maintain utility
+	- 当价格下降时，cv为正；当价格上升时，cv为负
+- **Equivalent variation**：A measure of how much additional money a consumer would need before a price reduction to be as well off as after the price decrease. 
+- 可以的，这个东西其实稍微理解一下可以出来：
+	- 补偿变化：指的是在价格之后，消费者的income需要变化多少才可以回到之前的效用值。注意是价格变化之后，可以想象一下，当一个东西的价格变化了，消费者此时应该处于变化了的效用值，我们想让消费者回到之前的效用值，那么他的income需要变化多少。所以补偿变化指的是原来需要购买（价格变化之前的）的optimal组合的income和价格变化之后的价格和变化之前的同等的效用的optimal组合的difference
+	- 同等变化：指的是在价格变化之前，消费者愿意主动变化多少自己的income去达到价格改变之后的效用值。这个计算的是价格变化之前的optimal组合和原价格需要的income和新的效用值加上现在的价格（价格没有实际变化）的difference
+
+<img src="assets/post_pics/Snipaste_2020-06-01_19-48-00.png">
+
+- 一般来说，cv和ev并不见得一样，因为income effect常常不是0
+- 当income effect是0的时候且效用函数是quasilinear函数的时候，cv和ev相等
+
+<img src="assets/post_pics/Snipaste_2020-06-01_19-52-24.png">
+
+-  if there is no income effect, not only are the compensating variation and the equivalent variation equal to each other, they are also equal to the change in the consumer surplus (the change in the area under the demand curve as a result of the price change)
+
+<img src="assets/post_pics/Snipaste_2020-06-01_20-02-49.png">
+
+- 顺便讲一下为什么quasilinear的utility function就是income effetc就是0呢？因为income effect等于（新的budget line平行的budget line和旧的utility function的切点）和（新的budget line和新的utility function的切点）的差，因为现在两两互相平行，所以结果必定是一样的
+
+### Market Demand
+
+- **The market demand curve is the horizontal sum of the demands of the individual consumers**
+
+<img src="assets/post_pics/Snipaste_2020-06-01_20-53-24.png">
+
+- 计算的时候其实是要分情况讨论的，这一点书上面讲的非常清楚
+
+<img src="assets/post_pics/Snipaste_2020-06-01_20-59-38.png">
+
+- **Network Externalities**: A demand characteristic present when the amount of a good demanded by one consumer depends on the number of other consumers who purchase the good.消费者对于某种产品的需求基于其他想要这个产品的消费者的个数
+	- 当externality是正的时候，说明越多人想要，我就越想要
+	- 当externality是负的时候，说明越多人想要，我就越不想要
+
+<img src="assets/post_pics/Snipaste_2020-06-01_21-08-02.png">
+
+- 上图展现了一个带有bandwagon effect的正network externality的图，你看，当价格从20->10的时候，一般普通的商品的需求都是沿着需求曲线走的，但是这个不一样，因为价格便宜了，用的人多了，甚至会把需求曲线推向更远的地方，导致了搬瓦工效应
+
+- **Bandwagon effect**: A positive network externality that refers to the increase in each consumer’s demand for a good as more consumers buy the good.
+
+- **Snob effetc**: A negative network externality that refers to the decrease in each consumer’s demand as more consumers buy the good.
+
+### 4.3 Consumer Choice With Composite Goods
+
+- 一般只想探讨的顾客对于单一商品的selection，所以会把别的所有商品拢成*composite good*，这个composite good会被放在竖轴，然后根据传统，这个composite good的价格为1。
+
+#### Application: Coupons and cash sbusidies
+
+- **How a government program might increase the amount of housing chosen by a consumer**
+
+<img src="assets/post_pics/Snipaste_2020-06-07_18-06-15.png">
+
+- 以上这张图就把coupon和subsidy之间的关系阐述的很明了
+
+- **subsidy**：可以看作是政府为了刺激消费者购买更多的housing而**直接给消费者发工资上的补贴**，就是直接给钱，这个钱可以用来买任何商品。那么他的budget line就会向右移动，从而会导致一个新的optimal choice相切于U2，但是也可以看出在这个新的optimal choice下面，房子的数量正好是政府希望人们去拥有的
+
+- **Coupan**：**Coupan指的是只能花费在某种商品下的政府的补贴**，在这种情况下，人们能获得普通商品的量不会改变，却可以买更多的房子。在这张图上面，如果获得了房子的coupon，那么KFG就是消费者的BL，F是消费者把工资全用在普通商品，且只用coupon/voucher去买房子的情况；然后他马上急转直下来到了与x轴的交点，他也正好与U2相切与optimal点，切数量也是政府希望的数量
+
+- 如果是上面的图的话，两种政策带来的后果是一样的，但是有的图，当政府介绍不同的政策的时候会带来不一样的结果，一般分为consumer会不会worse off或者政府的目的到底是想提高某种商品的消费，还是想提高人们的效用值
+
+#### Applicatio: Joining a club
+
+- **Consumer can join clubs that let them purchase goods and services at a discount**
+
+<img src="assets/post_pics/Snipaste_2020-06-07_19-46-11.png">
+
+#### Application: Borrowing and Lending
+
+- 注意了，在接下来的讨论中：**saving = lending钱给银行(with the interest rate offered by the bank)**
+
+<img src="assets/post_pics/Snipaste_2020-06-07_20-01-39.png">
+
+- 这里接的是最下面appendix的内容
+
+- 在这种情况下，消费者的效用函数是：
+	
+	$$
+		\begin{aligned}
+			& U(C_{1}) + \frac{U(C_2)}{1+P}
+		\end{aligned}
+	$$
+
+- 注意在这张图里面，横轴和竖轴代表的是今年和明年而不是两种商品
+
+- U(C)指的是消费者在某一年买了C dollar的composite good的时候所获得的效用值，其实就是给下一年的效用值加了个discount rate。这个discount rate就很特殊，它被称为**consumer's rate of time perference**: is a measure of the consumer's impatience. (这个值越大，说明消费者就越不“耐心”，说明消费者在未来得到的效用就越小)
+
+- **MArginal rate of substitution is** \\( MRS_{c1, c2} = (1+p)\frac{U'(C1)}{U'(c2)} \\)
+
+<img src="assets/post_pics/Snipaste_2020-06-08_16-13-04.png">
+
+
+- This theory of optimal choice suggests, then, that for a given expectation of in- come growth, a more impatient individual will have a greater propensity to borrow than a more patient individual. And for a given rate of time preference, an individual with a higher expectation of income growth will have a greater propensity to borrow than an individual with a lower expectation of income growth.
+
+#### Application: Quantity Discounts
+
+- 这里讲的东西和第二个module讲的那个**kink**是一样的，其实指的就是**当买了多少多少个之后，价格会进行什么样的变化。**具体去看module 2的kinked budget就好了
+
+
+### Chapter 4: Appendix 2: The time value of the money
+
+- **Money has time value: 生动的例子就是给你100块钱和明天再给你100块钱之间选择，你大概率会选择前者**。同时这个也是为什么利率会存在的原因
+
+- The techniques that can be used to compare amounts of money received at different points in time
+
+#### Future value and present value
+
+- **Future value of an amount of money \$C**: The amount you would have at a given date in the future if you put \$C into an account that earned a given rate of interest
+	
+	$$
+		\begin{aligned}
+		& \text{假设投入的本金为C，利率为r（per t），t是总共要存的period} \\
+		& \text{那么future value 就是}C(1+r)^{t}
+		\end{aligned}
+	$$
+
+- 这个公式当然也可以拿来反推present value：The amount you need to invest today at a given rate of interest so that you would have \$C at a given date in the future. 注意现在这里C变成了未来的钱
+
+	$$
+		\begin{aligned}
+		& \text{假设未来的目标资金为C，利率为r（per t），t是总共要存的period} \\
+		& \text{那么现在的present value 就是}\frac{C}{(1+r)^{t}}
+		\end{aligned}
+	$$
+
+- **当计算present rate的时候，往往会把interest rate称为<u>discount rate</u>**
+
+- 通过这个可以计算**present value of a stream of payments**
+
+	<img src="assets/post_pics/mike.png">
+
+- **Annuity**: An annuity is a stream of **constant**, equally spaced, payments over a certain period of time. 就是说上面那个C不管经过多少年都是不变的
+
+
+	$$
+		\begin{aligned}
+		& \text{计算这个annuity的方法很简单，就是做了下化简} \\
+		& \frac{C}{r}(1-\frac{1}{(1+r)^{T}}) \\
+		& \text{其中T指的是这种payment会持续到最久的年份（基数词的最后一个）}
+		\end{aligned}
+	$$
+
+- **Perpetuity**:指的是一种永远也不会停止的annuity，也就是说T趋于无穷，那么括号里面的term就会趋于1，那么最后的presnet value就是简单的\\( \frac{C}{r} \\)
+
+#### Net Present Value
+
+- **An important use of present value is to compare benefits to costs.**
+
+- **Net present value(NPV) is the difference between the present value of the stream of benefits and the upfront cost that musht be incurred.**
+
+	$$
+		\begin{aligned}
+			& NPV  = -C_{0} + \frac{C_1}{(1+r)} + \frac{C_2}{(1+r)^{2}} + .... + \frac{C_{T}}{(1+r)^{T}}
+			& \text{其中c0指的就是一开始的成本，而后面的c1啥的都是之后可以赚到的钱}
+		\end{aligned}
+	$$
+
+#### Presnet value, future value and the optimal consumption choice problem
+
+- 其实这里的东西很多都跟上面的borrowing and lending有关，所以直接跳到上面去
+
+### 5.5 The Choice of labor and leisure
+
+- We use that model to examine a consumer's choice of how much to work
+
+#### As wages rise, leisure first decreases, then increases
+
+- 假设一天被分成了：work和leisure，work赚到花在leisure上的income
+
+- Assumption:
+	- L代表了花在了leisure上的时间(hours)
+	- w代表了每小时赚来的钱
+	- 所以日收入是w(24-L)
+	- 收入可以用来买composite good
+- 消费者的效用值基于花在leisure上的时间和能买多少good
+
+<img src="assets/post_pics/Snipaste_2020-06-08_16-38-14.png">
+
+- 斜率都是-w，可以观察到的趋势是当工资上升（从5-15），number of hours of leisure fall；但是观察得到，当工资持续上涨，那么花在leisure上的时间会变多
+
+#### The Backward-bending supply of labor
+
+<img src="assets/post_pics/Snipaste_2020-06-08_16-50-48.png">
+
+- **An increase in the wage rate reduces the amount of work required to buy a unit of the composite good, and this leads to both a substitution effect and an income ef- fect. **
+
+- 可以这么理解：leisure和labor完全是对立的关系，而labor和composite good却不是对立的关系，所以可以看出leisure和composite good是对立的关系。那么为什么替代效应和收入效用会带来影响呢？在这个场景里面，出了wage rate其他的东西都不会变化，那么当wage上升，就会有一些东西在变化
+	- 在这里的替代效应：当wage上升的时候，bl必定向y正方向移动，也就是说此时能够购买的composite商品就变多了（这个的效果和我们把composite good的价格降低是一样的效果），那么这个时候对于composite good来说，其替代效应是正的，因为为了维持原有的效用，他可以买更多的composite good，而这个正替代效应，将会：induce the consumer to substitute more of the composite good for leisure，这和前面的是一样的
+	- 但是同时，income effect收入效应会导致另外一种情况，那么就是因为leisure是normal good，工资上升自然意味着收入上升，所以人们会想要扩大自己的leisure的时间
+	- 两个方向完全不一样的效用导致了这种恶心的曲线
+
+<img src="assets/post_pics/Snipaste_2020-06-08_17-09-22.png">
+
+- In sum, the labor supply curve slopes upward over the region where the substitu- tion effect associated with a wage increase outweighs the income effect, but bends backward over the region where the income effect outweighs the substitution effect.
+
+<img src="assets/post_pics/Snipaste_2020-06-08_17-14-15.png">

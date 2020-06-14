@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+	<title>Mlp · Tao Ma</title>
+
+
+<meta name="description" content="MLP(Multi-layer Perceptron)">
+
+<link rel="icon" href="http://localhost:4000/assets/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
+<link rel="stylesheet" href="http://localhost:4000/assets/core.css">
+<link rel="canonical" href="http://localhost:4000/mlp">
+<link rel="alternate" type="application/atom+xml" title="Tao Ma" href="http://localhost:4000/feed.xml" />
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<aside class="logo">
+
+	
+
+	<a href="http://localhost:4000/">
+		<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">
+	</a>
+	<span class="logo-prompt code">Back to Index</span>
+</aside>
+<br />
+<section>
+		And hello to u too:) By clicking the above icon, u can come back to index any time, or u can eneter my personal info page. 
+		<br />
+		<em><strong>The picture is randomly generated every time u click the icon, I have nothing to do with any of the content of the pictures(ﾟ∀ﾟ)</strong></em>
+.
+</section>
+
+
+		<div id="content">
+			<article>
+
+	<div class="center">
+		<h1 class="title">Mlp</h1>
+		<time class="code">June 9, 2020</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<h3 id="mlpmulti-layer-perceptron">MLP(Multi-layer Perceptron)</h3>
+
+<ul>
+  <li>什么是凸优化（covex optimization）：
+    <ul>
+      <li>凸优化指的是损失函数是凸函数的优化（是吗？？）凸函数指的是这个函数的local maximum就是其global maximum，所以凸优化对一开始的条件不是很在乎，反正不管从哪个点开始，凸优化都可以沿着梯度的方向找到全局最优</li>
+      <li>但是随机梯度下降，处理损失函数往往就不是凸函数，therefore the initial parameters is actually quite important to neural network. It has direct relationship to the performance of the gradient based algorithm.</li>
+    </ul>
+  </li>
+  <li>我乱赌一下cost function不会考，但是大体了解一下对于什么样子的数据，并且还有关于交叉熵的推导，可以这么说，几乎所有的损失函数，都是用最大似然角度推导而来的，所以最大似然是一个原则，而不是一个损失函数：
+    <ul>
+      <li><a href="https://blog.csdn.net/zdy0_2004/article/details/56843022">关于损失函数的选择</a></li>
+      <li><a href="https://zhuanlan.zhihu.com/p/97698386">关于损失函数的选择</a></li>
+      <li><a href="https://zhuanlan.zhihu.com/p/38241764">关于交叉熵及其推导过程</a></li>
+    </ul>
+  </li>
+  <li>Hidden Unit:
+    <ul>
+      <li>线性整流函数在0的时候不可以导，not differentiable，那么为什么他依然可以作为hidden unit的激活函数呢？
+        <ul>
+          <li>ReLU is differentiable at all the point except 0. the left derivative at z = 0 is 0 and the right derivative is 1. This may seem like g is not eligible for use in gradient based optimization algorithm. But in practice, gradient descent still performs well enough for these models to be used for machine learning tasks. This is in part because neural network training algorithms do not usually arrive at a local minimum of the cost function. Hence it is acceptable for the minima of the cost function to correspond to points with undefined gradient.(一般达不到)</li>
+          <li>在实际的应用中，可以通过别的办法来保护这个算法，另其在0的时候也能返还一个值，不至于造成error</li>
+          <li><a href="https://blog.vlitter.top/post/why-can-we-use-non-differentiable-relu-in-gradient-descent/">读完这个就稳了</a></li>
+        </ul>
+      </li>
+      <li>relu的拓展
+        <ul>
+          <li>absolute value rectification</li>
+          <li>leaky relu</li>
+          <li>parametric relu/PRelu</li>
+        </ul>
+      </li>
+      <li>softmax函数和sigmoid函数的区别：都可以用作输出函数</li>
+    </ul>
+  </li>
+  <li>什么是universal approximation properties and depth</li>
+  <li>什么是雅可比矩阵和hessian矩阵</li>
+  <li>bp算法在计算机中是怎么实现的：dp！！！</li>
+</ul>
+
+
+
+</article>
+
+<div class="page-navigation code">
+	
+		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="http://localhost:4000/dnn" title="PREV: Dnn">&gt;&gt;</a>
+  
+</div>
+
+<!-- Link Gitalk 的支持文件  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    // gitalk的主要参数
+        clientID: 'f075f01270dae871aa15',
+        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
+        repo: 'michaeltaoma.github.io',
+        owner: 'michaeltaoma',
+        admin: ['michaeltaoma'],
+        id: md5(location.pathname),
+        
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
+
+		</div>
+
+		<div class="footer">
+  <span class="block">&copy; 2020 Tao Ma</span>
+  <span class="block"><small>&lt;/&gt; Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/heiswayi/the-plain">The Plain theme</a>.</small></span>
+</div>
+
+
+	</body>
+
+</html>

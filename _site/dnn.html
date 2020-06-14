@@ -10,7 +10,7 @@
 	<title>Dnn · Tao Ma</title>
 
 
-<meta name="description" content="Deep Feedforward Networks  Deep feedforward networks, feedforward neural networks, Multilayer perceptrons其实都是一个东西。目的都是学的一个方程 \( f* \)比如可以用来学得一个把数据x映射到类别y的分类器...">
+<meta name="description" content="第一章">
 
 <link rel="icon" href="http://localhost:4000/assets/favicon.png">
 <link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
@@ -54,7 +54,64 @@
 
 	<div class="divider"></div>
 
-	<h3 id="deep-feedforward-networks">Deep Feedforward Networks</h3>
+	<h3 id="第一章">第一章</h3>
+
+<ul>
+  <li><strong>Representation Learning</strong>: Use machine to discover not only the mapping from representation to output but also the representation itself.（所以可以看出表示学习是机器学习的一个支线，它不仅学习输入到输出的关系，他还学习如何表示一个输入）</li>
+  <li><strong>Autoencoder</strong>:
+    <ul>
+      <li>encoder: converts the input data into a different representation</li>
+      <li>decoder: converts the new representation back to the original format</li>
+    </ul>
+  </li>
+  <li>所以深度网络中的隐藏层可以被看作是负责特征提取的</li>
+  <li>Two main ways of measuring the depth:
+    <ul>
+      <li>The first view is based on the number of sequential instructions that must be executed to evaluate the architecture</li>
+      <li>depth of the graph describing how concepts are related to each other</li>
+    </ul>
+  </li>
+  <li>先留坑历史学习</li>
+</ul>
+
+<h3 id="应用数学与机器学习基础">应用数学与机器学习基础</h3>
+
+<h4 id="线性代数">线性代数</h4>
+<ul>
+  <li><strong>标量scalar</strong>：一个标量就是一个单独的数，它不同于线性代数中研究的其他 大部分对象(通常是多个数的数组)。我们用斜体表示标量。标量通常被赋予小写的变量名称。当我们介绍标量时，会明确它们是哪种类型的数。比如，在定义实数标量时，我们可能会说 ‘‘令 s ∈ R 表示一条线的斜率’’;在定义自然数标量时，我们可能会说 ‘‘令 n ∈ N 表示元素的数目’’。</li>
+  <li><strong>向量vector</strong>：A vector is an array of numbers。一个向量是一列数。这些数是有序排列的。通过次序中的索 引，我们可以确定每个单独的数。通常我们赋予向量粗体的小写变量名称，比 如 x。向量中的元素可以通过带脚标的斜体表示。向量 x 的第一个元素是 x1，第二个元素是 x2，等等。所以在这里的向量特指的是一个[x1, x2, x3…, xn]这样的一个东西，所谓的“多维向量”其实都是张量。标准的向量都是列向量</li>
+  <li><strong>矩阵matrix</strong>：矩阵特指一个二维数组，一个元素被两个索引而确定，这里的矩阵特指的是像2*2的矩阵</li>
+  <li><strong>张量</strong>：超过二维的数组。就是各种各样奇形怪状的矩阵都用张量来表示比如（2*2*2）这就是一个三维的张量，就像是个立方体的一样</li>
+  <li>有时，我们通过将向量元素作为行矩阵写在文本行中，然后使用转置操作将其变为标准的列向量</li>
+  <li>在机器学习中，<strong>允许矩阵和向量相加</strong>，矩阵和向量相加的操作就像\( C = A_{i, j} + b_{j} \)，这个的意义是向量b和矩阵A的每一行（j）相加</li>
+  <li>这个简写方法使我们无需在加法操作前定义一个将向量 b 复制 到每一行而生成的矩阵。这种隐式地复制向量 b 到很多位置的方式，被称为 广播(broadcasting)。</li>
+  <li>矩阵和向量相乘：\( C_{i, j} = \sum_{k} A_{i, k}B_{k, j} \)
+    <ul>
+      <li>A(B + C) = AB + AC</li>
+      <li>A(BC) = (AB)C</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="assets/post_pics/Snipaste_2020-05-31_22-23-09.png" /></p>
+
+<ul>
+  <li>单位矩阵(Identity Matrix)：比如说I_n，那他是个n*n的矩阵且在他的对角线上全都是1，其他位置全是0</li>
+  <li>A的矩阵逆：\( A\times A^{-1} = I_{n} \)</li>
+  <li>并且通过证明可得：</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+	& Ax = b \\
+	& x = A^{-1}b
+\end{aligned} %]]></script>
+
+<ul>
+  <li></li>
+</ul>
+
+<h3 id="deep-feedforward-networks">Deep Feedforward Networks</h3>
 <ul>
   <li>Deep feedforward networks, feedforward neural networks, Multilayer perceptrons其实都是一个东西。目的都是学的一个方程 \( f* \)比如可以用来学得一个把数据x映射到类别y的分类器。</li>
   <li><em>A feedforward network defines a mapping \( y = f(x;\theta) \) and learns the value of the parameters \( \theta \) that result in the best function approximation</em></li>
@@ -165,29 +222,11 @@
 
 <h4 id="621-cost-function">6.2.1 Cost function</h4>
 <ul>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>Cost function一般是这样定义的：In most cases, our parametric model deﬁnes a distribution \( p(y</td>
-          <td>x;\theta) \) and we simply use the principle of maximum likelihood</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
+  <li>Cost function一般是这样定义的：In most cases, our parametric model deﬁnes a distribution \( p(y | x;\theta) \) and we simply use the principle of maximum likelihood</li>
   <li>对数似然函数的代价函数的基本过程：想办法定义概率分布函数，取这个概率分布函数的log然后找最佳参数匹配</li>
   <li>使用最大似然法则提取出来的cost function符合这个原理：
     <ul>
-      <li>
-        <table>
-          <tbody>
-            <tr>
-              <td>机器学习可以看作是给定数据x，我们要预测y，假设y服从某一种分布，那么机器学习就是想要学得这个分布的具体的参数，假设已知label y服从某一概率分布，通过最大似然函数找出令P(y</td>
-              <td>参数)最大的参数值来确定概率模型的参数，这样子就是用最大似然函数去求代价函数的基本意义</td>
-            </tr>
-          </tbody>
-        </table>
-      </li>
+      <li>机器学习可以看作是给定数据x，我们要预测y，假设y服从某一种分布，那么机器学习就是想要学得这个分布的具体的参数，假设已知label y服从某一概率分布，通过最大似然函数找出令P(y | 参数)最大的参数值来确定概率模型的参数，这样子就是用最大似然函数去求代价函数的基本意义</li>
       <li>Principle of maximum likelihood:
         <ul>
           <li>
@@ -204,9 +243,8 @@
   L(\theta|x_1, x_2) = f(x_1, x_2 | \theta) = \prod_{i = 1}^{2} f(x_i | \theta)
   \end{aligned}</script>
           </li>
-          <li>
-            <p>所以接下来的目的，就是找到令似然函数最大的theta值</p>
-          </li>
+          <li>所以接下来的目的，就是找到令似然函数最大的theta值</li>
+          <li>一般来说，就是要找到这个最大值，甚至可以直接求导</li>
         </ul>
       </li>
     </ul>
@@ -252,16 +290,7 @@ J(\theta) = -E_{x, y \sim \hat{P}_{data}} [Log p_{model}(y|x)]
 
 <h5 id="6212-learning-conditional-statistics">6.2.1.2 Learning Conditional Statistics</h5>
 <ul>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>Instead of learning a full probability distribution \( p(y</td>
-          <td>x;\theta) \), we often want to learn just one conditional statistic of y given x. 比如，我们可能只想知道我们训练出来的y的平均值</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
+  <li>Instead of learning a full probability distribution \( p(y |x;\theta) \), we often want to learn just one conditional statistic of y given x. 比如，我们可能只想知道我们训练出来的y的平均值</li>
   <li>这个东西就很牛逼，如果我们把神经网络理解成：神经网络可以从许许多多的函数集合中找到对应的函数（这些函数的集合是很泛的）。那么可以把成本函数看成是一个<strong>functional泛函数: A functional is a mapping from functions to real numbers.</strong>这个就很高级了，学习不再是调参，而是寻找函数，我们可以令损失函数的最低点为一个我们想要的函数。比如我们可以令损失函数的最低点落在一个把x映射到y的expected value的函数上。这种优化问题被称为：<strong>Calculus of variation</strong></li>
 </ul>
 
@@ -431,20 +460,14 @@ f(x) = ln(1 + e^{x})
 
     <ul>
       <li>
-        <table>
-          <tbody>
-            <tr>
-              <td>Absolute value rectification：固定 αi = −1 来得到 g(z) =</td>
-              <td>z</td>
-              <td>，它的意义：用于图像中的对象识别 (Jarrett et al., 2009a)，其中寻找在输入照明极性反转下不变的特征是有意义的。</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Absolute value rectification：固定 αi = −1 来得到 g(z) = |z|，它的意义：用于图像中的对象识别 (Jarrett et al., 2009a)，其中寻找在输入照明极性反转下不变的特征是有意义的。</p>
       </li>
       <li>
         <p>Leaky ReLU：ﬁxes αi to a small value like 0.01</p>
       </li>
-      <li>Parametric ReLU/PReLU：treats αi as a learnable parameter</li>
+      <li>
+        <p>Parametric ReLU/PReLU：treats αi as a learnable parameter</p>
+      </li>
     </ul>
   </li>
   <li>
@@ -678,6 +701,9 @@ f(x) = ln(1 + e^{x})
 
 <div class="page-navigation code">
 	
+    <a class="next" href="http://localhost:4000/mlp" title="NEXT: Mlp">&lt;&lt;</a>
+		<span> &middot; </span>
+  
 		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
   
 		<span> &middot; </span>
