@@ -2,6 +2,17 @@
   
     {
 
+      "title"    : "Company Fraud Analytic",
+      "url"      : "/company-fraud-analytic",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2020-06-15 00:00:00 +0800",
+	  "description" : ""
+
+    } ,
+  
+    {
+
       "title"    : "Mlp",
       "url"      : "/mlp",
       "category" : "",

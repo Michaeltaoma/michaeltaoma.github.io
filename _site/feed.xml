@@ -7,6 +7,34 @@
     
       
         <item>
+          <title>Company Fraud Analytic</title>
+          <description>&lt;h3 id=&quot;论文笔记&quot;&gt;论文笔记&lt;/h3&gt;
+
+&lt;h4 id=&quot;assessing-the-risk-of-management-fraud-through-neural-network-technology&quot;&gt;Assessing the Risk of Management Fraud Through Neural Network Technology&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Analytical Procedure（分析程序）：是指注册会计师通过研究不同财务数据之间以及财务数据与非财务数据之间的内在关系，对财务信息作出评价。分析程序是注册会计师在了解被审计单位及其环境时运用的重要程序之一
+    &lt;ul&gt;
+      &lt;li&gt;论文中的定义：consisting of evaluations of financial information made by a study of plausible relationships among both financial and non-financial data&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Expectation Gap: 审计期望差是指公众对审计的需求与公众对目前审计执业的认识之间存在的差距。
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://wiki.mbalib.com/wiki/%E5%AE%A1%E8%AE%A1%E6%9C%9F%E6%9C%9B%E5%B7%AE&quot;&gt;这里面讲的很详细&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+          <pubDate>2020-06-15T00:00:00+08:00</pubDate>
+          <link>http://localhost:4000/company-fraud-analytic</link>
+          <guid isPermaLink="true">http://localhost:4000/company-fraud-analytic</guid>
+        </item>
+      
+    
+      
+        <item>
           <title>Mlp</title>
           <description>&lt;h3 id=&quot;mlpmulti-layer-perceptron&quot;&gt;MLP(Multi-layer Perceptron)&lt;/h3&gt;
 
@@ -2902,7 +2930,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;**An increase in the wage rate reduces the amount of work required to buy a unit of the composite good, and this leads to both a substitution effect and an income ef- fect. **&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;An increase in the wage rate reduces the amount of work required to buy a unit of the composite good, and this leads to both a substitution effect and an income ef- fect.&lt;/strong&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;可以这么理解：leisure和labor完全是对立的关系，而labor和composite good却不是对立的关系，所以可以看出leisure和composite good是对立的关系。那么为什么替代效应和收入效用会带来影响呢？在这个场景里面，出了wage rate其他的东西都不会变化，那么当wage上升，就会有一些东西在变化&lt;/p&gt;
@@ -2921,6 +2949,278 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-08_17-14-15.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;chapter-15-risk-and-information&quot;&gt;Chapter 15: Risk and Information&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;About risk, imperfect information and how we can employ tools from microeconomics to analyze risk phenomena and decisions made in the face of risk&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;151-describing-risky-outcomes&quot;&gt;15.1: Describing Risky Outcomes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Probability Distribution:
+    &lt;ul&gt;
+      &lt;li&gt;Lottery: Any event for which the outcome is uncertain.(哇这个在讲你妈的废话啊。。)&lt;/li&gt;
+      &lt;li&gt;Probability: The likelihood that a particular outcome of a lottery will occur.&lt;/li&gt;
+      &lt;li&gt;Probability distribution: A depiction of all possible payoffs in a lottery and their associated probabilities.&lt;/li&gt;
+      &lt;li&gt;Subjective Probabilities: Probabilities that reflect subjective beliefs about risky events.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Expected Value: A measure of the average payoff that a lottery will generate.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+	\text{Expected Value} = &amp; \text{probability of A} \times \text{payoff iff A occurs} \\
+							&amp; \text{probability of B} \times \text{payoff iff B occurs} \\
+							&amp; \text{probability of C} \times \text{payoff iff C occurs} \\
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Variance: The sum of the probability-weighted squared deviations of the possible outcomes of the lottery. 这个值越高，风险越大&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-14_11-09-37.png&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-14_11-10-07.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Standard Deviation: The square root of the variance.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;152-evaluating-risky-outcomes&quot;&gt;15.2: Evaluating Risky Outcomes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;How we can use the concept of &lt;strong&gt;a utility function&lt;/strong&gt; to evaluate the benefits that decision maker would enjoy from alternatives with differing amounts of risk.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Expected Utility: The expected value of the utility levels that the decision maker receives from the payoffs in a lottery.(用不同的事件的概率和这些事件发生之后会带来的效用值分别相乘，再把这些值加起来)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Risk averse: A characteristic of a decision maker who prefers a sure thing to a lottery of equal expected value.(对于拥有同样的expected value值的lottery和确定的事物，这类人更倾向于确定的事物)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;With diminishing marginal utility, the decision maker is thus hurt more by the downside of a lottery than he or she is helped by the upside.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;定律: &lt;em&gt;If lotteries L and M have the same expected value, but lottery L has a lower variance than lottery M, a risk-averse decision maker will prefer L to M&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Risk Neutral: A characteristic of a decision maker who compares lotteries according to their expected value and is therefore indifferent between a sure thing and a lottery with the same expected value.
+    &lt;ul&gt;
+      &lt;li&gt;risk neutral有着linear utility function: \( U = a + bI \)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Thus, when the expected value equals the payoff of the sure thing (i.e., when EV=I ), the expected utility equals the utility of the sure thing (i.e., EU=U ).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Risk Loving: A characteristic of a decision maker who prefers a lottery to a sure thing that is equal to the expected value of the lottery.
+    &lt;ul&gt;
+      &lt;li&gt;也就是说如果是risk loving的话，他的效用函数将会是concave up的&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;大致的总结一下：
+    &lt;ul&gt;
+      &lt;li&gt;效用函数concave up：risk averse，直接找eu更大的那个&lt;/li&gt;
+      &lt;li&gt;效用函数是linear：risk neutral，证明两者的utility相等，更准确地说是他们之间的utility和eu是一样的&lt;/li&gt;
+      &lt;li&gt;效用函数concave down：risk loving，找eu更大的那个&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;A risk-averse decision maker might prefer a gam- ble to a sure thing if the expected payoff from the gamble is sufficiently larger than the payoff from the sure thing.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;153-bearing-and-eliminating-risk&quot;&gt;15.3 Bearing and eliminating risk&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Risk Premium&lt;/strong&gt;: The necessary difference between the expected value of a lottery and the payoff of a sure thing to make the decision maker indifferent between the lottery and the sure thing.(后面这个payoff of a sure thing其实就代表了cv（certainty equivalent）)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;如果用P代表I1的概率和（1-P）代表I2的概率的话，RP（risk premium）可以用以下恒等式得出\( pU(I_{1}) + (1-p)U(I_{2}) = U(pI_{1} + (1-p)I_{2}-RP) \)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;An important determinant of the risk premium is the variance of the lottery. If two lotteries have the same expected value but different variances, the lottery with the bigger variance will entail a higher risk premium. This implies that the reward a risk- averse individual requires for bearing risk becomes larger as the risk increases.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;when-would-a-risk-averse-person-choose-to-eliminate-risk-the-demand-for-insurance&quot;&gt;When would a risk-averse person choose to eliminate risk? The demand for insurance&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Fairly priced insurance policy&lt;/strong&gt;: An insurance policy in which the &lt;em&gt;insurance premium&lt;/em&gt; is equal to the expected value of the promised insurance payment.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;**Insurance Premium: **很简单的例子是如果你愿意每年花费500刀去买保险，这个保险可以为你付最高10，000刀的赔付，你买保险用的500刀既是你的insurance premium，如果这个保险包的是车辆的维修，然后他是个faired priced insurance（上面那个），那么说明车辆维修的ev是500刀&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-16_20-01-45.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;asymmetric-information-moral-hazard-and-adverse-selection&quot;&gt;Asymmetric Information: Moral Hazard and Adverse Selection&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Asymmetric Information: A situation in which one party knows more about its own actions or characteristics than another party.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;在保险市场中，信息不对等一般发生在：
+        &lt;ol&gt;
+          &lt;li&gt;Moral Hazard: which arises when the insured party can take hidden actions that affect the likelihood of an accident
+            &lt;ul&gt;
+              &lt;li&gt;an insured party exercises less care than he or she would in the absence of insurance&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;Adverse Selection: arises when a party has hidden information about its risk of an accident or loss.
+            &lt;ul&gt;
+              &lt;li&gt;A phenomenon whereby an increase in the insurance premium increases the overall riskiness of the pool of individuals who buy an insurance policy.&lt;/li&gt;
+              &lt;li&gt;这个现象强调的是：保险公司有时候很难清楚的为不同的人的不同的风险程度给出一个合适的保险价位&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;pay-for-performance-as-a-response-to-maral-hazard-and-adverse-selection&quot;&gt;Pay for performance as a response to maral hazard and adverse selection&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;上面的概念同样适用于求职市场：求职者水平参差不齐，雇主必须避免以上类似的情况发生而去制定相应的应对政策&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Pay for performance&lt;/strong&gt;：Most firms offer employees rewards for better performance&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chanpter-6-input-and-production-functions&quot;&gt;Chanpter 6: Input and Production Functions&lt;/h2&gt;
+
+&lt;h3 id=&quot;61-introduction-to-inputs-and-production-functions&quot;&gt;6.1 Introduction to inputs and production functions&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;inputs: Resources, such as labor, capital equipment, and raw materials, that are combined to produce finished goods.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Factors of production: Resources that are used to produce a good.&lt;/li&gt;
+  &lt;li&gt;Output: The amount of a good or service produced by a firm.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Production function: A mathematical represen- tation that shows the maximum quantity of output a firm can produce given the quantities of inputs that it might employ. \( Q=f(L, K) \),L是labor数量，k是capital数量&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-20_15-15-32.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Labor requirenments function(inverse of production function): A function that indicates the minimum amount of labor required to produce a given amount of output.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;62-production-functions-with-a-single-input&quot;&gt;6.2 Production Functions With A Single Input&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Simple case in which the quantity of out- put depends on a single input, labor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-20_15-20-43.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Total Production Function: A production function. A total product function with a single input shows how total output depends on the level of the input.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Increasing marginal returns to labor: The region along the total prod- uct function where output rises with additional labor at an increasing rate.
+    &lt;ul&gt;
+      &lt;li&gt;这个增加的原因之一是specialization，员工人数上升，员工分类干活（specialization）了，干的越来越好&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dimishing marginal returns to labor: The region along the total prod- uct function in which output rises with additional labor but at a decreasing rate.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Dimishing total returns to labor: The region along the total product function where output decreases with additional labor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-20_15-30-10.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Average Product of labour(AP): 很简单直接算均值，The average amount of output per unit of labor.直接用当下的Q/L就好了
+    &lt;ul&gt;
+      &lt;li&gt;The average product of labor at any arbitrary quantity L0 corresponds to the slope of a ray drawn from the origin to the point along the total product func- tion corresponding to L0&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Marginal Product of labor: The rate at which total output changes as the quantity of labor the firm uses is changed. \( \frac{\Delta Q}{\Delta L} \)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Law of diminishing marginal returns: Principle that as the usage of one input increases, the quantities of other inputs being held fixed, a point will be reached beyond which the marginal product of the variable input will decrease.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;一些显而易见的关系：
+    &lt;ul&gt;
+      &lt;li&gt;当MP&amp;gt;AP时：AP上升&lt;/li&gt;
+      &lt;li&gt;当MP=AP时：AP最大&lt;/li&gt;
+      &lt;li&gt;当MP&amp;lt;AP时：AP下降&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;production-functions-with-more-than-one-input&quot;&gt;Production Functions with more than one input&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Total Product Hill: A three-dimensional graph of a production function.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-20_15-43-16.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;把某个值固定在某个位置，就可以找到另一个变量的single value&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;isoquants&quot;&gt;Isoquants&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Isoquants&lt;/strong&gt;: A curve that shows all of the combina- tions of labor and capital that can produce a given level of output.
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;把z轴固定起来 那么这一圈线上的所有组合代表了所有能够有这个特定输出的输入&lt;/p&gt;
+
+        &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-20_15-47-47.png&quot; /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;这就和indiffernt curve的数学意义是一样的了&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The region of upward-sloping or backward-bending isoquants. In the uneconomic region, at least one input has a negative marginal product.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Economic region of production: The region where the isoquants are downward sloping.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-20_15-54-49.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一个想要最小化自己生产成本的公司绝不在uneconomic的区域生产&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;marginal-rate-of-technical-substitution&quot;&gt;Marginal Rate of Technical Substitution&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Marginal Rate of Technical Substitution&lt;/strong&gt;: \( MRTS_{L,K} \) measures how steep an isoquant is.
+    &lt;ul&gt;
+      &lt;li&gt;The rate at which the quantity of capital can be decreased for every one-unit increase in the quantity of labor, holding the quantity of output constant, or&lt;/li&gt;
+      &lt;li&gt;The rate at which the quantity of capital must be increased for every one-unit decrease in the quantity of labor, holding the quantity of output constant.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The negative of the slope of the tangent line is the MRTSL,K at that point.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Diminishing Marginal Rate of Technical Substitution: A feature of a production function in which the marginal rate of technical substitution of labor for capital diminishes as the quantity of labor increases along an isoquant.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果是有这个性质的话：说明是convex的！！！！！&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;\( \frac{MP_{L}}{MP_{K}} = MRTS_{L,K} \)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;64-substitutability-among-inputs&quot;&gt;6.4 Substitutability among Inputs&lt;/h3&gt;
 </description>
           <pubDate>2020-05-11T00:00:00+08:00</pubDate>
           <link>http://localhost:4000/economics-note</link>
@@ -4377,6 +4677,172 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
 &lt;img src=&quot;assets/post_pics/2560px-Ramp_function.svg.png&quot; /&gt;
 显然，施加了ReLU激活函数的神经元阈值为0，那么如果我们在训练的时候发现，0并不是一个最好的阈值，1才是一个最好的阈值，那该怎么办呢？当这种情况发生，神经网络会自适应调整bias的值，把bias的值变成-1，&lt;strong&gt;这样通过改变bias的大小的同时调整了函数的阈值，使得nn的适应性更加强。&lt;/strong&gt;
 bias偏差值和学习率一样，初始化的时候随机生成，我们训练神经网络，就是通过多次迭代，找出现有训练集下的能够最大化模型预测精准度的参数的值。在计算加权和的时候，为了确保bias能够随着权重在每一次的迭代中被调整到，神经网络都是把bias当作是一个不存在的输入\(x_0(= 1) \)的权重，也就是说，\( \sum_{i=0}w_{i}*x_{i} \)是等价于\(\sum_{i = 1}w_{i}*x_{i} + bias \).&lt;/p&gt;
+
+&lt;h2 id=&quot;bias-in-machine-learning-models&quot;&gt;Bias in Machine Learning Models&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;这里的偏见指的真的是偏见，就比如脸部识别算法对于女性的脸庞表现没有那么好, 我们的目标是develop the benefits of machine learning for everyone，所以用数据代表类别is a first step in avoiding bias.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;interactive bias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;selection bias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;latent bias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;u href=&quot;https://developers.googleblog.com/2018/04/text-embedding-models-contain-bias.html&quot;&gt;这里有更加详细的解释&lt;/u&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Human data encodes human biases by default.&lt;/strong&gt;&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;简单的打个比方，fashion mnist中有许多的照片，但是如果encode data的人坚信只有高跟鞋才算鞋子，那么会在数据集中囊括许多的高跟鞋的照片，从而导致偏见从人类身上转移到了机器身上&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;callbacks&quot;&gt;Callbacks&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在tensorflow里面可以定义一个回调机制，他的工作原理是：可以实现在每次迭代一轮之后，自动调用指定的函数，例如on_epoch_end可以帮助我们控制训练终止的时机，其实调用函数并不一定每次都要在一次迭代训练之后，而可以在六个不同的时间点，下面第二篇文章详细介绍了&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如何实现的？其实自己也实现了一次，就懒得记了，希望csdn用不倒下，这篇博客讲的非常详细&lt;a href=&quot;https://blog.csdn.net/STILLxjy/article/details/98756775&quot;&gt;如何重写on_epoch_end&lt;/a&gt;, 这篇文章是最最最玩具车的介绍&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;但这篇文章讲了些许干货&lt;a href=&quot;https://www.cnblogs.com/weiyinfu/p/9874195.html&quot;&gt;干活！！&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;cnn-convolutional-neural-network&quot;&gt;CNN: Convolutional Neural Network&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;condense the image down to the important features that distinguish what makes it a shoe, or a handbag, or a shirt&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;主要的大意就是在会有一个filter，这个filter上面上面存在一些值，姑且当他们是“权重”，这些权重可以作用于某个pixel值之上，通过和他以及他的neighbour相乘得到一个新的pixel值，如下图所示&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;By passing filters over an image to reduce the amount of information, they then allowed the neural network to effectively extract features that can distinguish one class of image from another.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-16_14-55-36.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;这样做的目的是：加重特征(emphasize feature)&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/pixel.png&quot; /&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;上面没有讲清楚，filtering的意义主要是特征加重，很少有特征减少，而下面的pooling的意义才是特征减少，摒弃掉某些特征&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Pooling&lt;/strong&gt;: Compress image, 给定一个区域，选取这个区域中pixel值最大的点，输出这个点，就像这样，注意最后对应的位置也是一样的&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;You also saw how pooling compresses the information to make it more manageable. This is a really nice way to improve our image recognition performance.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-16_15-01-24.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用filter会减少dimension的原因是因为，如果你这个filter是三乘三的话，那么你这张图片的最顶端，是没有neighbour的，那么也就是说他们的输出值是无法被定义的，所以只要没有足够用于计算的neighbour，那这个就是pixel的点就是无法被定义的，所以会被reduce掉&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;所谓的conv number指的是总共生成了多少个filter，如果有64个，说明有64个filter生成，且这个卷积层结束后会有64个图片&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如何理解卷积神经网络中的channel？：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;channel可以直观的想像成“叠加的二维图片“，每一个通道，是数字图像中存储不同类型信息的灰度图像，一个图像中最多可以有数十个通道，注意，单一的通道实际上只代表着一个灰度图像，所以如果一张图片只有一个通道的话，那么说明这张图片就是一张灰色的图片；平时的照片是彩色的，说明这是三个通道的照片，分别是RGB&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;卷积神经网络中的chaneel又分别有三个：&lt;/p&gt;
+        &lt;ol&gt;
+          &lt;li&gt;输入的图片的channel，这个由图片自身所决定&lt;/li&gt;
+          &lt;li&gt;卷积操作完成后输出的out_channels，这个由卷积核的数量决定，比如卷积核有64个，输出的图片就有64个channel，这时候就记住他是channel就好，不要尝试直观的记忆，且这个会作为下一次卷积时的卷积核的in_channel&lt;/li&gt;
+          &lt;li&gt;卷积核中的in_channel，是上一次卷积的out_channel，这个in_channel决定了每个卷积核会作用于多少个pixel上面&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;写代码的时候要注意的点就是卷积和pool只是提取特征，最后还是要丢到全连接层里面去的，如果原来的图片没有specify channel的话，必须要给他specify上&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;using-real-world-images&quot;&gt;Using Real-World images&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;tensflow的一个帮忙label照片的东西&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;One feature of the image generator is that you can point it at a directory and then the sub-directories of that will automatically generate labels for you.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-17_20-32-22.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;course-2-convolutional-neural-networks-in-tensorflow&quot;&gt;Course 2: Convolutional Neural Networks in Tensorflow&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Image augmentation and data augmentation is one of the most widely used tools in deep learning to increase your dataset size and make your neural networks perform better&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;这个解决的是数据集不够的问题，比如如果猫猫一直在图片的上端，那么如果是猫猫在图片的下端就很难识别出来&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;所以可以用tf的库，这个imagegenerator可以令图片的改动不直接发生在drive上，keras的这个东西不会直接修改图片，而是在训练中做preprocessing&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;augmentation指的其实就是数据增强，比如我们可以翻转图片啊，旋转图片之类的&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;除了要增加训练集的randomness，还要增加测试集的randomness&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;所以训练时间变长的原因是因为image preprocessing takes cycle&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;transfer-learning&quot;&gt;Transfer Learning&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Download maybe an open-source model that someone else has already trained on a huge dataset maybe for weeks and use those parameters as a starting point to then train your model just a little bit more on perhaps a smaller dataset that you have for a given task, so it is called &lt;em&gt;transfer learning&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;用别人已经训练好的模型，自己再加以调整和使用&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;主要还是因为自己训练的话，训练集太小了&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;我们在调整别人的模型的时候，可以选择把别人的一些模型适当给锁住。 比如现在的目的是要实现的是图像识别，那么别人训练好的卷积层的特征一般都是universal的，我们可以直接用，在自己训练的时候，把这些训练好的卷积层给锁住，然后只训练dense layer的权值&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Droout:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;they remove a random number of neurons in your neural network.&lt;/li&gt;
+      &lt;li&gt;Two reason why it works well:
+        &lt;ul&gt;
+          &lt;li&gt;The first is that neighboring neurons often end up with similar weights, which can lead to overfitting, so dropping some out at random can remove this.&lt;/li&gt;
+          &lt;li&gt;The second is that often a neuron can over-weigh the input from a neuron in the previous layer, and can over specialize as a result.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 </description>
           <pubDate>2020-05-07T00:00:00+08:00</pubDate>
           <link>http://localhost:4000/What-is-bias</link>

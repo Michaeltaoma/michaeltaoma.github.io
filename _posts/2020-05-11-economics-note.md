@@ -838,7 +838,7 @@ $$
 
 <img src="assets/post_pics/Snipaste_2020-06-08_16-50-48.png">
 
-- **An increase in the wage rate reduces the amount of work required to buy a unit of the composite good, and this leads to both a substitution effect and an income ef- fect. **
+- **An increase in the wage rate reduces the amount of work required to buy a unit of the composite good, and this leads to both a substitution effect and an income ef- fect.**
 
 - 可以这么理解：leisure和labor完全是对立的关系，而labor和composite good却不是对立的关系，所以可以看出leisure和composite good是对立的关系。那么为什么替代效应和收入效用会带来影响呢？在这个场景里面，出了wage rate其他的东西都不会变化，那么当wage上升，就会有一些东西在变化
 	- 在这里的替代效应：当wage上升的时候，bl必定向y正方向移动，也就是说此时能够购买的composite商品就变多了（这个的效果和我们把composite good的价格降低是一样的效果），那么这个时候对于composite good来说，其替代效应是正的，因为为了维持原有的效用，他可以买更多的composite good，而这个正替代效应，将会：induce the consumer to substitute more of the composite good for leisure，这和前面的是一样的
@@ -850,3 +850,177 @@ $$
 - In sum, the labor supply curve slopes upward over the region where the substitu- tion effect associated with a wage increase outweighs the income effect, but bends backward over the region where the income effect outweighs the substitution effect.
 
 <img src="assets/post_pics/Snipaste_2020-06-08_17-14-15.png">
+
+## Chapter 15: Risk and Information
+
+- About risk, imperfect information and how we can employ tools from microeconomics to analyze risk phenomena and decisions made in the face of risk
+
+### 15.1: Describing Risky Outcomes
+
+- Probability Distribution:
+	- Lottery: Any event for which the outcome is uncertain.(哇这个在讲你妈的废话啊。。)
+	- Probability: The likelihood that a particular outcome of a lottery will occur.
+	- Probability distribution: A depiction of all possible payoffs in a lottery and their associated probabilities.
+	- Subjective Probabilities: Probabilities that reflect subjective beliefs about risky events.
+
+- Expected Value: A measure of the average payoff that a lottery will generate.
+
+$$
+\begin{aligned}
+	\text{Expected Value} = & \text{probability of A} \times \text{payoff iff A occurs} \\
+							& \text{probability of B} \times \text{payoff iff B occurs} \\
+							& \text{probability of C} \times \text{payoff iff C occurs} \\
+\end{aligned}
+$$
+
+- Variance: The sum of the probability-weighted squared deviations of the possible outcomes of the lottery. 这个值越高，风险越大
+
+	<img src="assets/post_pics/Snipaste_2020-06-14_11-09-37.png">
+
+	<img src="assets/post_pics/Snipaste_2020-06-14_11-10-07.png">
+
+- Standard Deviation: The square root of the variance.
+
+### 15.2: Evaluating Risky Outcomes
+
+- How we can use the concept of **a utility function** to evaluate the benefits that decision maker would enjoy from alternatives with differing amounts of risk.
+
+- Expected Utility: The expected value of the utility levels that the decision maker receives from the payoffs in a lottery.(用不同的事件的概率和这些事件发生之后会带来的效用值分别相乘，再把这些值加起来)
+
+- Risk averse: A characteristic of a decision maker who prefers a sure thing to a lottery of equal expected value.(对于拥有同样的expected value值的lottery和确定的事物，这类人更倾向于确定的事物)
+
+- With diminishing marginal utility, the decision maker is thus hurt more by the downside of a lottery than he or she is helped by the upside. 
+
+- 定律: *If lotteries L and M have the same expected value, but lottery L has a lower variance than lottery M, a risk-averse decision maker will prefer L to M*
+
+- Risk Neutral: A characteristic of a decision maker who compares lotteries according to their expected value and is therefore indifferent between a sure thing and a lottery with the same expected value.
+	- risk neutral有着linear utility function: \\( U = a + bI \\)
+
+- Thus, when the expected value equals the payoff of the sure thing (i.e., when EV=I ), the expected utility equals the utility of the sure thing (i.e., EU=U ).
+
+- Risk Loving: A characteristic of a decision maker who prefers a lottery to a sure thing that is equal to the expected value of the lottery.
+	- 也就是说如果是risk loving的话，他的效用函数将会是concave up的
+
+- 大致的总结一下：
+	- 效用函数concave up：risk averse，直接找eu更大的那个
+	- 效用函数是linear：risk neutral，证明两者的utility相等，更准确地说是他们之间的utility和eu是一样的
+	- 效用函数concave down：risk loving，找eu更大的那个
+
+- A risk-averse decision maker might prefer a gam- ble to a sure thing if the expected payoff from the gamble is sufficiently larger than the payoff from the sure thing. 
+
+### 15.3 Bearing and eliminating risk
+
+- **Risk Premium**: The necessary difference between the expected value of a lottery and the payoff of a sure thing to make the decision maker indifferent between the lottery and the sure thing.(后面这个payoff of a sure thing其实就代表了cv（certainty equivalent）)
+
+	- 如果用P代表I1的概率和（1-P）代表I2的概率的话，RP（risk premium）可以用以下恒等式得出\\( pU(I_{1}) + (1-p)U(I_{2}) = U(pI_{1} + (1-p)I_{2}-RP) \\)
+
+- An important determinant of the risk premium is the variance of the lottery. If two lotteries have the same expected value but different variances, the lottery with the bigger variance will entail a higher risk premium. This implies that the reward a risk- averse individual requires for bearing risk becomes larger as the risk increases.
+
+#### When would a risk-averse person choose to eliminate risk? The demand for insurance
+
+- **Fairly priced insurance policy**: An insurance policy in which the *insurance premium* is equal to the expected value of the promised insurance payment.
+
+- **Insurance Premium: **很简单的例子是如果你愿意每年花费500刀去买保险，这个保险可以为你付最高10，000刀的赔付，你买保险用的500刀既是你的insurance premium，如果这个保险包的是车辆的维修，然后他是个faired priced insurance（上面那个），那么说明车辆维修的ev是500刀
+
+	<img src="assets/post_pics/Snipaste_2020-06-16_20-01-45.png">
+
+#### Asymmetric Information: Moral Hazard and Adverse Selection
+
+- Asymmetric Information: A situation in which one party knows more about its own actions or characteristics than another party.
+
+	- 在保险市场中，信息不对等一般发生在：
+		1. Moral Hazard: which arises when the insured party can take hidden actions that affect the likelihood of an accident
+			- an insured party exercises less care than he or she would in the absence of insurance
+		2. Adverse Selection: arises when a party has hidden information about its risk of an accident or loss.
+			- A phenomenon whereby an increase in the insurance premium increases the overall riskiness of the pool of individuals who buy an insurance policy.
+			- 这个现象强调的是：保险公司有时候很难清楚的为不同的人的不同的风险程度给出一个合适的保险价位
+
+#### Pay for performance as a response to maral hazard and adverse selection
+
+- 上面的概念同样适用于求职市场：求职者水平参差不齐，雇主必须避免以上类似的情况发生而去制定相应的应对政策
+
+- **Pay for performance**：Most firms offer employees rewards for better performance
+
+## Chanpter 6: Input and Production Functions
+
+### 6.1 Introduction to inputs and production functions
+
+- inputs: Resources, such as labor, capital equipment, and raw materials, that are combined to produce finished goods.
+
+- Factors of production: Resources that are used to produce a good. 
+- Output: The amount of a good or service produced by a firm.
+- Production function: A mathematical represen- tation that shows the maximum quantity of output a firm can produce given the quantities of inputs that it might employ. \\( Q=f(L, K) \\),L是labor数量，k是capital数量
+	
+	<img src="assets/post_pics/Snipaste_2020-06-20_15-15-32.png">
+
+- Labor requirenments function(inverse of production function): A function that indicates the minimum amount of labor required to produce a given amount of output.
+
+### 6.2 Production Functions With A Single Input
+
+- Simple case in which the quantity of out- put depends on a single input, labor.
+
+<img src="assets/post_pics/Snipaste_2020-06-20_15-20-43.png">
+
+- Total Production Function: A production function. A total product function with a single input shows how total output depends on the level of the input.
+
+- Increasing marginal returns to labor: The region along the total prod- uct function where output rises with additional labor at an increasing rate.
+	- 这个增加的原因之一是specialization，员工人数上升，员工分类干活（specialization）了，干的越来越好
+
+- Dimishing marginal returns to labor: The region along the total prod- uct function in which output rises with additional labor but at a decreasing rate.
+
+- Dimishing total returns to labor: The region along the total product function where output decreases with additional labor.
+
+<img src="assets/post_pics/Snipaste_2020-06-20_15-30-10.png">
+
+- Average Product of labour(AP): 很简单直接算均值，The average amount of output per unit of labor.直接用当下的Q/L就好了
+	- The average product of labor at any arbitrary quantity L0 corresponds to the slope of a ray drawn from the origin to the point along the total product func- tion corresponding to L0
+
+- Marginal Product of labor: The rate at which total output changes as the quantity of labor the firm uses is changed. \\( \frac{\Delta Q}{\Delta L} \\)
+
+- Law of diminishing marginal returns: Principle that as the usage of one input increases, the quantities of other inputs being held fixed, a point will be reached beyond which the marginal product of the variable input will decrease.
+
+- 一些显而易见的关系：
+	- 当MP\>AP时：AP上升
+	- 当MP=AP时：AP最大
+	- 当MP\<AP时：AP下降
+
+### Production Functions with more than one input
+
+- Total Product Hill: A three-dimensional graph of a production function.
+
+<img src="assets/post_pics/Snipaste_2020-06-20_15-43-16.png">
+
+- 把某个值固定在某个位置，就可以找到另一个变量的single value
+
+#### Isoquants
+
+- **Isoquants**: A curve that shows all of the combina- tions of labor and capital that can produce a given level of output.
+	- 把z轴固定起来 那么这一圈线上的所有组合代表了所有能够有这个特定输出的输入
+		
+		<img src="assets/post_pics/Snipaste_2020-06-20_15-47-47.png">
+
+	-  这就和indiffernt curve的数学意义是一样的了
+
+- The region of upward-sloping or backward-bending isoquants. In the uneconomic region, at least one input has a negative marginal product.
+
+- Economic region of production: The region where the isoquants are downward sloping.
+
+<img src="assets/post_pics/Snipaste_2020-06-20_15-54-49.png">
+
+- 一个想要最小化自己生产成本的公司绝不在uneconomic的区域生产
+
+#### Marginal Rate of Technical Substitution
+
+- **Marginal Rate of Technical Substitution**: \\( MRTS_{L,K} \\) measures how steep an isoquant is. 
+	- The rate at which the quantity of capital can be decreased for every one-unit increase in the quantity of labor, holding the quantity of output constant, or
+	- The rate at which the quantity of capital must be increased for every one-unit decrease in the quantity of labor, holding the quantity of output constant.
+
+- The negative of the slope of the tangent line is the MRTSL,K at that point.
+
+- Diminishing Marginal Rate of Technical Substitution: A feature of a production function in which the marginal rate of technical substitution of labor for capital diminishes as the quantity of labor increases along an isoquant.
+
+- 如果是有这个性质的话：说明是convex的！！！！！
+
+- \\( \frac{MP_{L}}{MP_{K}} = MRTS_{L,K} \\)
+
+### 6.4 Substitutability among Inputs
