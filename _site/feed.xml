@@ -7,6 +7,190 @@
     
       
         <item>
+          <title>What is bias?</title>
+          <description>&lt;h2 id=&quot;what-is-bias&quot;&gt;What is bias?&lt;/h2&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/HetFihsXSys&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;但凡对于神经网络有过一定了解的人，就不会不知道bias。bias为分界线提供了一个灵活的变化。假设现在使用的激活函数是ReLU即整流线型激活函数，当加权和\( \sum_{i = 1}w_{i}*x_{i} + bias \)进入到达神经元时，这个函数的行为如下图所示
+&lt;img src=&quot;assets/post_pics/2560px-Ramp_function.svg.png&quot; /&gt;
+显然，施加了ReLU激活函数的神经元阈值为0，那么如果我们在训练的时候发现，0并不是一个最好的阈值，1才是一个最好的阈值，那该怎么办呢？当这种情况发生，神经网络会自适应调整bias的值，把bias的值变成-1，&lt;strong&gt;这样通过改变bias的大小的同时调整了函数的阈值，使得nn的适应性更加强。&lt;/strong&gt;
+bias偏差值和学习率一样，初始化的时候随机生成，我们训练神经网络，就是通过多次迭代，找出现有训练集下的能够最大化模型预测精准度的参数的值。在计算加权和的时候，为了确保bias能够随着权重在每一次的迭代中被调整到，神经网络都是把bias当作是一个不存在的输入\(x_0(= 1) \)的权重，也就是说，\( \sum_{i=0}w_{i}*x_{i} \)是等价于\(\sum_{i = 1}w_{i}*x_{i} + bias \).&lt;/p&gt;
+
+&lt;h2 id=&quot;bias-in-machine-learning-models&quot;&gt;Bias in Machine Learning Models&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;这里的偏见指的真的是偏见，就比如脸部识别算法对于女性的脸庞表现没有那么好, 我们的目标是develop the benefits of machine learning for everyone，所以用数据代表类别is a first step in avoiding bias.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;interactive bias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;selection bias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;latent bias&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;u href=&quot;https://developers.googleblog.com/2018/04/text-embedding-models-contain-bias.html&quot;&gt;这里有更加详细的解释&lt;/u&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Human data encodes human biases by default.&lt;/strong&gt;&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;简单的打个比方，fashion mnist中有许多的照片，但是如果encode data的人坚信只有高跟鞋才算鞋子，那么会在数据集中囊括许多的高跟鞋的照片，从而导致偏见从人类身上转移到了机器身上&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;callbacks&quot;&gt;Callbacks&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在tensorflow里面可以定义一个回调机制，他的工作原理是：可以实现在每次迭代一轮之后，自动调用指定的函数，例如on_epoch_end可以帮助我们控制训练终止的时机，其实调用函数并不一定每次都要在一次迭代训练之后，而可以在六个不同的时间点，下面第二篇文章详细介绍了&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如何实现的？其实自己也实现了一次，就懒得记了，希望csdn用不倒下，这篇博客讲的非常详细&lt;a href=&quot;https://blog.csdn.net/STILLxjy/article/details/98756775&quot;&gt;如何重写on_epoch_end&lt;/a&gt;, 这篇文章是最最最玩具车的介绍&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;但这篇文章讲了些许干货&lt;a href=&quot;https://www.cnblogs.com/weiyinfu/p/9874195.html&quot;&gt;干活！！&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;cnn-convolutional-neural-network&quot;&gt;CNN: Convolutional Neural Network&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;condense the image down to the important features that distinguish what makes it a shoe, or a handbag, or a shirt&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;主要的大意就是在会有一个filter，这个filter上面上面存在一些值，姑且当他们是“权重”，这些权重可以作用于某个pixel值之上，通过和他以及他的neighbour相乘得到一个新的pixel值，如下图所示&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;By passing filters over an image to reduce the amount of information, they then allowed the neural network to effectively extract features that can distinguish one class of image from another.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-16_14-55-36.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;这样做的目的是：加重特征(emphasize feature)&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/pixel.png&quot; /&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;上面没有讲清楚，filtering的意义主要是特征加重，很少有特征减少，而下面的pooling的意义才是特征减少，摒弃掉某些特征&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Pooling&lt;/strong&gt;: Compress image, 给定一个区域，选取这个区域中pixel值最大的点，输出这个点，就像这样，注意最后对应的位置也是一样的&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;You also saw how pooling compresses the information to make it more manageable. This is a really nice way to improve our image recognition performance.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-16_15-01-24.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用filter会减少dimension的原因是因为，如果你这个filter是三乘三的话，那么你这张图片的最顶端，是没有neighbour的，那么也就是说他们的输出值是无法被定义的，所以只要没有足够用于计算的neighbour，那这个就是pixel的点就是无法被定义的，所以会被reduce掉&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;所谓的conv number指的是总共生成了多少个filter，如果有64个，说明有64个filter生成，且这个卷积层结束后会有64个图片&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如何理解卷积神经网络中的channel？：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;channel可以直观的想像成“叠加的二维图片“，每一个通道，是数字图像中存储不同类型信息的灰度图像，一个图像中最多可以有数十个通道，注意，单一的通道实际上只代表着一个灰度图像，所以如果一张图片只有一个通道的话，那么说明这张图片就是一张灰色的图片；平时的照片是彩色的，说明这是三个通道的照片，分别是RGB&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;卷积神经网络中的chaneel又分别有三个：&lt;/p&gt;
+        &lt;ol&gt;
+          &lt;li&gt;输入的图片的channel，这个由图片自身所决定&lt;/li&gt;
+          &lt;li&gt;卷积操作完成后输出的out_channels，这个由卷积核的数量决定，比如卷积核有64个，输出的图片就有64个channel，这时候就记住他是channel就好，不要尝试直观的记忆，且这个会作为下一次卷积时的卷积核的in_channel&lt;/li&gt;
+          &lt;li&gt;卷积核中的in_channel，是上一次卷积的out_channel，这个in_channel决定了每个卷积核会作用于多少个pixel上面&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;写代码的时候要注意的点就是卷积和pool只是提取特征，最后还是要丢到全连接层里面去的，如果原来的图片没有specify channel的话，必须要给他specify上&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;using-real-world-images&quot;&gt;Using Real-World images&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;tensflow的一个帮忙label照片的东西&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;One feature of the image generator is that you can point it at a directory and then the sub-directories of that will automatically generate labels for you.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-17_20-32-22.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;course-2-convolutional-neural-networks-in-tensorflow&quot;&gt;Course 2: Convolutional Neural Networks in Tensorflow&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Image augmentation and data augmentation is one of the most widely used tools in deep learning to increase your dataset size and make your neural networks perform better&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;这个解决的是数据集不够的问题，比如如果猫猫一直在图片的上端，那么如果是猫猫在图片的下端就很难识别出来&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;所以可以用tf的库，这个imagegenerator可以令图片的改动不直接发生在drive上，keras的这个东西不会直接修改图片，而是在训练中做preprocessing&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;augmentation指的其实就是数据增强，比如我们可以翻转图片啊，旋转图片之类的&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;除了要增加训练集的randomness，还要增加测试集的randomness&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;所以训练时间变长的原因是因为image preprocessing takes cycle&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;transfer-learning&quot;&gt;Transfer Learning&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Download maybe an open-source model that someone else has already trained on a huge dataset maybe for weeks and use those parameters as a starting point to then train your model just a little bit more on perhaps a smaller dataset that you have for a given task, so it is called &lt;em&gt;transfer learning&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;用别人已经训练好的模型，自己再加以调整和使用&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;主要还是因为自己训练的话，训练集太小了&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;我们在调整别人的模型的时候，可以选择把别人的一些模型适当给锁住。 比如现在的目的是要实现的是图像识别，那么别人训练好的卷积层的特征一般都是universal的，我们可以直接用，在自己训练的时候，把这些训练好的卷积层给锁住，然后只训练dense layer的权值&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Droout:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;they remove a random number of neurons in your neural network.&lt;/li&gt;
+      &lt;li&gt;Two reason why it works well:
+        &lt;ul&gt;
+          &lt;li&gt;The first is that neighboring neurons often end up with similar weights, which can lead to overfitting, so dropping some out at random can remove this.&lt;/li&gt;
+          &lt;li&gt;The second is that often a neuron can over-weigh the input from a neuron in the previous layer, and can over specialize as a result.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+          <pubDate>2020-06-22T00:00:00+08:00</pubDate>
+          <link>http://localhost:4000/tensorflow-in-practice</link>
+          <guid isPermaLink="true">http://localhost:4000/tensorflow-in-practice</guid>
+        </item>
+      
+    
+      
+        <item>
           <title>Company Fraud Analytic</title>
           <description>&lt;h3 id=&quot;论文笔记&quot;&gt;论文笔记&lt;/h3&gt;
 
@@ -3160,7 +3344,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;production-functions-with-more-than-one-input&quot;&gt;Production Functions with more than one input&lt;/h3&gt;
+&lt;h2 id=&quot;63-production-functions-with-more-than-one-input&quot;&gt;6.3: Production Functions with more than one input&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Total Product Hill: A three-dimensional graph of a production function.&lt;/li&gt;
@@ -3188,7 +3372,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;The region of upward-sloping or backward-bending isoquants. In the uneconomic region, at least one input has a negative marginal product.&lt;/p&gt;
+    &lt;p&gt;Uneconomic Region:(从Isoquants的图上可以看出来的)The region of upward-sloping or backward-bending isoquants. In the uneconomic region, at least one input has a negative marginal product.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Economic region of production: The region where the isoquants are downward sloping.&lt;/li&gt;
 &lt;/ul&gt;
@@ -3204,6 +3388,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Marginal Rate of Technical Substitution&lt;/strong&gt;: \( MRTS_{L,K} \) measures how steep an isoquant is.
     &lt;ul&gt;
+      &lt;li&gt;和MRS是一样的概念，都要控制产出是恒定的&lt;/li&gt;
       &lt;li&gt;The rate at which the quantity of capital can be decreased for every one-unit increase in the quantity of labor, holding the quantity of output constant, or&lt;/li&gt;
       &lt;li&gt;The rate at which the quantity of capital must be increased for every one-unit decrease in the quantity of labor, holding the quantity of output constant.&lt;/li&gt;
     &lt;/ul&gt;
@@ -3212,15 +3397,191 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
     &lt;p&gt;The negative of the slope of the tangent line is the MRTSL,K at that point.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Diminishing Marginal Rate of Technical Substitution: A feature of a production function in which the marginal rate of technical substitution of labor for capital diminishes as the quantity of labor increases along an isoquant.&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;Diminishing Marginal Rate of Technical Substitution&lt;/em&gt;: A feature of a production function in which the marginal rate of technical substitution of labor for capital diminishes as the quantity of labor increases along an isoquant.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;如果是有这个性质的话：说明是convex的！！！！！&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;\( \frac{MP_{L}}{MP_{K}} = MRTS_{L,K} \)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;\( \frac{MP_{L}}{MP_{K}} = MRTS_{L,K} \)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;it is possible to have a diminishing marginal rate of technical substitution even though both of the marginal products are constant.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;64-substitutability-among-inputs&quot;&gt;6.4 Substitutability among Inputs&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;In this section, we explore how to describe the ease or difficulty with which a firm can substitute between different inputs.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-28_10-37-58.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;注意一下这里左右搞反了。。。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;也就是说，右边的production function，为公司带来的是比较局限的选择；但是在左边的production function，却可以带来比较abundant的收益&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;When the production function offers limited input substitution opportunities, the MRTSL,K changes substantially as we move along an isoquant. In this case, the isoquants are nearly L-shaped, as in Figure 6.11(a).
+        &lt;ul&gt;
+          &lt;li&gt;umm他这里讲的就有点二逼了，因为他说比较局限的生产函数的MRTS变化会比较大，是因为在点A的左右两边呈现出来的是very horizontal/vertical的线，所以在A的左边和右边的MRST会大幅度的变化&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;When the production function offers abundant input substitution opportunities, the MRTSL,K changes gradually as we move along an isoquant. In this case, the isoquants are nearly straight lines, as in Figure 6.11(b).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;elasticity-of-substitution&quot;&gt;Elasticity of Substitution&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Elascity of substitution&lt;/strong&gt;: A measure of how easy it is for a firm to substitute labor for capital. It is equal to the percentage change in the capital–labor ratio for every 1 percent change in the marginal rate of technical substitution of labor for capital as we move along an isoquant.
+    &lt;ul&gt;
+      &lt;li&gt;基于MRST的变化率，衡量了在isoquant线上移动的时候，MRST移动的是有多快&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Capital-labor ratio&lt;/strong&gt;: The ratio of the quantity of capital to the quantity of labor: \( \frac{K}{L} \)&lt;/li&gt;
+  &lt;li&gt;Elascity等于(change in k/L)/(change in MRTS)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+
+\text{The elascity of substition} \\
+
+\sigma &amp;= \frac{\text{percentage change in capital-labor ratio}}{\text{percentage change in } MRTS_{L,K}}\\
+&amp;= \frac{\% \Delta \frac{K}{L}}{\% \Delta MRTS_{L,K}}
+
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Elascity can be anything [0,1]&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;如果弹性非常小（离0很近），那么基本没啥机会可以替换&lt;/li&gt;
+      &lt;li&gt;如果弹性比较大，就有更多的替换的机会&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;special-production-functions&quot;&gt;Special Production Functions&lt;/h3&gt;
+
+&lt;h4 id=&quot;linear-production-functionperfect-substitute&quot;&gt;Linear Production Function(Perfect Substitute)&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;\( Q = aL + bK \)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Isoquantes are straight lines&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Elascity of substitution for a linear production function must be infinite&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果有这种样子的linear production function的话，那么input就是linear的&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;fixed-properties-production-functionperfect-complements&quot;&gt;Fixed-properties production function(Perfect Complements)&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;也就是说input之间必须以一种固定的比例相结合，这样的input也被称为perfect complement&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;\( Q = min(aL, bK) \)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;他们的isoquants就是那种带有强烈拐角的图&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Elascity of substitution for a fixed properties production function must be zero&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;cobb-douglas-production-function&quot;&gt;Cobb-Douglas production function&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;\( Q=AL^{\alpha}K^{\beta} \)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;就是比较“正常”的生产函数，弹性处于0-正无穷之间&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In fact, it turns out that the elasticity of substitution along a Cobb–Douglas production function is always equal to 1. (This result is derived in the Appendix to this chapter.)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;constant-elasticity-of-substitution-production-function&quot;&gt;Constant elasticity of substitution production function&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;父类：A type of production function that includes linear production functions, fixed- proportions production functions, and Cobb–Douglas production functions as special cases.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;\( Q = [aL^{\frac{\sigma - 1}{sigma}} + bK^{\frac{\sigma}{\sigma - 1}}]^{\frac{\sigma}{sigma - 1}} \)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-28_11-20-15.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-28_11-20-43.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;65-returns-to-scale&quot;&gt;6.5 Returns to Scale&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;how increases in all input quantities affect the quantity of output the firm can produce.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;returns to scale: the percentage increase in output when a firm increases all of its input quantities by a given percentage amount&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Return to scale } = \frac{\% \Delta (quantity of output)}{\% \Delta (quantity of all inputs)}&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Increasing returns to scale: A proportionate increase in all input quanti- ties resulting in a greater than proportionate increase in output.&lt;/li&gt;
+  &lt;li&gt;Constant returns to scale: A proportionate in- crease in all input quantities simultaneously that results in the same percentage in- crease in output.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Decreasing returns to scale: A proportionate increase in all input quanti- ties resulting in a less than proportionate increase in output.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;计算的时候，就是同时给所有的input一样的增长lambda，然后算出增长后的output的数量，并且求出output的变化theta，用theta和lambda做对比&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;为什么规模回报很重要?当生产过程呈现出规模效益递增的趋势时，大规模经营就会带来成本优势。特别是，一家大公司能够以较低的单位成本生产一定数量的产品，而两家规模相同的小公司所能生产的产品只有前者的一半。例如，如果两家半导体公司能以每片0.1美元的价格各自生产100万个芯片，那么一家大型半导体公司就能以每片不到0.1美元的价格生产200万个芯片。这是因为，随着规模收益的增加，大公司需要雇佣少于小公司两倍的劳动力和资本来生产两倍的产出。当一个大公司比小公司拥有这样的成本优势时，一个大公司比几个小公司更能有效地服务市场。这种大规模经营的成本优势一直是允许企业作为受监管的垄断者在电力和石油管道运输等市场上经营的传统理由。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Return to scale VS Diminishing Marginal Returns:
+    &lt;ul&gt;
+      &lt;li&gt;Returns to scale pertains to the impact of an increase in all input quantities simultaneously, while marginal returns (i.e., marginal product) pertains to the impact of an increase in the quantity of a single input, such as labor, holding the quantities of all other inputs fixed.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;66-technological-progress&quot;&gt;6.6 Technological Progress&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;注意，一个公司的生产函数并不是亘久不变的，他们是会改变的&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Technological Progress: A change in a production process that enables a firm to achieve more output from a given combination of inputs or, equivalently, the same amount of output from less inputs.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Neutral Technological Progress: Technological progress that decreases the amounts of labor and capi- tal needed to produce a given output, without af- fecting the marginal rate of technical substitution of labor for capital.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Labor Saving technological Progress: Technological progress that causes the marginal product of capital to increase relative to the marginal product of labor.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Capital Saving technological progress: Technological progress that causes the marginal product of labor to increase relative to the marginal product of capital.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-28_11-40-42.png&quot; /&gt;&lt;/p&gt;
+
 </description>
           <pubDate>2020-05-11T00:00:00+08:00</pubDate>
           <link>http://localhost:4000/economics-note</link>
@@ -4663,190 +5024,6 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
           <pubDate>2020-05-08T00:00:00+08:00</pubDate>
           <link>http://localhost:4000/java-on-call-1</link>
           <guid isPermaLink="true">http://localhost:4000/java-on-call-1</guid>
-        </item>
-      
-    
-      
-        <item>
-          <title>What is bias?</title>
-          <description>&lt;h2 id=&quot;what-is-bias&quot;&gt;What is bias?&lt;/h2&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/HetFihsXSys&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;但凡对于神经网络有过一定了解的人，就不会不知道bias。bias为分界线提供了一个灵活的变化。假设现在使用的激活函数是ReLU即整流线型激活函数，当加权和\( \sum_{i = 1}w_{i}*x_{i} + bias \)进入到达神经元时，这个函数的行为如下图所示
-&lt;img src=&quot;assets/post_pics/2560px-Ramp_function.svg.png&quot; /&gt;
-显然，施加了ReLU激活函数的神经元阈值为0，那么如果我们在训练的时候发现，0并不是一个最好的阈值，1才是一个最好的阈值，那该怎么办呢？当这种情况发生，神经网络会自适应调整bias的值，把bias的值变成-1，&lt;strong&gt;这样通过改变bias的大小的同时调整了函数的阈值，使得nn的适应性更加强。&lt;/strong&gt;
-bias偏差值和学习率一样，初始化的时候随机生成，我们训练神经网络，就是通过多次迭代，找出现有训练集下的能够最大化模型预测精准度的参数的值。在计算加权和的时候，为了确保bias能够随着权重在每一次的迭代中被调整到，神经网络都是把bias当作是一个不存在的输入\(x_0(= 1) \)的权重，也就是说，\( \sum_{i=0}w_{i}*x_{i} \)是等价于\(\sum_{i = 1}w_{i}*x_{i} + bias \).&lt;/p&gt;
-
-&lt;h2 id=&quot;bias-in-machine-learning-models&quot;&gt;Bias in Machine Learning Models&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;这里的偏见指的真的是偏见，就比如脸部识别算法对于女性的脸庞表现没有那么好, 我们的目标是develop the benefits of machine learning for everyone，所以用数据代表类别is a first step in avoiding bias.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;interactive bias&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;selection bias&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;latent bias&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u href=&quot;https://developers.googleblog.com/2018/04/text-embedding-models-contain-bias.html&quot;&gt;这里有更加详细的解释&lt;/u&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Human data encodes human biases by default.&lt;/strong&gt;&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;简单的打个比方，fashion mnist中有许多的照片，但是如果encode data的人坚信只有高跟鞋才算鞋子，那么会在数据集中囊括许多的高跟鞋的照片，从而导致偏见从人类身上转移到了机器身上&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;callbacks&quot;&gt;Callbacks&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;在tensorflow里面可以定义一个回调机制，他的工作原理是：可以实现在每次迭代一轮之后，自动调用指定的函数，例如on_epoch_end可以帮助我们控制训练终止的时机，其实调用函数并不一定每次都要在一次迭代训练之后，而可以在六个不同的时间点，下面第二篇文章详细介绍了&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如何实现的？其实自己也实现了一次，就懒得记了，希望csdn用不倒下，这篇博客讲的非常详细&lt;a href=&quot;https://blog.csdn.net/STILLxjy/article/details/98756775&quot;&gt;如何重写on_epoch_end&lt;/a&gt;, 这篇文章是最最最玩具车的介绍&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;但这篇文章讲了些许干货&lt;a href=&quot;https://www.cnblogs.com/weiyinfu/p/9874195.html&quot;&gt;干活！！&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;cnn-convolutional-neural-network&quot;&gt;CNN: Convolutional Neural Network&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;condense the image down to the important features that distinguish what makes it a shoe, or a handbag, or a shirt&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;主要的大意就是在会有一个filter，这个filter上面上面存在一些值，姑且当他们是“权重”，这些权重可以作用于某个pixel值之上，通过和他以及他的neighbour相乘得到一个新的pixel值，如下图所示&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;By passing filters over an image to reduce the amount of information, they then allowed the neural network to effectively extract features that can distinguish one class of image from another.&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-16_14-55-36.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;这样做的目的是：加重特征(emphasize feature)&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;assets/post_pics/pixel.png&quot; /&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;上面没有讲清楚，filtering的意义主要是特征加重，很少有特征减少，而下面的pooling的意义才是特征减少，摒弃掉某些特征&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Pooling&lt;/strong&gt;: Compress image, 给定一个区域，选取这个区域中pixel值最大的点，输出这个点，就像这样，注意最后对应的位置也是一样的&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;You also saw how pooling compresses the information to make it more manageable. This is a really nice way to improve our image recognition performance.&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-16_15-01-24.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;使用filter会减少dimension的原因是因为，如果你这个filter是三乘三的话，那么你这张图片的最顶端，是没有neighbour的，那么也就是说他们的输出值是无法被定义的，所以只要没有足够用于计算的neighbour，那这个就是pixel的点就是无法被定义的，所以会被reduce掉&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;所谓的conv number指的是总共生成了多少个filter，如果有64个，说明有64个filter生成，且这个卷积层结束后会有64个图片&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如何理解卷积神经网络中的channel？：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;channel可以直观的想像成“叠加的二维图片“，每一个通道，是数字图像中存储不同类型信息的灰度图像，一个图像中最多可以有数十个通道，注意，单一的通道实际上只代表着一个灰度图像，所以如果一张图片只有一个通道的话，那么说明这张图片就是一张灰色的图片；平时的照片是彩色的，说明这是三个通道的照片，分别是RGB&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;卷积神经网络中的chaneel又分别有三个：&lt;/p&gt;
-        &lt;ol&gt;
-          &lt;li&gt;输入的图片的channel，这个由图片自身所决定&lt;/li&gt;
-          &lt;li&gt;卷积操作完成后输出的out_channels，这个由卷积核的数量决定，比如卷积核有64个，输出的图片就有64个channel，这时候就记住他是channel就好，不要尝试直观的记忆，且这个会作为下一次卷积时的卷积核的in_channel&lt;/li&gt;
-          &lt;li&gt;卷积核中的in_channel，是上一次卷积的out_channel，这个in_channel决定了每个卷积核会作用于多少个pixel上面&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;写代码的时候要注意的点就是卷积和pool只是提取特征，最后还是要丢到全连接层里面去的，如果原来的图片没有specify channel的话，必须要给他specify上&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;using-real-world-images&quot;&gt;Using Real-World images&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;tensflow的一个帮忙label照片的东西&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;One feature of the image generator is that you can point it at a directory and then the sub-directories of that will automatically generate labels for you.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-17_20-32-22.png&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;course-2-convolutional-neural-networks-in-tensorflow&quot;&gt;Course 2: Convolutional Neural Networks in Tensorflow&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Image augmentation and data augmentation is one of the most widely used tools in deep learning to increase your dataset size and make your neural networks perform better&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;这个解决的是数据集不够的问题，比如如果猫猫一直在图片的上端，那么如果是猫猫在图片的下端就很难识别出来&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;所以可以用tf的库，这个imagegenerator可以令图片的改动不直接发生在drive上，keras的这个东西不会直接修改图片，而是在训练中做preprocessing&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;augmentation指的其实就是数据增强，比如我们可以翻转图片啊，旋转图片之类的&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;除了要增加训练集的randomness，还要增加测试集的randomness&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;所以训练时间变长的原因是因为image preprocessing takes cycle&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;transfer-learning&quot;&gt;Transfer Learning&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Download maybe an open-source model that someone else has already trained on a huge dataset maybe for weeks and use those parameters as a starting point to then train your model just a little bit more on perhaps a smaller dataset that you have for a given task, so it is called &lt;em&gt;transfer learning&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;用别人已经训练好的模型，自己再加以调整和使用&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;主要还是因为自己训练的话，训练集太小了&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;我们在调整别人的模型的时候，可以选择把别人的一些模型适当给锁住。 比如现在的目的是要实现的是图像识别，那么别人训练好的卷积层的特征一般都是universal的，我们可以直接用，在自己训练的时候，把这些训练好的卷积层给锁住，然后只训练dense layer的权值&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Droout:&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;they remove a random number of neurons in your neural network.&lt;/li&gt;
-      &lt;li&gt;Two reason why it works well:
-        &lt;ul&gt;
-          &lt;li&gt;The first is that neighboring neurons often end up with similar weights, which can lead to overfitting, so dropping some out at random can remove this.&lt;/li&gt;
-          &lt;li&gt;The second is that often a neuron can over-weigh the input from a neuron in the previous layer, and can over specialize as a result.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-          <pubDate>2020-05-07T00:00:00+08:00</pubDate>
-          <link>http://localhost:4000/What-is-bias</link>
-          <guid isPermaLink="true">http://localhost:4000/What-is-bias</guid>
         </item>
       
     

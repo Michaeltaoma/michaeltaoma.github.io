@@ -2,6 +2,17 @@
   
     {
 
+      "title"    : "What is bias?",
+      "url"      : "/tensorflow-in-practice",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2020-06-22 00:00:00 +0800",
+	  "description" : ""
+
+    } ,
+  
+    {
+
       "title"    : "Company Fraud Analytic",
       "url"      : "/company-fraud-analytic",
       "category" : "",
@@ -139,17 +150,6 @@
       "category" : "",
       "tags"     : "",
       "date"     : "2020-05-08 00:00:00 +0800",
-	  "description" : ""
-
-    } ,
-  
-    {
-
-      "title"    : "What is bias?",
-      "url"      : "/What-is-bias",
-      "category" : "",
-      "tags"     : "",
-      "date"     : "2020-05-07 00:00:00 +0800",
 	  "description" : ""
 
     } ,

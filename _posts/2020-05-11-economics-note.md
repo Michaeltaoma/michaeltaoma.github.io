@@ -984,7 +984,7 @@ $$
 	- 当MP=AP时：AP最大
 	- 当MP\<AP时：AP下降
 
-### Production Functions with more than one input
+## 6.3: Production Functions with more than one input
 
 - Total Product Hill: A three-dimensional graph of a production function.
 
@@ -1001,7 +1001,7 @@ $$
 
 	-  这就和indiffernt curve的数学意义是一样的了
 
-- The region of upward-sloping or backward-bending isoquants. In the uneconomic region, at least one input has a negative marginal product.
+- Uneconomic Region:(从Isoquants的图上可以看出来的)The region of upward-sloping or backward-bending isoquants. In the uneconomic region, at least one input has a negative marginal product.
 
 - Economic region of production: The region where the isoquants are downward sloping.
 
@@ -1012,15 +1012,130 @@ $$
 #### Marginal Rate of Technical Substitution
 
 - **Marginal Rate of Technical Substitution**: \\( MRTS_{L,K} \\) measures how steep an isoquant is. 
-	- The rate at which the quantity of capital can be decreased for every one-unit increase in the quantity of labor, holding the quantity of output constant, or
+	- 和MRS是一样的概念，都要控制产出是恒定的
+	- The rate at which the quantity of capital can be decreased for every one-unit increase in the quantity of labor, holding the quantity of output constant, or 
 	- The rate at which the quantity of capital must be increased for every one-unit decrease in the quantity of labor, holding the quantity of output constant.
 
 - The negative of the slope of the tangent line is the MRTSL,K at that point.
 
-- Diminishing Marginal Rate of Technical Substitution: A feature of a production function in which the marginal rate of technical substitution of labor for capital diminishes as the quantity of labor increases along an isoquant.
+- *Diminishing Marginal Rate of Technical Substitution*: A feature of a production function in which the marginal rate of technical substitution of labor for capital diminishes as the quantity of labor increases along an isoquant.
 
 - 如果是有这个性质的话：说明是convex的！！！！！
 
 - \\( \frac{MP_{L}}{MP_{K}} = MRTS_{L,K} \\)
 
+- it is possible to have a diminishing marginal rate of technical substitution even though both of the marginal products are constant.
+
 ### 6.4 Substitutability among Inputs
+
+- **In this section, we explore how to describe the ease or difficulty with which a firm can substitute between different inputs.**
+
+	<img src="assets/post_pics/Snipaste_2020-06-28_10-37-58.png">
+
+- 注意一下这里左右搞反了。。。
+
+- 也就是说，右边的production function，为公司带来的是比较局限的选择；但是在左边的production function，却可以带来比较abundant的收益
+
+	- When the production function offers limited input substitution opportunities, the MRTSL,K changes substantially as we move along an isoquant. In this case, the isoquants are nearly L-shaped, as in Figure 6.11(a).
+		- umm他这里讲的就有点二逼了，因为他说比较局限的生产函数的MRTS变化会比较大，是因为在点A的左右两边呈现出来的是very horizontal/vertical的线，所以在A的左边和右边的MRST会大幅度的变化
+	- When the production function offers abundant input substitution opportunities, the MRTSL,K changes gradually as we move along an isoquant. In this case, the isoquants are nearly straight lines, as in Figure 6.11(b).
+
+#### Elasticity of Substitution
+
+- **Elascity of substitution**: A measure of how easy it is for a firm to substitute labor for capital. It is equal to the percentage change in the capital–labor ratio for every 1 percent change in the marginal rate of technical substitution of labor for capital as we move along an isoquant.
+	- 基于MRST的变化率，衡量了在isoquant线上移动的时候，MRST移动的是有多快
+- **Capital-labor ratio**: The ratio of the quantity of capital to the quantity of labor: \\( \frac{K}{L} \\)
+- Elascity等于(change in k/L)/(change in MRTS)
+
+$$
+\begin{aligned}
+
+\text{The elascity of substition} \\
+
+\sigma &= \frac{\text{percentage change in capital-labor ratio}}{\text{percentage change in } MRTS_{L,K}}\\
+&= \frac{\% \Delta \frac{K}{L}}{\% \Delta MRTS_{L,K}}
+
+\end{aligned}
+$$
+
+- **Elascity can be anything [0,1]**
+	- 如果弹性非常小（离0很近），那么基本没啥机会可以替换
+	- 如果弹性比较大，就有更多的替换的机会
+
+### Special Production Functions
+
+#### Linear Production Function(Perfect Substitute)
+- \\( Q = aL + bK \\)
+
+- Isoquantes are straight lines
+
+- Elascity of substitution for a linear production function must be infinite
+
+- 如果有这种样子的linear production function的话，那么input就是linear的
+
+#### Fixed-properties production function(Perfect Complements)
+
+- 也就是说input之间必须以一种固定的比例相结合，这样的input也被称为perfect complement
+
+- \\( Q = min(aL, bK) \\)
+
+- 他们的isoquants就是那种带有强烈拐角的图
+
+- Elascity of substitution for a fixed properties production function must be zero
+
+#### Cobb-Douglas production function
+
+- \\( Q=AL^{\alpha}K^{\beta} \\)
+
+- 就是比较“正常”的生产函数，弹性处于0-正无穷之间
+
+- In fact, it turns out that the elasticity of substitution along a Cobb–Douglas production function is always equal to 1. (This result is derived in the Appendix to this chapter.)
+
+#### Constant elasticity of substitution production function
+
+- 父类：A type of production function that includes linear production functions, fixed- proportions production functions, and Cobb–Douglas production functions as special cases.
+
+- \\( Q = [aL^{\frac{\sigma - 1}{sigma}} + bK^{\frac{\sigma}{\sigma - 1}}]^{\frac{\sigma}{sigma - 1}} \\)
+
+<img src="assets/post_pics/Snipaste_2020-06-28_11-20-15.png">
+
+<img src="assets/post_pics/Snipaste_2020-06-28_11-20-43.png">
+
+### 6.5 Returns to Scale
+
+- how increases in all input quantities affect the quantity of output the firm can produce.
+
+- returns to scale: the percentage increase in output when a firm increases all of its input quantities by a given percentage amount
+
+$$
+
+\text{Return to scale } = \frac{\% \Delta (quantity of output)}{\% \Delta (quantity of all inputs)}
+
+$$
+
+- Increasing returns to scale: A proportionate increase in all input quanti- ties resulting in a greater than proportionate increase in output.
+- Constant returns to scale: A proportionate in- crease in all input quantities simultaneously that results in the same percentage in- crease in output.
+- Decreasing returns to scale: A proportionate increase in all input quanti- ties resulting in a less than proportionate increase in output.
+
+- 计算的时候，就是同时给所有的input一样的增长lambda，然后算出增长后的output的数量，并且求出output的变化theta，用theta和lambda做对比
+
+- 为什么规模回报很重要?当生产过程呈现出规模效益递增的趋势时，大规模经营就会带来成本优势。特别是，一家大公司能够以较低的单位成本生产一定数量的产品，而两家规模相同的小公司所能生产的产品只有前者的一半。例如，如果两家半导体公司能以每片0.1美元的价格各自生产100万个芯片，那么一家大型半导体公司就能以每片不到0.1美元的价格生产200万个芯片。这是因为，随着规模收益的增加，大公司需要雇佣少于小公司两倍的劳动力和资本来生产两倍的产出。当一个大公司比小公司拥有这样的成本优势时，一个大公司比几个小公司更能有效地服务市场。这种大规模经营的成本优势一直是允许企业作为受监管的垄断者在电力和石油管道运输等市场上经营的传统理由。
+
+- Return to scale VS Diminishing Marginal Returns:
+	- Returns to scale pertains to the impact of an increase in all input quantities simultaneously, while marginal returns (i.e., marginal product) pertains to the impact of an increase in the quantity of a single input, such as labor, holding the quantities of all other inputs fixed.
+
+## 6.6 Technological Progress 
+
+- 注意，一个公司的生产函数并不是亘久不变的，他们是会改变的
+
+- Technological Progress: A change in a production process that enables a firm to achieve more output from a given combination of inputs or, equivalently, the same amount of output from less inputs.
+
+- Neutral Technological Progress: Technological progress that decreases the amounts of labor and capi- tal needed to produce a given output, without af- fecting the marginal rate of technical substitution of labor for capital.
+
+- Labor Saving technological Progress: Technological progress that causes the marginal product of capital to increase relative to the marginal product of labor.
+
+- Capital Saving technological progress: Technological progress that causes the marginal product of labor to increase relative to the marginal product of capital.
+
+<img src="assets/post_pics/Snipaste_2020-06-28_11-40-42.png">
+
+
