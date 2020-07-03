@@ -1,5 +1,5 @@
 ---
-title: What is bias?
+title: Tensorflow_in_Practice
 
 updated: 2020-05-07 19:40
 ---

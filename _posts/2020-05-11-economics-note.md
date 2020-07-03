@@ -1109,7 +1109,7 @@ $$
 
 $$
 
-\text{Return to scale } = \frac{\% \Delta (quantity of output)}{\% \Delta (quantity of all inputs)}
+\text{Return to scale } = \frac{\% \Delta (quantity\ of\ output)}{\% \Delta (quantity\ of\ all\ inputs)}
 
 $$
 
@@ -1124,7 +1124,7 @@ $$
 - Return to scale VS Diminishing Marginal Returns:
 	- Returns to scale pertains to the impact of an increase in all input quantities simultaneously, while marginal returns (i.e., marginal product) pertains to the impact of an increase in the quantity of a single input, such as labor, holding the quantities of all other inputs fixed.
 
-## 6.6 Technological Progress 
+### 6.6 Technological Progress 
 
 - 注意，一个公司的生产函数并不是亘久不变的，他们是会改变的
 
@@ -1137,5 +1137,27 @@ $$
 - Capital Saving technological progress: Technological progress that causes the marginal product of labor to increase relative to the marginal product of capital.
 
 <img src="assets/post_pics/Snipaste_2020-06-28_11-40-42.png">
+
+## Chapter 7: Costs and Cost minimization
+
+### 7.1 Cost Concepts for decision making
+
+- Explicit Cost: Costs that involve a direct monetary outlay.
+
+- Implicit Cost: Costs that do not involve outlays of cash.
+
+- **Opportunity Cost**: The value of the next best alternative that is forgone when another alternative is chosen. Include all of the explicit and implicit costs associated with that alternative. 
+
+- Different opportunity cost for different decision making.
+
+- Note that the unifying feature of this example is that the relevant opportunity cost was, in both cases, the current market price of the sheet steel. 
+
+#### Economic Versus Accounting Costs
+
+- Economic Costs: The sum of the firm’s explicit costs and implicit costs.
+
+- Accounting Costs: The total of explicit costs that have been incurred in the past.
+
+
 
 

@@ -3539,7 +3539,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Return to scale } = \frac{\% \Delta (quantity of output)}{\% \Delta (quantity of all inputs)}&lt;/script&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Return to scale } = \frac{\% \Delta (quantity\ of\ output)}{\% \Delta (quantity\ of\ all\ inputs)}&lt;/script&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Increasing returns to scale: A proportionate increase in all input quanti- ties resulting in a greater than proportionate increase in output.&lt;/li&gt;
@@ -3560,7 +3560,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;66-technological-progress&quot;&gt;6.6 Technological Progress&lt;/h2&gt;
+&lt;h3 id=&quot;66-technological-progress&quot;&gt;6.6 Technological Progress&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -3581,6 +3581,39 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-06-28_11-40-42.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;chapter-7-costs-and-cost-minimization&quot;&gt;Chapter 7: Costs and Cost minimization&lt;/h2&gt;
+
+&lt;h3 id=&quot;71-cost-concepts-for-decision-making&quot;&gt;7.1 Cost Concepts for decision making&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Explicit Cost: Costs that involve a direct monetary outlay.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Implicit Cost: Costs that do not involve outlays of cash.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Opportunity Cost&lt;/strong&gt;: The value of the next best alternative that is forgone when another alternative is chosen. Include all of the explicit and implicit costs associated with that alternative.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Different opportunity cost for different decision making.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note that the unifying feature of this example is that the relevant opportunity cost was, in both cases, the current market price of the sheet steel.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;economic-versus-accounting-costs&quot;&gt;Economic Versus Accounting Costs&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Economic Costs: The sum of the firm’s explicit costs and implicit costs.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Accounting Costs: The total of explicit costs that have been incurred in the past.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 </description>
           <pubDate>2020-05-11T00:00:00+08:00</pubDate>
