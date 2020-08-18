@@ -7,7 +7,20 @@
     
       
         <item>
-          <title>What is bias?</title>
+          <title>Tensorflow_in_Practice</title>
+          <description>&lt;h4 id=&quot;summary-of-the-vacationuntil-now&quot;&gt;Summary of the vacation(until now)&lt;/h4&gt;
+
+&lt;p&gt;最近（其实是四月份以来），基本每天都能感受到相当强烈的peer pressure。首先觉得自己身边被自己视为竞争对手的人都在各个方面取得了成功，不由得看看自己，感觉假期以来没有完成什么成就。经受的项目似乎并不怎么需要我的贡献，指导的教授态度很高冷，充满了学者的傲慢，不由得让我对这个环境之下成长起来的学生感到担忧；GRE方面更不必说，一塌糊涂，单词没背好，之前更是空了一段时间，填空状态非常不稳定，阅读状态稳定的差；自己选的网课方面，Coursera还落下三个week的内容没学；学校的网课成绩上倒没有拉下太多，但是实际掌握到了多少知识，对final有几成的把握？；暑研方面，倒是有一些令人开心的结果，kaggle和参与度两个都是班第一，但是同时暑研也是带来最大的peer pressure的，在很多方面感觉自己比不上别人：学历和对知识的掌握程度。&lt;/p&gt;
+</description>
+          <pubDate>2020-07-12T00:00:00+08:00</pubDate>
+          <link>http://localhost:4000/Summary-of-these-days</link>
+          <guid isPermaLink="true">http://localhost:4000/Summary-of-these-days</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Tensorflow_in_Practice</title>
           <description>&lt;h2 id=&quot;what-is-bias&quot;&gt;What is bias?&lt;/h2&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/HetFihsXSys&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
@@ -3612,6 +3625,96 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd&quot;&lt;/span&
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Accounting Costs: The total of explicit costs that have been incurred in the past.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-8-cost-curvesseriously-do-u-suprise&quot;&gt;Chapter 8: Cost Curves(Seriously, do u suprise?)&lt;/h2&gt;
+
+&lt;h3 id=&quot;81-long-run-cost-curves&quot;&gt;8,1 Long-Run Cost Curves&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Long-run total cost&lt;/strong&gt;: A curve that shows how total cost varies with output, holding input prices fixed and choosing all inputs to minimize cost. 当产量上升的时候，每次都选择最小化的total cost的bundle，曲线表明了产量上升与total cost的关系&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;./assets/post_pics/Snipaste_2020-07-07_16-57-00.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Long-run total cost curve must be increasing in Q and must equal 0 when Q = 0&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;./assets/post_pics/Snipaste_2020-07-07_17-01-53.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;所以先利用切线条件孤立labor和capital，带入价格得到total cost的等式&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;how-does-the-long-run-total-cost-curve-shift-when-input-prices-change&quot;&gt;How does the long run total cost curve shift when input prices change&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;当其中一个生产要素改变的时候，会把整个TC曲线向上移动&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;what-happens-when-all-input-prices-change-proportionately&quot;&gt;What happens when all input prices change proportionately&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;a given percentage increase in both input prices leaves the cost-minimizing input combination unchanged, while the total cost curve shifts up by exactly the same percentage.&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;为什么cost-minimizing input combination是不变的呢？因为同时增加一样的比例导致cost line的斜率保持不变，所以切点也不会变！&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;long-run-average-and-maginal-cost-curves&quot;&gt;Long-Run average and Maginal Cost Curves&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Long-run average cost: The firm’s total cost per unit of output. It equals long-run total cost divided by total quantity. \( AC(Q) = \frac{TC(Q)}{Q} \)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Long-run marginal cost: The rate at which long-run total cost changes with respect to change in output.就是slope of TC(Q)&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;./assets/post_pics/Snipaste_2020-07-07_17-15-16.png&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;MC(Q)和AC(Q)的关系
+    &lt;ul&gt;
+      &lt;li&gt;Average cost is decreasing then: \( AC(Q) \gt MC(Q) \)&lt;/li&gt;
+      &lt;li&gt;Average cost is increasing then: \( AC(Q) \lt MC(Q) \) &lt;/li&gt;
+      &lt;li&gt;Average cost is neighter decreasing nor increasing:\( AC(Q) = MC(Q) \)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Economies of scale: A characteristic of production in which average cost decreases as output goes up.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Diseconomies of scale: A characteristic of production in which average cost increase as output goes up.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Indivisible Input: an input that is available only in a certain minimum size; its quantity cannot be scaled down as the firm’s output goes to zero. 也就是说，不管你生产多少，一定数量的这个要素都得存在，会带来economies of scale&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Managerial diseconomies: A situation in which a given percentage increase in output forces the firm to increase its spending on the services of managers by more than this percentage. output上升的同时，需要更多的人来管理，管理费用上升的比例高过output上升的比例&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Minimum Efficient Scale: The smallest quantity at which the long-run average cost curve attains its minimum point. The larger MES is, in
+comparison to overall market sales, the greater the magnitude of economies of scale&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;returns to scale: the percentage increase in output when a firm increases all of its input quantities by a given percentage amount&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If average cost decreases as output increases, we have economies of scale and increasing returns to scale&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If average cost decreases as output increases, we have diseconomies of scale and decreasing returns to scale&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If average cost remain unchanged as output increases, we have neighter economies nor diseconomies scale and constant returns to scale.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;下面这张表格说实话看着很管用&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;assets/post_pics/Snipaste_2020-07-07_17-38-10.png&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 

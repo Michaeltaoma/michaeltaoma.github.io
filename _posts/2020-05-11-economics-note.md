@@ -1158,6 +1158,63 @@ $$
 
 - Accounting Costs: The total of explicit costs that have been incurred in the past.
 
+## Chapter 8: Cost Curves(Seriously, do u suprise?)
 
+### 8,1 Long-Run Cost Curves
 
+- **Long-run total cost**: A curve that shows how total cost varies with output, holding input prices fixed and choosing all inputs to minimize cost. 当产量上升的时候，每次都选择最小化的total cost的bundle，曲线表明了产量上升与total cost的关系
+
+	<img src="./assets/post_pics/Snipaste_2020-07-07_16-57-00.png">
+
+- **Long-run total cost curve must be increasing in Q and must equal 0 when Q = 0**
+
+	<img src="./assets/post_pics/Snipaste_2020-07-07_17-01-53.png">
+
+- 所以先利用切线条件孤立labor和capital，带入价格得到total cost的等式
+
+#### How does the long run total cost curve shift when input prices change
+
+- 当其中一个生产要素改变的时候，会把整个TC曲线向上移动
+
+#### What happens when all input prices change proportionately
+
+- **a given percentage increase in both input prices leaves the cost-minimizing input combination unchanged, while the total cost curve shifts up by exactly the same percentage.**
+
+- 为什么cost-minimizing input combination是不变的呢？因为同时增加一样的比例导致cost line的斜率保持不变，所以切点也不会变！
+
+#### Long-Run average and Maginal Cost Curves
+
+- Long-run average cost: The firm’s total cost per unit of output. It equals long-run total cost divided by total quantity. \\( AC(Q) = \frac{TC(Q)}{Q} \\)
+
+- Long-run marginal cost: The rate at which long-run total cost changes with respect to change in output.就是slope of TC(Q)
+
+	<img src="./assets/post_pics/Snipaste_2020-07-07_17-15-16.png">
+
+- MC(Q)和AC(Q)的关系
+	- Average cost is decreasing then: \\( AC(Q) \gt MC(Q) \\)
+	- Average cost is increasing then: \\( AC(Q) \lt MC(Q) \\) 
+	- Average cost is neighter decreasing nor increasing:\\( AC(Q) = MC(Q) \\) 
+
+- Economies of scale: A characteristic of production in which average cost decreases as output goes up.
+
+- Diseconomies of scale: A characteristic of production in which average cost increase as output goes up.
+
+- Indivisible Input: an input that is available only in a certain minimum size; its quantity cannot be scaled down as the firm’s output goes to zero. 也就是说，不管你生产多少，一定数量的这个要素都得存在，会带来economies of scale
+
+- Managerial diseconomies: A situation in which a given percentage increase in output forces the firm to increase its spending on the services of managers by more than this percentage. output上升的同时，需要更多的人来管理，管理费用上升的比例高过output上升的比例
+
+- Minimum Efficient Scale: The smallest quantity at which the long-run average cost curve attains its minimum point. The larger MES is, in
+comparison to overall market sales, the greater the magnitude of economies of scale
+
+- returns to scale: the percentage increase in output when a firm increases all of its input quantities by a given percentage amount
+
+- If average cost decreases as output increases, we have economies of scale and increasing returns to scale
+
+- If average cost decreases as output increases, we have diseconomies of scale and decreasing returns to scale
+
+- If average cost remain unchanged as output increases, we have neighter economies nor diseconomies scale and constant returns to scale.
+
+- 下面这张表格说实话看着很管用
+
+	<img src="assets/post_pics/Snipaste_2020-07-07_17-38-10.png">
 
