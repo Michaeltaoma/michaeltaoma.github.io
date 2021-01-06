@@ -2,39 +2,6 @@
   
     {
 
-      "title"    : "Tensorflow_in_Practice",
-      "url"      : "/Summary-of-these-days",
-      "category" : "",
-      "tags"     : "",
-      "date"     : "2020-07-12 00:00:00 +0800",
-	  "description" : ""
-
-    } ,
-  
-    {
-
-      "title"    : "Tensorflow_in_Practice",
-      "url"      : "/tensorflow-in-practice",
-      "category" : "",
-      "tags"     : "",
-      "date"     : "2020-06-22 00:00:00 +0800",
-	  "description" : ""
-
-    } ,
-  
-    {
-
-      "title"    : "Company Fraud Analytic",
-      "url"      : "/company-fraud-analytic",
-      "category" : "",
-      "tags"     : "",
-      "date"     : "2020-06-15 00:00:00 +0800",
-	  "description" : ""
-
-    } ,
-  
-    {
-
       "title"    : "Mlp",
       "url"      : "/mlp",
       "category" : "",
