@@ -1,0 +1,666 @@
+<ol>
+  <li>Java基础知识</li>
+  <li>面向对象</li>
+  <li>常用API</li>
+  <li>集合I/O</li>
+  <li>多线程、网络编程、反射、设计模式</li>
+</ol>
+
+<p>这是准备java面试的第二天，以上的分类的思维导图，来自-&gt;<a href="https://www.cnblogs.com/java1024/p/8757952.html" target="_blank">这里</a></p>
+<ul>
+  <li>这里是整理好的面试题，至少都过一遍:
+    <ol>
+      <li><a href="https://blog.csdn.net/qq_41701956/article/details/86686492">2019年最新java面试题及答案整理上</a></li>
+      <li><a href="https://blog.csdn.net/qq_41701956/article/details/86699263">2019年最新java面试题及答案整理下</a></li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="面向对象object-oriented">面向对象(Object Oriented)</h3>
+<ul>
+  <li>面向对象是一种程序设计思想之一。面向对象是一种对现实世界理解和抽象的方法，是计算机编程技术发展到一定阶段后的产物。<strong>面向过程是一种以过程为中心的编程思维。这些都是以<em>什么正在发生为主要目标进行编程。</em>与面向底箱明显不同的是封装、继承、类</strong></li>
+  <li>在看完了网上一个很生动的例子，这里写下一些个人的理解。面向对象应该是一个大于面向过程的概念，即面向对象融合了面向过程与对象。为什么这么说呢，在网上现有的对于面向过程的定义一般都如：面向过程指的是一种以事物为中心的编程思想。主要关注的是“怎么做”，即完成任务的具体细节。但是令我非常不解的一点就是：<strong><u>难道面向对象思想中就不包含一丝面向过程的概念吗？这两个非得一定是互斥对立的吗？</u></strong>个人认为，面向对象也关注任务的具体细节，但是面向对象把任务的具体细节抽象化，并且把事物分工给了各个对象，只不过，当我们无法再细分，具体到某一个对象的某一个任务的时候，我们不也是“关注任务的具体细节”吗？当不停的出现新的需求，或者同类任务却有不同的小细节时，面向对象就展现出了其优势。
+    <h4 id="类与对象">类与对象</h4>
+  </li>
+  <li><em>类与对象是不一样的东西，不过他是存在联系的。</em><strong>类对某一类事物进行描述，是抽象的；而对象是类的实例，是具象的。对象拥有他这一类的共有的属性，却也有独立与对象个体的属性。</strong>万物皆是对象，当这个对象从一个类被实例化的时候，他就成了对象。打个比方，狗是一个类，狗规定了狗的一些共有性质（脊索动物门，哺乳纲…），而柯基是狗的一个子类，因为它继承了狗的特点，却也衍生出了自己的特点，而你家的养的小柯基jimmy则是一个对象，因为他不再是抽象的了，他是具象的一条狗叫jimmy</li>
+  <li><strong>成员变量（class variable/member variable）</strong>:
+    <ol>
+      <li>成员变量定义在类中，在整个类都可以被访问</li>
+      <li>成员变量随着对象的建立而建立，随着对象的消失而消失，存在于对象所在的堆内存中。成员变量与对象共存亡。</li>
+      <li>成员变量有默认初始化值。</li>
+    </ol>
+  </li>
+  <li><strong>局部变量</strong>
+    <ol>
+      <li>局部变量只定义在局部范围，如函数内、语句内、只在所属的区域有效</li>
+      <li>局部变量存于栈内存中（因为只有function call的时候会用到这个局部变量），当方法执行完之后，变量空间会自动释放</li>
+      <li>局部变量没有默认初始化值</li>
+    </ol>
+  </li>
+  <li>在使用变量时遵循的原则是就近原则，就是现在“局部”范围里面找，没有的话才是取到成员类的位置上找</li>
+  <li>小问题：父类的成员变量子类可不可以访问</li>
+  <li><strong>静态变量</strong>: 指的是使用<code>static</code>修饰符修饰的变量
+    <ol>
+      <li>静态变量随着类的加载而存在（并不需要实例化），随着类的消失而消失</li>
+      <li>静态变量可以被对象调用，还可以被类名字调用</li>
+      <li>静态变量的数据储存在方法区（共享数据区）的静态区，所以也叫对象的共享数据</li>
+    </ol>
+  </li>
+  <li><strong>匿名对象</strong>: 在实例化的时候没有明确的给出名字的对象。匿名对象只用一次，而且匿名对象只在堆内存中开辟空间，而不存在栈内存的引用。
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span> 
+  <span class="kd">public</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span> 
+  <span class="c1">// 定义构造方法，为属性初始化</span>
+  <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="c1">// 获取信息的方法</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">tell</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"姓名："</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"，年龄："</span> <span class="o">+</span> <span class="n">age</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">"张三"</span><span class="o">,</span> <span class="mi">30</span><span class="o">).</span><span class="na">tell</span><span class="o">();</span> <span class="c1">// 匿名对象，可以看到张三这个对象是没有名字的，直接使用了person类的tell方法</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+    <h4 id="封装encapsulation这里的解释很多都是从chenssy的博客中引用的">封装（Encapsulation，这里的解释很多都是从<a href="https://www.cnblogs.com/chenssy/p/3351835.html" target="_blank">chenssy的博客</a>中引用的）</h4>
+  </li>
+  <li>封装从字面上来理解就是包装的意思，专业点就是信息隐藏，是指利用抽象数据类型将数据和基于数据的操作封装在一起，使其构成一个不可分割的独立实体，数据被保护在抽象数据类型的内部，尽可能地隐藏内部的细节，只保留一些对外接口使之与外部发生联系。系统的其他对象只能通过包裹在数据外面的已经授权的操作来与这个封装的对象进行交流和交互。也就是说用户是无需知道对象内部的细节（当然也无从知道），但可以通过该对象对外的提供的接口来访问该对象。</li>
+  <li>如果用124的定义的化就很简单：Encapsulation is the process of defining a Class that has at least one customizable attribute</li>
+  <li>使用封装的好处：
+    <ol>
+      <li>良好的封装能够减少耦合（耦合指的是模块及模块之间信息或参数依赖程度）</li>
+      <li>类内部的结构可以自由修改</li>
+      <li>可以对成员进行更精确的控制</li>
+      <li>隐藏信息，实现细节</li>
+    </ol>
+  </li>
+  <li>其实这个概念就是相当简单的，封装令一个对象的属性私有化，同时提供一些可以被外界访问的属性的方法，即使是方法，也可以被类封装起来</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+
+<span class="cm">/**
+ * A class to store Halloween information.
+ * &lt;p&gt;
+ * The year, the number of vistors, hourly temperatures in deg C and the weather condition is recorded. This class
+ * has been created as a lecture example, and is not otherwise particularly useful!  
+ * &lt;p&gt;
+ * This version demonstrates the implementation of Comparable (for sorting) and Serializable (for
+ * filing).  Also, the mutators for temperature and weather condition have been combined, so both
+ * attributes have to be set at the same time.  In this way they cannot be set to an illegal value
+ * independently.
+ * 
+ * @author Alan McLeod
+ * @version 3.2
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Halloween5</span> <span class="kd">implements</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="nc">Halloween5</span><span class="o">&gt;,</span> <span class="nc">Serializable</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">4705089863030936649L</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">year</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">numMunchkins</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">temperatures</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">weatherCondition</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * Full parameter constructor.
+	 * 可以看到如果是和类名一样的方法的那他就是个constructor
+     * @param yr The year when the data was collected.
+     * @param numKids The number of Trick or Treaters!
+     * @param temps The air temperatures in degrees Centigrade in an array of int of any size.
+     * @param weather The weather condition: "clear", "snow" or "rain".
+     * @throws IllegalHalloweenException If arguments are not legal.
+     */</span>
+    <span class="c1">// 4 parameter constructor invokes mutators</span>
+    <span class="kd">public</span> <span class="nf">Halloween5</span><span class="o">(</span><span class="kt">int</span> <span class="n">yr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">numKids</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">temps</span><span class="o">,</span> <span class="nc">String</span> <span class="n">weather</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="n">setYear</span><span class="o">(</span><span class="n">yr</span><span class="o">);</span>
+        <span class="n">setNumMunchkins</span><span class="o">(</span><span class="n">numKids</span><span class="o">);</span>
+        <span class="n">setWeather</span><span class="o">(</span><span class="n">temps</span><span class="o">,</span> <span class="n">weather</span><span class="o">);</span>
+    <span class="o">}</span> <span class="c1">// end Halloween4 4 parameter constructor</span>
+
+    <span class="cm">/**
+     * Three parameter constructor.  The weather condition does not have to be supplied.
+	 * 利用了方法过载
+     * @param yr The year when the data was collected.
+     * @param numKids The number of Trick or Treaters.
+     * @param temps The air temperatures in degrees Centigrade in an array of int of any size.
+     * @throws IllegalHalloweenException if arguments are not legal.
+     */</span>
+    <span class="c1">// 3 parameter constructor invokes 3 parameter constructor with an assumption about the</span>
+    <span class="c1">// weatherCondition attribute</span>
+    <span class="kd">public</span> <span class="nf">Halloween5</span><span class="o">(</span><span class="kt">int</span> <span class="n">yr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">numKids</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">temps</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">(</span><span class="n">yr</span><span class="o">,</span> <span class="n">numKids</span><span class="o">,</span> <span class="n">temps</span><span class="o">,</span> <span class="s">"unknown"</span><span class="o">);</span>
+    <span class="o">}</span> <span class="c1">// end Halloween4 3 parameter constructor</span>
+
+    <span class="cm">/**
+     * Sets the year the data was recorded.
+     * @param year The calendar year.
+     * @throws IllegalHalloweenException if the year does not lie between 1959 and 2016
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setYear</span><span class="o">(</span><span class="kt">int</span> <span class="n">year</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">year</span> <span class="o">&lt;</span> <span class="mi">1950</span> <span class="o">||</span> <span class="n">year</span> <span class="o">&gt;</span> <span class="mi">2019</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"Illegal year: "</span> <span class="o">+</span> <span class="n">year</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">year</span> <span class="o">=</span> <span class="n">year</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end year mutator</span>
+
+    <span class="cm">/**
+     * Sets the number of kids.
+     * @param numKids The number of kids arriving at the door.
+     * @throws IllegalHalloweenException if the number of kids is less than zero or greater
+     * than 500.
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNumMunchkins</span><span class="o">(</span><span class="kt">int</span> <span class="n">numKids</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">numKids</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">numKids</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"Illegal number of kids: "</span> <span class="o">+</span> <span class="n">numKids</span><span class="o">);</span>
+        <span class="n">numMunchkins</span> <span class="o">=</span> <span class="n">numKids</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end numMunchkinds mutator</span>
+
+    <span class="cm">/**
+     * Sets the temperatures array and the weather condition String.  The temperatures are 
+     * recorded with one temperature per hour.
+     * @param temps An array of temperatures between -30 and 30 degrees C.
+     * @param weather The weather condition as a String.
+     * @throws IllegalHalloweenException if the condition is not "rain", "snow", "clear" or "unknown",
+     * or if the array is empty or any temperatures are not legal. 
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setWeather</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">temps</span><span class="o">,</span> <span class="nc">String</span> <span class="n">weather</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalHalloweenException</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">avgTemperature</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">temps</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"No temperatures supplied"</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">temperature</span> <span class="o">:</span> <span class="n">temps</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">30</span> <span class="o">||</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">30</span><span class="o">)</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"Illegal temperature in array: "</span> <span class="o">+</span> <span class="n">temperature</span><span class="o">);</span>
+            <span class="n">avgTemperature</span> <span class="o">+=</span> <span class="n">temperature</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">temperatures</span> <span class="o">=</span> <span class="n">temps</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+        <span class="n">avgTemperature</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">avgTemperature</span> <span class="o">/</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">/</span> <span class="mf">10.0</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">((</span><span class="n">weather</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="s">"rain"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">avgTemperature</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">5</span><span class="o">)</span> <span class="o">||</span>
+                <span class="o">(</span><span class="n">weather</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="s">"snow"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">avgTemperature</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">||</span>
+                <span class="n">weather</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="s">"clear"</span><span class="o">)</span> <span class="o">||</span> <span class="n">weather</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="s">"unknown"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">weatherCondition</span> <span class="o">=</span> <span class="n">weather</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalHalloweenException</span><span class="o">(</span><span class="s">"Illegal weather/temperature combination: "</span> <span class="o">+</span>
+                    <span class="n">weather</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">avgTemperature</span> <span class="o">+</span> <span class="s">" deg C."</span><span class="o">);</span>    	
+    <span class="o">}</span> <span class="c1">// end setWeather mutator</span>
+    
+    <span class="cm">/**
+     * Returns the calendar year the data was recorded.
+     * @return The year the data was recorded.
+     */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getYear</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">year</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end getYear</span>
+
+    <span class="cm">/**
+     * Returns the number of visitors.
+     * @return the number of Trick or Treaters.
+     */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNumMunchkins</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">numMunchkins</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end getNumMunchkins Accessor</span>
+
+    <span class="cm">/**
+     * Returns the temperatures array.
+     * @return The temperatures in degrees Centigrade.
+     */</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">getTemperatures</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+    <span class="o">}</span> <span class="c1">// end getTemperature Accessor</span>
+
+    <span class="cm">/**
+     * Returns the weather condition.
+     * @return The weather condition as a String.
+     */</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getWeatherCondition</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">weatherCondition</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end getWeatherCondition Accessor</span>
+
+    <span class="cm">/**
+     * A String representation of the current object.
+     * @return A String representation of the contents of the object containing the values of
+     * all the attributes.
+     */</span>
+    <span class="c1">// Overrides (replaces) the toString method of the Object class.</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"In "</span> <span class="o">+</span> <span class="n">year</span> <span class="o">+</span> <span class="s">" there were "</span> <span class="o">+</span> <span class="n">numMunchkins</span> <span class="o">+</span> <span class="s">" kids. Temperatures each hour were: "</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="s">", "</span><span class="o">;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">"and "</span> <span class="o">+</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">temperatures</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">" deg C., and the weather was "</span><span class="o">;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">weatherCondition</span> <span class="o">+</span> <span class="s">"."</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end toString</span>
+
+    <span class="cm">/**
+     * Tests two Halloween5 objects for equality.
+     * @return &lt;code&gt;true&lt;/code&gt; if all the attributes of both objects are exactly equal, &lt;code&gt;false&lt;/code&gt;
+     * otherwise.
+     * @param otherObject The other Halloween5 object.
+     */</span>
+    <span class="c1">// Overrides the equals method of the Object class.</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">otherObject</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">otherObject</span> <span class="k">instanceof</span> <span class="nc">Halloween5</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">Halloween5</span> <span class="n">otherH</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Halloween5</span><span class="o">)</span><span class="n">otherObject</span><span class="o">;</span>
+            <span class="kt">boolean</span> <span class="n">arrayCheck</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">otherH</span><span class="o">.</span><span class="na">temperatures</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span> <span class="n">arrayCheck</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                <span class="n">arrayCheck</span> <span class="o">=</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">otherH</span><span class="o">.</span><span class="na">temperatures</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">arrayCheck</span><span class="o">)</span>
+                <span class="k">return</span> <span class="n">year</span> <span class="o">==</span> <span class="n">otherH</span><span class="o">.</span><span class="na">year</span> <span class="o">&amp;&amp;</span>
+                    <span class="n">numMunchkins</span> <span class="o">==</span> <span class="n">otherH</span><span class="o">.</span><span class="na">numMunchkins</span> <span class="o">&amp;&amp;</span>
+                    <span class="n">weatherCondition</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">otherH</span><span class="o">.</span><span class="na">weatherCondition</span><span class="o">);</span>
+        <span class="o">}</span> <span class="c1">// end if</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end equals</span>
+
+    <span class="cm">/**
+     * Compares Halloween5 objects on the basis of the number of visitors only.
+     * @param otherH The other Halloween5 object.
+     * @return A negative &lt;code&gt;int&lt;/code&gt; if the supplied object had more vistors, zero if they have the same
+     * number and a positive number if the current object has more visitors.
+     */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="nc">Halloween5</span> <span class="n">otherH</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">numMunchkins</span> <span class="o">-</span> <span class="n">otherH</span><span class="o">.</span><span class="na">numMunchkins</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end compareTo</span>
+    
+    <span class="cm">/**
+     * Returns a copy of the of the current Halloween5 object.
+     * @return A copy of the current object.
+     */</span>
+    <span class="c1">// Overrides the clone method in the Object class.</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Halloween5</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Halloween5</span> <span class="n">hwCopy</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">hwCopy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Halloween5</span><span class="o">(</span><span class="n">year</span><span class="o">,</span> <span class="n">numMunchkins</span><span class="o">,</span> <span class="n">temperatures</span><span class="o">,</span> <span class="n">weatherCondition</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IllegalHalloweenException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Should never get here!</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span> <span class="c1">// end try/catch</span>
+        <span class="k">return</span> <span class="n">hwCopy</span><span class="o">;</span>
+    <span class="o">}</span> <span class="c1">// end clone</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>上面就是一个Halloween5的类，他有五个变量其中<code>serialVersionUID</code>是一个静态变量，也就是说别的对象也可以使用</li>
+  <li>构造函数就是constructor，构造函数没有返回值，并且构造函数的名字与类名相同，构造函数也是可以过载的</li>
+  <li><code>this</code>关键字的作用是对当前对象的引用；或者更高级一点的对当前方法所属对象的引用。这个东西在一个类中常见于构造函数内用来区分构造函数的局部变量与类的成员变量</li>
+</ul>
+
+<h4 id="继承inheritance">继承(Inheritance)</h4>
+<ul>
+  <li>继承是java三大特性之二，它允许创建分等级分层次的类。继承就是子类继承父类的特征和行为，使得子类对象（实例）具有父类的实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为。</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{...}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{...}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{...}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{...}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Student</span> <span class="kd">extends</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="c1">// 不要重复name和age字段/方法,</span>
+    <span class="c1">// 只需要定义新增score字段/方法:</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">score</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getScore</span><span class="o">()</span> <span class="o">{</span> <span class="err">…</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setScore</span><span class="o">(</span><span class="kt">int</span> <span class="n">score</span><span class="o">)</span> <span class="o">{</span> <span class="err">…</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>可以看到以上的代码，student类继承了person类，那么此时person就是student的父类，超类，基类；而student是person的子类，扩展类</li>
+  <li>子类可以直接访问父类中非私有的属性与方法，注意是非私有的，也就是说如果一个属性/方法被<code>private</code>修饰符给修饰了，那么即使是子类也无法访问，但如果是一个加上了<code>protected</code>修饰符的变量/方法，是可以被子类访问的</li>
+  <li><strong>任何类都是Object类的子类</strong></li>
+  <li><em>一个类只可以继承自一个类，也就是说，任何类都只有一个父类。但是一个父类却可以有多个子类</em></li>
+  <li>向上转型和向下转型：
+    <ul>
+      <li>向上转型（upcasting）指的是把一个子类类型安全的变为父类类型: <code>Person p = new Student();</code>，注意这个操作是可以的</li>
+      <li>向下转型（downcasting）指的是令一个引用类型为父类的变量指向其子类，这个操作是不允许的</li>
+    </ul>
+  </li>
+  <li><code>super</code>这个关键字可以给子类指向父类，并且在子类的构造函数中，必须符合以下规定：
+    <ol>
+      <li>每一个构造函数都会默认访问父类的构造函数<code></code></li>
+      <li><strong>每一个构造函数第一行默认是super()</strong></li>
+      <li>先执行父类的构造函数，再执行自己的</li>
+      <li>如果父类没有空参数构造函数，子类必须实打实的使用有参数的构造函数，并且子类可以访问本类其他构造函数，再访问父类的构造函数</li>
+    </ol>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="nc">Student</span> <span class="kd">extends</span> <span class="nc">Person</span> <span class="o">{</span>
+  <span class="kd">protected</span> <span class="kt">int</span> <span class="n">score</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="kt">int</span> <span class="n">score</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span> <span class="c1">// 调用父类的构造方法Person(String, int)</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>方法的重写（override）：指的是子类将父类的方法重新实现，要利用<code>@override</code>关键字，<em>子类方法的访问权限要大于等于父类方法的访问权限</em>（不可以父类是public的，然后子类重写了之后来个private），静态方法只可以覆盖静态方法，子类不能覆盖父类私有方法</li>
+</ul>
+
+<h4 id="多态polymorphism">多态(Polymorphism)</h4>
+<ul>
+  <li>从理论的层面上来看：<strong>多态就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量倒底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。因为在程序运行时才确定具体的类，这样，不用修改源程序代码，就可以让引用变量绑定到各种不同的类实现上，从而导致该引用调用的具体方法随之改变，即不修改程序代码就可以改变程序运行时所绑定的具体代码，让程序可以选择多个运行状态，这就是多态性。</strong></li>
+  <li>先说回之前就讲过的向上转型，即<code>Parent p = new Child();</code>，这一行的意义是：定义了Parent类型的p，这个p指向Child类的对象实例。这样做的好处，也即是他的目的，是因为这个父类引用类型是指向子类的，所以他除了可以引用父类的共性之外，还可以使用子类强大的功能。但是这个upcasting肯定是存在缺陷的，这个缺陷就是：父类类型的引用可以调用<strong>父类中定义的所有属性和方法，对于只存在子类的方法和属性他就望尘莫及了。</strong>也就是说如果一个函数在父类中被定义，在子类中被重写；另一个函数在父类中被定义，在子类中被重载，当我们用upcasting的这个方法定义的父类对象，这个对象会使用父类中的没被重载的函数（因为子类中被重载的函数并没有定义在父类），还有在子类中被重写了的函数（被重写的函数是被定义在父类的）</li>
+  <li>所以统一的对多态的机制进行了一个总结：指向子类的父类由于由于向上转型了，他只能访问父类中拥有的方法和属性，而对于只存在子类中而不存在父类中的方法，他无法引用，即使是在子类中重载的方法也无法使用；但是如果是子类中重写了父类中的某些方法，在调用这些方法的时候，必定是使用子类中定义的这些方法。</li>
+  <li>Java实现多态的三个必要条件：
+    <ol>
+      <li><em>在多态中必须存在有继承关系的子类和父类</em></li>
+      <li><em>子类对父类中某些方法进行重写，那么在调用时就会调用在子类中覆盖的版本</em></li>
+      <li>在多态中需要将子类的引用赋予给父类对象，只有这样该引用此啊具备技能调用父类的方法和子类的方法</li>
+    </ol>
+  </li>
+  <li><strong><em>当超类对象引用变量引用子类对象时，被引用对象的类型而不是引用变量的类型决定了调用谁的成员方法，但是这个被调用的方法必须是在超类中定义过的，也就是说被子类覆盖的方法。</em></strong></li>
+  <li>多态中的成员特点：
+    <ul>
+      <li>成员变量：编译运行全都是以父类为基准，编译时看父类有没有这个变量；运行时运行父类的变量</li>
+      <li>成员方法：编译看父类，运行看子类，编译的时候会看父类中有没有这个方法，有的话就编译成功；运行的时候，实际运行的是子类的重写的方法</li>
+      <li>静态方法：<strong>静态方法是无法被子类override的</strong>，所以一样编译运行都看父类</li>
+    </ul>
+  </li>
+  <li>
+    <p>向下转型更具体来说是这样</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nc">Parent</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Parent</span><span class="o">();</span>
+  <span class="nc">Child</span> <span class="n">c</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Child</span><span class="o">)</span><span class="n">p</span><span class="o">;</span><span class="c1">//注意这是不安全的</span>
+</code></pre></div>    </div>
+    <p>以下内容大部分转载自<a href="https://www.cnblogs.com/dolphin0520/p/3811437.html">深入理解Java的接口和抽象类</a></p>
+    <h4 id="抽象类abstract-class">抽象类(Abstract Class)</h4>
+  </li>
+  <li>A class which also have concrete method definition and any kind of attribute but it can only be <strong>extended</strong>.</li>
+  <li>要知道什么是抽象类，就要知道什么是抽象方法：<code>abstract void fun();</code>，抽象方法只有方法的声明，却没有具体的实现。如果一个类被<code>abstract</code>这个关键字所修饰，那么这个类是个抽象类，而抽象类中，十有八九有抽象方法（因为如果一个类中没有抽象方法，那么把这个类声明为抽象类也没有什么意义），但是，只要有一个方法是抽象方法，那么这个类就一定是被定义成抽象类的</li>
+  <li>从阿兰的话里也可以读出来的是，抽象类只可以被继承，他是为了继承而存在的，如果定义了抽象类却不去继承他，那么相当于白定义了。如果一个父类中</li>
+  <li>抽象类和普通类的区别
+    <ul>
+      <li>抽象方法只可以为public/protected，如果定义成private/final/static的话就很傻逼了，子类无法重写这个抽象方法，不能被子类继承</li>
+      <li>抽象类不能用来创建对象</li>
+      <li>如果一个类继承于一个抽象类，则子类必须实现父类的抽象方法。如果子类没有实现父类的抽象方法，则必须将子类也定义为抽象类</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="接口interface">接口(Interface)</h4>
+<ul>
+  <li>在JAVA编程语言中是一个特殊的抽象类，但是接口并不是类，因为他不继承于Object。是抽象方法的集合，接口通常以interface来声明。从语义的角度解释，接口泛指供别人调用的方法或者函数，所以接口可以被看作是对行为的抽象。</li>
+  <li>接口是这么样子定义的：<code>interface InterfaceName{}</code>，接口中可以含有 变量和方法。但是要注意，接口中的变量会被隐式地指定为public static final变量（并且只能是public static final变量，用private修饰会报编译错误），而方法会被隐式地指定为public abstract方法且只能是public abstract方法（用其他关键字，比如private、protected、static、 final等修饰会报编译错误），并且接口中所有的方法不能有具体的实现，也就是说，接口中的方法必须都是抽象方法。从这里可以隐约看出接口和抽象类的区别，接口是一种极度抽象的类型，它比抽象类更加“抽象”，并且一般情况下不在接口中定义变量。</li>
+  <li>接口不是类，所以是不可以被类继承(extend)的，但是接口却是可以被implemented的：<code>class ClassName implements Interface1, Interface2,... {}</code>, 可以看到一个类可以遵循多个接口，和抽象类的继承一样，但凡是遵循了某接口的类都必须实现这个接口中定义的抽象方法；如果他不打算实现这个接口中的抽象方法，那么这个类就得是个抽象类。但是对于另一个接口来说，接口是可以继承接口的，并且一个接口是可以继承多个接口的</li>
+  <li>接口和抽象类的区别：
+    <ul>
+      <li>抽象类有构造函数，抽象类的成员方法可以有普通方法和抽象方法，甚至还可以只有普通方法，抽象类的成员变量是很普通的</li>
+      <li>而接口没有构造函数，接口只可以有抽象方法，接口的成员变量全都是被final修饰的</li>
+      <li>接口与类的实现方式是多实现，抽象类与类的继承关系是单继承</li>
+      <li>从意义上来讲，抽象类是对类的抽象，继承了此抽象类的子类，那么子类也是这个抽象类；而接口是对行为的抽象，实现了这个接口的类，只能说他能干到这个接口中的行为，而不能说这个类是这个接口</li>
+    </ul>
+  </li>
+  <li>所以当只有部分子类要完成的方法，我们可以直接把它封装到一个接口里面，但是对于全部子类都要实现的方法，应该使用抽象类</li>
+</ul>
+
+<h4 id="内部类inner-class">内部类(Inner Class)</h4>
+<ul>
+  <li>关于内部类的内容多选自<a href="https://www.cnblogs.com/chenssy/p/3388487.html">java提高篇（八）—-详解内部类</a></li>
+  <li>还有这个<a href="https://www.cnblogs.com/dolphin0520/p/3811445.html">Java内部详解</a></li>
+  <li>
+    <p>A class defined within a class。就是在一个类的内部再定义一个类。里面定义的这个类就叫做内部类。</p>
+  </li>
+  <li>成员内部类（成员内部类是最普通的内部类，它的定义为位于另一个类的内部）
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="nc">Circle</span> <span class="o">{</span>
+  	<span class="kt">double</span> <span class="n">radius</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+     	
+  	<span class="kd">public</span> <span class="nf">Circle</span><span class="o">(</span><span class="kt">double</span> <span class="n">radius</span><span class="o">)</span> <span class="o">{</span>
+      	<span class="k">this</span><span class="o">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">radius</span><span class="o">;</span>
+  	<span class="o">}</span>
+    	 
+  	<span class="kd">class</span> <span class="nc">Draw</span> <span class="o">{</span>     <span class="c1">//内部类</span>
+      	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawSahpe</span><span class="o">()</span> <span class="o">{</span>
+          	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"drawshape"</span><span class="o">);</span>
+      	<span class="o">}</span>
+  	<span class="o">}</span>
+  <span class="o">}</span>
+
+</code></pre></div>    </div>
+    <ul>
+      <li>内部类可以访问外部类的成员，包括私有的成员，但是如果外部类想要访问内部类的成员，必须要创建内部类对象，才可以访问，在编译的时候，编译器会默认为成员内部类添加了一个指向外部类对象的引用</li>
+      <li>要注意的是！当成员内部类拥有和外部类同名的成员变量或者方法时，默认情况下访问的是成员内部类的成员。如果从外面要访问外部类的同名成员，需要<code>外部类.this.成员</code></li>
+      <li>成员内部类是依附外部类而存在的，也就是说，如果要创建成员内部类的对象，前提是必须首先存在一个外部类对象。
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nc">Outter</span> <span class="n">outter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Outter</span><span class="o">();</span>
+  <span class="nc">Outter</span><span class="o">.</span><span class="na">Inner</span> <span class="n">inner</span> <span class="o">=</span> <span class="n">outter</span><span class="o">.</span><span class="na">new</span> <span class="nf">Inner</span><span class="o">();</span>
+  <span class="c1">//或者是</span>
+  <span class="nc">Outter</span><span class="o">.</span><span class="na">Inner</span> <span class="n">inner</span> <span class="o">=</span> <span class="n">outter</span><span class="o">.</span><span class="na">getInnerInstance</span><span class="o">();</span>
+</code></pre></div>        </div>
+      </li>
+      <li>内部类可以拥有private访问权限、protected访问权限、public访问权限及包访问权限。比如上面的例子，如果成员内部类Inner用private修饰，则只能在外部类的内部访问，如果用public修饰，则任何地方都能访问；如果用protected修饰，则只能在同一个包下或者继承外部类的情况下访问；如果是默认访问权限，则只能在同一个包下访问。这一点和外部类有一点不一样，外部类只能被public和包访问两种权限修饰。我个人是这么理解的，由于成员内部类看起来像是外部类的一个成员，所以可以像类的成员一样拥有多种权限修饰。</li>
+    </ul>
+  </li>
+  <li>局部内部类（定义在一个方法或者一个作用域里面的类，它和成员内部类的区别在于局部内部类的访问仅限于方法内或者该作用域内）</li>
+  <li>局部内部类因为就像是个局部变量一样，是不可以有修饰符的
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="nc">People</span><span class="o">{</span>
+      <span class="kd">public</span> <span class="nf">People</span><span class="o">()</span> <span class="o">{</span>
+			 
+      <span class="o">}</span>
+  <span class="o">}</span>
+ 
+  <span class="kd">class</span> <span class="nc">Man</span><span class="o">{</span>
+      <span class="kd">public</span> <span class="nf">Man</span><span class="o">(){</span>
+			 
+      <span class="o">}</span>
+	 
+      <span class="kd">public</span> <span class="nc">People</span> <span class="nf">getWoman</span><span class="o">(){</span>
+          <span class="kd">class</span> <span class="nc">Woman</span> <span class="kd">extends</span> <span class="nc">People</span><span class="o">{</span>   <span class="c1">//局部内部类</span>
+              <span class="kt">int</span> <span class="n">age</span> <span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+          <span class="o">}</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nf">Woman</span><span class="o">();</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>匿名内部类（匿名内部类也就是没有名字的内部类，正因为没有名字，所以匿名内部类只能使用一次，它通常用来简化代码编写）</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">eat</span><span class="o">();</span>
+  <span class="o">}</span>
+	 
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Demo</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      	<span class="nc">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">()</span> <span class="o">{</span>
+          	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">eat</span><span class="o">()</span> <span class="o">{</span>
+              	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"eat something"</span><span class="o">);</span>
+          	<span class="o">}</span>
+      	<span class="o">};</span>
+      	<span class="n">p</span><span class="o">.</span><span class="na">eat</span><span class="o">();</span>
+  	<span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>以上这段代码的运行结果也是eat something，这样的写法就比较简洁</li>
+      <li>匿名内部类是唯一一个没有构造函数的类</li>
+    </ul>
+  </li>
+  <li>静态内部类（和成员内部类很像，只不过他多了个静态修饰符）
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  <span class="o">{</span>
+      	<span class="nc">Outter</span><span class="o">.</span><span class="na">Inner</span> <span class="n">inner</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Outter</span><span class="o">.</span><span class="na">Inner</span><span class="o">();</span>
+  	<span class="o">}</span>
+  <span class="o">}</span>
+	 
+  <span class="kd">class</span> <span class="nc">Outter</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="nf">Outter</span><span class="o">()</span> <span class="o">{</span>
+	         
+  	<span class="o">}</span>
+	     
+  	<span class="kd">static</span> <span class="kd">class</span> <span class="nc">Inner</span> <span class="o">{</span>
+      	<span class="kd">public</span> <span class="nf">Inner</span><span class="o">()</span> <span class="o">{</span>
+	             
+      	<span class="o">}</span>
+  	<span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>静态内部类是不可以像成员内部类一样访问外部类非静态的内容，因为静态内部类是独立于外部类的，是可以独立创建的，所以如果允许静态内部类访问外部类的非静态的内容的话就会产生矛盾</li>
+    </ul>
+  </li>
+  <li>为什么要使用内部类？<strong>使用内部类最吸引人的原因是：每个内部类都能独立地继承一个接口的实现，所以无论外围类是否已经继承了某个接口的实现，对于内部类没有影响</strong></li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Father</span> <span class="o">{</span>
+
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Mother</span> <span class="o">{</span>
+
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Son</span> <span class="kd">implements</span> <span class="nc">Father</span><span class="o">,</span> <span class="nc">Mother</span> <span class="o">{</span>
+
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Daughter</span> <span class="kd">implements</span> <span class="nc">Father</span><span class="o">{</span>
+
+    <span class="kd">class</span> <span class="nc">Mother_</span> <span class="kd">implements</span> <span class="nc">Mother</span><span class="o">{</span>
+        
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>思考一个很高深的问题，为什么局部内部类和匿名内部类只可以访问局部final变量？先考虑以下代码</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+  	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  <span class="o">{</span>
+       	  
+  	<span class="o">}</span>
+     	
+  	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+      	<span class="kd">final</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+      	<span class="k">new</span> <span class="nf">Thread</span><span class="o">(){</span>
+          	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+              	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+              	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+          	<span class="o">};</span>
+      	<span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+  	<span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>这段代码就很有东西，观察test这个方法，他访问的是a和b这两个final变量，当test方法执行完毕之后，变量a和b的生命周期就结束了（因为是局部的），那么如果Thread在此时还没结束，Thread还要访问a/b的，那么怎么办呢？Java采用了复制的手段来解决这个问题，具体是：也就说如果局部变量的值在编译期间就可以确定，则直接在匿名内部里面创建一个拷贝。如果局部变量的值无法在编译期间确定，则通过构造器传参的方式来对拷贝进行初始化赋值。前者很好理解，如果是后者的话，可以看出，在run方法中访问的变量a和test中实际的局部变量啊不是一个变量，他们只不过有一样的值，那么如果test中的a被确定了，然后run又想改变a的内容的话，会造成数据不一致！所以java编译器限定必须将变量a限制为final变量</p>
+  </li>
+  <li>
+    <p>final关键字：可以修饰类，方法和变量，fianl修饰的类不能被子类继承，final修饰的方法，不能被子类重写，final修饰的变量的值不能被改变，其实也就相当于一个常量了</p>
+  </li>
+</ul>
+
+<h3 id="常用api">常用API</h3>
+<ul>
+  <li>API，英文全称Application Programming Interface，翻译为“应用程序编程接口”。是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。简单的来说就是一个让编程人员不需要读到源码就能使用某一现存的软件/硬件的接口
+    <h4 id="wrapper-classes包装类">Wrapper classes（包装类）</h4>
+  </li>
+  <li>有的时候为了方便，我们往往希望一个基本数据类型不仅仅是基本数据类型，我们也想他是一个对象，毕竟万物皆是对象。那么Java为每一个基本数据类型都有一个唯一的包装类。基本类型与其包装类都可以通过他对应的包装类的中的静态成员方法进行转换。注意的是，<strong>这些包装类都是final修饰的</strong>，他们都无法被继承或重写.
+    <h5 id="integer包装类">Integer包装类</h5>
+  </li>
+  <li><code>public Integer(int value)</code>: Integer包装类的构造函数，构造一个值为value的Integer对象</li>
+  <li><code>public Integer(String s)</code>: Integer包装类的构造函数，相当于把字符串s中的数字提取出来放入Integer对象当中</li>
+  <li><code>static int MAX_VALUE</code></li>
+  <li><code>static int MIN_VALUE</code></li>
+  <li><code>public static String toBinaryString(int i)</code>: 用String返还一个int的二进制形式</li>
+  <li><code>public static String toHexSrtring(int i)</code></li>
+  <li><code>public static String toOctal(int i)</code></li>
+  <li><code>public static String toString(int i, int radix)</code></li>
+  <li><code>public static Integer valueOf(String s, int radix)</code>: 相当于把一个String中的int提取出来并返还</li>
+  <li><code>public Integer(int value)</code>: 和构造函数一样，不过也有其他的意义，int -&gt; Integer的转换</li>
+  <li><code>public int intValue()</code>: Integer -&gt; int的转换
+    <h4 id="object">Object</h4>
+  </li>
+  <li><code>public String toSrting()</code>: 就是那个每个对象都要改来改去的方法</li>
+  <li><code>public boolean equals(Object obj)</code>: 这个方法的意义是判断两个object是不是指向同一个类</li>
+  <li><code>protected void finalize()</code>: The java.lang.Object.finalize() is called by the garbage collector on an object when garbage collection determines that there are no more references to the object. A subclass overrides the finalize method to dispose of system resources or to perform other cleanup. 似乎是判断已经没有对这个类的引用</li>
+  <li><code>public final Class getClass()</code>: returns the runtime class of an object.</li>
+  <li><code>public int hashCode()</code>: method returns a hash code value for the object.
+    <h4 id="scanner">Scanner</h4>
+  </li>
+  <li><code>public String nextLine()</code>: 以Enter为结束符,也就是说 nextLine()方法返回的是输入回车之前的所有字符且可以获得空白。</li>
+  <li><code>public int nextInt()</code>: 读取整数
+    <h4 id="string">String</h4>
+  </li>
+  <li><code>public String()</code></li>
+  <li><code>boolean equals(Object obj)</code></li>
+  <li><code>boolean equalsIgnoreCase(Srting str)</code></li>
+  <li><code>boolean contains(Srting str)</code></li>
+  <li><code>boolean startsWith(Srting str)</code></li>
+  <li><code>boolean endsWith(String str)</code></li>
+  <li><code>boolean isEmpty</code></li>
+  <li><code>int length()</code></li>
+  <li><code>char charAt(int index)</code></li>
+  <li><code>int indexOf(int ch)</code></li>
+  <li><code>int indexOf(String str)</code></li>
+  <li><code>int indexOf(int ch, int fromIndex0</code></li>
+  <li><code>String subSrting(int start, int end)</code></li>
+  <li><code>byte[] getBytes()</code></li>
+  <li><code>char[] toCharArrays()</code></li>
+  <li><code>static String copyValueOf(char[] chs)</code></li>
+  <li><code>static String valueOf(char[] chs)</code></li>
+  <li><code>static String valueOf(int i)</code></li>
+  <li><code>String toLowerCase()</code></li>
+  <li><code>String concat(String str)</code></li>
+  <li><code>String replace(char old, char new)</code></li>
+  <li><code>String replace(String old, String new)</code></li>
+  <li><code>String[] split(String regex)</code></li>
+  <li><code>String trim()</code>: 去除字符串两端空格
+    <h4 id="arrays">Arrays</h4>
+  </li>
+  <li><code>public static String toSrting(int[] a)</code>: This method returns a string representation of a.</li>
+  <li><code>public static void sort(int[] a)</code>: o(nlogn)</li>
+  <li><code>public static int binarySearch(int[] a, int key)</code>
+    <h4 id="stringbuffer">StringBuffer</h4>
+  </li>
+  <li>众所周知String作为不可修改的对象，即每次更改String都会产生一个新的字符串对象，与之相对应的StringBuffer类的对象能够进行多次修改并且不会产生新的未使用的对象，因此在内存上要优于String对象</li>
+  <li><code>public StringBuffer()</code></li>
+  <li><code>public StringBuffer(int capacity)</code></li>
+  <li><code>public StringBuffer(String str)</code></li>
+  <li><code>public int length()</code></li>
+  <li><code>public int capacity()</code></li>
+  <li><code>public StringBuffer append(int i)</code></li>
+  <li><code>public StringBuffer insert(int offset, int i)</code></li>
+  <li><code>StringBuffer delete(int start, int end)</code></li>
+  <li><code>StringBuffer deleteCharAt(int index)</code></li>
+  <li><code>StringBuffer replace(int start, int end, String str)</code></li>
+  <li><code>String substring(int start, int end)</code></li>
+  <li><code>StringBuffer reverse()</code>
+    <h4 id="random">Random</h4>
+  </li>
+  <li><code>public Random(long seed)</code>: 构造一个random类，If two instances of Random are created with the same seed, and the same sequence of method calls is made for each, they will generate and return identical sequences of numbers.</li>
+  <li><code>public int nextInt(int n)</code>: 随机生成一个0到n之间的整数
+    <h4 id="system">System</h4>
+  </li>
+  <li><code>public static void gc()</code>: The java.lang.System.gc() method runs the garbage collector</li>
+  <li><code>public static void exit(int status)</code>: The java.lang.System.exit() method terminates the currently running Java Virtual Machine.</li>
+  <li><code>public static long currentTimeMills()</code></li>
+  <li><code>public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)</code>: The java.lang.System.arraycopy() method copies an array from the specified source array, beginning at the specified position, to the specified position of the destination array.
+    <h4 id="date">Date</h4>
+  </li>
+  <li><code>public Date()</code></li>
+  <li><code>public Date(long date)</code>: 毫秒到日期的转换</li>
+  <li><code>public long getTime()</code>: 日期到毫秒的转换
+    <h4 id="dateformat">DateFormat</h4>
+  </li>
+  <li>SimpleDateFormat is a concrete class for formatting and parsing dates in a locale-sensitive manner. SimpleDateFormat allows you to start by choosing any user-defined patterns for date-time formatting.</li>
+  <li><code>public SimpleDateFormat(String pattern)</code></li>
+  <li><code>public final String format(Date date)</code></li>
+  <li><code>public Date parse(String source)</code>
+    <h4 id="calender">Calender</h4>
+  </li>
+  <li><code>public static Calender getInstance()</code>: The java.util.Calendar.getInstance() method gets a calendar using the specified time zone and specified locale.</li>
+  <li><code>public int get(int field)</code>: returns the value of the given calendar field.</li>
+  <li><code>public final void set(int year, int month, int date)</code>: sets the values for the calendar fields YEAR, MONTH,DAY_OF_MONTH,HOUR_OF_DAY,MINUTE and SECOND.</li>
+  <li><code>public abstract void add(int field, int amount)</code>: adds or subtracts the specified amount of time (amount) to the given calendar field (field), based on the calendar’s rules.</li>
+</ul>
+
