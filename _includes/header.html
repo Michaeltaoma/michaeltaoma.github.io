@@ -2,10 +2,10 @@
 
 	{% if page.url == '/index.html' or page.url == '/' %}
 		{% assign link = '/about' %}
-		{% assign prompt = 'About the Author' %}
+		{% assign prompt = 'About Me' %}
 	{% else %}
 		{% assign link = '/' %}
-		{% assign prompt = 'Back to Index' %}
+		{% assign prompt = 'Main' %}
 	{% endif %}
 
 	<a href="{{ link | prepend: site.baseurl | prepend: site.url }}">
@@ -15,8 +15,6 @@
 </aside>
 <br />
 <section>
-		And hello to u too:) By clicking the above icon, u can come back to index any time, or u can eneter my personal info page. 
-		<br />
-		<em><strong>The picture is randomly generated every time u click the icon, I have nothing to do with any of the content of the pictures(ﾟ∀ﾟ)</strong></em>
-.
+		And hello to u too:)
+<!--		<em><strong>The picture is randomly generated every time u click the icon, I have nothing to do with any of the content of the pictures(ﾟ∀ﾟ)</strong></em>-->
 </section>
