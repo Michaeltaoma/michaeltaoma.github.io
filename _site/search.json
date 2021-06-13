@@ -2,6 +2,17 @@
   
     {
 
+      "title"    : "Summer Note 01",
+      "url"      : "/summer-note-01",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2021-06-12 00:00:00 +0800",
+	  "description" : ""
+
+    } ,
+  
+    {
+
       "title"    : "Mlp",
       "url"      : "/mlp",
       "category" : "",
