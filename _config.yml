@@ -8,7 +8,8 @@ logo_url:           https://avatars0.githubusercontent.com/u/13794983?v=4 # Get 
 url:                https://michaeltaoma.github.io
 baseurl:            
 permalink:          /:title # Post permalink
-timezone:           Asia/Kuala_Lumpur # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#timezone:           Asia/Kuala_Lumpur # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone:           America/Vancouver # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 mathjax:            true  # enables support for mathjax - set to 'false' to disable
 
 # Site Build

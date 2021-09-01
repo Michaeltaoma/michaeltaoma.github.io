@@ -1,21 +1,47 @@
-<aside class="logo">
+<!--<div style="background-image: url('https://source.unsplash.com/random/360x175');">-->
+<!--<div style="background-color: #7BA7AB">-->
+<style>
+.d-flex {
+    position: relative;
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 160px;
+	width: 100%;
+}
 
-	{% if page.url == '/index.html' or page.url == '/' %}
-		{% assign link = '/about' %}
-		{% assign prompt = 'About Me' %}
-	{% else %}
-		{% assign link = '/' %}
-		{% assign prompt = 'Main' %}
-	{% endif %}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+</style>
+<div class="d-flex ">
+	<div class="logo">
 
-	<!-- The picture is generated from unsplash,com-->
+		{% if page.url == '/index.html' or page.url == '/' %}
+			{% assign link = '/about' %}
+			{% assign prompt = 'About Me' %}
+		{% else %}
+			{% assign link = '/' %}
+			{% assign prompt = 'Main' %}
+		{% endif %}
 
-	<a href="{{ link | prepend: site.baseurl | prepend: site.url }}">
-		<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">
-	</a>
-	<span class="logo-prompt code">{{ prompt }}</span>
-</aside>
+		<a href="{{ link | prepend: site.baseurl | prepend: site.url }}">
+			<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">
+		</a>
+		<span class="logo-prompt code">{{ prompt }}</span>
+	</div>
 <br />
+
+</div>
+
 <section>
-		And hello to u too:)
+	And hello to u too:) Click the icon above for more detail
 </section>

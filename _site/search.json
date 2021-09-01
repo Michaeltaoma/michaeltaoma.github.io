@@ -2,11 +2,22 @@
   
     {
 
+      "title"    : "Offline Reinforcement Learning Review",
+      "url"      : "/Offline-Reinforcement-Learning-Review",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2021-06-15 00:00:00 -0700",
+	  "description" : ""
+
+    } ,
+  
+    {
+
       "title"    : "Summer Note 01",
       "url"      : "/summer-note-01",
       "category" : "",
       "tags"     : "",
-      "date"     : "2021-06-12 00:00:00 +0800",
+      "date"     : "2021-06-12 00:00:00 -0700",
 	  "description" : ""
 
     } ,
@@ -17,7 +28,7 @@
       "url"      : "/mlp",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-06-09 00:00:00 +0800",
+      "date"     : "2020-06-09 00:00:00 -0700",
 	  "description" : ""
 
     } ,
@@ -28,7 +39,7 @@
       "url"      : "/dnn",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-24 00:00:00 +0800",
+      "date"     : "2020-05-24 00:00:00 -0700",
 	  "description" : ""
 
     } ,
@@ -39,7 +50,7 @@
       "url"      : "/java-on-call-7",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-18 00:00:00 +0800",
+      "date"     : "2020-05-18 00:00:00 -0700",
 	  "description" : "Spring MVC的一些基本应用和他处理数据的方式"
 
     } ,
@@ -50,7 +61,7 @@
       "url"      : "/%E8%A5%BF%E7%93%9C",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-17 00:00:00 +0800",
+      "date"     : "2020-05-17 00:00:00 -0700",
 	  "description" : "周志华的机器学习随书笔记"
 
     } ,
@@ -61,7 +72,7 @@
       "url"      : "/java-on-call-6",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-17 00:00:00 +0800",
+      "date"     : "2020-05-17 00:00:00 -0700",
 	  "description" : "Spring框架, AOP, IOC应用, Maven, 主要是关于依赖注入的"
 
     } ,
@@ -72,7 +83,7 @@
       "url"      : "/java-on-call-5",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-12 00:00:00 +0800",
+      "date"     : "2020-05-12 00:00:00 -0700",
 	  "description" : "Spring框架, AOP, IOC"
 
     } ,
@@ -83,7 +94,7 @@
       "url"      : "/java-on-call-4",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-11 00:00:00 +0800",
+      "date"     : "2020-05-11 00:00:00 -0700",
 	  "description" : "这是学习java的第四天，内容包括IO剩下的和Spring框架"
 
     } ,
@@ -94,7 +105,7 @@
       "url"      : "/economics-note",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-11 00:00:00 +0800",
+      "date"     : "2020-05-11 00:00:00 -0700",
 	  "description" : "My Economics note"
 
     } ,
@@ -105,7 +116,7 @@
       "url"      : "/all-my-past-notes",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-11 00:00:00 +0800",
+      "date"     : "2020-05-11 00:00:00 -0700",
 	  "description" : "CISC324, CISC452, CISC365, CISC223, CISC124"
 
     } ,
@@ -116,7 +127,7 @@
       "url"      : "/java-on-call-3",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-10 00:00:00 +0800",
+      "date"     : "2020-05-10 00:00:00 -0700",
 	  "description" : "set, io, list, arraylist, vector, linklist, hashset, linkedhashset, generic, treeset, map, treemap, hashmap, linkedhashmap, compareto, comparable, block, nonblock, asychronous"
 
     } ,
@@ -127,7 +138,7 @@
       "url"      : "/java-on-call-2",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-09 00:00:00 +0800",
+      "date"     : "2020-05-09 00:00:00 -0700",
 	  "description" : ""
 
     } ,
@@ -138,7 +149,7 @@
       "url"      : "/java-on-call-1",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-08 00:00:00 +0800",
+      "date"     : "2020-05-08 00:00:00 -0700",
 	  "description" : ""
 
     } ,
@@ -149,7 +160,7 @@
       "url"      : "/Hello-World",
       "category" : "",
       "tags"     : "",
-      "date"     : "2020-05-07 00:00:00 +0800",
+      "date"     : "2020-05-07 00:00:00 -0700",
 	  "description" : ""
 
     } ,
@@ -160,7 +171,7 @@
       "url"      : "/very-long-title-post",
       "category" : "",
       "tags"     : "",
-      "date"     : "2016-10-18 00:00:00 +0800",
+      "date"     : "2016-10-18 00:00:00 -0700",
 	  "description" : ""
 
     } 
