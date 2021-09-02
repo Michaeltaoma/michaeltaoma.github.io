@@ -74,7 +74,7 @@
 <loc>http://localhost:4000/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/project-detail/intelligent_doctor</loc>
+<loc>http://localhost:4000/intelligent_doctor</loc>
 </url>
 <url>
 <loc>http://localhost:4000/project</loc>
