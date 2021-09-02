@@ -29,62 +29,17 @@
 		<!--<div style="background-image: url('https://source.unsplash.com/random/360x175');">-->
 <!--<div style="background-color: #7BA7AB">-->
 <style>
+
 .d-flex {
-    position: relative;
+	position: relative;
 	/*background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
 	background: linear-gradient(-45deg, #134e5e, #71b280);
 	background-size: 400% 400%;
 	animation: gradient 10s ease infinite;
 	height: 160px;
 	width: 100%;
-    border-radius: 10px;
+	border-radius: 10px;
 }
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-</style>
-<div class="d-flex ">
-	<div class="logo">
-
-		
-
-		<a href="http://localhost:4000/about">
-<!--			<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">-->
-			<img src="assets/post_pics/head_icon.jpeg" alt="" class="logo-avatar">
-		</a>
-		<span class="logo-prompt code">About Me</span>
-	</div>
-<br />
-
-</div>
-
-<br />
-
-<section>
-	And hello to u too:) Click the icon above for more detail
-</section>
-
-
-		<div id="content">
-			<style>
-	/*input[type=text]{*/
-	/*	width: 50%;*/
-	/*	height: 40%;*/
-	/*	border: 2px solid #7BA7AB;*/
-    /*    border-radius: 5px;*/
-    /*    background: #f0f8ff;*/
-    /*    color: #00000;*/
-	/*}*/
-
 	input{
 		border: 1px solid #ccc;
 		width: 30%;
@@ -117,9 +72,43 @@
 	  margin-right: 0.2rem;
 	}
 
+	@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
 </style>
 
+
+<div class="d-flex ">
+	<div class="logo">
+
+		
+
+		<a href="http://localhost:4000/about">
+<!--			<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">-->
+			<img src="assets/post_pics/head_icon.jpeg" alt="" class="logo-avatar">
+
+		</a>
+		<span class="logo-prompt code">About Me</span>
+	</div>
+<br />
+
+</div>
+
+<br />
+
 <section>
+	And hello to u too:) Click the icon above for more detail
+
+	<br />
+	<br />
 
 	<div id="search-container" >
 		<input type="text" id="search-input" placeholder="search">
@@ -138,7 +127,44 @@
   		json: '/search.json'
 	})
 	</script>
-	
+
+</section>
+
+
+
+
+		<div id="content">
+			<style>
+	.parallax {
+  /* The image used */
+  background-image: url("assets/post_pics/artur-tumasjan-qLzWvcQq-V8-unsplash.jpg");
+
+  /* Set a specific height */
+  min-height: 300px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+
+<section>
+	<p style="font-family:verdana">Thank you and welcome! I am Tao Ma and currently a master student in the Department of Electrical and Computer Engineering student at <a href="https://www.ubc.ca/">The University of British Columbia</a> and I obtained my B.S. in CS from <a href="https://www.queensu.ca/">Queen's University</a>.</p>
+	<p style="font-family:verdana">I am interested in web developing as well as research on the topic of Artificial Intelligence. View <a href="project">here</a> if you want to know about some of my projects.</p>
+	<p style="font-family:verdana">This webpage is mostly intended to showcase my own work and to keep track of my notes.</p>
+
+
+
+	<div class="recent_render">
+		<h2>Most Recent <a href="project">Project</a></h2>
+		<div class="parallax"></div>
+		<p style="font-family:verdana"><strong>Intelligent Doctor: </strong>a medical advising system that can generate clinical note given CT images and recommend morphine usages given ICU patients’ status using Python, PyTorch with <a href = "https://mimic.mit.edu/">MIMICIV</a> dataset. More details on <a href="project-detail/intelligent_doctor">here</a>.</p>
+	</div>
+
+	<div class="Note">
+	<h2>Notes</h2>
 	
 		
 			<h3 class="code">2021</h3>
@@ -430,6 +456,7 @@
 		</ul>
 
 	
+	</div>
 
 </section>
 

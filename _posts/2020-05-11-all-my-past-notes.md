@@ -40,5 +40,12 @@ The following notes are classified according to the course, as a share and as a 
 
 *Introduction to object-oriented design, architecture, and programming. Use of packages, class libraries, and interfaces. Encapsulation and representational abstraction. Inheritance. Polymorphic programming. Exception handling. Iterators. Introduction to a class design notation. Applications in various areas.*
 
+#### ECON212: Microeconomic Theory I
+<a href="economics-note" target="_blank">Lecture Notes</a>
+
+*Theory of markets and prices: decision-making by individuals and firms, equilibrium conditions under various market structures, and issues of individual and social welfare. This course presumes a knowledge of calculus at the first-year university level.
+*
+
+
 
 

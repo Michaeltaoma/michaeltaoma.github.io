@@ -3,69 +3,36 @@ layout: default
 ---
 
 <style>
-	/*input[type=text]{*/
-	/*	width: 50%;*/
-	/*	height: 40%;*/
-	/*	border: 2px solid #7BA7AB;*/
-    /*    border-radius: 5px;*/
-    /*    background: #f0f8ff;*/
-    /*    color: #00000;*/
-	/*}*/
+	.parallax {
+  /* The image used */
+  background-image: url("assets/post_pics/artur-tumasjan-qLzWvcQq-V8-unsplash.jpg");
 
-	input{
-		border: 1px solid #ccc;
-		width: 30%;
-		border-radius: 3px;
-		padding: 7px 0px 7px 5px;
-		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-		box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-		-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
-            }
-	input:focus{
-		border-color: #66afe9;
-		outline: 0;
-		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-		box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
-	}
-	#search-container ul {
-		list-style: none;
-		}
-	#search-container ul li::before {
-	  content: "";
-	  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/fb-heart.gif);
-	  background-size: contain;
-	  display: inline-block;
-	  width: 1em;
-	  height: 1em;
-	  position: relative;
-	  top: 0.1rem;
-	  margin-right: 0.2rem;
-	}
+  /* Set a specific height */
+  min-height: 300px;
 
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>
 
 <section>
+	<p style="font-family:verdana">Thank you and welcome! I am Tao Ma and currently a master student in the Department of Electrical and Computer Engineering student at <a href="https://www.ubc.ca/">The University of British Columbia</a> and I obtained my B.S. in CS from <a href="https://www.queensu.ca/">Queen's University</a>.</p>
+	<p style="font-family:verdana">I am interested in web developing as well as research on the topic of Artificial Intelligence. View <a href="project">here</a> if you want to know about some of my projects.</p>
+	<p style="font-family:verdana">This webpage is mostly intended to showcase my own work and to keep track of my notes.</p>
 
-	<div id="search-container" >
-		<input type="text" id="search-input" placeholder="search">
-		<ul id="results-container"></ul>
+
+
+	<div class="recent_render">
+		<h2>Most Recent <a href="project">Project</a></h2>
+		<div class="parallax"></div>
+		<p style="font-family:verdana"><strong>Intelligent Doctor: </strong>a medical advising system that can generate clinical note given CT images and recommend morphine usages given ICU patients’ status using Python, PyTorch with <a href = "https://mimic.mit.edu/">MIMICIV</a> dataset. More details on <a href="project-detail/intelligent_doctor">here</a>.</p>
 	</div>
 
-
-<!-- Script pointing to search-script.js -->
-	<script src="assets/js/search-script.js" type="text/javascript"></script>
-
-<!-- Configuration -->
-	<script>
-	SimpleJekyllSearch({
-  		searchInput: document.getElementById('search-input'),
-  		resultsContainer: document.getElementById('results-container'),
-  		json: '/search.json'
-	})
-	</script>
-	
+	<div class="Note">
+	<h2>Notes</h2>
 	{% for post in site.posts %}
 		{% unless post.next %}
 			<h3 class="code">{{ post.date | date: '%Y' }}</h3>
@@ -89,5 +56,6 @@ layout: default
 		</ul>
 
 	{% endfor %}
+	</div>
 
 </section>

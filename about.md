@@ -3,21 +3,58 @@ layout: page
 title: About
 ---
 
+<style>
+.about_link a {
+  background-color: red;
+  color: black;
+  /*padding: 1em 1.5em;*/
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.about_link a:hover {
+  background-color: #555;
+}
+
+.about_link a:active {
+  background-color: black;
+}
+
+.about_link a:visited {
+  background-color: #ccc;
+}
+
+/* Non-Demo Styles */
+.about_link body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+</style>
+
 #### ლ(́◕◞౪◟◕‵ლ)
 
-Thank you and welcome! I am a master of engineering student in the Department of Electrical and Computer Engineering student at the University of British Columbia. I am interested in web developing as well as research on the topic of Artificial Intelligence.
 
 {% comment %} 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-eGKwriOgwk" frameborder="0" allowfullscreen></iframe>
 {% endcomment %}
 
-For my resume, you can find it <a href = "assets/pdf/Tao's_Resume.pdf">here</a>
 
-如果你想要我的中文简历的话，他在<a href="assets/pdf/Tao_Ma_resume.pdf">这里</a>哦！
+<div class="about_link">
+For my resume, you can find it at <a href = "assets/pdf/Tao's_Resume.pdf">Ma, Tao - Resume</a>
+<br />
 
-For my past notes, locate here -> <a href="all-my-past-notes">All my past notes<a>
+如果你想要我的中文简历的话，他在<a href="assets/pdf/Tao_Ma_resume.pdf">马韬 - 简历</a>
+<br />
 
-For my project, you can find them on this <a href="project">page</a>
+For my past notes, locate here -> <a href="all-my-past-notes">Notes</a>
+<br />
+
+For my project, you can find them on this <a href="project">Project Showcase</a>
+
+<br />
+</div>
 
 **Less is more..**
 **空即是...**
