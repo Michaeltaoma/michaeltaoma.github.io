@@ -1,4 +1,48 @@
 ---
-layout: page
+layout: project-style
 title: Project
 ---
+
+<style>
+    h2, h3{
+        font-family: "Open Sans";
+    }
+
+    p, li{
+        font-family: "Open Sans";
+        margin: 3px auto;
+    }
+</style>
+
+<h2 id="intelligent">Intelligent Doctor</h2>
+
+<p>We developed an end-to-end medical advising system that is able to <a href="#clinical">generate clinical note giving a patient's CT image</a> and <a href="#morphine">suggest appropriate morphine dosage</a>
+    using <a href="https://pytorch.org/">PyTorch</a> with <a href="https://mimic.mit.edu/">MIMICIV</a> dataset.</p>
+
+<h3 id="clinical">Clinical Note Generation</h3>
+<img src="assets/post_pics/deecamp.gif" style="height=10;" />
+<p>The Vision Transformer-based CT intelligent diagnosis report combines computer vision and natural language processing algorithms, and the introduction of the memory driver module significantly improves the accuracy of the model when generating medium-length diagnosis reports.
+</p>
+<h3 id="morphine">Morphine Dose Prediction</h3>
+<p>
+    We use Q-Learning to make the model learn the optimal dose of sedative use. Our model combines two extensions of the traditional deep Q network (DQN). First, the dual-deep Q network improves the stability of the algorithm by bifurcating Q values into two values: state value and action dominance, while the former of the double-deep Q network (DDQN) alleviates the problem of overestimation of value due to bootstrapping and maximization by separating action selection from value estimation. The model has two hidden layers, consisting of 64 and 256 nodes, respectively, with Leaky-ReLu activation functions and equally sized dominance and value streams. In each training step, we randomly (uniformly) draw samples from the experience pool to allow the model to learn.
+</p>
+<hr>
+
+<h2>Grad School Application Information System</h2>
+<ol>
+    <li>Realized more than 10 stored procedures according to system needs by programming SQL to provide access to data to external software.</li>
+    <li>Developed and launched a website utilizing Spring Boot, CSS, HTML, and Heroku – enabling users to examine or contribute information about applicants to graduate programs and their application results, allowing students to get a sense of which programs they may be eligible.</li>
+</ol>
+<hr>
+
+<h2>Animal Rescuing System</h2>
+<ol>
+    <li>Designed and implemented the database structure by using ER Diagrams and programming SQL to provide robust storage for the animal rescuing system, owned and managed all changes to the data models.</li>
+    <li>Collaborated with team members to implement and deploy the system that deliver animal rescuing related functionalities using PHP and Bootstrap.</li>
+</ol>
+<hr>
+
+More to be added
+
+
