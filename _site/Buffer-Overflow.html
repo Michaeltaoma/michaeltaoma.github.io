@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+	<title>Buffer Overflow · Tao Ma</title>
+
+
+<meta name="description" content="Buffer Overflow">
+
+<link rel="icon" href="http://localhost:4000/assets/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
+<link rel="stylesheet" href="http://localhost:4000/assets/core.css">
+<link rel="canonical" href="http://localhost:4000/Buffer-Overflow">
+<link rel="alternate" type="application/atom+xml" title="Tao Ma" href="http://localhost:4000/feed.xml" />
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<!--<div style="background-image: url('https://source.unsplash.com/random/360x175');">-->
+<!--<div style="background-color: #7BA7AB">-->
+<style>
+
+.d-flex {
+	position: relative;
+	/*background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
+	/*background: linear-gradient(-45deg, #134e5e, #71b280);*/
+	/*background: linear-gradient(54deg, #260032, #D8186E);*/
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 160px;
+	width: 100%;
+	border-radius: 10px;
+}
+	input{
+		border: 1px solid #ccc;
+		width: 30%;
+		border-radius: 3px;
+		padding: 7px 0px 7px 5px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+            }
+	input:focus{
+		border-color: #66afe9;
+		outline: 0;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+	}
+	#search-container ul {
+		list-style: none;
+		}
+	#search-container ul li::before {
+	  content: "";
+	  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/fb-heart.gif);
+	  background-size: contain;
+	  display: inline-block;
+	  width: 1em;
+	  height: 1em;
+	  position: relative;
+	  top: 0.1rem;
+	  margin-right: 0.2rem;
+	}
+
+	@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+</style>
+
+
+<div class="d-flex ">
+	<div class="logo">
+
+		
+
+		<a href="http://localhost:4000/">
+<!--			<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">-->
+			<img src="assets/post_pics/head_icon.jpeg" alt="" class="logo-avatar">
+
+		</a>
+		<span class="logo-prompt code">Main</span>
+	</div>
+<br />
+
+</div>
+
+<br />
+
+<section>
+	And hello to u too:) Click the icon above for more detail
+
+	<br />
+	<br />
+
+	<div id="search-container" >
+		<input type="text" id="search-input" placeholder="search">
+		<ul id="results-container"></ul>
+	</div>
+
+
+<!-- Script pointing to search-script.js -->
+	<script src="assets/js/search-script.js" type="text/javascript"></script>
+
+<!-- Configuration -->
+	<script>
+	SimpleJekyllSearch({
+  		searchInput: document.getElementById('search-input'),
+  		resultsContainer: document.getElementById('results-container'),
+  		json: '/search.json'
+	})
+	</script>
+
+</section>
+
+
+
+
+		<div id="content">
+			<article>
+
+	<div class="center">
+		<h1 class="title">Buffer Overflow</h1>
+		<time class="code">September 14, 2021</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<h1 id="buffer-overflow">Buffer Overflow</h1>
+
+<ul>
+  <li>
+    <p>Buffer overflow is a general method or scheme of a computer secure threat. Its main idea is: attacker puts in more content than total number of legal space in a buffer, data that exceeds the buffer limit overflow to somewhere they shouldn’t be and directly affect the normal running of a program.</p>
+  </li>
+  <li>
+    <p>How process stores</p>
+  </li>
+</ul>
+
+<blockquote>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0xFFFFFFFF
+kernel -- denote command and env variables, run time?
+Stack -- denote arguments, local variables, run time
+↓
+↑
+Heap -- denote the dynamic memory alloctaed by malloc(), run time
+Uninitialized static data -- 特指的是static, compile time, static const int x;
+Initialized static data -- 特指的是static, compile time, static const int x = 10; 
+Text(code) -- denote the code segment, compile time
+0x00000000
+</code></pre></div>  </div>
+</blockquote>
+
+<ul>
+  <li>Heap
+    <ul>
+      <li>the heap is managed by the programmer, the ability to modify it is somewhat boundless</li>
+      <li>in C, variables are allocated and freed using functions like malloc() and free()</li>
+      <li>需要程序员自己去释放空间，不然的话，heap占用的空间就会被持续的占用</li>
+      <li>the heap is large, and is usually limited by the physical memory available</li>
+      <li>the heap requires pointers to access it</li>
+    </ul>
+  </li>
+  <li>what kind of buffer arrays are stored in stack?
+    <ul>
+      <li>As mentioned, stack stored all the fixed length(stack itself is fixed-length)</li>
+      <li>when declare fixed length array: <code class="highlighter-rouge">char buffer[n];</code>, the array will be stored in stack</li>
+      <li>when declare dynamic length array:
+        <pre><code class="language-C">  char *buffer;
+  buffer = new char[n];
+</code></pre>
+        <p>the array will be stored in heap</p>
+      </li>
+    </ul>
+  </li>
+  <li>Stack Frame</li>
+</ul>
+
+<blockquote>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function arguments
+return address -- store the return address
+old ebp value -- stores the last location of ebp?
+local variables
+</code></pre></div>  </div>
+</blockquote>
+
+<p>when a function starts, things happen</p>
+
+<ol>
+  <li>ESP works as expected.</li>
+  <li>function arguments has been pushed(in reverse order, such that argumentN would actually being pushed prior to argument0)</li>
+  <li>current value in the EIP will be pushed to stack. This is the return address of the function. The address in current EIP is the adress where this particular function is being called</li>
+  <li>current EBP value will be pushed to the stack. This is to restore the EBP when the function ends.</li>
+  <li>EBP will be set to ESP. Since later when the function return, we need to point back the ESP to the start address to release storage.</li>
+  <li>Local variables get pushed onto the stack. ESP changes as expected.</li>
+  <li>Function runs. If local variables needs to be referenced, then it will be referenced using EBP</li>
+  <li>When function finishs running, ESP points to EBP, releasing all the space took by local variables.</li>
+</ol>
+
+<h3 id="over-write">Over-write</h3>
+
+<h4 id="stack-overflow">Stack Overflow</h4>
+
+<h5 id="code">Code</h5>
+
+<p><strong>Anything that tries to put more things in a <em>fixed</em> length array/buffer results in stack overflow</strong></p>
+
+<pre><code class="language-C">void func(char *arg1)
+{
+char buffer[4]; /* Initialize a fixed array */
+strcpy(buffer, arg1); /*Put in the string*/
+}
+
+int main()
+{
+char *mystr = "AuthMe!"; /*Try to put in buffer more than it takes*/
+func(mystr);
+}
+</code></pre>
+
+<pre><code class="language-C">char buffer[10]; /* Initialize a fixed array */
+memcpy(buffer, "Hello, world!\n", 15); /*Try to put in buffer more than it takes*/
+</code></pre>
+
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#define MAX_IP_LENGTH 15 /*Define the holder length for ip address*/
+int main(void) {
+  char file_name[] = "ip.txt";
+  FILE *fp;
+  fp = fopen(file_name, "r");
+  char ch;
+  int counter = 0;
+  char buf[MAX_IP_LENGTH]; /*Initialize a fixed length array*/
+  while((ch = fgetc(fp)) != EOF) {
+  	/*Fill the array*/
+    buf[counter++] = ch;
+  }
+  buf[counter] = '\0';
+  printf("%s\n", buf);
+  fclose(fp);
+  return 0;
+}
+</code></pre>
+
+<h5 id="how-the-attack-works">How the attack works?</h5>
+
+<h5 id="stack-smashing">Stack Smashing</h5>
+<ol>
+  <li>Construct input string (code injection)
+    <ul>
+      <li>”[NOP SLED][SHELLCODE(MAL CODE)][PADDING][OLD EBP][RETURN ADDRESS]”
+        <ul>
+          <li>Contains no all-zeros byte
+            <ul>
+              <li>
+                <ul>
+                  <li>Caused memcpy, scanf…to stop</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>NOP SLED
+            <ul>
+              <li>No operation, automatic skip to next line when encounter. Adding this helps with locating the desired address: as long as with land on one of NOP SLED, the actual start of the malicious code can be find</li>
+            </ul>
+          </li>
+          <li>SHELLCODE(MAL CODE)
+            <ul>
+              <li>The malicious code we are trying to run. MUST BE:
+                <ol>
+                  <li>Machine Code</li>
+                  <li>Contains no all-zeros byte
+                    <ul>
+                      <li>Caused memcpy, scanf…to stop</li>
+                    </ul>
+                  </li>
+                  <li>Can’t used loader: must be self contained</li>
+                </ol>
+              </li>
+              <li>Malicious code can just be Shellcode
+                <ul>
+                  <li>create a shell for the attacker so that the attacker is able to control the victim computer</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>PADDING</li>
+          <li>OLD EBP: The original address</li>
+          <li>RETURN ADDRESS
+            <ul>
+              <li>The start address of the mal code, can be one of the NOP SLED</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Send the input string to a buffer to overflow it</li>
+  <li>Overwrite the return address</li>
+</ol>
+
+<h5 id="return-oriented-programming">Return Oriented Programming</h5>
+<ol>
+  <li>Find gadgets
+    <ul>
+      <li>Gadgets are chunks of library functions, or useful functions</li>
+      <li>To find useful gadgets, automate a search of the target binary for gadgets(look for <code class="highlighter-rouge">ret</code> instructions, work backwards)</li>
+    </ul>
+  </li>
+  <li>Construct Input String
+    <ul>
+      <li>Contains addresses of different gadgets, in a way that they can be combined</li>
+      <li>arguments will be in between gadgets</li>
+    </ul>
+  </li>
+  <li>Overwrite the return address</li>
+  <li>Stack serves as code
+    <ul>
+      <li>gadgets invoked via <code class="highlighter-rouge">ret</code></li>
+      <li>gadgets get their arguments via <code class="highlighter-rouge">pop</code></li>
+    </ul>
+  </li>
+</ol>
+
+<h5 id="return-to-libc">Return-to-libc</h5>
+<ol>
+  <li>Can be viewed as a very special case of ROP since every “gadgets” used here would be a complete function from library.</li>
+  <li>Construct the input string
+    <ul>
+      <li>Contains the address of the library function that the attacker desire</li>
+      <li>Contains the arguments, if any</li>
+    </ul>
+  </li>
+  <li>Sent the input string to a buffer to overflow it</li>
+  <li>Overwrite the return address with the address of the library function that the attacker desire</li>
+  <li>Executing the library function</li>
+  <li>Reading arguments from stack</li>
+</ol>
+
+<h5 id="blind-return-oriented-programming">Blind Return Oriented Programming</h5>
+<ol>
+  <li>To tackle the randomization of code segment</li>
+  <li>Assume that when a process crash and re-run, the code would not be re-rand</li>
+  <li></li>
+</ol>
+
+<h5 id="challenge">Challenge</h5>
+<ol>
+  <li>Loading code into memory</li>
+  <li>Getting injected code to run</li>
+  <li>Finding the return address</li>
+</ol>
+
+<h5 id="defend-strategies">Defend Strategies</h5>
+
+<ol>
+  <li>
+    <p>Make the bug harder to exploit</p>
+
+    <ul>
+      <li>
+        <p>Examine necessary steps for exploitation, make one or more of them difficult or impossible</p>
+      </li>
+      <li>
+        <p>Best case: complicated exploitation by changing the libraries, compiler, and/or os</p>
+      </li>
+      <li>
+        <p>Detecting overflows with canaries（stop attacker putting code into the memory）
+  	<code class="highlighter-rouge">
+  	function arguments
+ return address 
+ old ebp value 
+ ------- canary -------
+ local variables
+  	</code>
+  	+ carnary就是上面的这一小串代码，如果return address被覆盖的话，那么canary肯定也无了，只需要检查canary是否是一致的就好
+  	+ what value should the canary have
+  		* terminator canaries(用那些scanf看到就会停的东西，攻击者根本不会使这样的数据，因为如果一使用他们也用不了s 	
+  		* random canaries：randomize each process start
+  		* random xor canaries：store canary xor some control info</p>
+      </li>
+      <li>
+        <p>Make stack(and heap) non-executable(stop get %eip to point to attacker code)
+  	+ In this case, the malicious code that we injected to the stack can’t run
+  	+ can be bypassed by return-to-libc</p>
+      </li>
+      <li>Address-space layout randomization-&gt; ASLR
+        <ul>
+          <li>ASLR randomly arranges the address space positions of key data areas of a process(the location of the library) so an attacker does not know which addresses to inject into the call stack in order to abuse libc or other known software libraries including the system Kernel.</li>
+          <li>caveats
+  	+ only shifts the offset of memory areas
+  	+ may not apply to program code
+  	+ need sufficient randomness
+  		* otherwise can be <strong>brute force</strong></li>
+          <li>can be resolved by ROP</li>
+        </ul>
+      </li>
+      <li>Randomization of the code segment</li>
+    </ul>
+  </li>
+  <li>
+    <p>Avoid the bug entirely</p>
+
+    <ul>
+      <li>Secure coding practices</li>
+      <li>Advanced code review and testing</li>
+    </ul>
+  </li>
+  <li>
+    <p>Both are used</p>
+  </li>
+</ol>
+
+<h4 id="heap-overflow">Heap Overflow</h4>
+<h5 id="code-1">Code</h5>
+<pre><code class="language-C">/*Define a struct(similar to an object) */
+typedef struct _vulnerable_struct {
+	char buff[MAX_LEN];
+	int (*cmp)(char*, char*);
+} vulnerable;
+
+int foo(vulnerable* s, char* one, char* two)
+{
+	strcpy(s-&gt;buff, one); /*copy one in buff*/
+	strcpy(s-&gt;buff, two); /*copy two in buff*/
+	/*if one + two exceeds MAX_LEN, the *cmp pointer will be overwrite*/
+	return s-&gt;cmp(s-&gt;buff, "file://foobar");
+}
+</code></pre>
+<h5 id="how-the-attack-works-1">How the attack works?</h5>
+
+<h5 id="overflow-into-the-c-object-vtable">Overflow into the C++ object <em>vtable</em></h5>
+<p>For each object in C++, <em>vtable</em> contains pointers to the object’s methods. <strong>The attacker can overflow this vtable to modify the pointer</strong>. Just like the most basic example, if one of the fields get overflowed, then the <em>vtable</em> can be modified.</p>
+
+<h5 id="overflow-into-the-adajecent">Overflow into the adajecent</h5>
+<p>Like its name, this kind of variant overflow to the adajecent, especially those adajecent object with function pointers.</p>
+
+<h5 id="overflow-heap-metadata">Overflow heap metadata</h5>
+<p>Heap metadata refers to a hidden header, used to keep track of heap allocated memory, just before the pointer returned by malloc. This header contain pointer linking a return object into a list of allocated data. Attacker can overflow this header to overwrite the pointer.</p>
+
+<h4 id="integer-overflow">Integer Overflow</h4>
+
+<h5 id="code-2">Code</h5>
+<pre><code class="language-C">void vulnerable()
+{
+	char response;
+	int nresp = packet_get_int();
+	if (nresp &gt; 0)
+	{
+		/*response is allocated as follow*/
+		response = malloc(nresp*sizeof(char*)); /*The size of response can easily be corrupted since attacker can easily overflow the integer: nresp*sizeof(char*) and make it wraps to 0*/
+		for (int i = 0; i &lt; nresp; i++)
+		{
+			/*Then anything from packet_get_string would be overflowed*/
+			response[i] = packet_get_string(NULL);
+		}
+	}
+}
+</code></pre>
+
+<h4 id="data-corruption">Data Corruption</h4>
+<h5 id="how-the-attack-works-2">How the attack works?</h5>
+<ul>
+  <li>
+    <p><strong>Modify a secret</strong> to be known to the attacker, to be able to decrypy future intercepted messages</p>
+  </li>
+  <li>
+    <p><strong>Modify state variables</strong> to bypass authorization checks</p>
+  </li>
+  <li>
+    <p><strong>Modify interpreted strings</strong> used as part of commands. Like SQL injection.</p>
+  </li>
+</ul>
+
+<h4 id="stale-memory-dangling-pointer">Stale Memory: Dangling Pointer</h4>
+<h5 id="code-3">Code</h5>
+<pre><code class="language-C">struct foo {int (*cmp)(char*, char*);};
+struct foo *p = malloc(...); /*Allocate memory*/
+free(p); /*free the memory, but not the pointer*/
+
+q = malloc(...); /*Locate the just-freed memory*/
+*q = 0xdeadbeef; /*Overwrite the memory location that now has been pointed with p and q*/
+
+p-&gt;cmp("hello", "hello"); //dangling pointer
+</code></pre>
+
+<h5 id="how-the-attack-works-3">How the attack works?</h5>
+<p>This kind of attack occurs when a pointer is freed, but the program continues to use it. An attacker can arrange for the freed memory to be reallocated and under his control, now, he can modify the data being pointed to malicious.</p>
+
+<h4 id="format-string-vulnerabilities">Format String Vulnerabilities</h4>
+<h5 id="code-4">Code</h5>
+<pre><code class="language-C">void vulnerable()
+{
+	char buf[80];
+	if (fgets(buf, sizeof(buf), stdin)==NULL) return;
+	/*the string buf might contain specifiers without arguments.*/
+	printf(buf);
+}
+</code></pre>
+
+<h5 id="how-the-attack-works-4">How the attack works?</h5>
+<p><code class="highlighter-rouge">printf</code> takes variable number of arguments and pays no mind where the stack frame ends. So if there is a specifier in the first argument, it presumes that you called it with as many arguments as specified in the format string. Attacker can exploit this to make the program prints private information.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">printf("100% dave");</code>: printf会直接把%和d的空格给忽略
+    <ul>
+      <li><code class="highlighter-rouge">printf("%s");</code>: prints bytes pointed to by that stack entry，把eip右边的那个解成一个pointer，找到pointer指向的位置，把位置有的memory的东西全都print出来</li>
+      <li><code class="highlighter-rouge">printf("%d %d %d %d");</code>: printf会直接把eip边上的四个entry（本来用来存储argument的地方）全都print出来</li>
+      <li><code class="highlighter-rouge">printf("100% no way!");</code>: printf writes the number 3 to address pointed by stack entry
+        <ul>
+          <li>%n会把progress of printf load进下一个参数，例如<code class="highlighter-rouge">printf("The value of %ns : ", &amp;s);</code>，那么在这里，s的值就是13，因为%n之前有13个character</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="over-read">Over-read</h3>
+<h4 id="read-overflow">Read Overflow</h4>
+<h5 id="code-5">Code</h5>
+<pre><code class="language-C">int main()
+{
+	char buf[100], *p;
+	int i, len;
+	while (1) {
+		/*retrieve len*/
+		p = fgets(buf, sizeof(buf), stdin);
+		if (p == NULL) return 0;
+		len = atoi(p);
+		/*retrieve the string to print*/
+		p = fgets(buf, sizeof(buf), stdin);
+		if (p == NULL) return 0;
+		for (int i = 0; i &lt; len; i++)
+		{
+			/*if len &gt; len(buf), then the attack happens and private information leaks*/
+			if (!iscntrl(buf[i])) putchar(buf[i]);
+			else putchar('.');
+		}
+		printf("\n");
+	}
+}
+</code></pre>
+<h5 id="how-the-attack-works-5">How the attack works?</h5>
+<p>During this kind of attack, attacker reads past the end of the message they are allowed and hence disclose the private information.</p>
+
+<h4 id="heartbleed">Heartbleed</h4>
+
+<h5 id="how-the-attack-works-6">How the attack works?</h5>
+<p>This bug takes advantage of a feature of the ssl server: heartbeat, which allows the user to send a Heartbleed request to confirm that the connection to the database is alive, and the server returns a heartbeat message. However, the user can specify a longer message length than they actually claim to need when sending the request message, so that everything in the buffer next to the heartbeat message will be read</p>
+
+<h3 id="learning-objectives">Learning Objectives</h3>
+
+<ul>
+  <li>
+    <p>Explain how a buffer overflow vulnerability can allow an attacker to divert the control flow from the real program code to the instructions placed by the attacker in the buffer(i.e., code injection)</p>
+  </li>
+  <li>
+    <p>Explain how a buffer overflow vulnerability can allow an attacker to override variables in the program or to leak data.</p>
+  </li>
+  <li>
+    <p>Explain dangling pointer and format string vulnerabilities and how they can be exploited.</p>
+  </li>
+  <li>
+    <p>Compare and contrast countermeasures for making exploits of the above vulnerabilities in C and C++ programs harder to execute.</p>
+  </li>
+  <li>
+    <p>Explain general idea(s) of Return-Oriented Programming (ROP) and why ROP would be used instead of other (simpler) exploit techniques.</p>
+  </li>
+</ul>
+
+<h2 id="math-essential">Math Essential</h2>
+
+<h3 id="modular-arithmetic">Modular Arithmetic</h3>
+
+<ul>
+  <li>
+    <p>figures prominently in the field of public key cryptography</p>
+  </li>
+  <li>
+    <p><strong>x mod n is the remainder of x/n</strong></p>
+
+    <ul>
+      <li>
+        <p>possible values are through 0 to n-1</p>
+      </li>
+      <li>
+        <p>notation:
+<script type="math/tex">x\ mod\ n = y \\
+x =  y\ mod\ n \\
+x(mod)\ n = y\\
+x=y(mod\ n)</script></p>
+      </li>
+      <li>
+        <p>((a mod n) + (b mod n)) mod n = (a + b) mod n</p>
+      </li>
+      <li>
+        <p>((a mod n)(b mod n)) mod n = ab mod n</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>additive inverse of x mod n</strong></p>
+
+    <ul>
+      <li>denoted as -x mod n</li>
+      <li>what, that in the range of 0 to n-1, that you add to x to get (x + target) mod n = 0</li>
+      <li>-2 mod 6 = 4，4 is the addictive inverse of 2 mod 4</li>
+      <li>(2 + 4) mod 6 = 0</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>multiplicative inverse of x mod n</strong></p>
+
+    <ul>
+      <li>what, that in the range of 0 to n - 1, that I multiply x by to get (x * target) mod n = 1</li>
+      <li>$3^{-1}$ mod 7 = 5, because (3 * 5) mod 7 = 1</li>
+      <li>$x^{-1}$ mod y only exist when x and y are relatively prime, easy to find using Euclidean Algorithm</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Prime</strong>: A number <em>p</em> is said to be <em>prime</em> if it has no factors other than 1 and <em>p</em></p>
+  </li>
+  <li>
+    <p><strong><em>Relatively prime</em></strong>: two numbers <em>x</em> and <em>y</em> are <strong><em>relatively prime</em></strong> if they have no common factor other than 1</p>
+  </li>
+  <li>
+    <p><strong>totient function</strong>: number of integers less than n that are relatively prime to n</p>
+
+    <ul>
+      <li>For any prime number <em>p</em>, it’s easy to show that $\phi(p)=p-1$</li>
+      <li>If p and q are prime, then $\phi(pq) = (p-1)(q-1)$</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="permutation">Permutation</h3>
+
+<ul>
+  <li>building block of ciphers(?)</li>
+  <li>Then a <strong><em>permutation</em> of <em>S</em></strong> is an ordered list of the elements of <em>S,</em> where each element appears exactly once.</li>
+  <li>There are $n!$ permutations for a set consisting n elements</li>
+</ul>
+
+<h3 id="probability">Probability</h3>
+
+<ul>
+  <li>For event outcomes $S = {0, 1, 2, …, N-1}$, if each outcome is equally likely, then the probability of the event X, where $X \sub S$, is 
+<script type="math/tex">P(X) = \frac{\text{number of elements in X}}{\text{number of elements in S}}\\\\
+P(X) = 1 - P(\text{complement of X})\\\\
+P(sum > 3) = 1-P(sum\leq3)</script></li>
+</ul>
+
+<h3 id="linear-algebra">Linear Algebra</h3>
+
+<ul>
+  <li>
+    <p>We write $v \in R^{n}$ to denote a vector containing n components, where each element is a real number: $v = [v_1, v_2, v_3, v_4] = [4, 7/3, 13, -\frac{3}{2}] \in R^{4}$</p>
+
+    <ul>
+      <li>dot product of two vectors, $u, v\in R^{n}$ is $u \dotproduct v=u_1v_1 + u_2v_2 +…+u_nv_n$</li>
+    </ul>
+  </li>
+  <li>
+    <p>A matrix is an $n\times n$ array of numbers. For example, $A=\begin{bmatrix}3 &amp; 4 &amp; 2\1 &amp; 7 &amp; 9\end{bmatrix}$ is a $2\times 3$ matrix. We write $A_{2 \times 3}$ to denote that.</p>
+  </li>
+  <li>
+    <p>Say matrix A, we use $a_{2, 3}$ to denote 9.</p>
+  </li>
+  <li>
+    <p>To <strong>multiply matrix</strong> by a number, we simply multiply each element of the matrix by the number</p>
+  </li>
+  <li>
+    <p><strong>Addition</strong> of matrices only defined for those with the same dimensions.</p>
+  </li>
+  <li>
+    <p><strong>Matrix Multiplication</strong></p>
+
+    <ul>
+      <li>For two matrices, $A_{m\times n}, B_{k\times l}$, the multiplication only works when $n = k$, and the result dimension of the matrix is $m \times n$</li>
+      <li>在点乘的时候，用左边的每一行去和右边的每一列做affine
+        <ul>
+          <li>因为做点乘的话至少要align，也就是，左边的每一行（一行有列数个元素）和右边的每一列（一列有行数的元素）align，然后我们在相乘的时候确定了，左边的列数和右边的行数相等</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Identity Matrix</strong>, $I_{n \times n}$ has 1s on the main diagonal and 0s elsewhere, always square.</p>
+
+    <ul>
+      <li>For a square matrix A, $AI = IA = A$</li>
+    </ul>
+  </li>
+  <li>
+    <p>Block matrices, where the elements are themselves matrices</p>
+
+    <ul>
+      <li>we can also multiply block matrices:
+<script type="math/tex">% <![CDATA[
+M = \begin{bmatrix}I_{n\times n} & C_{n\times1}\\A_{m\times n}  & B_{m\times 1}\end{bmatrix} and\ V = \begin{bmatrix}U_{n\times l}\\T_{1\times l}\end{bmatrix} %]]></script>
+In this case, the result is $MV = \begin{bmatrix}X_{n\times l} \ Y_{m\times l}\end{bmatrix}$, and $X = U + CT$ and $Y = AU + BT$</li>
+    </ul>
+  </li>
+  <li>
+    <p>Linear independent</p>
+
+    <ul>
+      <li>For vectors $x, y \in R^{n}$, we say that $x$ and $y$ are linearly independent if, for scalar $\alpha, \beta$, that the only solution for $\alpha x+\beta y = 0$ is $\alpha = 0, \beta=0$</li>
+      <li>if a set of vectors are linearly independent, then none of the vectors can be written as a <em>linear combination</em> of the other vectors, that is, none of <strong>the vectors can be written as a sum of multiples of the other vectors in the set.</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="learning-objectives-1">Learning Objectives</h3>
+
+<p>After studying this module, students should be able to:</p>
+
+<ol>
+  <li>Find <em>modular</em> addition, multiplication, as well as additive and multiplicative inverse of a number.</li>
+  <li>Determine if two numbers are <em>relatively prime</em>.</li>
+  <li>Count the number of permutations of a set.</li>
+  <li>Compute the discrete probability of an event or a set of related events (e.g., both dice show even numbers).</li>
+</ol>
+
+
+</article>
+
+<div class="page-navigation code">
+	
+		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="http://localhost:4000/Offline-Reinforcement-Learning-Review" title="PREV: Offline Reinforcement Learning Review">&gt;&gt;</a>
+  
+</div>
+
+<!-- Link Gitalk 的支持文件  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    // gitalk的主要参数
+        clientID: 'f075f01270dae871aa15',
+        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
+        repo: 'michaeltaoma.github.io',
+        owner: 'michaeltaoma',
+        admin: ['michaeltaoma'],
+        id: md5(location.pathname),
+        
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
+
+		</div>
+
+		<div class="footer">
+  <span class="block">&copy; 2021 Tao Ma</span>
+  <span class="block"><small>&lt;/&gt; Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/heiswayi/the-plain">The Plain theme</a>.</small></span>
+</div>
+
+
+	</body>
+
+</html>

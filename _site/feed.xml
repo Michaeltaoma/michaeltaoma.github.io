@@ -7,6 +7,611 @@
     
       
         <item>
+          <title>Buffer Overflow</title>
+          <description>&lt;h1 id=&quot;buffer-overflow&quot;&gt;Buffer Overflow&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Buffer overflow is a general method or scheme of a computer secure threat. Its main idea is: attacker puts in more content than total number of legal space in a buffer, data that exceeds the buffer limit overflow to somewhere they shouldn’t be and directly affect the normal running of a program.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How process stores&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0xFFFFFFFF
+kernel -- denote command and env variables, run time?
+Stack -- denote arguments, local variables, run time
+↓
+↑
+Heap -- denote the dynamic memory alloctaed by malloc(), run time
+Uninitialized static data -- 特指的是static, compile time, static const int x;
+Initialized static data -- 特指的是static, compile time, static const int x = 10; 
+Text(code) -- denote the code segment, compile time
+0x00000000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Heap
+    &lt;ul&gt;
+      &lt;li&gt;the heap is managed by the programmer, the ability to modify it is somewhat boundless&lt;/li&gt;
+      &lt;li&gt;in C, variables are allocated and freed using functions like malloc() and free()&lt;/li&gt;
+      &lt;li&gt;需要程序员自己去释放空间，不然的话，heap占用的空间就会被持续的占用&lt;/li&gt;
+      &lt;li&gt;the heap is large, and is usually limited by the physical memory available&lt;/li&gt;
+      &lt;li&gt;the heap requires pointers to access it&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;what kind of buffer arrays are stored in stack?
+    &lt;ul&gt;
+      &lt;li&gt;As mentioned, stack stored all the fixed length(stack itself is fixed-length)&lt;/li&gt;
+      &lt;li&gt;when declare fixed length array: &lt;code class=&quot;highlighter-rouge&quot;&gt;char buffer[n];&lt;/code&gt;, the array will be stored in stack&lt;/li&gt;
+      &lt;li&gt;when declare dynamic length array:
+        &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;  char *buffer;
+  buffer = new char[n];
+&lt;/code&gt;&lt;/pre&gt;
+        &lt;p&gt;the array will be stored in heap&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Stack Frame&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function arguments
+return address -- store the return address
+old ebp value -- stores the last location of ebp?
+local variables
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;when a function starts, things happen&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;ESP works as expected.&lt;/li&gt;
+  &lt;li&gt;function arguments has been pushed(in reverse order, such that argumentN would actually being pushed prior to argument0)&lt;/li&gt;
+  &lt;li&gt;current value in the EIP will be pushed to stack. This is the return address of the function. The address in current EIP is the adress where this particular function is being called&lt;/li&gt;
+  &lt;li&gt;current EBP value will be pushed to the stack. This is to restore the EBP when the function ends.&lt;/li&gt;
+  &lt;li&gt;EBP will be set to ESP. Since later when the function return, we need to point back the ESP to the start address to release storage.&lt;/li&gt;
+  &lt;li&gt;Local variables get pushed onto the stack. ESP changes as expected.&lt;/li&gt;
+  &lt;li&gt;Function runs. If local variables needs to be referenced, then it will be referenced using EBP&lt;/li&gt;
+  &lt;li&gt;When function finishs running, ESP points to EBP, releasing all the space took by local variables.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;over-write&quot;&gt;Over-write&lt;/h3&gt;
+
+&lt;h4 id=&quot;stack-overflow&quot;&gt;Stack Overflow&lt;/h4&gt;
+
+&lt;h5 id=&quot;code&quot;&gt;Code&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;Anything that tries to put more things in a &lt;em&gt;fixed&lt;/em&gt; length array/buffer results in stack overflow&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;void func(char *arg1)
+{
+char buffer[4]; /* Initialize a fixed array */
+strcpy(buffer, arg1); /*Put in the string*/
+}
+
+int main()
+{
+char *mystr = &quot;AuthMe!&quot;; /*Try to put in buffer more than it takes*/
+func(mystr);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;char buffer[10]; /* Initialize a fixed array */
+memcpy(buffer, &quot;Hello, world!\n&quot;, 15); /*Try to put in buffer more than it takes*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
+#define MAX_IP_LENGTH 15 /*Define the holder length for ip address*/
+int main(void) {
+  char file_name[] = &quot;ip.txt&quot;;
+  FILE *fp;
+  fp = fopen(file_name, &quot;r&quot;);
+  char ch;
+  int counter = 0;
+  char buf[MAX_IP_LENGTH]; /*Initialize a fixed length array*/
+  while((ch = fgetc(fp)) != EOF) {
+  	/*Fill the array*/
+    buf[counter++] = ch;
+  }
+  buf[counter] = '\0';
+  printf(&quot;%s\n&quot;, buf);
+  fclose(fp);
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&quot;how-the-attack-works&quot;&gt;How the attack works?&lt;/h5&gt;
+
+&lt;h5 id=&quot;stack-smashing&quot;&gt;Stack Smashing&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;Construct input string (code injection)
+    &lt;ul&gt;
+      &lt;li&gt;”[NOP SLED][SHELLCODE(MAL CODE)][PADDING][OLD EBP][RETURN ADDRESS]”
+        &lt;ul&gt;
+          &lt;li&gt;Contains no all-zeros byte
+            &lt;ul&gt;
+              &lt;li&gt;
+                &lt;ul&gt;
+                  &lt;li&gt;Caused memcpy, scanf…to stop&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;NOP SLED
+            &lt;ul&gt;
+              &lt;li&gt;No operation, automatic skip to next line when encounter. Adding this helps with locating the desired address: as long as with land on one of NOP SLED, the actual start of the malicious code can be find&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;SHELLCODE(MAL CODE)
+            &lt;ul&gt;
+              &lt;li&gt;The malicious code we are trying to run. MUST BE:
+                &lt;ol&gt;
+                  &lt;li&gt;Machine Code&lt;/li&gt;
+                  &lt;li&gt;Contains no all-zeros byte
+                    &lt;ul&gt;
+                      &lt;li&gt;Caused memcpy, scanf…to stop&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;Can’t used loader: must be self contained&lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/li&gt;
+              &lt;li&gt;Malicious code can just be Shellcode
+                &lt;ul&gt;
+                  &lt;li&gt;create a shell for the attacker so that the attacker is able to control the victim computer&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;PADDING&lt;/li&gt;
+          &lt;li&gt;OLD EBP: The original address&lt;/li&gt;
+          &lt;li&gt;RETURN ADDRESS
+            &lt;ul&gt;
+              &lt;li&gt;The start address of the mal code, can be one of the NOP SLED&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Send the input string to a buffer to overflow it&lt;/li&gt;
+  &lt;li&gt;Overwrite the return address&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;return-oriented-programming&quot;&gt;Return Oriented Programming&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;Find gadgets
+    &lt;ul&gt;
+      &lt;li&gt;Gadgets are chunks of library functions, or useful functions&lt;/li&gt;
+      &lt;li&gt;To find useful gadgets, automate a search of the target binary for gadgets(look for &lt;code class=&quot;highlighter-rouge&quot;&gt;ret&lt;/code&gt; instructions, work backwards)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Construct Input String
+    &lt;ul&gt;
+      &lt;li&gt;Contains addresses of different gadgets, in a way that they can be combined&lt;/li&gt;
+      &lt;li&gt;arguments will be in between gadgets&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Overwrite the return address&lt;/li&gt;
+  &lt;li&gt;Stack serves as code
+    &lt;ul&gt;
+      &lt;li&gt;gadgets invoked via &lt;code class=&quot;highlighter-rouge&quot;&gt;ret&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;gadgets get their arguments via &lt;code class=&quot;highlighter-rouge&quot;&gt;pop&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;return-to-libc&quot;&gt;Return-to-libc&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;Can be viewed as a very special case of ROP since every “gadgets” used here would be a complete function from library.&lt;/li&gt;
+  &lt;li&gt;Construct the input string
+    &lt;ul&gt;
+      &lt;li&gt;Contains the address of the library function that the attacker desire&lt;/li&gt;
+      &lt;li&gt;Contains the arguments, if any&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Sent the input string to a buffer to overflow it&lt;/li&gt;
+  &lt;li&gt;Overwrite the return address with the address of the library function that the attacker desire&lt;/li&gt;
+  &lt;li&gt;Executing the library function&lt;/li&gt;
+  &lt;li&gt;Reading arguments from stack&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;blind-return-oriented-programming&quot;&gt;Blind Return Oriented Programming&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;To tackle the randomization of code segment&lt;/li&gt;
+  &lt;li&gt;Assume that when a process crash and re-run, the code would not be re-rand&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;challenge&quot;&gt;Challenge&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;Loading code into memory&lt;/li&gt;
+  &lt;li&gt;Getting injected code to run&lt;/li&gt;
+  &lt;li&gt;Finding the return address&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;defend-strategies&quot;&gt;Defend Strategies&lt;/h5&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Make the bug harder to exploit&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Examine necessary steps for exploitation, make one or more of them difficult or impossible&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Best case: complicated exploitation by changing the libraries, compiler, and/or os&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Detecting overflows with canaries（stop attacker putting code into the memory）
+  	&lt;code class=&quot;highlighter-rouge&quot;&gt;
+  	function arguments
+ return address 
+ old ebp value 
+ ------- canary -------
+ local variables
+  	&lt;/code&gt;
+  	+ carnary就是上面的这一小串代码，如果return address被覆盖的话，那么canary肯定也无了，只需要检查canary是否是一致的就好
+  	+ what value should the canary have
+  		* terminator canaries(用那些scanf看到就会停的东西，攻击者根本不会使这样的数据，因为如果一使用他们也用不了s 	
+  		* random canaries：randomize each process start
+  		* random xor canaries：store canary xor some control info&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Make stack(and heap) non-executable(stop get %eip to point to attacker code)
+  	+ In this case, the malicious code that we injected to the stack can’t run
+  	+ can be bypassed by return-to-libc&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Address-space layout randomization-&amp;gt; ASLR
+        &lt;ul&gt;
+          &lt;li&gt;ASLR randomly arranges the address space positions of key data areas of a process(the location of the library) so an attacker does not know which addresses to inject into the call stack in order to abuse libc or other known software libraries including the system Kernel.&lt;/li&gt;
+          &lt;li&gt;caveats
+  	+ only shifts the offset of memory areas
+  	+ may not apply to program code
+  	+ need sufficient randomness
+  		* otherwise can be &lt;strong&gt;brute force&lt;/strong&gt;&lt;/li&gt;
+          &lt;li&gt;can be resolved by ROP&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Randomization of the code segment&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Avoid the bug entirely&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Secure coding practices&lt;/li&gt;
+      &lt;li&gt;Advanced code review and testing&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Both are used&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;heap-overflow&quot;&gt;Heap Overflow&lt;/h4&gt;
+&lt;h5 id=&quot;code-1&quot;&gt;Code&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;/*Define a struct(similar to an object) */
+typedef struct _vulnerable_struct {
+	char buff[MAX_LEN];
+	int (*cmp)(char*, char*);
+} vulnerable;
+
+int foo(vulnerable* s, char* one, char* two)
+{
+	strcpy(s-&amp;gt;buff, one); /*copy one in buff*/
+	strcpy(s-&amp;gt;buff, two); /*copy two in buff*/
+	/*if one + two exceeds MAX_LEN, the *cmp pointer will be overwrite*/
+	return s-&amp;gt;cmp(s-&amp;gt;buff, &quot;file://foobar&quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&quot;how-the-attack-works-1&quot;&gt;How the attack works?&lt;/h5&gt;
+
+&lt;h5 id=&quot;overflow-into-the-c-object-vtable&quot;&gt;Overflow into the C++ object &lt;em&gt;vtable&lt;/em&gt;&lt;/h5&gt;
+&lt;p&gt;For each object in C++, &lt;em&gt;vtable&lt;/em&gt; contains pointers to the object’s methods. &lt;strong&gt;The attacker can overflow this vtable to modify the pointer&lt;/strong&gt;. Just like the most basic example, if one of the fields get overflowed, then the &lt;em&gt;vtable&lt;/em&gt; can be modified.&lt;/p&gt;
+
+&lt;h5 id=&quot;overflow-into-the-adajecent&quot;&gt;Overflow into the adajecent&lt;/h5&gt;
+&lt;p&gt;Like its name, this kind of variant overflow to the adajecent, especially those adajecent object with function pointers.&lt;/p&gt;
+
+&lt;h5 id=&quot;overflow-heap-metadata&quot;&gt;Overflow heap metadata&lt;/h5&gt;
+&lt;p&gt;Heap metadata refers to a hidden header, used to keep track of heap allocated memory, just before the pointer returned by malloc. This header contain pointer linking a return object into a list of allocated data. Attacker can overflow this header to overwrite the pointer.&lt;/p&gt;
+
+&lt;h4 id=&quot;integer-overflow&quot;&gt;Integer Overflow&lt;/h4&gt;
+
+&lt;h5 id=&quot;code-2&quot;&gt;Code&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;void vulnerable()
+{
+	char response;
+	int nresp = packet_get_int();
+	if (nresp &amp;gt; 0)
+	{
+		/*response is allocated as follow*/
+		response = malloc(nresp*sizeof(char*)); /*The size of response can easily be corrupted since attacker can easily overflow the integer: nresp*sizeof(char*) and make it wraps to 0*/
+		for (int i = 0; i &amp;lt; nresp; i++)
+		{
+			/*Then anything from packet_get_string would be overflowed*/
+			response[i] = packet_get_string(NULL);
+		}
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;data-corruption&quot;&gt;Data Corruption&lt;/h4&gt;
+&lt;h5 id=&quot;how-the-attack-works-2&quot;&gt;How the attack works?&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Modify a secret&lt;/strong&gt; to be known to the attacker, to be able to decrypy future intercepted messages&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Modify state variables&lt;/strong&gt; to bypass authorization checks&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Modify interpreted strings&lt;/strong&gt; used as part of commands. Like SQL injection.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;stale-memory-dangling-pointer&quot;&gt;Stale Memory: Dangling Pointer&lt;/h4&gt;
+&lt;h5 id=&quot;code-3&quot;&gt;Code&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;struct foo {int (*cmp)(char*, char*);};
+struct foo *p = malloc(...); /*Allocate memory*/
+free(p); /*free the memory, but not the pointer*/
+
+q = malloc(...); /*Locate the just-freed memory*/
+*q = 0xdeadbeef; /*Overwrite the memory location that now has been pointed with p and q*/
+
+p-&amp;gt;cmp(&quot;hello&quot;, &quot;hello&quot;); //dangling pointer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&quot;how-the-attack-works-3&quot;&gt;How the attack works?&lt;/h5&gt;
+&lt;p&gt;This kind of attack occurs when a pointer is freed, but the program continues to use it. An attacker can arrange for the freed memory to be reallocated and under his control, now, he can modify the data being pointed to malicious.&lt;/p&gt;
+
+&lt;h4 id=&quot;format-string-vulnerabilities&quot;&gt;Format String Vulnerabilities&lt;/h4&gt;
+&lt;h5 id=&quot;code-4&quot;&gt;Code&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;void vulnerable()
+{
+	char buf[80];
+	if (fgets(buf, sizeof(buf), stdin)==NULL) return;
+	/*the string buf might contain specifiers without arguments.*/
+	printf(buf);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&quot;how-the-attack-works-4&quot;&gt;How the attack works?&lt;/h5&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;printf&lt;/code&gt; takes variable number of arguments and pays no mind where the stack frame ends. So if there is a specifier in the first argument, it presumes that you called it with as many arguments as specified in the format string. Attacker can exploit this to make the program prints private information.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;printf(&quot;100% dave&quot;);&lt;/code&gt;: printf会直接把%和d的空格给忽略
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;printf(&quot;%s&quot;);&lt;/code&gt;: prints bytes pointed to by that stack entry，把eip右边的那个解成一个pointer，找到pointer指向的位置，把位置有的memory的东西全都print出来&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;printf(&quot;%d %d %d %d&quot;);&lt;/code&gt;: printf会直接把eip边上的四个entry（本来用来存储argument的地方）全都print出来&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;printf(&quot;100% no way!&quot;);&lt;/code&gt;: printf writes the number 3 to address pointed by stack entry
+        &lt;ul&gt;
+          &lt;li&gt;%n会把progress of printf load进下一个参数，例如&lt;code class=&quot;highlighter-rouge&quot;&gt;printf(&quot;The value of %ns : &quot;, &amp;amp;s);&lt;/code&gt;，那么在这里，s的值就是13，因为%n之前有13个character&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;over-read&quot;&gt;Over-read&lt;/h3&gt;
+&lt;h4 id=&quot;read-overflow&quot;&gt;Read Overflow&lt;/h4&gt;
+&lt;h5 id=&quot;code-5&quot;&gt;Code&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;int main()
+{
+	char buf[100], *p;
+	int i, len;
+	while (1) {
+		/*retrieve len*/
+		p = fgets(buf, sizeof(buf), stdin);
+		if (p == NULL) return 0;
+		len = atoi(p);
+		/*retrieve the string to print*/
+		p = fgets(buf, sizeof(buf), stdin);
+		if (p == NULL) return 0;
+		for (int i = 0; i &amp;lt; len; i++)
+		{
+			/*if len &amp;gt; len(buf), then the attack happens and private information leaks*/
+			if (!iscntrl(buf[i])) putchar(buf[i]);
+			else putchar('.');
+		}
+		printf(&quot;\n&quot;);
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&quot;how-the-attack-works-5&quot;&gt;How the attack works?&lt;/h5&gt;
+&lt;p&gt;During this kind of attack, attacker reads past the end of the message they are allowed and hence disclose the private information.&lt;/p&gt;
+
+&lt;h4 id=&quot;heartbleed&quot;&gt;Heartbleed&lt;/h4&gt;
+
+&lt;h5 id=&quot;how-the-attack-works-6&quot;&gt;How the attack works?&lt;/h5&gt;
+&lt;p&gt;This bug takes advantage of a feature of the ssl server: heartbeat, which allows the user to send a Heartbleed request to confirm that the connection to the database is alive, and the server returns a heartbeat message. However, the user can specify a longer message length than they actually claim to need when sending the request message, so that everything in the buffer next to the heartbeat message will be read&lt;/p&gt;
+
+&lt;h3 id=&quot;learning-objectives&quot;&gt;Learning Objectives&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Explain how a buffer overflow vulnerability can allow an attacker to divert the control flow from the real program code to the instructions placed by the attacker in the buffer(i.e., code injection)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Explain how a buffer overflow vulnerability can allow an attacker to override variables in the program or to leak data.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Explain dangling pointer and format string vulnerabilities and how they can be exploited.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Compare and contrast countermeasures for making exploits of the above vulnerabilities in C and C++ programs harder to execute.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Explain general idea(s) of Return-Oriented Programming (ROP) and why ROP would be used instead of other (simpler) exploit techniques.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;math-essential&quot;&gt;Math Essential&lt;/h2&gt;
+
+&lt;h3 id=&quot;modular-arithmetic&quot;&gt;Modular Arithmetic&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;figures prominently in the field of public key cryptography&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;x mod n is the remainder of x/n&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;possible values are through 0 to n-1&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;notation:
+&lt;script type=&quot;math/tex&quot;&gt;x\ mod\ n = y \\
+x =  y\ mod\ n \\
+x(mod)\ n = y\\
+x=y(mod\ n)&lt;/script&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;((a mod n) + (b mod n)) mod n = (a + b) mod n&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;((a mod n)(b mod n)) mod n = ab mod n&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;additive inverse of x mod n&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;denoted as -x mod n&lt;/li&gt;
+      &lt;li&gt;what, that in the range of 0 to n-1, that you add to x to get (x + target) mod n = 0&lt;/li&gt;
+      &lt;li&gt;-2 mod 6 = 4，4 is the addictive inverse of 2 mod 4&lt;/li&gt;
+      &lt;li&gt;(2 + 4) mod 6 = 0&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;multiplicative inverse of x mod n&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;what, that in the range of 0 to n - 1, that I multiply x by to get (x * target) mod n = 1&lt;/li&gt;
+      &lt;li&gt;$3^{-1}$ mod 7 = 5, because (3 * 5) mod 7 = 1&lt;/li&gt;
+      &lt;li&gt;$x^{-1}$ mod y only exist when x and y are relatively prime, easy to find using Euclidean Algorithm&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Prime&lt;/strong&gt;: A number &lt;em&gt;p&lt;/em&gt; is said to be &lt;em&gt;prime&lt;/em&gt; if it has no factors other than 1 and &lt;em&gt;p&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Relatively prime&lt;/em&gt;&lt;/strong&gt;: two numbers &lt;em&gt;x&lt;/em&gt; and &lt;em&gt;y&lt;/em&gt; are &lt;strong&gt;&lt;em&gt;relatively prime&lt;/em&gt;&lt;/strong&gt; if they have no common factor other than 1&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;totient function&lt;/strong&gt;: number of integers less than n that are relatively prime to n&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;For any prime number &lt;em&gt;p&lt;/em&gt;, it’s easy to show that $\phi(p)=p-1$&lt;/li&gt;
+      &lt;li&gt;If p and q are prime, then $\phi(pq) = (p-1)(q-1)$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;permutation&quot;&gt;Permutation&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;building block of ciphers(?)&lt;/li&gt;
+  &lt;li&gt;Then a &lt;strong&gt;&lt;em&gt;permutation&lt;/em&gt; of &lt;em&gt;S&lt;/em&gt;&lt;/strong&gt; is an ordered list of the elements of &lt;em&gt;S,&lt;/em&gt; where each element appears exactly once.&lt;/li&gt;
+  &lt;li&gt;There are $n!$ permutations for a set consisting n elements&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;probability&quot;&gt;Probability&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;For event outcomes $S = {0, 1, 2, …, N-1}$, if each outcome is equally likely, then the probability of the event X, where $X \sub S$, is 
+&lt;script type=&quot;math/tex&quot;&gt;P(X) = \frac{\text{number of elements in X}}{\text{number of elements in S}}\\\\
+P(X) = 1 - P(\text{complement of X})\\\\
+P(sum &gt; 3) = 1-P(sum\leq3)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;linear-algebra&quot;&gt;Linear Algebra&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;We write $v \in R^{n}$ to denote a vector containing n components, where each element is a real number: $v = [v_1, v_2, v_3, v_4] = [4, 7/3, 13, -\frac{3}{2}] \in R^{4}$&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;dot product of two vectors, $u, v\in R^{n}$ is $u \dotproduct v=u_1v_1 + u_2v_2 +…+u_nv_n$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A matrix is an $n\times n$ array of numbers. For example, $A=\begin{bmatrix}3 &amp;amp; 4 &amp;amp; 2\1 &amp;amp; 7 &amp;amp; 9\end{bmatrix}$ is a $2\times 3$ matrix. We write $A_{2 \times 3}$ to denote that.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Say matrix A, we use $a_{2, 3}$ to denote 9.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To &lt;strong&gt;multiply matrix&lt;/strong&gt; by a number, we simply multiply each element of the matrix by the number&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Addition&lt;/strong&gt; of matrices only defined for those with the same dimensions.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Matrix Multiplication&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;For two matrices, $A_{m\times n}, B_{k\times l}$, the multiplication only works when $n = k$, and the result dimension of the matrix is $m \times n$&lt;/li&gt;
+      &lt;li&gt;在点乘的时候，用左边的每一行去和右边的每一列做affine
+        &lt;ul&gt;
+          &lt;li&gt;因为做点乘的话至少要align，也就是，左边的每一行（一行有列数个元素）和右边的每一列（一列有行数的元素）align，然后我们在相乘的时候确定了，左边的列数和右边的行数相等&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Identity Matrix&lt;/strong&gt;, $I_{n \times n}$ has 1s on the main diagonal and 0s elsewhere, always square.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;For a square matrix A, $AI = IA = A$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Block matrices, where the elements are themselves matrices&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;we can also multiply block matrices:
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+M = \begin{bmatrix}I_{n\times n} &amp; C_{n\times1}\\A_{m\times n}  &amp; B_{m\times 1}\end{bmatrix} and\ V = \begin{bmatrix}U_{n\times l}\\T_{1\times l}\end{bmatrix} %]]&gt;&lt;/script&gt;
+In this case, the result is $MV = \begin{bmatrix}X_{n\times l} \ Y_{m\times l}\end{bmatrix}$, and $X = U + CT$ and $Y = AU + BT$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Linear independent&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;For vectors $x, y \in R^{n}$, we say that $x$ and $y$ are linearly independent if, for scalar $\alpha, \beta$, that the only solution for $\alpha x+\beta y = 0$ is $\alpha = 0, \beta=0$&lt;/li&gt;
+      &lt;li&gt;if a set of vectors are linearly independent, then none of the vectors can be written as a &lt;em&gt;linear combination&lt;/em&gt; of the other vectors, that is, none of &lt;strong&gt;the vectors can be written as a sum of multiples of the other vectors in the set.&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;learning-objectives-1&quot;&gt;Learning Objectives&lt;/h3&gt;
+
+&lt;p&gt;After studying this module, students should be able to:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Find &lt;em&gt;modular&lt;/em&gt; addition, multiplication, as well as additive and multiplicative inverse of a number.&lt;/li&gt;
+  &lt;li&gt;Determine if two numbers are &lt;em&gt;relatively prime&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Count the number of permutations of a set.&lt;/li&gt;
+  &lt;li&gt;Compute the discrete probability of an event or a set of related events (e.g., both dice show even numbers).&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+          <pubDate>2021-09-14T00:00:00-07:00</pubDate>
+          <link>http://localhost:4000/Buffer-Overflow</link>
+          <guid isPermaLink="true">http://localhost:4000/Buffer-Overflow</guid>
+        </item>
+      
+    
+      
+        <item>
           <title>Offline Reinforcement Learning Review</title>
           <description>
 &lt;p&gt;Here I review two literatures on Reinforcement learning on healthcare to gain understanding on related field.&lt;/p&gt;
