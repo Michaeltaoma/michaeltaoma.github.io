@@ -1,0 +1,506 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"G",
+				"Golfer"
+			],
+			[
+				"Go",
+				"GolfCouse"
+			],
+			[
+				"re",
+				"returnByPrintf"
+			],
+			[
+				"str",
+				"strcpy"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C Single File.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/C++/C Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C Single File.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/User/JavaC-Java.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/C++/C Single File.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/User/JavaC-Java.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Java/Ant.sublime-build",
+					""
+				],
+				[
+					"Packages/Java/JavaC.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Java/JavaC.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/MarkdownPreview/Markdown.sublime-build",
+					""
+				],
+				[
+					"Packages/User/JavaC-Java.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/MarkdownPreview/Markdown.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Perl/Perl.sublime-build",
+					""
+				],
+				[
+					"Packages/Perl/Perl.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Perl/Perl.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				":insta",
+				"Package Control: Install Package"
+			],
+			[
+				":close",
+				"File: Close All"
+			],
+			[
+				":q",
+				"Set Syntax: SQL"
+			],
+			[
+				":sql",
+				"Set Syntax: SQL"
+			],
+			[
+				":cl",
+				"File: Close All"
+			],
+			[
+				":clos",
+				"File: Close All"
+			],
+			[
+				":pre",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				":build ",
+				"Build: New Build System"
+			],
+			[
+				":close ",
+				"File: Close All"
+			],
+			[
+				"File:",
+				"File: Save All"
+			],
+			[
+				":",
+				":$ - EOF"
+			],
+			[
+				":W",
+				":w - Save"
+			],
+			[
+				":previe",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				":preview",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"install pa",
+				"Package Control: Install Package"
+			],
+			[
+				"set syntax: mar",
+				"Set Syntax: Markdown"
+			],
+			[
+				"set syntax: la",
+				"Set Syntax: LaTeX"
+			],
+			[
+				"Package Control: Ints",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/EECE571C/presentation/Presentation.txt",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/daily_task.txt",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC503/assignment1/assign1.txt",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/EECE571C/presentation/note.txt",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/COOP/coop_intake.txt",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC503/lecture.md",
+		"/Users/michaelma/github/blog/michaeltaoma.github.io/_posts/2021-09-14-Buffer-Overflow.md",
+		"/Users/michaelma/github/blog/michaeltaoma.github.io/_posts/2021-06-15-Offline-Reinforcement-Learning-Review.md",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPEN542/buffer_overflow.md",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPEN542/note.md",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC404/lectures/preclass.sql",
+		"/Users/michaelma/github/blog/michaeltaoma.github.io/daily_task.txt",
+		"/Users/michaelma/github/blog/michaeltaoma.github.io/index.html",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/c_lang/c_note.md",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/c_lang/test.c",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/c_lang/test.java",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/c_note.md",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/test.java",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/test.c",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/test.cpp",
+		"/Users/michaelma/Library/Application Support/Sublime Text/Packages/User/javac-java.sublime-build",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/EECE571C/note.md",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC503/code/test.pl",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC503/reading.md",
+		"/Users/michaelma/Library/Application Support/Sublime Text/Packages/MarkdownTOC/MarkdownTOC.sublime-settings",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC538M/note.md",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC538M/main.cpp",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC538M/test.py",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC538M/aes.txt",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC538M/reviews/review.tex",
+		"/Users/michaelma/Library/Application Support/Sublime Text/Packages/Terminal/Terminal.sublime-settings",
+		"/Users/michaelma/Library/Application Support/Sublime Text/Packages/User/Terminal.sublime-settings",
+		"/Users/michaelma/Library/Application Support/Sublime Text/Packages/User/Terminal (OSX).sublime-settings",
+		"/Users/michaelma/Library/Application Support/Sublime Text/Packages/User/Default Dark.sublime-theme",
+		"/Users/michaelma/Library/Application Support/Sublime Text/Packages/Theme - Default/Default Dark.sublime-theme",
+		"/Users/michaelma/Desktop/Workspace/School/UBC/courses/2021-22-Winter/CPSC538M/reviews/review.log"
+	],
+	"find":
+	{
+		"height": 30.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": true,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 32.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.latextools":
+	{
+		"height": 28.0
+	},
+	"output.markdown":
+	{
+		"height": 32.0
+	},
+	"pinned_build_system": "",
+	"project": "404.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

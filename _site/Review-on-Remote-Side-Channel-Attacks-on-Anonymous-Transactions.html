@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+	<title>Review On Remote Side Channel Attacks On Anonymous Transactions · Tao Ma</title>
+
+
+<meta name="description" content="Review On “Remote Side Channel Attacks On Anonymous Transactions”">
+
+<link rel="icon" href="http://localhost:4000/assets/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
+<link rel="stylesheet" href="http://localhost:4000/assets/core.css">
+<link rel="canonical" href="http://localhost:4000/Review-on-Remote-Side-Channel-Attacks-on-Anonymous-Transactions">
+<link rel="alternate" type="application/atom+xml" title="Tao Ma" href="http://localhost:4000/feed.xml" />
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	</head>
+
+	<body>
+
+		<!--<div style="background-image: url('https://source.unsplash.com/random/360x175');">-->
+<!--<div style="background-color: #7BA7AB">-->
+<style>
+
+.d-flex {
+	position: relative;
+	/*background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
+	/*background: linear-gradient(-45deg, #134e5e, #71b280);*/
+	/*background: linear-gradient(54deg, #260032, #D8186E);*/
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 160px;
+	width: 100%;
+	border-radius: 10px;
+}
+	input{
+		border: 1px solid #ccc;
+		width: 30%;
+		border-radius: 3px;
+		padding: 7px 0px 7px 5px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+            }
+	input:focus{
+		border-color: #66afe9;
+		outline: 0;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+	}
+	#search-container ul {
+		list-style: none;
+		}
+	#search-container ul li::before {
+	  content: "";
+	  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/fb-heart.gif);
+	  background-size: contain;
+	  display: inline-block;
+	  width: 1em;
+	  height: 1em;
+	  position: relative;
+	  top: 0.1rem;
+	  margin-right: 0.2rem;
+	}
+
+	@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+</style>
+
+
+<div class="d-flex ">
+	<div class="logo">
+
+		
+
+		<a href="http://localhost:4000/">
+<!--			<img src="https://source.unsplash.com/random/460x460" alt="" class="logo-avatar">-->
+			<img src="assets/post_pics/head_icon.jpeg" alt="" class="logo-avatar">
+
+		</a>
+		<span class="logo-prompt code">Main</span>
+	</div>
+<br />
+
+</div>
+
+<br />
+
+<section>
+	And hello to u too:) Click the icon above for more detail
+
+	<br />
+	<br />
+
+	<div id="search-container" >
+		<input type="text" id="search-input" placeholder="search">
+		<ul id="results-container"></ul>
+	</div>
+
+
+<!-- Script pointing to search-script.js -->
+	<script src="assets/js/search-script.js" type="text/javascript"></script>
+
+<!-- Configuration -->
+	<script>
+	SimpleJekyllSearch({
+  		searchInput: document.getElementById('search-input'),
+  		resultsContainer: document.getElementById('results-container'),
+  		json: '/search.json'
+	})
+	</script>
+
+</section>
+
+
+
+
+		<div id="content">
+			<article>
+
+	<div class="center">
+		<h1 class="title">Review On Remote Side Channel Attacks On Anonymous Transactions</h1>
+		<time class="code">October 10, 2021</time>
+	</div>
+
+	<div class="divider"></div>
+
+	<h1 id="review-on-remote-side-channel-attacks-on-anonymous-transactions">Review On “Remote Side Channel Attacks On Anonymous Transactions”</h1>
+
+<p>The paper, “Remote Side Channel Attacks On Anonymous Transactions” written by Florian Tramer et al. discuss some efficient side channel attack on privacy focused cypto currencies. Before start</p>
+
+<p>Structure</p>
+
+<p>Entity(human, business…anyone)
+	- Address1: 
+		- Transactions1: Sent coin from other address to current address
+		- Transactions2: Sent coin from other address to current address
+		- Transactions3: Sent coin from other address to current address
+		……
+		- TransactionsN-2: Sent coin from current address to other address
+		- TransactionsN-1: Sent coin from current address to other address
+		- TransactionsN: Sent coin from current address to other address
+		- Balance: Coins/output from all those incoming transaction that have not yet being spent
+		- Private key 1
+	- Address2: {Transaction, Balance, Private key}
+	…
+	- AddressN</p>
+
+<p>0) Initialize transaction
+	0) There is unspent bitcoin/transaction outputs(because they are essentially from other transactions) in the address’s balance
+	1) Initialize transaction from current address to other address with amount less than address’s balance 
+	2) Sign the transaction</p>
+
+<p>1) New transactions are broadcast to all nodes.</p>
+
+<p>2) Each node collects new transactions into a block.</p>
+
+<p>3) Each node works on finding a difficult proof-of-work for its block.</p>
+
+<p>4) When a node finds a proof-of-work, it broadcasts the block to all nodes.</p>
+
+<p>5) Nodes accept the block only if all transactions in it are valid and not already spent.
+	0) Once verified, the output address is now contain a new transaction. And the amount just sent becomes the unspent balance for this address</p>
+
+<p>6) Nodes express their acceptance of the block by working on creating the next block in the chain, using the hash of the accepted block as the previous hash.</p>
+
+<p>所以在bitcoin中，一个node，或者说一个矿工？？在接收到别的矿工broadcast的block之后，先要验证这个block里面的transaction的validity，验证通过之后，再照着这个去找下一个block？</p>
+
+<ol>
+  <li>
+    <p>那么如果验证不通过呢？</p>
+  </li>
+  <li>
+    <p>是谁在initialize这个transaction？？？</p>
+  </li>
+</ol>
+
+<p>-&gt; Transaction</p>
+
+<ul>
+  <li>
+    <p>Transaction is, in principle, is just a handing over the control over a certain value in the block chain to another address.</p>
+
+    <p>2.1. 什么是address，address的概念.</p>
+
+    <p>猜想: An entity, might own multiple address, these addresses can be the payee or recipient of the blockchain transaction.</p>
+
+    <p>For each address there are zero or more transactions that have the address as output. When you did not send them over to someone else, the are called unspent bitcoins or unspent transaction outputs. The sum of those make up the balance of the address.</p>
+  </li>
+</ul>
+
+
+</article>
+
+<div class="page-navigation code">
+	
+    <a class="next" href="http://localhost:4000/blockchain-note" title="NEXT: Blockchain Note">&lt;&lt;</a>
+		<span> &middot; </span>
+  
+		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
+  
+		<span> &middot; </span>
+    <a class="prev" href="http://localhost:4000/Buffer-Overflow" title="PREV: Buffer Overflow">&gt;&gt;</a>
+  
+</div>
+
+<!-- Link Gitalk 的支持文件  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    // gitalk的主要参数
+        clientID: 'f075f01270dae871aa15',
+        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
+        repo: 'michaeltaoma.github.io',
+        owner: 'michaeltaoma',
+        admin: ['michaeltaoma'],
+        id: md5(location.pathname),
+        
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
+
+		</div>
+
+		<div class="footer">
+  <span class="block">&copy; 2021 Tao Ma</span>
+  <span class="block"><small>&lt;/&gt; Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/heiswayi/the-plain">The Plain theme</a>.</small></span>
+</div>
+
+
+	</body>
+
+</html>

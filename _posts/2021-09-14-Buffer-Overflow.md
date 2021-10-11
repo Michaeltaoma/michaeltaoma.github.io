@@ -1,5 +1,3 @@
-# Buffer Overflow #
-
 - Buffer overflow is a general method or scheme of a computer secure threat. Its main idea is: attacker puts in more content than total number of legal space in a buffer, data that exceeds the buffer limit overflow to somewhere they shouldn't be and directly affect the normal running of a program.
 
 - How process stores
