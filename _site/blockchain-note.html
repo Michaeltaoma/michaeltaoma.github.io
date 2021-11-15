@@ -146,7 +146,7 @@
 
 	<p>Note for blockchain, bitcoin and all that…</p>
 
-<p>Structure of each person’s account</p>
+<p>Structure</p>
 
 <p>Entity(human, business…anyone)</p>
 <ul>
@@ -168,8 +168,10 @@
   <li>AddressN</li>
 </ul>
 
+<p>Process of transaction</p>
+
 <p>0) Initialize transaction
-	0) There is unspent bitcoin/transaction outputs(because they are essentially from other transactions) in the address’s balance
+    0) There is unspent bitcoin/transaction outputs(because they are essentially from other transactions) in the address’s balance
 	1) Initialize transaction from current address to other address with amount less than address’s balance 
 	2) Sign the transaction</p>
 
@@ -177,7 +179,7 @@
 
 <p>2) Each node collects new transactions into a block.</p>
 
-<p>3) Each node works on finding a difficult proof-of-work for its block.</p>
+<p>3) Each node works on finding a difficult <a href="#proof-of-work">proof of work</a> for its block.</p>
 
 <p>4) When a node finds a proof-of-work, it broadcasts the block to all nodes.</p>
 
@@ -210,6 +212,8 @@
     <p>For each address there are zero or more transactions that have the address as output. When you did not send them over to someone else, the are called unspent bitcoins or unspent transaction outputs. The sum of those make up the balance of the address.</p>
   </li>
 </ul>
+
+<h1 id="proof-of-work">Proof of work</h1>
 
 
 </article>

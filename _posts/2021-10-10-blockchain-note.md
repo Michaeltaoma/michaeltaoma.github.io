@@ -1,6 +1,6 @@
 Note for blockchain, bitcoin and all that...
 
-Structure of each person's account
+Structure
 
 Entity(human, business...anyone)
 - Address1: 
@@ -17,8 +17,10 @@ Entity(human, business...anyone)
 ...
 - AddressN
 
+Process of transaction
+
 0) Initialize transaction
-	0) There is unspent bitcoin/transaction outputs(because they are essentially from other transactions) in the address's balance
+    0) There is unspent bitcoin/transaction outputs(because they are essentially from other transactions) in the address's balance
 	1) Initialize transaction from current address to other address with amount less than address's balance 
 	2) Sign the transaction
 
@@ -26,7 +28,7 @@ Entity(human, business...anyone)
 
 2) Each node collects new transactions into a block.
 
-3) Each node works on finding a difficult proof-of-work for its block.
+3) Each node works on finding a difficult [proof of work](#proof-of-work) for its block.
 
 4) When a node finds a proof-of-work, it broadcasts the block to all nodes.
 
@@ -50,3 +52,5 @@ Entity(human, business...anyone)
 	猜想: An entity, might own multiple address, these addresses can be the payee or recipient of the blockchain transaction. 
 
 	For each address there are zero or more transactions that have the address as output. When you did not send them over to someone else, the are called unspent bitcoins or unspent transaction outputs. The sum of those make up the balance of the address.
+
+# Proof of work
