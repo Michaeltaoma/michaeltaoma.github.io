@@ -4,6 +4,20 @@ title: Project
 ---
 
 <style>
+
+        .parallax {
+      /* The image used */
+      background-image: url("assets/post_pics/artur-tumasjan-qLzWvcQq-V8-unsplash.jpg");
+
+      /* Set a specific height */
+      min-height: 300px;
+
+      /* Create the parallax scrolling effect */
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
     h2, h3{
         font-family: "Open Sans";
     }
@@ -13,6 +27,12 @@ title: Project
         margin: 3px auto;
     }
 </style>
+
+	<div class="recent_render">
+		<h2>Most Recent <a href="project">Project</a></h2>
+		<div class="parallax"></div>
+		<p style="font-family:verdana"><strong>Intelligent Doctor: </strong>a medical advising system that can generate clinical note given CT images and recommend morphine usages given ICU patients’ status using Python, PyTorch with <a href = "https://mimic.mit.edu/">MIMICIV</a> dataset. More details on <a href="project">here</a>.</p>
+	</div>
 
 <h2 id="intelligent">Intelligent Doctor</h2>
 

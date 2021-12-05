@@ -26,6 +26,3 @@ For my project, you can find them on this <a href="project">Project Showcase</a>
 
 <br />
 </div>
-
-**Less is more..**
-**空即是...**

@@ -89,6 +89,9 @@
 <loc>http://localhost:4000/intelligent_doctor</loc>
 </url>
 <url>
+<loc>http://localhost:4000/note</loc>
+</url>
+<url>
 <loc>http://localhost:4000/project</loc>
 </url>
 <url>
@@ -112,7 +115,15 @@
 <lastmod>2020-03-19T13:48:04-07:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/assets/pdf/MaTaoResume.pdf</loc>
+<lastmod>2021-11-14T16:42:44-08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/assets/pdf/Tao's_Resume_111.pdf</loc>
+<lastmod>2021-11-14T16:42:44-08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/assets/pdf/Tao's_Resume_111_pri.pdf</loc>
 <lastmod>2021-09-15T15:32:00-07:00</lastmod>
 </url>
 <url>

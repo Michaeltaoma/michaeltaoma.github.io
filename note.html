@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+<style>
+	.parallax {
+  /* The image used */
+  background-image: url("assets/post_pics/artur-tumasjan-qLzWvcQq-V8-unsplash.jpg");
+
+  /* Set a specific height */
+  min-height: 300px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+<section>
+
+	<div class="Note">
+	<h2>Notes</h2>
+	{% for post in site.posts %}
+		{% unless post.next %}
+			<h3 class="code">{{ post.date | date: '%Y' }}</h3>
+		{% else %}
+			{% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+			{% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+			{% if year != nyear %}
+				<h3 class="code">{{ post.date | date: '%Y' }}</h3>
+			{% endif %}
+		{% endunless %}
+
+		<ul>
+			<li>
+				<div class="post-date code">
+					<span>{{ post.date | date: "%b %d" }}</span>
+				</div>
+				<div class="title">
+					<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a>
+				</div>
+			</li>
+		</ul>
+
+	{% endfor %}
+	</div>
+</section>

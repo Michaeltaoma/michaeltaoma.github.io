@@ -3,6 +3,9 @@ layout: default
 ---
 
 <style>
+    p {
+        font-family: verdana;
+    }
 	.parallax {
   /* The image used */
   background-image: url("assets/post_pics/artur-tumasjan-qLzWvcQq-V8-unsplash.jpg");
@@ -19,43 +22,9 @@ layout: default
 </style>
 
 <section>
-	<p style="font-family:verdana">Thank you and welcome! I am Tao Ma and currently a master student in the Department of Electrical and Computer Engineering student at <a href="https://www.ubc.ca/">The University of British Columbia</a> and I obtained my B.S. in CS from <a href="https://www.queensu.ca/">Queen's University</a>.</p>
-	<p style="font-family:verdana">I am interested in web developing as well as research on the topic of Artificial Intelligence. View <a href="project">here</a> if you want to know about some of my projects. Also, feel free to contact me at <a href="mailto:taoma0606@gmail.com">taoma0606@gmail.com</a>.</p>
-	<p style="font-family:verdana">This webpage is mostly intended to showcase my own work and to keep track of my notes.</p>
-
-
-
-	<div class="recent_render">
-		<h2>Most Recent <a href="project">Project</a></h2>
-		<div class="parallax"></div>
-		<p style="font-family:verdana"><strong>Intelligent Doctor: </strong>a medical advising system that can generate clinical note given CT images and recommend morphine usages given ICU patients’ status using Python, PyTorch with <a href = "https://mimic.mit.edu/">MIMICIV</a> dataset. More details on <a href="project">here</a>.</p>
-	</div>
-
-	<div class="Note">
-	<h2>Notes</h2>
-	{% for post in site.posts %}
-		{% unless post.next %}
-			<h3 class="code">{{ post.date | date: '%Y' }}</h3>
-		{% else %}
-			{% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-			{% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
-			{% if year != nyear %}
-				<h3 class="code">{{ post.date | date: '%Y' }}</h3>
-			{% endif %}
-		{% endunless %}
-
-		<ul>
-			<li>
-				<div class="post-date code">
-					<span>{{ post.date | date: "%b %d" }}</span>
-				</div>
-				<div class="title">
-					<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a>
-				</div>
-			</li>
-		</ul>
-
-	{% endfor %}
-	</div>
+	<p style="font-family:verdana">I am Tao Ma and currently a master student in the Department of Electrical and Computer Engineering student at <a href="https://www.ubc.ca/">The University of British Columbia</a> and I obtained my B.S. in CS from <a href="https://www.queensu.ca/">Queen's University</a>. I am currently looking for a summer intern position starting April, 2022.</p>
+    <p style="font-family:verdana">I am interested in web developing as well as research on the topic of Artificial Intelligence. I have been supervised by Dr. Farhana Zulkernine and Dr. Hasan Zafari at <a href="http://bamlab.ca/">BAM Lab</a>. </p>
+    <p style="font-family:verdana"><a href="assets/pdf/MaTaoResume.pdf">cv</a>, <a href="all-my-past-notes">class notes</a>, <a href="project">project</a> and <a href="note">blogs</a></p>
+    <p>Feel free to contact me at <a href="mailto:taoma0606@gmail.com">taoma0606@gmail.com</a>.</p>
 
 </section>
