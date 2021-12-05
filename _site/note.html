@@ -136,7 +136,16 @@
 
 
 		<div id="content">
-			<style>
+			<article>
+
+	<div class="center">
+		<h1 class="title"></h1>
+		<time class="code"></time>
+	</div>
+
+	<div class="divider"></div>
+
+	<style>
 	.parallax {
   /* The image used */
   background-image: url("assets/post_pics/artur-tumasjan-qLzWvcQq-V8-unsplash.jpg");
@@ -502,6 +511,36 @@
 	
 	</div>
 </section>
+
+
+</article>
+
+<div class="page-navigation code">
+	
+		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
+  
+</div>
+
+<!-- Link Gitalk 的支持文件  -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+<script type="text/javascript" src="/assets/js/md5.min.js"></script>
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+    // gitalk的主要参数
+        clientID: 'f075f01270dae871aa15',
+        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
+        repo: 'michaeltaoma.github.io',
+        owner: 'michaeltaoma',
+        admin: ['michaeltaoma'],
+        id: md5(location.pathname),
+        
+    });
+    gitalk.render('gitalk-container');
+</script> 
+<!-- Gitalk end -->
+
 
 		</div>
 
