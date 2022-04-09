@@ -99,6 +99,9 @@
 <loc>http://localhost:4000/note</loc>
 </url>
 <url>
+<loc>http://localhost:4000/playground</loc>
+</url>
+<url>
 <loc>http://localhost:4000/project</loc>
 </url>
 <url>

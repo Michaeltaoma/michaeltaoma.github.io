@@ -1,0 +1,60 @@
+---
+layout: default
+---
+
+
+
+<style>
+    p {
+        font-family: verdana;
+    }
+    .parallax {
+  /* The image used */
+  background-image: url("assets/post_pics/artur-tumasjan-qLzWvcQq-V8-unsplash.jpg");
+
+  /* Set a specific height */
+  min-height: 300px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+#editor {
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
+
+</style>
+
+
+<section>
+    <p>Editor with no ads</p>
+
+    <div id="editor">some text</div>
+    <script src="assets/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/ace-builds/src/ext-themelist.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/ace-builds/src/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/ace-builds/src/ext-keybinding_menu.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var $ = document.getElementById.bind(document);
+        var dom = require("ace/lib/dom");
+        ace.config.set("enableBasicAutocompletion", true);
+
+        var editor = ace.edit("editor");
+        editor.setKeyboardHandler("ace/keyboard/vim");
+        editor.setTheme("ace/theme/twilight");
+        editor.session.setMode("ace/mode/java");
+
+        editor.renderer.setScrollMargin(10, 10);
+        editor.setOptions({
+            // "scrollPastEnd": 0.8,
+            autoScrollEditorIntoView: true
+        });
+    </script>
+
+</section>

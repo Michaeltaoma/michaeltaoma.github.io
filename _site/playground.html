@@ -7,15 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-	<title>Hello World · Tao Ma</title>
+	<title>Tao Ma</title>
 
 
-<meta name="description" content="Hello World这篇文章是本站写下的第一篇文章，相当有纪念价值。这个网站简单的基于github pages和Jekyll. 折腾着把网站基本搭建好了之后，才发现好像没啥东西写。。。点击我的个人头像可以随时进入我的个人简介，里面有我的联系方式，想和我交流的小伙伴们请不要犹豫戳戳戳！！">
+<meta name="description" content="And hello to you to:)">
 
 <link rel="icon" href="http://localhost:4000/assets/favicon.png">
 <link rel="apple-touch-icon" href="http://localhost:4000/assets/touch-icon.png">
 <link rel="stylesheet" href="http://localhost:4000/assets/core.css">
-<link rel="canonical" href="http://localhost:4000/Hello-World">
+<link rel="canonical" href="http://localhost:4000/playground">
 <link rel="alternate" type="application/atom+xml" title="Tao Ma" href="http://localhost:4000/feed.xml" />
 
 
@@ -136,54 +136,60 @@
 
 
 		<div id="content">
-			<article>
+			<style>
+    p {
+        font-family: verdana;
+    }
+    .parallax {
+  /* The image used */
+  background-image: url("assets/post_pics/artur-tumasjan-qLzWvcQq-V8-unsplash.jpg");
 
-	<div class="center">
-		<h1 class="title">Hello World</h1>
-		<time class="code">May 7, 2020</time>
-	</div>
+  /* Set a specific height */
+  min-height: 300px;
 
-	<div class="divider"></div>
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
-	<h2 id="hello-world">Hello World</h2>
-<p>这篇文章是本站写下的第一篇文章，相当有纪念价值。这个网站简单的基于github pages和Jekyll. 折腾着把网站基本搭建好了之后，才发现好像没啥东西写。。。点击我的个人头像可以随时进入我的个人简介，里面有我的联系方式，想和我交流的小伙伴们请不要犹豫戳戳戳！！</p>
+}
 
+#editor {
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
 
-</article>
-
-<div class="page-navigation code">
-	
-    <a class="next" href="http://localhost:4000/java-on-call-1" title="NEXT: Java On Call 1">&lt;&lt;</a>
-		<span> &middot; </span>
-  
-		<a class="home" href="http://localhost:4000/" title="Back to Index">Index</a>
-  
-		<span> &middot; </span>
-    <a class="prev" href="http://localhost:4000/very-long-title-post" title="PREV: For Example of very Long Title Would Be Typography Elements in One">&gt;&gt;</a>
-  
-</div>
-
-<!-- Link Gitalk 的支持文件  -->
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
-<script type="text/javascript" src="/assets/js/md5.min.js"></script>
-<div id="gitalk-container"></div>     
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-    // gitalk的主要参数
-        clientID: 'f075f01270dae871aa15',
-        clientSecret: '5a97f06edaad9527cb4a92d6d1ee12a86ec73057',
-        repo: 'michaeltaoma.github.io',
-        owner: 'michaeltaoma',
-        admin: ['michaeltaoma'],
-        id: md5(location.pathname),
-        
-    });
-    gitalk.render('gitalk-container');
-</script> 
-<!-- Gitalk end -->
+</style>
 
 
+<section>
+    <p>Editor with no ads</p>
+
+    <div id="editor">some text</div>
+    <script src="assets/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/ace-builds/src/ext-themelist.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/ace-builds/src/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/ace-builds/src/ext-keybinding_menu.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var $ = document.getElementById.bind(document);
+        var dom = require("ace/lib/dom");
+        ace.config.set("enableBasicAutocompletion", true);
+
+        var editor = ace.edit("editor");
+        editor.setKeyboardHandler("ace/keyboard/vim");
+        editor.setTheme("ace/theme/twilight");
+        editor.session.setMode("ace/mode/java");
+
+        editor.renderer.setScrollMargin(10, 10);
+        editor.setOptions({
+            // "scrollPastEnd": 0.8,
+            autoScrollEditorIntoView: true
+        });
+    </script>
+
+</section>
 		</div>
 
 		<div class="footer">
