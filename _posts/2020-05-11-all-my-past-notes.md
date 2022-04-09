@@ -9,7 +9,8 @@ note taker.
 ### The University of British Columbia
 
 #### CPSC530L: Topics in Information Processing - Behavioral Models
-<a href="assets/pdf/CPSC530L.pdf">Course Note</a>
+<!-- <a href="assets/pdf/CPSC530L.pdf">Course Note</a> -->
+<a href="https://drive.google.com/file/d/1T_PhbV78cRMNwU1-CRJTIfFuM9hpg7-a/view?usp=sharing">Course Note</a>
 This course will focus on models for predicting human strategic behavior. (very interesting!)
 
 #### CPSC404: Advanced Relational Databases
