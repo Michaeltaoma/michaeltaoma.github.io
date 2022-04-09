@@ -155,7 +155,7 @@
 </ul>
 
 <blockquote>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0xFFFFFFFF
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0xFFFFFFFF
 kernel -- denote command and env variables, run time?
 Stack -- denote arguments, local variables, run time
 ↓
@@ -181,7 +181,7 @@ Text(code) -- denote the code segment, compile time
   <li>what kind of buffer arrays are stored in stack?
     <ul>
       <li>As mentioned, stack stored all the fixed length(stack itself is fixed-length)</li>
-      <li>when declare fixed length array: <code class="highlighter-rouge">char buffer[n];</code>, the array will be stored in stack</li>
+      <li>when declare fixed length array: <code class="language-plaintext highlighter-rouge">char buffer[n];</code>, the array will be stored in stack</li>
       <li>when declare dynamic length array:
         <pre><code class="language-C">  char *buffer;
   buffer = new char[n];
@@ -194,7 +194,7 @@ Text(code) -- denote the code segment, compile time
 </ul>
 
 <blockquote>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function arguments
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function arguments
 return address -- store the return address
 old ebp value -- stores the last location of ebp?
 local variables
@@ -321,7 +321,7 @@ int main(void) {
   <li>Find gadgets
     <ul>
       <li>Gadgets are chunks of library functions, or useful functions</li>
-      <li>To find useful gadgets, automate a search of the target binary for gadgets(look for <code class="highlighter-rouge">ret</code> instructions, work backwards)</li>
+      <li>To find useful gadgets, automate a search of the target binary for gadgets(look for <code class="language-plaintext highlighter-rouge">ret</code> instructions, work backwards)</li>
     </ul>
   </li>
   <li>Construct Input String
@@ -333,8 +333,8 @@ int main(void) {
   <li>Overwrite the return address</li>
   <li>Stack serves as code
     <ul>
-      <li>gadgets invoked via <code class="highlighter-rouge">ret</code></li>
-      <li>gadgets get their arguments via <code class="highlighter-rouge">pop</code></li>
+      <li>gadgets invoked via <code class="language-plaintext highlighter-rouge">ret</code></li>
+      <li>gadgets get their arguments via <code class="language-plaintext highlighter-rouge">pop</code></li>
     </ul>
   </li>
 </ol>
@@ -383,7 +383,7 @@ int main(void) {
       </li>
       <li>
         <p>Detecting overflows with canaries（stop attacker putting code into the memory）
-  	<code class="highlighter-rouge">
+  	<code class="language-plaintext highlighter-rouge">
   	function arguments
  return address 
  old ebp value 
@@ -516,16 +516,16 @@ p-&gt;cmp("hello", "hello"); //dangling pointer
 </code></pre>
 
 <h5 id="how-the-attack-works-4">How the attack works?</h5>
-<p><code class="highlighter-rouge">printf</code> takes variable number of arguments and pays no mind where the stack frame ends. So if there is a specifier in the first argument, it presumes that you called it with as many arguments as specified in the format string. Attacker can exploit this to make the program prints private information.</p>
+<p><code class="language-plaintext highlighter-rouge">printf</code> takes variable number of arguments and pays no mind where the stack frame ends. So if there is a specifier in the first argument, it presumes that you called it with as many arguments as specified in the format string. Attacker can exploit this to make the program prints private information.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">printf("100% dave");</code>: printf会直接把%和d的空格给忽略
+  <li><code class="language-plaintext highlighter-rouge">printf("100% dave");</code>: printf会直接把%和d的空格给忽略
     <ul>
-      <li><code class="highlighter-rouge">printf("%s");</code>: prints bytes pointed to by that stack entry，把eip右边的那个解成一个pointer，找到pointer指向的位置，把位置有的memory的东西全都print出来</li>
-      <li><code class="highlighter-rouge">printf("%d %d %d %d");</code>: printf会直接把eip边上的四个entry（本来用来存储argument的地方）全都print出来</li>
-      <li><code class="highlighter-rouge">printf("100% no way!");</code>: printf writes the number 3 to address pointed by stack entry
+      <li><code class="language-plaintext highlighter-rouge">printf("%s");</code>: prints bytes pointed to by that stack entry，把eip右边的那个解成一个pointer，找到pointer指向的位置，把位置有的memory的东西全都print出来</li>
+      <li><code class="language-plaintext highlighter-rouge">printf("%d %d %d %d");</code>: printf会直接把eip边上的四个entry（本来用来存储argument的地方）全都print出来</li>
+      <li><code class="language-plaintext highlighter-rouge">printf("100% no way!");</code>: printf writes the number 3 to address pointed by stack entry
         <ul>
-          <li>%n会把progress of printf load进下一个参数，例如<code class="highlighter-rouge">printf("The value of %ns : ", &amp;s);</code>，那么在这里，s的值就是13，因为%n之前有13个character</li>
+          <li>%n会把progress of printf load进下一个参数，例如<code class="language-plaintext highlighter-rouge">printf("The value of %ns : ", &amp;s);</code>，那么在这里，s的值就是13，因为%n之前有13个character</li>
         </ul>
       </li>
     </ul>
@@ -602,10 +602,10 @@ p-&gt;cmp("hello", "hello"); //dangling pointer
       </li>
       <li>
         <p>notation:
-<script type="math/tex">x\ mod\ n = y \\
+\(x\ mod\ n = y \\
 x =  y\ mod\ n \\
 x(mod)\ n = y\\
-x=y(mod\ n)</script></p>
+x=y(mod\ n)\)</p>
       </li>
       <li>
         <p>((a mod n) + (b mod n)) mod n = (a + b) mod n</p>
@@ -662,9 +662,9 @@ x=y(mod\ n)</script></p>
 
 <ul>
   <li>For event outcomes $S = {0, 1, 2, …, N-1}$, if each outcome is equally likely, then the probability of the event X, where $X \sub S$, is 
-<script type="math/tex">P(X) = \frac{\text{number of elements in X}}{\text{number of elements in S}}\\\\
+\(P(X) = \frac{\text{number of elements in X}}{\text{number of elements in S}}\\\\
 P(X) = 1 - P(\text{complement of X})\\\\
-P(sum > 3) = 1-P(sum\leq3)</script></li>
+P(sum &gt; 3) = 1-P(sum\leq3)\)</li>
 </ul>
 
 <h3 id="linear-algebra">Linear Algebra</h3>
@@ -713,8 +713,7 @@ P(sum > 3) = 1-P(sum\leq3)</script></li>
 
     <ul>
       <li>we can also multiply block matrices:
-<script type="math/tex">% <![CDATA[
-M = \begin{bmatrix}I_{n\times n} & C_{n\times1}\\A_{m\times n}  & B_{m\times 1}\end{bmatrix} and\ V = \begin{bmatrix}U_{n\times l}\\T_{1\times l}\end{bmatrix} %]]></script>
+\(M = \begin{bmatrix}I_{n\times n} &amp; C_{n\times1}\\A_{m\times n}  &amp; B_{m\times 1}\end{bmatrix} and\ V = \begin{bmatrix}U_{n\times l}\\T_{1\times l}\end{bmatrix}\)
 In this case, the result is $MV = \begin{bmatrix}X_{n\times l} \ Y_{m\times l}\end{bmatrix}$, and $X = U + CT$ and $Y = AU + BT$</li>
     </ul>
   </li>

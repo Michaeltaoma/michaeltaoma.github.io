@@ -192,11 +192,10 @@
   <li>并且通过证明可得：</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-	& Ax = b \\
-	& x = A^{-1}b
-\end{aligned} %]]></script>
+\[\begin{aligned}
+	&amp; Ax = b \\
+	&amp; x = A^{-1}b
+\end{aligned}\]
 
 <ul>
   <li></li>
@@ -243,20 +242,19 @@
   <li>
     <p>损失函数loss function：Mean Square Error：</p>
 
-    <script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
 
   J(\theta) = \frac{1}{4} \sum_{x \in 数据集}(f^*(x) - f(x;\theta))^{2}
 
-  \end{aligned}</script>
+  \end{aligned}\]
   </li>
   <li><strong>所以在这些表示里面，\( \theta \)代表的是这一层级中的所有参数，那么在这里面的theta就有权重和bias，因为这个计算只是“一层的计算”。而像刚刚\( y = f(x;\theta, w) = \phi(x;\theta)^{T} w \)这个下面，为什么不把theta和w分在一起的原因是因为theta是属于那个映射的参数，而w是属于映射好了之后线性映射的参数，所以是不一样的</strong></li>
   <li>
     <p>不管怎么说，现在的模型如下：</p>
 
-    <script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-  & f(x;w,b) = x^T w + b
-  \end{aligned} %]]></script>
+\[\begin{aligned}
+  &amp; f(x;w,b) = x^T w + b
+  \end{aligned}\]
   </li>
   <li>这篇文章提出的一些看法是之前从来没讲过的，还是觉得把这么重要的一门课拿来给farhana这种划水教授讲真的败坏老子的前程。</li>
   <li>
@@ -274,22 +272,21 @@
   <li>
     <p><strong>隐藏层的激活函数选用线性函数的意义不大，如果隐藏层依然选用线性函数的话，整体的模型也还是一个线性函数</strong></p>
 
-    <script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-  & h = g(W^T x + c)
-  \end{aligned} %]]></script>
+\[\begin{aligned}
+  &amp; h = g(W^T x + c)
+  \end{aligned}\]
   </li>
   <li>
     <p>以上的g代表的就是一个激活函数，在这里他选用的是ReLu（Rectified Linear Unit）线性整流函数（修正线性单元）</p>
 
-    <script type="math/tex; mode=display">f(x) = max(0, x)</script>
+\[f(x) = max(0, x)\]
   </li>
   <li>
     <p>那么这样整合下来的话，完整的模型就是:</p>
 
-    <script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
   f(x;W, c, w, b) = w^{T} max(0, W^{T} x + c) + b
-  \end{aligned}</script>
+  \end{aligned}\]
   </li>
   <li>书中还演示了一遍walk through，这个walkthrough是根据一个已有的答案来的，这个答案属于global minimum of loss function set里面，也就是说还有别的答案</li>
 </ul>
@@ -324,15 +321,15 @@
             <p>简单来说就是我们选择模型是基于概率的：我们选择模型的原则是，他比所有别的模型都更好，给定样本的情况下，参数是某参数的概率是最高的，也就是参数基于样本的后验概率是最高的，以下是一个最大似然估计（Maximum Likelihood Estimation）的例子
   假设有个袋子，里面有7个白球和三个红球，设白球的比例为\( \theta \)</p>
 
-            <script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
   f(x_{1}, x_{2} | \theta) = f(x_{1}|\theta) \times f(x_2 | \theta)
-  \end{aligned}</script>
+  \end{aligned}\]
 
             <p>其中x1和x2表示两次采样，f是模型而theta是模型的参数，因为这两个样本是独立同分布，所以他们一起发生的概率就是相乘在一起，现在模型参数theta是未知的，为了求得这个theta，我们把似然L定义成theta关于采样的后验概率</p>
 
-            <script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
   L(\theta|x_1, x_2) = f(x_1, x_2 | \theta) = \prod_{i = 1}^{2} f(x_i | \theta)
-  \end{aligned}</script>
+  \end{aligned}\]
           </li>
           <li>所以接下来的目的，就是找到令似然函数最大的theta值</li>
           <li>一般来说，就是要找到这个最大值，甚至可以直接求导</li>
@@ -344,30 +341,30 @@
   <li>其中，\( P_{model}(x;\theta) \)是：maps any configuration x to a real number estimating the true probabolity</li>
   <li>
     <p>然后\( P_{model}(x) \)也等同于p(y|x;theta)
-<script type="math/tex">\begin{aligned}
+\(\begin{aligned}
 \theta_{ML} = argmax_{\theta} \prod_{i = 1}^{m} P_{model}(x^{(i)};\theta)
-\end{aligned}</script></p>
+\end{aligned}\)</p>
   </li>
   <li>意思就是给定参数和模型下面，预测出来的类别是这个y的概率是多少，那么为什么有的时候说<strong>log p</strong>呢，这是因为，如果两边同时取对数的话，不影响函数的单调性也不影响选出来的theta值，但可以把连乘变成连加，大大减少了之后求导的难度</li>
 </ul>
 
-<script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
 \theta_{ML} = argmax_{\theta} \sum_{i = 1}^{m} LogP_{model}(x^{(i)};\theta)
-\end{aligned}</script>
+\end{aligned}\]
 
 <ul>
   <li>所以我们训练theta值的时候这么训练的:</li>
 </ul>
 
-<script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
 \theta_{ML} = argmax_{\theta} E_{x \sim \hat{P}_{data}}[LogP_{model}(x^{(i)};\theta)]
-\end{aligned}</script>
+\end{aligned}\]
 
 <h5 id="6211-learning-conditional-distributions-with-maximum-likelihood">6.2.1.1 Learning Conditional Distributions with Maximum Likelihood</h5>
 
-<script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
 J(\theta) = -E_{x, y \sim \hat{P}_{data}} [Log p_{model}(y|x)]
-\end{aligned}</script>
+\end{aligned}\]
 
 <ul>
   <li>以上就是一个cost function，适用于各种模型，根据不同log p模型的选择，最终出来的cost function也不一样。打个比方如果是linear regression的话，他代入的结果就是一个mean suqare error cost</li>
@@ -408,27 +405,26 @@ J(\theta) = -E_{x, y \sim \hat{P}_{data}} [Log p_{model}(y|x)]
   </li>
 </ul>
 
-<script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
 	p(y|x) = \mathcal{N} (y;\hat{y}, I)
-\end{aligned}</script>
+\end{aligned}\]
 
 <ul>
   <li>
     <p>这里假设这个后验概率是高斯分布的极其重要，因为对于高斯分布的话：</p>
 
-    <script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
       p(x) = \frac{1}{\sqrt{2\pi} {\sigma}} e^{-\frac{1}{2{\sigma}^{2}} x^{2}}
-  \end{aligned}</script>
+  \end{aligned}\]
   </li>
   <li>
     <p>这个性质也非常关键，可以拿来推mean square error，现在定义一个似然函数：</p>
 
-    <script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-  & L(\theta) = \prod_{i = 1}^{n} p(y|x, \theta, \sigma) \\
-  & 给两边取对数，方便计算 \\
-  & J(\theta) = nln \frac{1}{\sqrt{2\pi}\sigma} - \frac{1}{2{\sigma}^{2}} \sum_{i = 1}{n}(y - f^{*}(x))^2 
-  \end{aligned} %]]></script>
+\[\begin{aligned}
+  &amp; L(\theta) = \prod_{i = 1}^{n} p(y|x, \theta, \sigma) \\
+  &amp; 给两边取对数，方便计算 \\
+  &amp; J(\theta) = nln \frac{1}{\sqrt{2\pi}\sigma} - \frac{1}{2{\sigma}^{2}} \sum_{i = 1}{n}(y - f^{*}(x))^2 
+  \end{aligned}\]
   </li>
   <li>所以本质上，线性拟合找的是结果y的条件高斯分布的mean，然后根据最大似然的理念去得到一个代价函数，这个代价函数等同于最小二乘</li>
   <li>linear units do not saturate, they pose little diﬃculty for gradient-based optimization algorithms and may be used with a wide variety of optimizationalgorithms从不饱和，何时是个头</li>
@@ -458,9 +454,9 @@ J(\theta) = -E_{x, y \sim \hat{P}_{data}} [Log p_{model}(y|x)]
   <li>最后是一个softplus function，softplus function的定义如下：</li>
 </ul>
 
-<script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
 f(x) = ln(1 + e^{x})
-\end{aligned}</script>
+\end{aligned}\]
 
 <ul>
   <li>这个的好处是在训练的时候，只有当(1-2y)z非常负-&gt;也就是点那个y = 1然后z非常正，也就是正确答案的时候，此训练才会饱和</li>
@@ -473,7 +469,7 @@ f(x) = ln(1 + e^{x})
   <li>以下定义的就是一个softmax的函数，这个函数的意义在于：可以帮助我们表示n个离散变量的概率分布</li>
 </ul>
 
-<script type="math/tex; mode=display">s(x_{i}) = \frac{e^{x_{i}}}{sum_{j = 1}^{n} e^{x_{j}}}</script>
+\[s(x_{i}) = \frac{e^{x_{i}}}{sum_{j = 1}^{n} e^{x_{j}}}\]
 
 <ul>
   <li>
@@ -496,14 +492,14 @@ f(x) = ln(1 + e^{x})
       <li>和之前一样同取对数再normalize，oh~又发现了这特么就是softmax函数的定义：</li>
     </ul>
 
-    <script type="math/tex; mode=display">softmax(z)_{i} = \frac{exp(z_i)}{\sum_{j} exp(z_{j})}</script>
+\[softmax(z)_{i} = \frac{exp(z_i)}{\sum_{j} exp(z_{j})}\]
   </li>
   <li>
     <p>然后再套一层log在softmax外面(log-likelihood原则的代价函数)，得到logsoftmax，这个的意义也是令这个有很多个exp term的东西不那么快饱和</p>
 
-    <script type="math/tex; mode=display">\begin{aligned}
+\[\begin{aligned}
       logsoftmax(z)_{i} = z_i - log \sum_{j} exp(z_j)
-  \end{aligned}</script>
+  \end{aligned}\]
   </li>
   <li>看这样子的代价函数就非常的好，前面第一个term会令求梯度时不会太快饱和，从而让模型可以一直进行自我调整</li>
   <li>第二的term的意义在于，如果现在预测出来的zj是对的，那么他就应该拥有很大的值，那么那个sum会大概等于zj，那么zi和zj因为很接近（zj是正确的），这个loss就会比较小；反之，这个loss就会返回一个比较大的loss的值</li>
@@ -543,7 +539,7 @@ f(x) = ln(1 + e^{x})
   <li>Generalization of ReLu（对于普通整流函数的拓展，解决梯度方法对于激活为零的样本无用的问题）</li>
 </ul>
 
-<script type="math/tex; mode=display">( h_{i} = g(z, \alpha)_{i} = max(0, z_i) + \alpha_{i} min(0, z_{i})</script>
+\[( h_{i} = g(z, \alpha)_{i} = max(0, z_i) + \alpha_{i} min(0, z_{i})\]
 
 <ul>
   <li>
@@ -564,7 +560,7 @@ f(x) = ln(1 + e^{x})
   <li>
     <p><strong>maxout unit</strong>：把z划分为每组具有k个值的组，每个maxout单元输出每组中的最大元素：</p>
 
-    <script type="math/tex; mode=display">g(z)_{i} = max_{j\in G^{(i)}} z_{j}</script>
+\[g(z)_{i} = max_{j\in G^{(i)}} z_{j}\]
   </li>
   <li>学习对输入 x 空间中多个方向响应的分段线性函数。</li>
   <li>特别地，具有两块的 maxout 层可以学习实现和传统层相同的输入 x 的函数，这些传统层可以使用整流线性激活函数、绝对值整流、渗漏整流线性单元 或参数化整流线性单元，或者可以学习实现与这些都不同的函数</li>
@@ -652,7 +648,7 @@ f(x) = ln(1 + e^{x})
   <li>如果\( y = g(x) \)和\( z = f(g(x)) = f(y) \)，那么：</li>
 </ul>
 
-<script type="math/tex; mode=display">\frac{dz}{dx} = \frac{dz}{dy} \times \frac{dy}{dx}</script>
+\[\frac{dz}{dx} = \frac{dz}{dy} \times \frac{dy}{dx}\]
 
 <p><img src="assets/post_pics/Snipaste_2020-05-27_12-31-59.png" /></p>
 
@@ -717,7 +713,7 @@ f(x) = ln(1 + e^{x})
   <li>
     <p>每个操作与bprop操作相关联，bprob操作可以计算雅各布向量积</p>
 
-    <script type="math/tex; mode=display">op.bprop(inputs, X, G) = \sum_{i} (\nabla_{x} op.f(inputs)_{i})G_{i}</script>
+\[op.bprop(inputs, X, G) = \sum_{i} (\nabla_{x} op.f(inputs)_{i})G_{i}\]
   </li>
   <li>
     <p>上面这个：这里，inputs 是提供给操作的一组输入，op.f 是操作实现的数学函数，X 是输入，我们想要计算关于它的梯度，G 是操作对于输出的梯度。</p>

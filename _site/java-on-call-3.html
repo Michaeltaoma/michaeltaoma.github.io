@@ -216,7 +216,7 @@
   <span class="o">}</span><span class="c1">//end Sample&lt;T&gt;</span>
 
 </code></pre></div>    </div>
-    <p>实例化泛型类<code class="highlighter-rouge">Sample&lt;Integer&gt; num2 = new Sample&lt;&gt;();</code>，在泛型类定义的时候，是可以在&lt;&gt;里面加入多个类型的。或者说有的时候，希望限制那些被允许传递到一个类型参数的类型种类范围，那么就是使用<em>bounding有界的类型参数</em>。<strong>要声明一个有界的类型参数，首先列出类型参数的名称，后跟extends关键字，最后紧跟他的上届</strong></p>
+    <p>实例化泛型类<code class="language-plaintext highlighter-rouge">Sample&lt;Integer&gt; num2 = new Sample&lt;&gt;();</code>，在泛型类定义的时候，是可以在&lt;&gt;里面加入多个类型的。或者说有的时候，希望限制那些被允许传递到一个类型参数的类型种类范围，那么就是使用<em>bounding有界的类型参数</em>。<strong>要声明一个有界的类型参数，首先列出类型参数的名称，后跟extends关键字，最后紧跟他的上届</strong></p>
 
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">RootClass</span><span class="o">&gt;</span> <span class="c1">//利用extend关键字声明上界，也就是说这个类型只可以是RootClass类及其子类的的</span>
   <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">RootClass</span> <span class="o">&amp;</span> <span class="nc">Pizza</span><span class="o">&gt;</span> <span class="c1">//利用extend关键字声明上界，也就是说这个类型只可以是RootClass类和Pizza类以及他们的子类的的</span>
@@ -235,8 +235,8 @@
 
     <p><em>使用泛型的好处</em>（once again）: Object是所有类的根类，任何类的对象都可以设置给该Object引用变量，使用的时候可能需要类型强制转换，但是使用了泛型标识符之后，类型在使用之前就已经确定了，不需要在进行类型强制转换</p>
     <ul>
-      <li>上界指的是使用了extends的bounding，例如<code class="highlighter-rouge">&lt;? extends T&gt;</code>，表示参数化类型的可能是T或是T的子类</li>
-      <li>下界指的是使用了super的bounding，例如<code class="highlighter-rouge">&lt;? super T&gt;</code>，这个学名叫做超类型限定，表示参数化类型的可能是此类型的超类型，直至Object</li>
+      <li>上界指的是使用了extends的bounding，例如<code class="language-plaintext highlighter-rouge">&lt;? extends T&gt;</code>，表示参数化类型的可能是T或是T的子类</li>
+      <li>下界指的是使用了super的bounding，例如<code class="language-plaintext highlighter-rouge">&lt;? super T&gt;</code>，这个学名叫做超类型限定，表示参数化类型的可能是此类型的超类型，直至Object</li>
     </ul>
   </li>
   <li><strong>泛型方法</strong>
@@ -693,7 +693,7 @@
 </code></pre></div></div>
 <p>有些数据就看一眼就能懂的，需要另外注意的是：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- **loadFactor(负载因子)**：负载因子声明了一个哈希表的装填程度。**负载因子的选择可以被认为是空间与时间上的一种折中**，这是因为当负载因子较高时，一个数组能够被填的越满，所以对整体来说，空间浪费会小（不管怎么样内存都已经把这部分的空间分配给了他），但同时查找速度因为值变多而降低；而当负载因子较小时，一个数组不会被填的太满，所以它整体上对空间的浪费较大，但是查找速度会因为值变少而加快。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- **loadFactor(负载因子)**：负载因子声明了一个哈希表的装填程度。**负载因子的选择可以被认为是空间与时间上的一种折中**，这是因为当负载因子较高时，一个数组能够被填的越满，所以对整体来说，空间浪费会小（不管怎么样内存都已经把这部分的空间分配给了他），但同时查找速度因为值变多而降低；而当负载因子较小时，一个数组不会被填的太满，所以它整体上对空间的浪费较大，但是查找速度会因为值变少而加快。
 - **TREEIFY_THRESHOLD**：为了保证效率，当一个链表中的元素的数量大于这个阈值的时候，这个链表就会被变成一个红黑树。 - **HashMap查找的Complexity**: 要分析这个complexity很简单，hash function是o(1)，找到对应的位置是o(1)，如果有链表的话原来是o(n)，但是因为现在限制了链表的长度，所以查找最慢的地方在于搜索红黑树，而这个需要花上o(logn)，所以HashMap查找的complexity就是**o(logn)** - **为什么HashMap会造成死锁**(&lt;a href="https://blog.csdn.net/lantian0802/article/details/42487803"&gt;原文链接&lt;/a&gt;)
 - 为了了解造成死锁的原因，首先要知道的是，为了防止一个数组过载，HashMap会经常自己检查自己的size是否超出阈值，如果超过的话，需要进行resize操作，而当resize的时候，是很简单的新建一个更大尺寸的hash表并且把数据从旧表中直接转移到新表，当转移的时候，以下的事情会发生：
 	1. 对索引数组中的元素遍历
