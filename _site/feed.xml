@@ -2610,6 +2610,96 @@ Quantifiers:
     
       
         <item>
+          <title>M1 Mac Install risc-v, qemu and xv6</title>
+          <description>&lt;p&gt;为了尝试做&lt;a href=&quot;https://pdos.csail.mit.edu/6.S081/2020/&quot;&gt;6.S081 (Introduction to Operating Systems)&lt;/a&gt;的lab, 需要配置&lt;code&gt;risc-v, qemu, xv6&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;我的电脑配置&quot;&gt;我的电脑配置&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;MacBook Pro (16-inch, 2021)&lt;/li&gt;
+  &lt;li&gt;macOS Monterey, version = 12.3.1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;配置全指南&quot;&gt;配置全指南&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;在开始之前，先检查一下自己的&lt;code&gt;~/.bash_profile, ~/.zshrc&lt;/code&gt;等配置文件有没有export一些奇奇怪怪的flag，如果有的话请尽快删除以免影响配置&lt;/li&gt;
+  &lt;li&gt;很多人已经写出了很全面的教程，这里只是为了address一些貌似只有我遇到过的问题，需要完整的配置教程的话，点开&lt;a href=&quot;#参考&quot;&gt;参考&lt;/a&gt;下的文章（按照”于我”有用的程度从上到下排序）
+    &lt;h4 id=&quot;steps&quot;&gt;Steps&lt;/h4&gt;
+    &lt;h5 id=&quot;risc-v-toolchain&quot;&gt;Risc-V toolchain&lt;/h5&gt;
+  &lt;/li&gt;
+  &lt;li&gt;如果不想自己编译/编译&lt;code&gt;risc-v&lt;/code&gt;出bug的话，可以直接从别人那里下载编译好的版本，见&lt;a href=&quot;#参考&quot;&gt;参考&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;我用的是&lt;a href=&quot;https://cloud.tencent.com/developer/article/1939023&quot;&gt;MIT 6.S081/Fall 2020 搭建risc-v与xv6开发调试环境&lt;/a&gt;的预编译版本，直接再设置个link就可以了&lt;/li&gt;
+  &lt;li&gt;Test: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;riscv64-unknown-elf-gcc -v&lt;/code&gt;
+    &lt;h6 id=&quot;riscv64-unknown-elf-gdb&quot;&gt;riscv64-unknown-elf-gdb&lt;/h6&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;注意&lt;/strong&gt;：在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;riscv64-unknown-elf-gcc -v&lt;/code&gt;能用，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qemu&lt;/code&gt;配置完成（能在xv6的路径下&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make qemu&lt;/code&gt;）之前都不要看这个，这一步是为了测试使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qemu-gdb&lt;/code&gt;对&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xv6&lt;/code&gt;进行调试的可行性&lt;/li&gt;
+  &lt;li&gt;需要注意的是，这个预编译版本下的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;riscv64-unknown-elf-gdb&lt;/code&gt;不work，报一个类似&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;an incompatible architecture (have '', need 'arm64e')&lt;/code&gt;的错误，应该是版本兼容的问题。&lt;/li&gt;
+  &lt;li&gt;所以我只能下载&lt;a href=&quot;https://zhayujie.com/mit6828-env.html#comment-187&quot;&gt;MIT6.828准备 — risc-v和xv6环境搭建&lt;/a&gt;下的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;riscv64-unknown-elf-gdb == 8.3.0&lt;/code&gt;预编译版本，提高权限，打开权限，这时报了另一个错
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Could not load the Python gdb module from 
+  /usr/local/opt/riscv-gnu-toolchain/share/gdb/python'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;所以只能尝试把别的gdb distribution下的python复制过来，比如可以把brew的gdb下的python挪过来:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  cp -R /usr/local/Cellar/gdb/10.1/share/gdb/python /usr/local/opt/riscv-gnu-toolchain/share/gdb/python/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;这时执行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;souce .gdbinit&lt;/code&gt;可能会有两种可能：&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;配置成功！(显示&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0000000000001000 in ?? ()&lt;/code&gt;)
+        &lt;ul&gt;
+          &lt;li&gt;配置失败 (不显示以上内容，或者直接报错):
+            &lt;ul&gt;
+              &lt;li&gt;失败的原因千千万，对我而言是这样：
+                &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Python Exception &amp;lt;type 'exceptions.NameError'&amp;gt; Installation error: gdb.execute_unwinders function is missing:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                &lt;/div&gt;
+                &lt;p&gt;明白了，放进去的python并不是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;riscv64-unknown-elf-gdb == 8.3.0&lt;/code&gt;想要的python，那就换一个python的版本测试下，对我而言能用的版本是&lt;code&gt;RISC-V toolchain == 10.2.0&lt;/code&gt;的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;intel&lt;/code&gt;预编译版本的python:&lt;/p&gt;
+                &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;riscv-gnu-toolchain/share/gdb/python
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                &lt;/div&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;qemu&quot;&gt;QEMU&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;我参考的是&lt;a href=&quot;https://github.com/BASARANOMO/xv6-labs-2020/issues/1&quot;&gt;Install riscv-tools and qemu on Apple Silicon M1 mac #1&lt;/a&gt;，在打补丁的时候，我使用的是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git apply *.patch&lt;/code&gt;而不是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;patch -p1 *.patch&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;xv6&quot;&gt;XV6&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;具体就看你想要的是哪个版本的课了，我用的是2022版本的&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git clone https://github.com/mit-pdos/xv6-riscv.git&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;参考&quot;&gt;参考&lt;/h5&gt;
+
+&lt;h6 id=&quot;mit6828准备--risc-v和xv6环境搭建&quot;&gt;&lt;a href=&quot;https://zhayujie.com/mit6828-env.html#comment-187&quot;&gt;MIT6.828准备 — risc-v和xv6环境搭建&lt;/a&gt;&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;包含&lt;code&gt;RISC-V toolchain == 9.2.0&lt;/code&gt;的源码，需要自己编译，详情看帖子&lt;/li&gt;
+  &lt;li&gt;包含&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;riscv64-unknown-elf-gdb == 8.3.0&lt;/code&gt;的版本，需要自己提高权限+开启权限, 详情看帖子&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;mit-6s081fall-2020-搭建risc-v与xv6开发调试环境&quot;&gt;&lt;a href=&quot;https://cloud.tencent.com/developer/article/1939023&quot;&gt;MIT 6.S081/Fall 2020 搭建risc-v与xv6开发调试环境&lt;/a&gt;&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;包含&lt;code&gt;RISC-V toolchain == 10.2.0&lt;/code&gt;的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;intel&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m1&lt;/code&gt;的预编译，可以直接使用，详情看帖子&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;install-riscv-tools-and-qemu-on-apple-silicon-m1-mac-1&quot;&gt;&lt;a href=&quot;https://github.com/BASARANOMO/xv6-labs-2020/issues/1&quot;&gt;Install riscv-tools and qemu on Apple Silicon M1 mac #1&lt;/a&gt;&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;包含需要打在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qemu&lt;/code&gt;上的两个补丁，先打补丁，再&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;configure&lt;/code&gt;，再&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make&lt;/code&gt;，再&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make install&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+          <pubDate>2022-04-20T00:00:00-07:00</pubDate>
+          <link>http://localhost:4000/m1-mac-install-risc-v-xv6</link>
+          <guid isPermaLink="true">http://localhost:4000/m1-mac-install-risc-v-xv6</guid>
+        </item>
+      
+    
+      
+        <item>
           <title>Blockchain Note</title>
           <description>&lt;p&gt;Note for blockchain, bitcoin and all that…&lt;/p&gt;
 

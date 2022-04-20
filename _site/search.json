@@ -13,6 +13,17 @@
   
     {
 
+      "title"    : "M1 Mac Install risc-v, qemu and xv6",
+      "url"      : "/m1-mac-install-risc-v-xv6",
+      "category" : "",
+      "tags"     : "",
+      "date"     : "2022-04-20 00:00:00 -0700",
+	  "description" : "risc-v, xv6, mit"
+
+    } ,
+  
+    {
+
       "title"    : "Blockchain Note",
       "url"      : "/blockchain-note",
       "category" : "",
