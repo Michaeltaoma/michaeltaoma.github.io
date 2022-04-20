@@ -33,8 +33,8 @@ description: risc-v, xv6, mit
     ```
   这时执行`souce .gdbinit`可能会有两种可能：
   - 配置成功！(显示`0x0000000000001000 in ?? ()`)
-    - 配置失败 (不显示以上内容，或者直接报错):
-      - 失败的原因千千万，对我而言是这样：
+  - 配置失败 (不显示以上内容，或者直接报错):
+    - 失败的原因千千万，对我而言是这样：
       ```
       Python Exception <type 'exceptions.NameError'> Installation error: gdb.execute_unwinders function is missing:
       ```
